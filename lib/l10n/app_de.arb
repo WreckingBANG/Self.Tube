@@ -1,0 +1,17 @@
+{
+  "@@locale": "de",
+  "appTitle": "Self.Tube",
+  "barHome": "Startseite",
+  "barChannels": "Kanäle",
+  "barPlaylists": "Wiedergabelisten",
+  "barActions": "Aktionen",
+  "tooltipSearch": "Suche",
+  "tooltipSettings": "Einstellungen",
+  "homeLatestVideos": "Letzte Videos",
+  "homeContinueWatching": "Weiterschauen",
+  "errorNoDataFound": "Fehler: Keine Daten gefunden",
+  "numberformatThousand": "Tsd.",
+  "numberformatMillion": "Mio.",
+  "numberformatBillion": "Mrd.",
+  "numberformatTrillion": "Bio."
+}

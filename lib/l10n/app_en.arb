@@ -1,0 +1,17 @@
+{
+  "@@locale": "en",
+  "appTitle": "Self.Tube",
+  "barHome": "Home",
+  "barChannels": "Channels",
+  "barPlaylists": "Playlists",
+  "barActions": "Actions",
+  "tooltipSearch": "Search",
+  "tooltipSettings": "Settings",
+  "homeLatestVideos": "Latest Videos",
+  "homeContinueWatching": "Continue Watching",
+  "errorNoDataFound": "Error: No Data found",
+  "numberformatThousand": "K",
+  "numberformatMillion": "M",
+  "numberformatBillion": "B",
+  "numberformatTrillion": "T"
+}
