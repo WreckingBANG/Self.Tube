@@ -10,6 +10,8 @@ import '../services/api_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'dart:async';
 import '../services/settings_service.dart';
+import '../l10n/generated/app_localizations.dart';
+
 
 class PlayerScreen extends StatefulWidget {
   final String youtubeId;
@@ -57,19 +59,20 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: AppBar(title: const Text("Player")),
+        appBar: AppBar(title: Text(localizations.playerTitle)),
         body: FutureBuilder(
           future: ApiService.fetchVideoPlayer(widget.youtubeId),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
-              return Center(child: Text("Error: ${snapshot.error}"));
+              return Center(child: Text(localizations.errorFailedToLoadData));
             } else if (!snapshot.hasData) {
-              return const Center(child: Text("No video found"));
+              return Center(child: Text(localizations.errorNoDataFound));
             } else {
               final video = snapshot.data!;
               _player.open(
@@ -80,8 +83,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
                   },
                 ),
               );
-
-              // Wait until duration is available, then seek
               _player.stream.duration.listen((duration) {
                 if (video.videoPosition > 0) {
                   _player.seek(Duration(seconds: video.videoPosition.toInt()));
@@ -107,7 +108,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 children: [
                                   Row(
                                     children: [
-                                      Text("${formatNumberCompact(video.videoViewCount, context)} Views"),
+                                      Text("${formatNumberCompact(video.videoViewCount, context)} ${localizations.playerViews}"),
                                       Text(" • "),
                                       Text(formatDateTime(video.videoDate, context)),
                                     ],
@@ -153,11 +154,11 @@ class _PlayerScreenState extends State<PlayerScreen> {
                             trailing: video.channelSubscribed
                                 ? FilledButton(
                                     onPressed: () {},
-                                    child: Text('Unsubscribe'),
+                                    child: Text(localizations.playerUnsubscribe),
                                   )
                                 : OutlinedButton(
                                     onPressed: () {},
-                                    child: Text('Subscribe'),
+                                    child: Text(localizations.playerSubscribe),
                                   ),
                             onTap: () {
                               Navigator.push(
@@ -166,19 +167,19 @@ class _PlayerScreenState extends State<PlayerScreen> {
                               );
                             },
                           ),
-                          const TabBar(
+                          TabBar(
                             tabs: <Widget>[
                               Tab(
                                 icon: Icon(Icons.description),
-                                text: "Description"
+                                text: localizations.playerDescription
                               ),
                               Tab(
                                 icon: Icon(Icons.comment),
-                                text: "Comments"
+                                text: localizations.playerComments
                               ),
                               Tab(
                                 icon: Icon(Icons.video_collection),
-                                text: "Similar Videos"
+                                text: localizations.playerSimilar
                               ),
                             ],
                           ),

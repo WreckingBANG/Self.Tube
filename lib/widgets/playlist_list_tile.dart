@@ -5,6 +5,7 @@ import '../services/api_service.dart';
 import '../screens/channelpage_screen.dart';
 import '../screens/playlistpage_screen.dart';
 import '../services/settings_service.dart';
+import '../l10n/generated/app_localizations.dart';
 
 class PlaylistListTile extends StatelessWidget {
   final dynamic playlist;
@@ -16,6 +17,7 @@ class PlaylistListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Card(
       elevation: 4,
       child: ListTile(
@@ -61,44 +63,44 @@ class PlaylistListTile extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Local Actions"),
+                            Text(localizations.sheetLocalActions,),
                             ListTile(
                               leading: Icon(Icons.timer_outlined),
-                              title: Text("Mark as Watched"),
+                              title: Text(localizations.sheetMarkWatched),
                               onTap: () {
                                 ApiService.setVideoWatched(playlist.youtubeId, true);
                               },
                             ),
                             ListTile(
                               leading: Icon(Icons.timer_off_outlined),
-                              title: Text("Mark as Unwatched"),
+                              title: Text(localizations.sheetMarkUnwatched),
                               onTap: () {
                                 ApiService.setVideoWatched(playlist.youtubeId, false);
                               },
                             ),
                             ListTile(
                               leading: Icon(Icons.person_2_rounded),
-                              title: Text("Open Channel"),
+                              title: Text(localizations.sheetOpenChannel),
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ChannelpageScreen(channelId: playlist.playlistChannelId)),
+                                  MaterialPageRoute(builder: (context) => ChannelpageScreen(channelId: playlist.channelId)),
                                 );
                               },
                             ),
                             ListTile(
                               leading: Icon(Icons.share),
-                              title: Text("Share"),
+                              title: Text(localizations.sheetShare),
                               onTap: () {
                                 SharePlus.instance.share(
-                                  ShareParams(uri: Uri.parse("https://www.youtube.com/watch?v=${playlist.playlistId}"))
+                                  ShareParams(uri: Uri.parse("https://www.youtube.com/watch?v=${playlist.youtubeId}"))
                                 );
                               },
                             ),
                             ListTile(
                               leading: Icon(Icons.file_download_outlined),
-                              title: Text("Download Locally"),
-                              subtitle: Text("Coming Soon"),
+                              title: Text(localizations.sheetDownloadLocal),
+                              subtitle: Text(localizations.sheetComingSoon),
                               onTap: () {},
                             ),
                           ]
@@ -110,17 +112,17 @@ class PlaylistListTile extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Server Actions"),
+                            Text(localizations.sheetServerActions),
                             ListTile(
                               leading: Icon(Icons.cloud_download),
-                              title: Text("Redownload to Server"),
-                              subtitle: Text("Coming Soon"),
+                              title: Text(localizations.sheetRedownloadServer),
+                              subtitle: Text(localizations.sheetComingSoon),
                               onTap: () {},
                             ),
                             ListTile(
                               leading: Icon(Icons.cloud_off_rounded),
-                              title: Text("Delete Video from Server"),
-                              subtitle: Text("Coming Soon"),
+                              title: Text(localizations.sheetDeleteVideoServer),
+                              subtitle: Text(localizations.sheetComingSoon),
                               onTap: () {},
                             ),
                           ]

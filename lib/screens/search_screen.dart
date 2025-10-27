@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../services/api_service.dart';
 import '../models/search/searchwrapper_model.dart';
 import '../widgets/playlist_list_tile.dart';
+import '../l10n/generated/app_localizations.dart';
 
 
 class SearchScreen extends StatefulWidget {
@@ -35,18 +36,19 @@ class _SearchScreenState extends State<SearchScreen>{
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: const Text("Search")),
+      appBar: AppBar(title: Text(localizations.searchTitle)),
       body:
       Column(
         children: [
           TextFormField(
             controller: _controller,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(25) )
               ),
-              labelText: 'Search...',
+              labelText: localizations.searchLabel,
             ),
           ),
           _searchQuery != ""  
@@ -56,9 +58,9 @@ class _SearchScreenState extends State<SearchScreen>{
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
-                  return Center(child: Text("Error: ${snapshot.error}"));
+                  return Center(child: Text(localizations.errorFailedToLoadData));
                 } else if (!snapshot.hasData) {
-                  return const Center(child: Text("Nothing found..."));
+                  return Center(child: Text(localizations.errorNoDataFound));
                 } else {
                   final result = snapshot.data!;
                   return Expanded(

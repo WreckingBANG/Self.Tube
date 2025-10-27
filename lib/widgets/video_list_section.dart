@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
 import 'video_list_tile.dart';
+import '../l10n/generated/app_localizations.dart';
 
 class VideoListSection extends StatefulWidget {
   final String title;
@@ -48,6 +49,7 @@ class _VideoListSectionState extends State<VideoListSection> {
 
 @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -58,7 +60,7 @@ class _VideoListSectionState extends State<VideoListSection> {
         if (videos.isEmpty && isLoading)
           const Center(child: CircularProgressIndicator())
         else if (videos.isEmpty)
-          const Center(child: Text("No data found."))
+          Center(child: Text(localizations.errorNoDataFound))
         else
           ...videos.map((video) => VideoListTile(video: video)).toList(),
         if (isLoading)
@@ -72,7 +74,7 @@ class _VideoListSectionState extends State<VideoListSection> {
             child: Center(
               child: TextButton(
                 onPressed: fetchVideos,
-                child: const Text("Show More"),
+                child: Text(localizations.listShowMore),
               ),
             ),
           ),

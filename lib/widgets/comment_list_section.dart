@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../models/commentlist_model.dart';
 import '../services/api_service.dart';
 import '../widgets/comment_list_tile.dart';
+import '../l10n/generated/app_localizations.dart';
+
 
 class CommentListWidget extends StatefulWidget {
   final String videoId;
@@ -24,13 +26,14 @@ class _CommentListWidgetState extends State<CommentListWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return FutureBuilder<List<CommentListItemModel>?>(
       future: _commentsFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError || snapshot.data == null) {
-          return const Center(child: Text('Failed to load comments.'));
+          return Center(child: Text(localizations.errorFailedToLoadData));
         }
 
         final comments = snapshot.data!;

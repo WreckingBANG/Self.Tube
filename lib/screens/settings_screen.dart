@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/settings_service.dart';
+import '../l10n/generated/app_localizations.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -22,17 +23,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> _saveSettings() async {
+    final localizations = AppLocalizations.of(context)!;
     await SettingsService.setInstanceUrl(_instanceUrlController.text);
     await SettingsService.setApiToken(_apiTokenController.text);
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Settings saved')),
+      SnackBar(content: Text(localizations.settingsSaved)),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text('Settings')),
+      appBar: AppBar(title: Text(localizations.settingsTitle)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -40,7 +43,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             TextField(
               controller: _instanceUrlController,
               decoration: InputDecoration(
-                labelText: 'Instance URL',
+                labelText: localizations.settingsInstanceUrl,
                 border: OutlineInputBorder(),
               ),
             ),
@@ -48,7 +51,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             TextField(
               controller: _apiTokenController,
               decoration: InputDecoration(
-                labelText: 'API Token',
+                labelText: localizations.settingsApiToken,
                 border: OutlineInputBorder(),
               ),
               obscureText: true,
@@ -56,7 +59,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SizedBox(height: 24),
             ElevatedButton(
               onPressed: _saveSettings,
-              child: Text('Save'),
+              child: Text(localizations.settingsSave),
             ),
           ],
         ),

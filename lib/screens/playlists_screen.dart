@@ -3,17 +3,19 @@ import 'package:flutter/material.dart';
 import '../services/api_service.dart';
 import '../screens/search_screen.dart';
 import '../screens/settings_screen.dart';
+import '../l10n/generated/app_localizations.dart';
 
 class PlaylistsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Self.Tube"),
+        title: Text(localizations.appTitle),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.search),
-            tooltip: 'Search',
+            tooltip: localizations.searchTitle,
             onPressed: () {
               Navigator.push(
                 context,
@@ -23,7 +25,7 @@ class PlaylistsScreen extends StatelessWidget {
           ),
           IconButton(
             icon: const Icon(Icons.settings),
-            tooltip: 'Settings',
+            tooltip: localizations.settingsTitle,
             onPressed: () {
               Navigator.push(
                 context,
@@ -40,9 +42,9 @@ class PlaylistsScreen extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
-              return Center(child: Text("Error: ${snapshot.error}"));
+              return Center(child: Text(localizations.errorFailedToLoadData));
             } else if (!snapshot.hasData) {
-              return const Center(child: Text("No user found"));
+              return Center(child: Text(localizations.errorNoDataFound));
             } else {
               final playlist = snapshot.data!;
               return Column(

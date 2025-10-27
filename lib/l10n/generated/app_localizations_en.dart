@@ -36,7 +36,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeContinueWatching => 'Continue Watching';
 
   @override
-  String get errorNoDataFound => 'Error: No Data found';
+  String get settingsSheetApp => 'App';
+
+  @override
+  String get settingsSheetSettings => 'Settings';
+
+  @override
+  String get settingsSheetDownloads => 'Downloads';
+
+  @override
+  String get settingsSheetLogout => 'Logout';
+
+  @override
+  String get settingsSheetAbout => 'About the App';
+
+  @override
+  String get settingsSheetServer => 'Server';
+
+  @override
+  String get settingsSheetLibraryStats => 'Library Statistics';
+
+  @override
+  String get settingsSheetComingSoon => 'Coming Soon';
+
+  @override
+  String get errorNoDataFound => 'Error: No data found';
+
+  @override
+  String get errorFailedToLoadData => 'Error: Failed to load';
 
   @override
   String get numberformatThousand => 'K';
@@ -49,4 +76,97 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get numberformatTrillion => 'T';
+
+  @override
+  String get sheetLocalActions => 'Local Actions';
+
+  @override
+  String get sheetMarkWatched => 'Mark as watched';
+
+  @override
+  String get sheetMarkUnwatched => 'Mark as unwatched';
+
+  @override
+  String get sheetOpenChannel => 'Open channel';
+
+  @override
+  String get sheetShare => 'Share';
+
+  @override
+  String get sheetDownloadLocal => 'Download to device';
+
+  @override
+  String get sheetServerActions => 'Server actions';
+
+  @override
+  String get sheetRedownloadServer => 'Redownload to server';
+
+  @override
+  String get sheetDeleteVideoServer => 'Delete video from server';
+
+  @override
+  String get sheetComingSoon => 'Coming soon';
+
+  @override
+  String get listShowMore => 'Show more';
+
+  @override
+  String get settingsSaved => 'Settings saved';
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get settingsInstanceUrl => 'Instance URL';
+
+  @override
+  String get settingsApiToken => 'API Token';
+
+  @override
+  String get settingsSave => 'Save';
+
+  @override
+  String get searchLabel => 'Search...';
+
+  @override
+  String get searchTitle => 'Search';
+
+  @override
+  String get playlistTitle => 'Playlist';
+
+  @override
+  String get playlistVideos => 'Videos';
+
+  @override
+  String get channelSubscribers => 'Subscribers: ';
+
+  @override
+  String get playerTitle => 'Player';
+
+  @override
+  String get playerViews => 'Views';
+
+  @override
+  String get playerSubscribe => 'Subscribe';
+
+  @override
+  String get playerUnsubscribe => 'Unsubscribe';
+
+  @override
+  String get playerDescription => 'Description';
+
+  @override
+  String get playerComments => 'Comments';
+
+  @override
+  String get playerSimilar => 'Similar videos';
+
+  @override
+  String get actionsTitle => 'Actions';
+
+  @override
+  String get channelTitle => 'Channel';
+
+  @override
+  String get channelVideos => 'Videos';
 }

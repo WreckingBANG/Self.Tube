@@ -57,10 +57,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("App"),
+                                Text(localizations.settingsSheetApp),
                                 ListTile(
                                   leading: Icon(Icons.settings),
-                                  title: Text("Settings"),
+                                  title: Text(localizations.settingsSheetSettings),
                                   onTap: () {
                                     Navigator.push(
                                       context,
@@ -70,20 +70,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.download),
-                                  title: Text("Downloads"),
-                                  subtitle: Text("Coming Soon"),
+                                  title: Text(localizations.settingsSheetDownloads),
+                                  subtitle: Text(localizations.settingsSheetComingSoon),
                                   onTap: () {},
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.logout),
-                                  title: Text("Logout"),
-                                  subtitle: Text("Coming Soon"),
+                                  title: Text(localizations.settingsSheetLogout),
+                                  subtitle: Text(localizations.settingsSheetComingSoon),
                                   onTap: () {},
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.info),
-                                  title: Text("About App"),
-                                  subtitle: Text("Coming Soon"),
+                                  title: Text(localizations.settingsSheetAbout),
+                                  subtitle: Text(localizations.settingsSheetComingSoon),
                                   onTap: () {},
                                 ),
                               ]
@@ -95,17 +95,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Server"),
+                                Text(localizations.settingsSheetServer),
                                 ListTile(
                                   leading: Icon(Icons.settings),
-                                  title: Text("Settings"),
-                                  subtitle: Text("Coming Soon"),
+                                  title: Text(localizations.settingsSheetSettings),
+                                  subtitle: Text(localizations.settingsSheetComingSoon),
                                   onTap: () {},
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.bar_chart_rounded),
-                                  title: Text("Library Stats"),
-                                  subtitle: Text("Coming Soon"),
+                                  title: Text(localizations.settingsSheetLibraryStats),
+                                  subtitle: Text(localizations.settingsSheetComingSoon),
                                   onTap: () {},
                                 ),
                               ]
