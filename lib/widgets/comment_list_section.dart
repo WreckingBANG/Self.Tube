@@ -52,6 +52,7 @@ class _CommentListWidgetState extends State<CommentListWidget> {
                   commentHasReplys: hasReplies,
                   commentLikeCount: comment.commentLikeCount,
                   commentIsExpanded: isExpanded,
+                  commentAuthorThumbnail: comment.commentAuthorThumbnail,
                   onPressed: () {
                     setState(() {
                       _expandedMap[comment.commentId] = !isExpanded;

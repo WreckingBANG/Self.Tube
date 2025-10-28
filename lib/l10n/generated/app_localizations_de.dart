@@ -57,6 +57,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsSheetLibraryStats => 'Bibliotheksstatistiken';
 
   @override
+  String get settingsShowCommentPics => 'Zeige Kommentator-Bilder';
+
+  @override
+  String get settingsShowCommentPicsDisclaimer =>
+      'Wenn aktiviert, wird das Bild von Google bezogen, da es nicht von TubeArchivist bereitgestellt wird.';
+
+  @override
   String get settingsSheetComingSoon => 'Kommt bald';
 
   @override

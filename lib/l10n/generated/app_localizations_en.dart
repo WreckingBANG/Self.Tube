@@ -57,6 +57,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsSheetLibraryStats => 'Library Statistics';
 
   @override
+  String get settingsShowCommentPics => 'Show Commentator Pictures';
+
+  @override
+  String get settingsShowCommentPicsDisclaimer =>
+      'This will make a connection to Google as the Images are not stored by TubeArchivist';
+
+  @override
   String get settingsSheetComingSoon => 'Coming Soon';
 
   @override

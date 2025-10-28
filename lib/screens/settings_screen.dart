@@ -10,6 +10,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   final TextEditingController _instanceUrlController = TextEditingController();
   final TextEditingController _apiTokenController = TextEditingController();
+  bool _showCommentPics = false;
 
   @override
   void initState() {
@@ -20,12 +21,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _loadSettings() async {
     _instanceUrlController.text = SettingsService.instanceUrl ?? '';
     _apiTokenController.text = SettingsService.apiToken ?? '';
+    _showCommentPics = SettingsService.showCommentPics?? false;
   }
 
   Future<void> _saveSettings() async {
     final localizations = AppLocalizations.of(context)!;
     await SettingsService.setInstanceUrl(_instanceUrlController.text);
     await SettingsService.setApiToken(_apiTokenController.text);
+    await SettingsService.setShowCommentPics(_showCommentPics);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(localizations.settingsSaved)),
     );
@@ -60,6 +63,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ElevatedButton(
               onPressed: _saveSettings,
               child: Text(localizations.settingsSave),
+            ),
+            SwitchListTile(
+              title: Text(localizations.settingsShowCommentPics),
+              value: _showCommentPics,
+              onChanged: (bool value) {
+                setState(() {
+                  _showCommentPics = value;
+                });
+              },
             ),
           ],
         ),

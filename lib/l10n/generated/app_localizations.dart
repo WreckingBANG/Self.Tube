@@ -194,6 +194,18 @@ abstract class AppLocalizations {
   /// **'Library Statistics'**
   String get settingsSheetLibraryStats;
 
+  /// No description provided for @settingsShowCommentPics.
+  ///
+  /// In en, this message translates to:
+  /// **'Show Commentator Pictures'**
+  String get settingsShowCommentPics;
+
+  /// No description provided for @settingsShowCommentPicsDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'This will make a connection to Google as the Images are not stored by TubeArchivist'**
+  String get settingsShowCommentPicsDisclaimer;
+
   /// No description provided for @settingsSheetComingSoon.
   ///
   /// In en, this message translates to:

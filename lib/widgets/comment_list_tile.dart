@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/number_formatter.dart';
+import '../services/settings_service.dart';
 
 class CommentListTile extends StatelessWidget {
   final dynamic commentText;
@@ -9,6 +10,7 @@ class CommentListTile extends StatelessWidget {
   final dynamic commentHasReplys;
   final dynamic commentIsExpanded;
   final dynamic commentLikeCount;
+  final dynamic commentAuthorThumbnail;
   final VoidCallback? onPressed;
 
   const CommentListTile({
@@ -21,6 +23,7 @@ class CommentListTile extends StatelessWidget {
     this.commentIsExpanded,
     this.commentHasReplys,
     this.commentLikeCount,
+    this.commentAuthorThumbnail
   });
 
   @override
@@ -39,20 +42,41 @@ class CommentListTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: Column(
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      commentAuthor,
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    if(commentAuthorThumbnail!=null && SettingsService.showCommentPics!=false)
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child:  Image.network(
+                          commentAuthorThumbnail,
+                          width: 40,
+                          height: 40)
                       ),
-                    Text(commentText),
-                    Row(
-                      children: [
-                        Icon(Icons.thumb_up),
-                        SizedBox(width: 5),
-                        Text(formatNumberCompact(commentLikeCount, context)),
-                      ],
+                    SizedBox(width: 8),
+                    Expanded( // This constrains the Column
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            commentAuthor,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text(
+                            commentText,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2, // Optional: limit lines
+                          ),
+                          Row(
+                            children: [
+                              Icon(Icons.thumb_up, size: 16),
+                              SizedBox(width: 5),
+                              Text(formatNumberCompact(commentLikeCount, context)),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

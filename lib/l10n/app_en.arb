@@ -16,6 +16,8 @@
   "settingsSheetAbout": "About the App",
   "settingsSheetServer": "Server",
   "settingsSheetLibraryStats": "Library Statistics",
+  "settingsShowCommentPics": "Show Commentator Pictures",
+  "settingsShowCommentPicsDisclaimer": "This will make a connection to Google as the Images are not stored by TubeArchivist",
   "settingsSheetComingSoon": "Coming Soon",
   "errorNoDataFound": "Error: No data found",
   "errorFailedToLoadData": "Error: Failed to load",

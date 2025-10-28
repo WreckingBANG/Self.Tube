@@ -16,6 +16,8 @@
   "settingsSheetAbout": "Über die App",
   "settingsSheetServer": "Server",
   "settingsSheetLibraryStats": "Bibliotheksstatistiken",
+  "settingsShowCommentPics": "Zeige Kommentator-Bilder",
+  "settingsShowCommentPicsDisclaimer": "Wenn aktiviert, wird das Bild von Google bezogen, da es nicht von TubeArchivist bereitgestellt wird.",
   "settingsSheetComingSoon": "Kommt bald",
   "errorNoDataFound": "Fehler: Keine Daten gefunden",
   "errorFailedToLoadData": "Fehler: Laden fehlgeschlagen",
