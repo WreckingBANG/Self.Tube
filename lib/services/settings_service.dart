@@ -4,16 +4,19 @@ class SettingsService {
   static const _instanceUrlKey = 'instanceUrl';
   static const _apiTokenKey = 'apiToken';
   static const _showCommentPics = 'showCommentPics';
+  static const _doneSetup = 'doneSetup';
 
   static String? instanceUrl;
   static String? apiToken;
   static bool? showCommentPics;
+  static bool? doneSetup;
 
   static Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
     instanceUrl = prefs.getString(_instanceUrlKey);
     apiToken = prefs.getString(_apiTokenKey);
     showCommentPics = prefs.getBool(_showCommentPics);
+    doneSetup = prefs.getBool(_doneSetup);
   }
 
   static Future<void> setInstanceUrl(String value) async {
@@ -32,5 +35,11 @@ class SettingsService {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_showCommentPics, value);
     showCommentPics = value;
+  }
+
+  static Future<void> setDoneSetup(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_doneSetup, value);
+    doneSetup = value;
   }
 }

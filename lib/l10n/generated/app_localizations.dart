@@ -433,6 +433,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Videos'**
   String get channelVideos;
+
+  /// No description provided for @onboardingLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get onboardingLogin;
+
+  /// No description provided for @onboardingUrlExample.
+  ///
+  /// In en, this message translates to:
+  /// **'https://tubearchivist.example.com'**
+  String get onboardingUrlExample;
+
+  /// No description provided for @onboardingTokenExample.
+  ///
+  /// In en, this message translates to:
+  /// **'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'**
+  String get onboardingTokenExample;
+
+  /// No description provided for @onboardingLoginFailure.
+  ///
+  /// In en, this message translates to:
+  /// **'Connection failed. Please check your token and URL.'**
+  String get onboardingLoginFailure;
+
+  /// No description provided for @onboardingWelcomeText.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Self.Tube'**
+  String get onboardingWelcomeText;
+
+  /// No description provided for @onboardingMarketing1.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse and manage your self-hosted TubeArchivist Instance with ease.'**
+  String get onboardingMarketing1;
+
+  /// No description provided for @onboardingMarketing2.
+  ///
+  /// In en, this message translates to:
+  /// **'Access your entire TubeArchivist Instance'**
+  String get onboardingMarketing2;
+
+  /// No description provided for @onboardingMarketing3.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage your archive'**
+  String get onboardingMarketing3;
+
+  /// No description provided for @onboardingMarketing4.
+  ///
+  /// In en, this message translates to:
+  /// **'View your Videos in a native like experience'**
+  String get onboardingMarketing4;
+
+  /// No description provided for @onboardingPrivacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get onboardingPrivacyPolicy;
+
+  /// No description provided for @onboardingContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Agree & Continue'**
+  String get onboardingContinue;
 }
 
 class _AppLocalizationsDelegate

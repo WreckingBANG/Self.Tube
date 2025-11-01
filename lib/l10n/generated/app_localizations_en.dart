@@ -176,4 +176,42 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get channelVideos => 'Videos';
+
+  @override
+  String get onboardingLogin => 'Login';
+
+  @override
+  String get onboardingUrlExample => 'https://tubearchivist.example.com';
+
+  @override
+  String get onboardingTokenExample =>
+      'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+
+  @override
+  String get onboardingLoginFailure =>
+      'Connection failed. Please check your token and URL.';
+
+  @override
+  String get onboardingWelcomeText => 'Welcome to Self.Tube';
+
+  @override
+  String get onboardingMarketing1 =>
+      'Browse and manage your self-hosted TubeArchivist Instance with ease.';
+
+  @override
+  String get onboardingMarketing2 =>
+      'Access your entire TubeArchivist Instance';
+
+  @override
+  String get onboardingMarketing3 => 'Manage your archive';
+
+  @override
+  String get onboardingMarketing4 =>
+      'View your Videos in a native like experience';
+
+  @override
+  String get onboardingPrivacyPolicy => 'Privacy Policy';
+
+  @override
+  String get onboardingContinue => 'Agree & Continue';
 }

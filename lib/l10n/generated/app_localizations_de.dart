@@ -176,4 +176,42 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get channelVideos => 'Videos';
+
+  @override
+  String get onboardingLogin => 'Einloggen';
+
+  @override
+  String get onboardingUrlExample => 'https://tubearchivist.example.com';
+
+  @override
+  String get onboardingTokenExample =>
+      'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+
+  @override
+  String get onboardingLoginFailure =>
+      'Verbindung Fehlgeschlagen. Überprüfe deinen Token und die URL.';
+
+  @override
+  String get onboardingWelcomeText => 'Willkommen bei Self.Tube';
+
+  @override
+  String get onboardingMarketing1 =>
+      'Durchstöbere und verwalte deine selbstgehostete TubeArchivist-Instanz ganz einfach.';
+
+  @override
+  String get onboardingMarketing2 =>
+      'Greife auf deine gesamte TubeArchivist-Instanz zu';
+
+  @override
+  String get onboardingMarketing3 => 'Verwalte dein Archiv';
+
+  @override
+  String get onboardingMarketing4 =>
+      'Sieh dir deine Videos in einer nativen Benutzererfahrung an';
+
+  @override
+  String get onboardingPrivacyPolicy => 'Datenschutzerklärung';
+
+  @override
+  String get onboardingContinue => 'Zustimmen & Fortfahren';
 }

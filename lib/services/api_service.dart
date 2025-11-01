@@ -9,11 +9,32 @@ import '../models/search/searchwrapper_model.dart';
 import '../models/commentlist_model.dart';
 import '../models/playlistlist_model.dart';
 import '../services/settings_service.dart';
+import '../models/ping_model.dart';
 
 class ApiService {
 
   static String? apiToken = SettingsService.apiToken;
   static String? baseUrl = SettingsService.instanceUrl;
+
+  static Future<PingModel?> testConnection(String tApiToken, String tBaseUrl) async {
+    try {
+      final response = await http.get(
+          Uri.parse('$tBaseUrl/api/ping'),
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'token $tApiToken',
+          },
+        );
+      if (response.statusCode == 200) {
+        return PingModel.fromJson(json.decode(response.body));
+      } else {
+        throw Exception(response);
+      }
+    } catch (e) {
+      print('Error: $e');
+      return null;
+    }
+  }
 
   static Future<List<VideoListItemModel>?> fetchVideoList(String options) async {
     try {

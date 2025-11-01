@@ -4,8 +4,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'l10n/generated/app_localizations.dart';
 import 'screens/bottomnavbar_screen.dart';
-import 'package:media_kit/media_kit.dart';
+import 'screens/onboarding/privacypolicy_screen.dart';
+import 'package:media_kit/media_kit.dart'; 
 import 'misc/theme.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +37,9 @@ class MyApp extends StatelessWidget {
           title: 'Self.Tube',
           theme: lightThemeFrom(lightDynamic ?? ColorScheme.fromSeed(seedColor: fallbackSeedColor, brightness: Brightness.light)),
           darkTheme: darkThemeFrom(darkDynamic ?? ColorScheme.fromSeed(seedColor: fallbackSeedColor, brightness: Brightness.dark)),
-          home: const BottNavBar(),
+          home: SettingsService.doneSetup == true
+              ? const BottNavBar()
+              : OnBoardingPrivacyPolicyScreen(),
         );
       },
     );

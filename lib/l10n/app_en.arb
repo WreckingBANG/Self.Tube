@@ -55,5 +55,16 @@
   "playerSimilar": "Similar videos",
   "actionsTitle": "Actions",
   "channelTitle": "Channel",
-  "channelVideos": "Videos"
+  "channelVideos": "Videos",
+  "onboardingLogin": "Login",
+  "onboardingUrlExample": "https://tubearchivist.example.com",
+  "onboardingTokenExample": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "onboardingLoginFailure": "Connection failed. Please check your token and URL.",
+  "onboardingWelcomeText": "Welcome to Self.Tube",
+  "onboardingMarketing1": "Browse and manage your self-hosted TubeArchivist Instance with ease.",
+  "onboardingMarketing2": "Access your entire TubeArchivist Instance",
+  "onboardingMarketing3": "Manage your archive",
+  "onboardingMarketing4": "View your Videos in a native like experience",
+  "onboardingPrivacyPolicy": "Privacy Policy",
+  "onboardingContinue": "Agree & Continue"
 }
