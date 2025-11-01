@@ -35,9 +35,10 @@ class _CommentListWidgetState extends State<CommentListWidget> {
         } else if (snapshot.hasError || snapshot.data == null) {
           return Center(child: Text(localizations.errorFailedToLoadData));
         }
-
         final comments = snapshot.data!;
         return ListView(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
           children: comments.map((comment) {
             final isExpanded = _expandedMap[comment.commentId] ?? false;
             final hasReplies = comment.commentReplies.isNotEmpty;

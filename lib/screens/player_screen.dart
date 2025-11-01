@@ -57,6 +57,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
@@ -88,116 +89,140 @@ class _PlayerScreenState extends State<PlayerScreen> {
                   _player.seek(Duration(seconds: video.videoPosition.toInt()));
                 }
               });
-              return Column(
-                children: [
-                  AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: Video(controller: _videoController),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ListView(
+
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AspectRatio(
+                        aspectRatio: 16 / 9,
+                        child: Video(controller: _videoController),
+                      ),
+                      const SizedBox(height: 12),
+                      Text(video.videoTitle, style: const TextStyle(fontSize: 22)),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(video.videoTitle, style: const TextStyle(fontSize: 22)),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              Row(
                                 children: [
-                                  Row(
-                                    children: [
-                                      Text("${formatNumberCompact(video.videoViewCount, context)} ${localizations.playerViews}"),
-                                      Text(" • "),
-                                      Text(formatDateTime(video.videoDate, context)),
-                                    ],
-                                  )
-                                ],
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Icon(Icons.thumb_up),
-                                      SizedBox(width: 5),
-                                      Text(formatNumberCompact(video.videoLikeCount, context)),
-                                      Text(" • "),
-                                      Icon(Icons.thumb_down),
-                                      SizedBox(width: 5),
-                                      Text(formatNumberCompact(video.videoDislikeCount, context)),
-                                    ],
-                                  )
+                                  Text("${formatNumberCompact(video.videoViewCount, context)} ${localizations.playerViews}"),
+                                  const Text(" • "),
+                                  Text(formatDateTime(video.videoDate, context)),
                                 ],
                               )
                             ],
                           ),
-                          ListTile(
-                            title: Text(video.channelName),
-                            subtitle: Text(formatNumberCompact(video.channelSubCount, context)),
-                            leading: AspectRatio(
-                              aspectRatio: 1 / 1,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: CachedNetworkImage(
-                                  imageUrl: "$baseUrl/${video.channelThumbUrl}",
-                                  httpHeaders: {
-                                    'Authorization': 'token $apiToken',
-                                  },
-                                  fit: BoxFit.cover,
-                                  placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                                ),
-                              ),
-                            ),
-                            trailing: video.channelSubscribed
-                                ? FilledButton(
-                                    onPressed: () {},
-                                    child: Text(localizations.playerUnsubscribe),
-                                  )
-                                : OutlinedButton(
-                                    onPressed: () {},
-                                    child: Text(localizations.playerSubscribe),
-                                  ),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => ChannelpageScreen(channelId: video.channelId))
-                              );
-                            },
-                          ),
-                          TabBar(
-                            tabs: <Widget>[
-                              Tab(
-                                icon: Icon(Icons.description),
-                                text: localizations.playerDescription
-                              ),
-                              Tab(
-                                icon: Icon(Icons.comment),
-                                text: localizations.playerComments
-                              ),
-                              Tab(
-                                icon: Icon(Icons.video_collection),
-                                text: localizations.playerSimilar
-                              ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Row(
+                                children: [
+                                  const Icon(Icons.thumb_up),
+                                  const SizedBox(width: 5),
+                                  Text(formatNumberCompact(video.videoLikeCount, context)),
+                                  const Text(" • "),
+                                  const Icon(Icons.thumb_down),
+                                  const SizedBox(width: 5),
+                                  Text(formatNumberCompact(video.videoDislikeCount, context)),
+                                ],
+                              )
                             ],
-                          ),
-                          SizedBox(
-                            height: 400,
-                            child: TabBarView(
-                              children: <Widget>[
-                                Center(child: Text(video.videoDescription)),
-                                Center(child: CommentListWidget(videoId: video.videoId)),
-                                Center(child: VideoListSimilarSection(videoId: widget.youtubeId, query: "")),
-                              ],
-                            ),
-                          ),
+                          )
                         ],
                       ),
-                    ),
+                      const SizedBox(height: 12),
+                      ListTile(
+                        title: Text(video.channelName),
+                        subtitle: Text(formatNumberCompact(video.channelSubCount, context)),
+                        leading: AspectRatio(
+                          aspectRatio: 1 / 1,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: CachedNetworkImage(
+                              imageUrl: "$baseUrl/${video.channelThumbUrl}",
+                              httpHeaders: {
+                                'Authorization': 'token $apiToken',
+                              },
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                              errorWidget: (context, url, error) => const Icon(Icons.error),
+                            ),
+                          ),
+                        ),
+                        trailing: video.channelSubscribed
+                            ? FilledButton(
+                                onPressed: () {},
+                                child: Text(localizations.playerUnsubscribe),
+                              )
+                            : OutlinedButton(
+                                onPressed: () {},
+                                child: Text(localizations.playerSubscribe),
+                              ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ChannelpageScreen(channelId: video.channelId))
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 12),
+                      TabBar(
+                        tabs: <Widget>[
+                          Tab(icon: const Icon(Icons.description), text: localizations.playerDescription),
+                          Tab(icon: const Icon(Icons.comment), text: localizations.playerComments),
+                          Tab(icon: const Icon(Icons.video_collection), text: localizations.playerSimilar),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      LayoutBuilder(
+                        builder: (context, constraints) {
+                          return SizedBox(
+                            height: MediaQuery.of(context).size.height,
+                            child: TabBarView(
+                              physics: const NeverScrollableScrollPhysics(),
+                              children: <Widget>[
+                                SingleChildScrollView(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(video.videoDescription),
+                                    ],
+                                  ),
+                                ),
+                                SingleChildScrollView(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      CommentListWidget(videoId: video.videoId),
+                                    ],
+                                  ),
+                                ),
+                                SingleChildScrollView(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      VideoListSimilarSection(videoId: widget.youtubeId, query: ""),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                          );
+                        },
+                      ),
+                    ],
                   ),
-                ],
+                ),
               );
             }
           },
