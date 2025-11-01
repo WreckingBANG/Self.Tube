@@ -1,6 +1,6 @@
 # Privacy Policy for Self.Tube
 
-**Effective Date:** [Insert Date]
+**Effective Date:** 1 November 2025
 
 Self.Tube is a Free and Open Source Software (FOSS) client application for TubeArchivist. This privacy policy outlines how Self.Tube handles user data and network activity.
 
