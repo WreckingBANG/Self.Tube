@@ -3,6 +3,8 @@ import '../screens/settings_screen.dart';
 import '../widgets/video_list_section.dart';
 import '../screens/search_screen.dart';
 import '../l10n/generated/app_localizations.dart';
+import '../services/settings_service.dart';
+import '../main.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -77,8 +79,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ListTile(
                                   leading: Icon(Icons.logout),
                                   title: Text(localizations.settingsSheetLogout),
-                                  subtitle: Text(localizations.settingsSheetComingSoon),
-                                  onTap: () {},
+                                  onTap: () async {
+                                    await SettingsService.setDoneSetup(false);
+                                    await SettingsService.setInstanceUrl("");
+                                    await SettingsService.setApiToken("");
+                                    Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => MyApp()),
+                                      (route) => false,
+                                    );
+                                  },
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.info),
