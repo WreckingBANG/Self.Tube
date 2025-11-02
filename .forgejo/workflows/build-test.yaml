@@ -16,10 +16,10 @@ jobs:
 
       - name: Build Flutter app in devShell
         run: |
-          NIX_DOWNLOAD_BUFFER_SIZE=10485760 \
-          nix --extra-experimental-features "nix-command flakes" develop --command bash -c '
-            flutter config --enable-linux-desktop
-            flutter pub get
-            flutter build linux --release
-            ls -lh build/linux/x64/release/bundle
-          '
+          nix --option download-buffer-size 2147483648 \
+              --extra-experimental-features "nix-command flakes" \
+              develop --command bash -c '
+                flutter pub get
+                flutter build linux --release
+                ls -lh build/linux/x64/release/bundle
+              '
