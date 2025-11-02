@@ -54,19 +54,16 @@ class CommentListTile extends StatelessWidget {
                           height: 40)
                       ),
                     SizedBox(width: 8),
-                    Expanded( // This constrains the Column
+                    Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             commentAuthor,
                             style: TextStyle(fontWeight: FontWeight.bold),
-                            overflow: TextOverflow.ellipsis,
                           ),
                           Text(
                             commentText,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2, // Optional: limit lines
                           ),
                           Row(
                             children: [
