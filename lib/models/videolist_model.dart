@@ -9,6 +9,7 @@ class VideoListItemModel {
   final bool watched;
   final double progress;
   final double position;
+  final String videoDate;
 
   VideoListItemModel({
     required this.youtubeId,
@@ -21,6 +22,7 @@ class VideoListItemModel {
     required this.watched,
     required this.progress,
     required this.position,
+    required this.videoDate
   });
 
   factory VideoListItemModel.fromJson(Map<String, dynamic> json) {
@@ -35,6 +37,7 @@ class VideoListItemModel {
       watched: json['player']?['watched'] ?? false,
       progress: (json['player']?['progress'] as num?)?.toDouble() ?? 0.0,
       position: (json['player']?['position'] as num?)?.toDouble() ?? 0.0,
+      videoDate: json['published'],
     );
   }
 

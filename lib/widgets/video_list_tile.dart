@@ -6,6 +6,7 @@ import 'package:share_plus/share_plus.dart';
 import '../services/api_service.dart';
 import '../services/settings_service.dart';
 import '../l10n/generated/app_localizations.dart';
+import '../utils/datetime_formatter.dart';
 
 class VideoListTile extends StatelessWidget {
   final dynamic video;
@@ -21,8 +22,25 @@ class VideoListTile extends StatelessWidget {
     return Card(
       elevation: 4,
       child: ListTile(
-        title: Text(video.title),
-        subtitle: Text(video.channelName),
+        title: Text(
+          video.title,
+          style: Theme.of(context).textTheme.bodyMedium, // or use TextStyle(fontSize: 14)
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Text(video.durationStr),
+                const Text(" • "),
+                Text(formatDateTime(video.videoDate, context))
+              ],
+            ),
+            Text(video.channelName)
+          ],
+        ),
         leading: AspectRatio(
           aspectRatio: 16 / 9,
           child: Stack(
@@ -57,12 +75,60 @@ class VideoListTile extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return SizedBox(
-                height: 470,
+                height: 600,
                 child: Padding(
                   padding: EdgeInsets.all(8),
                   child: 
                   Column(
                     children: [
+                      Card(
+                        color: Theme.of(context).colorScheme.surfaceContainerLowest,
+                        elevation: 4,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ListTile(
+                              title: Text(video.title),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(video.durationStr),
+                                      const Text(" • "),
+                                      Text(formatDateTime(video.videoDate, context))
+                                    ],
+                                  ),
+                                  Text(video.channelName)
+                                ],
+                              ),
+                              leading: AspectRatio(
+                                aspectRatio: 16 / 9,
+                                child: Stack(
+                                  alignment: Alignment.bottomCenter,
+                                  children: [
+                                    CachedNetworkImage(
+                                      imageUrl: "$baseUrl/${video.thumbnail}",
+                                      httpHeaders: {
+                                        'Authorization': 'token $apiToken',
+                                      },
+                                      fit: BoxFit.cover,
+                                      placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                                      errorWidget: (context, url, error) => const Icon(Icons.error),
+                                    ),
+                                    video.progress != 0 || video.watched == true
+                                      ? LinearProgressIndicator(
+                                          value: video.progress != 0 ? video.progress / 100 : 1.0,
+                                          minHeight: 4,
+                                        )
+                                      : SizedBox.shrink(),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ]
+                        ),
+                      ),
                       Card(
                         color: Theme.of(context).colorScheme.surfaceContainerLowest,
                         elevation: 4,
