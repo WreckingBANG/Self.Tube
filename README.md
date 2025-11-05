@@ -15,6 +15,7 @@ With a streamlined interface and direct connection to your TubeArchivist server,
 - [x]  Search archived videos
 - [x]  Stream directly from your server
 - [x]  Android phone support
+- [x]  Sponsorblock support
 - [ ]  Linux phone support ([#1](https://codeberg.org/WreckingBANG/Self.Tube/issues/1))
 - [ ]  Subtitle support ([#6](https://codeberg.org/WreckingBANG/Self.Tube/issues/6))
 - [ ]  Library management ([#15](https://codeberg.org/WreckingBANG/Self.Tube/issues/15))
