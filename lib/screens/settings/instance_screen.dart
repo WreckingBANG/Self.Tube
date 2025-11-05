@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../services/settings_service.dart';
-import '../l10n/generated/app_localizations.dart';
+import '../../services/settings_service.dart';
+import '../../l10n/generated/app_localizations.dart';
 
-class SettingsScreen extends StatefulWidget {
+class InstanceSettingsScreen extends StatefulWidget {
   @override
-  _SettingsScreenState createState() => _SettingsScreenState();
+  _InstanceSettingsScreenState createState() => _InstanceSettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _InstanceSettingsScreenState extends State<InstanceSettingsScreen> {
   final TextEditingController _instanceUrlController = TextEditingController();
   final TextEditingController _apiTokenController = TextEditingController();
   bool _showCommentPics = false;
@@ -63,15 +63,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ElevatedButton(
               onPressed: _saveSettings,
               child: Text(localizations.settingsSave),
-            ),
-            SwitchListTile(
-              title: Text(localizations.settingsShowCommentPics),
-              value: _showCommentPics,
-              onChanged: (bool value) {
-                setState(() {
-                  _showCommentPics = value;
-                });
-              },
             ),
           ],
         ),

@@ -11,6 +11,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'dart:async';
 import '../services/settings_service.dart';
 import '../l10n/generated/app_localizations.dart';
+import '../utils/duration_formatter.dart';
 
 
 class PlayerScreen extends StatefulWidget {
@@ -89,6 +90,39 @@ class _PlayerScreenState extends State<PlayerScreen> {
                   _player.seek(Duration(seconds: video.videoPosition.toInt()));
                 }
               });
+
+              final categoryEnabledMap = {
+                'sponsor': SettingsService.sbSponsor,
+                'selfpromo': SettingsService.sbSelfpromo,
+                'interaction': SettingsService.sbInteraction,
+                'intro': SettingsService.sbIntro,
+                'outro': SettingsService.sbOutro,
+                'preview': SettingsService.sbPreview,
+                'hook': SettingsService.sbHook,
+                'filler': SettingsService.sbFiller,
+              };
+
+              if (SettingsService.sponsorBlockEnabled == true) {
+                _player.stream.position.listen((position) {
+                  final currentSeconds = position.inSeconds.toDouble().round();
+
+                  for (final segment in video.sponsorBlock?.segments ?? []) {
+                    final start = segment.segment[0].round();
+                    final end = segment.segment[1].round();
+                    final category = segment.category.toLowerCase();
+
+                    if (categoryEnabledMap[category] == true &&
+                        currentSeconds >= start &&
+                        currentSeconds < end) {
+                      _player.seek(Duration(seconds: end));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Skipped ${segment.category} from ${formatDuration(start)} to ${formatDuration(end)}")),
+                      );
+                      break;
+                    }
+                  }
+                });
+              }
 
               return SingleChildScrollView(
                 child: Padding(

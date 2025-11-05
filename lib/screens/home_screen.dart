@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screens/settings_screen.dart';
+import 'settings/overview_screen.dart';
 import '../widgets/video_list_section.dart';
 import '../screens/search_screen.dart';
 import '../l10n/generated/app_localizations.dart';

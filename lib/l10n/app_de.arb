@@ -38,6 +38,12 @@
   "listShowMore": "Mehr anzeigen",
   "settingsSaved": "Einstellungen gespeichert",
   "settingsTitle": "Einstellungen",
+  "settingsAccountSettings": "Konto",
+  "settingsAccountSettingsDesc": "Instanz, API-Token, ...",
+  "settingsAppearanceSettings": "Darstellung",
+  "settingsAppearanceSettingsDesc": "...",
+  "settingsSponsorBlockSettings": "SponsorBlock",
+  "settingsSponsorBlockSettingsDesc": "SponsorBlock-Einstellungen",
   "settingsInstanceUrl": "Instanz-URL",
   "settingsApiToken": "API-Token",
   "settingsSave": "Speichern",
@@ -66,5 +72,14 @@
   "onboardingMarketing3": "Verwalte dein Archiv",
   "onboardingMarketing4": "Sieh dir deine Videos in einer nativen Benutzererfahrung an",
   "onboardingPrivacyPolicy": "Datenschutzerklärung",
-  "onboardingContinue": "Zustimmen & Fortfahren"
+  "onboardingContinue": "Zustimmen & Fortfahren",
+  "sponsorblockEnable": "SponsorBlock aktivieren",
+  "sponsorblockSponsor": "Sponsor überspringen",
+  "sponsorblockPromo": "Selbstwerbung überspringen",
+  "sponsorblockInteraction": "Interaktions-Erinnerung überspringen",
+  "sponsorblockIntro": "Intro überspringen",
+  "sponsorblockOutro": "Outro überspringen",
+  "sponsorblockPreview": "Vorschau überspringen",
+  "sponsorblockHook": "Eröffnungsteaser & Grußformeln überspringen",
+  "sponsorblockFiller": "Abschweifungen/Witze überspringen"
 }

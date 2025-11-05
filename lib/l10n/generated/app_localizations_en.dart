@@ -124,6 +124,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsTitle => 'Settings';
 
   @override
+  String get settingsAccountSettings => 'Account';
+
+  @override
+  String get settingsAccountSettingsDesc => 'Instance, Api-Key, ...';
+
+  @override
+  String get settingsAppearanceSettings => 'Appearance';
+
+  @override
+  String get settingsAppearanceSettingsDesc => '...';
+
+  @override
+  String get settingsSponsorBlockSettings => 'SponsorBlock';
+
+  @override
+  String get settingsSponsorBlockSettingsDesc => 'Settings for SponsorBlock';
+
+  @override
   String get settingsInstanceUrl => 'Instance URL';
 
   @override
@@ -214,4 +232,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingContinue => 'Agree & Continue';
+
+  @override
+  String get sponsorblockEnable => 'Enable Sponsorblock';
+
+  @override
+  String get sponsorblockSponsor => 'Skip Sponsor';
+
+  @override
+  String get sponsorblockPromo => 'Skip Self-Promotion';
+
+  @override
+  String get sponsorblockInteraction => 'Skip Interaction-Reminder';
+
+  @override
+  String get sponsorblockIntro => 'Skip Intro';
+
+  @override
+  String get sponsorblockOutro => 'Skip Outro';
+
+  @override
+  String get sponsorblockPreview => 'Skip Preview';
+
+  @override
+  String get sponsorblockHook => 'Skip Hook';
+
+  @override
+  String get sponsorblockFiller => 'Skip Filler';
 }

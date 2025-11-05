@@ -38,6 +38,12 @@
   "listShowMore": "Show more",
   "settingsSaved": "Settings saved",
   "settingsTitle": "Settings",
+  "settingsAccountSettings": "Account",
+  "settingsAccountSettingsDesc": "Instance, Api-Key, ...",
+  "settingsAppearanceSettings": "Appearance",
+  "settingsAppearanceSettingsDesc": "...",
+  "settingsSponsorBlockSettings": "SponsorBlock",
+  "settingsSponsorBlockSettingsDesc": "Settings for SponsorBlock",
   "settingsInstanceUrl": "Instance URL",
   "settingsApiToken": "API Token",
   "settingsSave": "Save",
@@ -66,5 +72,14 @@
   "onboardingMarketing3": "Manage your archive",
   "onboardingMarketing4": "View your Videos in a native like experience",
   "onboardingPrivacyPolicy": "Privacy Policy",
-  "onboardingContinue": "Agree & Continue"
+  "onboardingContinue": "Agree & Continue",
+  "sponsorblockEnable": "Enable Sponsorblock",
+  "sponsorblockSponsor": "Skip Sponsor",
+  "sponsorblockPromo": "Skip Self-Promotion",
+  "sponsorblockInteraction": "Skip Interaction-Reminder",
+  "sponsorblockIntro": "Skip Intro",
+  "sponsorblockOutro": "Skip Outro",
+  "sponsorblockPreview": "Skip Preview",
+  "sponsorblockHook": "Skip Hook",
+  "sponsorblockFiller": "Skip Filler"
 }

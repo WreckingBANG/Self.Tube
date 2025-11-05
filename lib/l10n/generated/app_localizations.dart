@@ -326,6 +326,42 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get settingsTitle;
 
+  /// No description provided for @settingsAccountSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get settingsAccountSettings;
+
+  /// No description provided for @settingsAccountSettingsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Instance, Api-Key, ...'**
+  String get settingsAccountSettingsDesc;
+
+  /// No description provided for @settingsAppearanceSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get settingsAppearanceSettings;
+
+  /// No description provided for @settingsAppearanceSettingsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'...'**
+  String get settingsAppearanceSettingsDesc;
+
+  /// No description provided for @settingsSponsorBlockSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'SponsorBlock'**
+  String get settingsSponsorBlockSettings;
+
+  /// No description provided for @settingsSponsorBlockSettingsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings for SponsorBlock'**
+  String get settingsSponsorBlockSettingsDesc;
+
   /// No description provided for @settingsInstanceUrl.
   ///
   /// In en, this message translates to:
@@ -499,6 +535,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Agree & Continue'**
   String get onboardingContinue;
+
+  /// No description provided for @sponsorblockEnable.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Sponsorblock'**
+  String get sponsorblockEnable;
+
+  /// No description provided for @sponsorblockSponsor.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip Sponsor'**
+  String get sponsorblockSponsor;
+
+  /// No description provided for @sponsorblockPromo.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip Self-Promotion'**
+  String get sponsorblockPromo;
+
+  /// No description provided for @sponsorblockInteraction.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip Interaction-Reminder'**
+  String get sponsorblockInteraction;
+
+  /// No description provided for @sponsorblockIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip Intro'**
+  String get sponsorblockIntro;
+
+  /// No description provided for @sponsorblockOutro.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip Outro'**
+  String get sponsorblockOutro;
+
+  /// No description provided for @sponsorblockPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip Preview'**
+  String get sponsorblockPreview;
+
+  /// No description provided for @sponsorblockHook.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip Hook'**
+  String get sponsorblockHook;
+
+  /// No description provided for @sponsorblockFiller.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip Filler'**
+  String get sponsorblockFiller;
 }
 
 class _AppLocalizationsDelegate

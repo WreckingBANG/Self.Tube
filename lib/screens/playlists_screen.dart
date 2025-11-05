@@ -2,7 +2,7 @@ import 'package:Self.Tube/widgets/playlist_list_tile.dart';
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
 import '../screens/search_screen.dart';
-import '../screens/settings_screen.dart';
+import 'settings/overview_screen.dart';
 import '../l10n/generated/app_localizations.dart';
 
 class PlaylistsScreen extends StatelessWidget {

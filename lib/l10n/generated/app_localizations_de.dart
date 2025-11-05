@@ -124,6 +124,24 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsTitle => 'Einstellungen';
 
   @override
+  String get settingsAccountSettings => 'Konto';
+
+  @override
+  String get settingsAccountSettingsDesc => 'Instanz, API-Token, ...';
+
+  @override
+  String get settingsAppearanceSettings => 'Darstellung';
+
+  @override
+  String get settingsAppearanceSettingsDesc => '...';
+
+  @override
+  String get settingsSponsorBlockSettings => 'SponsorBlock';
+
+  @override
+  String get settingsSponsorBlockSettingsDesc => 'SponsorBlock-Einstellungen';
+
+  @override
   String get settingsInstanceUrl => 'Instanz-URL';
 
   @override
@@ -214,4 +232,31 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get onboardingContinue => 'Zustimmen & Fortfahren';
+
+  @override
+  String get sponsorblockEnable => 'SponsorBlock aktivieren';
+
+  @override
+  String get sponsorblockSponsor => 'Sponsor überspringen';
+
+  @override
+  String get sponsorblockPromo => 'Selbstwerbung überspringen';
+
+  @override
+  String get sponsorblockInteraction => 'Interaktions-Erinnerung überspringen';
+
+  @override
+  String get sponsorblockIntro => 'Intro überspringen';
+
+  @override
+  String get sponsorblockOutro => 'Outro überspringen';
+
+  @override
+  String get sponsorblockPreview => 'Vorschau überspringen';
+
+  @override
+  String get sponsorblockHook => 'Eröffnungsteaser & Grußformeln überspringen';
+
+  @override
+  String get sponsorblockFiller => 'Abschweifungen/Witze überspringen';
 }
