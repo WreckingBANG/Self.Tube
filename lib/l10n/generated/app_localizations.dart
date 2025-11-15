@@ -589,6 +589,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Skip Filler'**
   String get sponsorblockFiller;
+
+  /// No description provided for @expandableTextMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Show more'**
+  String get expandableTextMore;
+
+  /// No description provided for @expandableTextLess.
+  ///
+  /// In en, this message translates to:
+  /// **'Show less'**
+  String get expandableTextLess;
 }
 
 class _AppLocalizationsDelegate

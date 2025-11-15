@@ -259,4 +259,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get sponsorblockFiller => 'Abschweifungen/Witze überspringen';
+
+  @override
+  String get expandableTextMore => 'Mehr ...';
+
+  @override
+  String get expandableTextLess => 'Weniger ...';
 }

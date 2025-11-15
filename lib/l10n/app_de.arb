@@ -81,5 +81,7 @@
   "sponsorblockOutro": "Outro überspringen",
   "sponsorblockPreview": "Vorschau überspringen",
   "sponsorblockHook": "Eröffnungsteaser & Grußformeln überspringen",
-  "sponsorblockFiller": "Abschweifungen/Witze überspringen"
+  "sponsorblockFiller": "Abschweifungen/Witze überspringen",
+  "expandableTextMore": "Mehr ...",
+  "expandableTextLess": "Weniger ..."
 }

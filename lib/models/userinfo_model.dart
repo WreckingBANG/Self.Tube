@@ -17,7 +17,6 @@ class UserInfoModel {
       userName: json['name'],
       isSuperUser: json['is_superuser'],
       isStaff: json['is_staff'],
-
     );
   }
 }

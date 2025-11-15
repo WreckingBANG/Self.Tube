@@ -19,7 +19,6 @@ With a streamlined interface and direct connection to your TubeArchivist server,
 - [ ]  Linux phone support ([#1](https://codeberg.org/WreckingBANG/Self.Tube/issues/1))
 - [ ]  Subtitle support ([#6](https://codeberg.org/WreckingBANG/Self.Tube/issues/6))
 - [ ]  Library management ([#15](https://codeberg.org/WreckingBANG/Self.Tube/issues/15))
-- [ ]  Sponsorblock support ([#14](https://codeberg.org/WreckingBANG/Self.Tube/issues/14))
 - [ ]  Offline playback ([#23](https://codeberg.org/WreckingBANG/Self.Tube/issues/23))
 - [ ]  Playlist management ([#15](https://codeberg.org/WreckingBANG/Self.Tube/issues/15))
 - [ ]  Jellyfin Integration for Transcoding ([#18](https://codeberg.org/WreckingBANG/Self.Tube/issues/18))

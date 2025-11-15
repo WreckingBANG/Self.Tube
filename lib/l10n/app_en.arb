@@ -81,5 +81,7 @@
   "sponsorblockOutro": "Skip Outro",
   "sponsorblockPreview": "Skip Preview",
   "sponsorblockHook": "Skip Hook",
-  "sponsorblockFiller": "Skip Filler"
+  "sponsorblockFiller": "Skip Filler",
+  "expandableTextMore": "Show more",
+  "expandableTextLess": "Show less"
 }

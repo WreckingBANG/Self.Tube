@@ -259,4 +259,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sponsorblockFiller => 'Skip Filler';
+
+  @override
+  String get expandableTextMore => 'Show more';
+
+  @override
+  String get expandableTextLess => 'Show less';
 }

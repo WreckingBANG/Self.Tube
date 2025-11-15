@@ -10,6 +10,7 @@ import '../models/commentlist_model.dart';
 import '../models/playlistlist_model.dart';
 import '../services/settings_service.dart';
 import '../models/ping_model.dart';
+import '../models/channel_model.dart';
 
 class ApiService {
 
@@ -107,6 +108,26 @@ class ApiService {
         );
       if (response.statusCode == 200) {
         return ChannelListItemModel.fromJsonList(json.decode(response.body));
+      } else {
+        throw Exception(response);
+      }
+    } catch (e) {
+      print('Error: $e');
+      return null;
+    }
+  }
+
+  static Future<ChannelItemModel?> fetchChannel(String channelId) async {
+    try {
+      final response = await http.get(
+          Uri.parse('$baseUrl/api/channel/$channelId'),
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'token $apiToken',
+          },
+        );
+      if (response.statusCode == 200) {
+        return ChannelItemModel.fromJson(json.decode(response.body));
       } else {
         throw Exception(response);
       }
