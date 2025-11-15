@@ -4,6 +4,7 @@ class SettingsService {
   static const _instanceUrlKey = 'instanceUrl';
   static const _apiTokenKey = 'apiToken';
   static const _showCommentPics = 'showCommentPics';
+  static const _materialYouColors = 'materialYouColors';
   static const _doneSetup = 'doneSetup';
 
   static const _sponsorBlockEnabledKey = 'sponsorBlockEnabled';
@@ -19,6 +20,7 @@ class SettingsService {
   static String? instanceUrl;
   static String? apiToken;
   static bool? showCommentPics;
+  static bool? materialYouColors;
   static bool? doneSetup;
 
   static bool? sponsorBlockEnabled;
@@ -36,6 +38,7 @@ class SettingsService {
     instanceUrl = prefs.getString(_instanceUrlKey);
     apiToken = prefs.getString(_apiTokenKey);
     showCommentPics = prefs.getBool(_showCommentPics);
+    materialYouColors = prefs.getBool(_materialYouColors);
     doneSetup = prefs.getBool(_doneSetup);
 
     sponsorBlockEnabled = prefs.getBool(_sponsorBlockEnabledKey);
@@ -65,6 +68,12 @@ class SettingsService {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_showCommentPics, value);
     showCommentPics = value;
+  }
+
+  static Future<void> setMaterialYouColors(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_materialYouColors, value);
+    materialYouColors = value;
   }
 
   static Future<void> setDoneSetup(bool value) async {

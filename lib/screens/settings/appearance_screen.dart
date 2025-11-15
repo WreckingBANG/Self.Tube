@@ -9,6 +9,7 @@ class AppearanceSettingsScreen extends StatefulWidget {
 
 class _AppearanceSettingsScreenState extends State<AppearanceSettingsScreen> {
   bool _showCommentPics = false;
+  bool _materialYouColors = true;
 
   @override
   void initState() {
@@ -18,11 +19,13 @@ class _AppearanceSettingsScreenState extends State<AppearanceSettingsScreen> {
 
   Future<void> _loadSettings() async {
     _showCommentPics = SettingsService.showCommentPics?? false;
+    _materialYouColors = SettingsService.materialYouColors?? false;
   }
 
   Future<void> _saveSettings() async {
     final localizations = AppLocalizations.of(context)!;
     await SettingsService.setShowCommentPics(_showCommentPics);
+    await SettingsService.setMaterialYouColors(_materialYouColors);
   }
 
   @override
@@ -40,6 +43,16 @@ class _AppearanceSettingsScreenState extends State<AppearanceSettingsScreen> {
               onChanged: (bool value) {
                 setState(() {
                   _showCommentPics = value;
+                  _saveSettings();
+                });
+              },
+            ),
+            SwitchListTile(
+              title: Text("Enable Material-You Colors"),
+              value: _materialYouColors,
+              onChanged: (bool value) {
+                setState(() {
+                  _materialYouColors = value;
                   _saveSettings();
                 });
               },

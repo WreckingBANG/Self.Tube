@@ -19,12 +19,29 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  ColorScheme _resolveColorScheme({
+    required bool isDark,
+    required ColorScheme? dynamicScheme,
+  }) {
+    if (SettingsService.materialYouColors == false) {
+      return ColorScheme.fromSeed(
+        seedColor: fallbackSeedColor,
+        brightness: isDark ? Brightness.dark : Brightness.light,
+      );
+    }
+    return dynamicScheme ??
+        ColorScheme.fromSeed(
+          seedColor: fallbackSeedColor,
+          brightness: isDark ? Brightness.dark : Brightness.light,
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
         return MaterialApp(
-          localizationsDelegates: [
+          localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -35,8 +52,12 @@ class MyApp extends StatelessWidget {
             Locale('de'),
           ],
           title: 'Self.Tube',
-          theme: lightThemeFrom(lightDynamic ?? ColorScheme.fromSeed(seedColor: fallbackSeedColor, brightness: Brightness.light)),
-          darkTheme: darkThemeFrom(darkDynamic ?? ColorScheme.fromSeed(seedColor: fallbackSeedColor, brightness: Brightness.dark)),
+          theme: lightThemeFrom(
+            _resolveColorScheme(isDark: false, dynamicScheme: lightDynamic),
+          ),
+          darkTheme: darkThemeFrom(
+            _resolveColorScheme(isDark: true, dynamicScheme: darkDynamic),
+          ),
           home: SettingsService.doneSetup == true
               ? const BottNavBar()
               : OnBoardingPrivacyPolicyScreen(),
