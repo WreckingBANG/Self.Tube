@@ -65,6 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   leading: Icon(Icons.settings),
                                   title: Text(localizations.settingsSheetSettings),
                                   onTap: () {
+                                    Navigator.pop(context);
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(builder: (context) => SettingsScreen()),
@@ -75,12 +76,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   leading: Icon(Icons.download),
                                   title: Text(localizations.settingsSheetDownloads),
                                   subtitle: Text(localizations.settingsSheetComingSoon),
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.logout),
                                   title: Text(localizations.settingsSheetLogout),
                                   onTap: () async {
+                                    Navigator.pop(context);
                                     await SettingsService.setDoneSetup(false);
                                     await SettingsService.setInstanceUrl("");
                                     await SettingsService.setApiToken("");
@@ -95,6 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   leading: Icon(Icons.info),
                                   title: Text(localizations.settingsSheetAbout),
                                   onTap: () {
+                                    Navigator.pop(context);
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(builder: (context) => AboutScreen()),
@@ -115,13 +120,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                   leading: Icon(Icons.settings),
                                   title: Text(localizations.settingsSheetSettings),
                                   subtitle: Text(localizations.settingsSheetComingSoon),
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.bar_chart_rounded),
                                   title: Text(localizations.settingsSheetLibraryStats),
                                   subtitle: Text(localizations.settingsSheetComingSoon),
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
                                 ),
                               ]
                             ),

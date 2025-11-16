@@ -24,7 +24,7 @@ class VideoListTile extends StatelessWidget {
       child: ListTile(
         title: Text(
           video.title,
-          style: Theme.of(context).textTheme.bodyMedium, // or use TextStyle(fontSize: 14)
+          style: Theme.of(context).textTheme.bodyMedium,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
@@ -141,6 +141,7 @@ class VideoListTile extends StatelessWidget {
                               title: Text(localizations.sheetMarkWatched),
                               onTap: () {
                                 ApiService.setVideoWatched(video.youtubeId, true);
+                                Navigator.pop(context);
                               },
                             ),
                             ListTile(
@@ -148,12 +149,14 @@ class VideoListTile extends StatelessWidget {
                               title: Text(localizations.sheetMarkUnwatched),
                               onTap: () {
                                 ApiService.setVideoWatched(video.youtubeId, false);
+                                Navigator.pop(context);
                               },
                             ),
                             ListTile(
                               leading: Icon(Icons.person_2_rounded),
                               title: Text(localizations.sheetOpenChannel),
                               onTap: () {
+                                Navigator.pop(context);
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(builder: (context) => ChannelpageScreen(channelId: video.channelId)),
@@ -164,6 +167,7 @@ class VideoListTile extends StatelessWidget {
                               leading: Icon(Icons.share),
                               title: Text(localizations.sheetShare),
                               onTap: () {
+                                Navigator.pop(context);
                                 SharePlus.instance.share(
                                   ShareParams(uri: Uri.parse("https://www.youtube.com/watch?v=${video.youtubeId}"))
                                 );
@@ -173,7 +177,9 @@ class VideoListTile extends StatelessWidget {
                               leading: Icon(Icons.file_download_outlined),
                               title: Text(localizations.sheetDownloadLocal),
                               subtitle: Text(localizations.sheetComingSoon),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
                             ),
                           ]
                         ),
@@ -189,13 +195,17 @@ class VideoListTile extends StatelessWidget {
                               leading: Icon(Icons.cloud_download),
                               title: Text(localizations.sheetRedownloadServer),
                               subtitle: Text(localizations.sheetComingSoon),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
                             ),
                             ListTile(
                               leading: Icon(Icons.cloud_off_rounded),
                               title: Text(localizations.sheetDeleteVideoServer),
                               subtitle: Text(localizations.sheetComingSoon),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
                             ),
                           ]
                         ),
