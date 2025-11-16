@@ -20,7 +20,7 @@ class PlaylistpageScreen extends StatelessWidget{
       body: SingleChildScrollView(
         child: Column(
           children: [
-            VideoListSection(title: localizations.playlistVideos, query: "?playlist=${playlistId}")
+            VideoListSection(title: localizations.playlistVideos, query: "?playlist=${playlistId}", hideChannel: false,)
           ],
         ),
       )

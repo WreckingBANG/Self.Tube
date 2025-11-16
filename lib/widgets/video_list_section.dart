@@ -5,11 +5,13 @@ import '../l10n/generated/app_localizations.dart';
 
 class VideoListSection extends StatefulWidget {
   final String title;
+  final bool hideChannel;
   final String query;
 
   const VideoListSection({
     super.key,
     required this.title,
+    required this.hideChannel,
     required this.query,
   });
 
@@ -62,7 +64,7 @@ class _VideoListSectionState extends State<VideoListSection> {
         else if (videos.isEmpty)
           Center(child: Text(localizations.errorNoDataFound))
         else
-          ...videos.map((video) => VideoListTile(video: video)).toList(),
+          ...videos.map((video) => VideoListTile(video: video,hideChannel: widget.hideChannel)).toList(),
         if (isLoading)
           const Padding(
             padding: EdgeInsets.all(8.0),

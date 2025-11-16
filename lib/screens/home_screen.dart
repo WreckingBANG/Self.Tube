@@ -45,6 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
             tooltip: localizations.tooltipSettings,
             onPressed: () {
               showModalBottomSheet<void>(
+                showDragHandle: true,
+                isScrollControlled: true,
                 context: context,
                 builder: (BuildContext context) {
                   return SizedBox(
@@ -154,11 +156,13 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               VideoListSection(
                 title: localizations.homeContinueWatching,
+                hideChannel: false,
                 query: "?order=asc&sort=published&watch=continue",
               ),
               const Divider(thickness: 2),
               VideoListSection(
                 title: localizations.homeLatestVideos,
+                hideChannel: false,
                 query: "?order=desc&sort=published&type=videos",
               ),
             ],

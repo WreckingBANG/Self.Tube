@@ -289,4 +289,57 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aboutDependencies => 'Dependencies';
+
+  @override
+  String get videoListViews => 'views';
+
+  @override
+  String secondsAgo(Object count) {
+    return '$count seconds ago';
+  }
+
+  @override
+  String secondAgo(Object count) {
+    return '$count second ago';
+  }
+
+  @override
+  String minutesAgo(Object count) {
+    return '$count minutes ago';
+  }
+
+  @override
+  String minuteAgo(Object count) {
+    return '$count minute ago';
+  }
+
+  @override
+  String hoursAgo(Object count) {
+    return '$count hours ago';
+  }
+
+  @override
+  String hourAgo(Object count) {
+    return '$count hour ago';
+  }
+
+  @override
+  String daysAgo(Object count) {
+    return '$count days ago';
+  }
+
+  @override
+  String dayAgo(Object count) {
+    return '$count day ago';
+  }
+
+  @override
+  String yearsAgo(Object count) {
+    return '$count years ago';
+  }
+
+  @override
+  String yearAgo(Object count) {
+    return '$count year ago';
+  }
 }

@@ -91,5 +91,16 @@
   "aboutSourceCode": "Source Code",
   "aboutReleases": "Releases",
   "aboutScrollDependencies": "Scroll down to see dependencies",
-  "aboutDependencies": "Dependencies"
+  "aboutDependencies": "Dependencies",
+  "videoListViews": "views",
+  "secondsAgo": "{count} seconds ago",
+  "secondAgo": "{count} second ago",
+  "minutesAgo": "{count} minutes ago",
+  "minuteAgo": "{count} minute ago",
+  "hoursAgo": "{count} hours ago",
+  "hourAgo": "{count} hour ago",
+  "daysAgo": "{count} days ago",
+  "dayAgo": "{count} day ago",
+  "yearsAgo": "{count} years ago",
+  "yearAgo": "{count} year ago"
 }

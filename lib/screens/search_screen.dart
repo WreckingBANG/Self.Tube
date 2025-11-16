@@ -85,7 +85,7 @@ class _SearchScreenState extends State<SearchScreen>{
                             itemBuilder: (context, index) {
                               return Card(
                                 elevation: 4,
-                                child: VideoListTile(video: result.videos[index])
+                                child: VideoListTile(video: result.videos[index], hideChannel: false,)
                               );
                             },
                           ),

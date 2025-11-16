@@ -91,5 +91,16 @@
   "aboutSourceCode": "Quellcode",
   "aboutReleases": "Versionsarchiv",
   "aboutScrollDependencies": "Scrolle um die Abhängigkeiten zu sehen",
-  "aboutDependencies": "Abhängigkeiten"
+  "aboutDependencies": "Abhängigkeiten",
+  "videoListViews": "klicks",
+  "secondsAgo": "vor {count} Sekunden",
+  "secondAgo": "vor {count} Sekunde",
+  "minutesAgo": "vor {count} Minuten",
+  "minuteAgo": "vor {count} Minute",
+  "hoursAgo": "vor {count} Stunden",
+  "hourAgo": "vor {count} Stunde",
+  "daysAgo": "vor {count} Tagen",
+  "dayAgo": "vor {count} Tag",
+  "yearsAgo": "vor {count} Jahren",
+  "yearAgo": "vor {count} Jahr"
 }

@@ -58,7 +58,7 @@ class _VideoListSimilarSectionState extends State<VideoListSimilarSection> {
         else if (videos.isEmpty)
           Center(child: Text(localizations.errorNoDataFound))
         else
-          ...videos.map((video) => VideoListTile(video: video)).toList(),
+          ...videos.map((video) => VideoListTile(video: video, hideChannel: false,)).toList(),
         if (isLoading)
           const Padding(
             padding: EdgeInsets.all(8.0),

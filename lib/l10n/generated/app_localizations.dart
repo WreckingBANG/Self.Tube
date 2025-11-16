@@ -649,6 +649,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dependencies'**
   String get aboutDependencies;
+
+  /// No description provided for @videoListViews.
+  ///
+  /// In en, this message translates to:
+  /// **'views'**
+  String get videoListViews;
+
+  /// No description provided for @secondsAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} seconds ago'**
+  String secondsAgo(Object count);
+
+  /// No description provided for @secondAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} second ago'**
+  String secondAgo(Object count);
+
+  /// No description provided for @minutesAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} minutes ago'**
+  String minutesAgo(Object count);
+
+  /// No description provided for @minuteAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} minute ago'**
+  String minuteAgo(Object count);
+
+  /// No description provided for @hoursAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} hours ago'**
+  String hoursAgo(Object count);
+
+  /// No description provided for @hourAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} hour ago'**
+  String hourAgo(Object count);
+
+  /// No description provided for @daysAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days ago'**
+  String daysAgo(Object count);
+
+  /// No description provided for @dayAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} day ago'**
+  String dayAgo(Object count);
+
+  /// No description provided for @yearsAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} years ago'**
+  String yearsAgo(Object count);
+
+  /// No description provided for @yearAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} year ago'**
+  String yearAgo(Object count);
 }
 
 class _AppLocalizationsDelegate
