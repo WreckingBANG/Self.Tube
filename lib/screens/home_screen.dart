@@ -4,6 +4,7 @@ import '../widgets/video_list_section.dart';
 import '../screens/search_screen.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../services/settings_service.dart';
+import '../screens/about_screen.dart';
 import '../main.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -93,8 +94,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ListTile(
                                   leading: Icon(Icons.info),
                                   title: Text(localizations.settingsSheetAbout),
-                                  subtitle: Text(localizations.settingsSheetComingSoon),
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => AboutScreen()),
+                                    );
+                                  },
                                 ),
                               ]
                             ),
