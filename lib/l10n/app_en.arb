@@ -83,5 +83,13 @@
   "sponsorblockHook": "Skip Hook",
   "sponsorblockFiller": "Skip Filler",
   "expandableTextMore": "Show more",
-  "expandableTextLess": "Show less"
+  "expandableTextLess": "Show less",
+  "aboutVersion": "Version",
+  "aboutLicense": "License",
+  "aboutDeveloper": "Developed by WreckingBANG",
+  "aboutPrivacyPolicy": "Privacy Policy",
+  "aboutSourceCode": "Source Code",
+  "aboutReleases": "Releases",
+  "aboutScrollDependencies": "Scroll down to see dependencies",
+  "aboutDependencies": "Dependencies"
 }

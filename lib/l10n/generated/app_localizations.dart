@@ -601,6 +601,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Show less'**
   String get expandableTextLess;
+
+  /// No description provided for @aboutVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get aboutVersion;
+
+  /// No description provided for @aboutLicense.
+  ///
+  /// In en, this message translates to:
+  /// **'License'**
+  String get aboutLicense;
+
+  /// No description provided for @aboutDeveloper.
+  ///
+  /// In en, this message translates to:
+  /// **'Developed by WreckingBANG'**
+  String get aboutDeveloper;
+
+  /// No description provided for @aboutPrivacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get aboutPrivacyPolicy;
+
+  /// No description provided for @aboutSourceCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Source Code'**
+  String get aboutSourceCode;
+
+  /// No description provided for @aboutReleases.
+  ///
+  /// In en, this message translates to:
+  /// **'Releases'**
+  String get aboutReleases;
+
+  /// No description provided for @aboutScrollDependencies.
+  ///
+  /// In en, this message translates to:
+  /// **'Scroll down to see dependencies'**
+  String get aboutScrollDependencies;
+
+  /// No description provided for @aboutDependencies.
+  ///
+  /// In en, this message translates to:
+  /// **'Dependencies'**
+  String get aboutDependencies;
 }
 
 class _AppLocalizationsDelegate

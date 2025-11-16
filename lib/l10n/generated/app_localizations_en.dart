@@ -265,4 +265,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get expandableTextLess => 'Show less';
+
+  @override
+  String get aboutVersion => 'Version';
+
+  @override
+  String get aboutLicense => 'License';
+
+  @override
+  String get aboutDeveloper => 'Developed by WreckingBANG';
+
+  @override
+  String get aboutPrivacyPolicy => 'Privacy Policy';
+
+  @override
+  String get aboutSourceCode => 'Source Code';
+
+  @override
+  String get aboutReleases => 'Releases';
+
+  @override
+  String get aboutScrollDependencies => 'Scroll down to see dependencies';
+
+  @override
+  String get aboutDependencies => 'Dependencies';
 }

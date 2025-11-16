@@ -83,5 +83,13 @@
   "sponsorblockHook": "Eröffnungsteaser & Grußformeln überspringen",
   "sponsorblockFiller": "Abschweifungen/Witze überspringen",
   "expandableTextMore": "Mehr ...",
-  "expandableTextLess": "Weniger ..."
+  "expandableTextLess": "Weniger ...",
+  "aboutVersion": "Version",
+  "aboutLicense": "Lizenz",
+  "aboutDeveloper": "Entwickelt von WreckingBANG",
+  "aboutPrivacyPolicy": "Datenschutzerklärung",
+  "aboutSourceCode": "Quellcode",
+  "aboutReleases": "Versionsarchiv",
+  "aboutScrollDependencies": "Scrolle um die Abhängigkeiten zu sehen",
+  "aboutDependencies": "Abhängigkeiten"
 }

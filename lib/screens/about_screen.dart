@@ -7,7 +7,6 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
 
-    // Links
     final Uri privacypolicyUrl = Uri.parse(
         'https://codeberg.org/WreckingBANG/Self.Tube/src/branch/main/docs/PRIVACY_POLICY.md');
     final Uri licenseUrl = Uri.parse(
@@ -100,13 +99,13 @@ class AboutScreen extends StatelessWidget {
                           localizations.appTitle,
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
-                        const Text("License: 0.1.0"),
-                        const Text("License: AGPL-v3-or-Later"),
+                        Text("${localizations.aboutVersion}: 0.1.0"),
+                        Text("${localizations.aboutLicense}: AGPL-v3-or-Later"),
                         const SizedBox(height: 8),
                         GestureDetector(
                           onTap: () => launchUrl(codebergAccountUrl),
                           child: Text(
-                            "Developed by WreckingBANG",
+                            localizations.aboutDeveloper,
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
@@ -120,27 +119,27 @@ class AboutScreen extends StatelessWidget {
                   children: [
                     ListTile(
                       leading: const Icon(Icons.article),
-                      title: const Text("License"),
+                      title: Text(localizations.aboutLicense),
                       onTap: () => launchUrl(licenseUrl),
                     ),
                     ListTile(
                       leading: const Icon(Icons.privacy_tip_outlined),
-                      title: const Text("Privacy Policy"),
+                      title: Text(localizations.aboutPrivacyPolicy),
                       onTap: () => launchUrl(privacypolicyUrl),
                     ),
                     ListTile(
                       leading: const Icon(Icons.code),
-                      title: const Text("Source Code"),
+                      title: Text(localizations.aboutSourceCode),
                       onTap: () => launchUrl(sourceCodeUrl),
                     ),
                     ListTile(
                       leading: const Icon(Icons.update),
-                      title: const Text("Releases"),
+                      title: Text(localizations.aboutReleases),
                       onTap: () => launchUrl(changelogUrl),
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      "Scroll down to see dependencies",
+                      localizations.aboutScrollDependencies,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -164,7 +163,7 @@ class AboutScreen extends StatelessWidget {
                 return ListTile(
                   leading: const Icon(Icons.extension),
                   title: Text(dep["name"]!),
-                  subtitle: Text("License: ${dep["license"]}"),
+                  subtitle: Text("${localizations.aboutLicense}: ${dep["license"]}"),
                   onTap: () => launchUrl(Uri.parse(dep["url"]!)),
                 );
               },
