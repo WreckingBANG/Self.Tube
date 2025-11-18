@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'l10n/generated/app_localizations.dart';
-import 'screens/bottomnavbar_screen.dart';
+import 'screens/homecontainer_screen.dart';
 import 'screens/onboarding/privacypolicy_screen.dart';
 import 'package:media_kit/media_kit.dart'; 
 import 'misc/theme.dart';
@@ -30,10 +30,10 @@ class MyApp extends StatelessWidget {
       );
     }
     return dynamicScheme ??
-        ColorScheme.fromSeed(
-          seedColor: fallbackSeedColor,
-          brightness: isDark ? Brightness.dark : Brightness.light,
-        );
+    ColorScheme.fromSeed(
+      seedColor: fallbackSeedColor,
+      brightness: isDark ? Brightness.dark : Brightness.light,
+    );
   }
 
   @override
@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
             _resolveColorScheme(isDark: true, dynamicScheme: darkDynamic),
           ),
           home: SettingsService.doneSetup == true
-              ? const BottNavBar()
+              ? const HomeContainer()
               : OnBoardingPrivacyPolicyScreen(),
         );
       },

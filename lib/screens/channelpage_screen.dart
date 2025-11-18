@@ -5,7 +5,6 @@ import '../l10n/generated/app_localizations.dart';
 import '../services/settings_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../models/channel_model.dart';
-import '../services/api_service.dart';
 import '../utils/number_formatter.dart';
 import '../widgets/expandable_text.dart';
 

@@ -6,7 +6,6 @@ class ActionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(localizations.actionsTitle)),
       body: 
       Text(localizations.actionsTitle)
     );
