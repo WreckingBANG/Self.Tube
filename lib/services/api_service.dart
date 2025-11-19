@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:Self.Tube/models/userinfo_model.dart';
 import 'package:http/http.dart' as http;
-import '../models/videolist_model.dart';
+import '../models/videolistwrapper_model.dart';
 import '../models/videolist_similar_model.dart';
 import '../models/videoplayer_model.dart';
 import '../models/channellist_model.dart';
@@ -37,19 +37,21 @@ class ApiService {
     }
   }
 
-  static Future<List<VideoListItemModel>?> fetchVideoList(String options) async {
+  static Future<VideoListWrapperModel?> fetchVideoList(String options) async {
     try {
       final response = await http.get(
-          Uri.parse('$baseUrl/api/video$options'),
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'token $apiToken',
-          },
-        );
+        Uri.parse('$baseUrl/api/video$options'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'token $apiToken',
+        },
+      );
+
       if (response.statusCode == 200) {
-        return VideoListItemModel.fromJsonList(json.decode(response.body));
+        final Map<String, dynamic> jsonMap = json.decode(response.body);
+        return VideoListWrapperModel.fromJson(jsonMap);
       } else {
-        throw Exception(response);
+        throw Exception('Failed to load videos: ${response.statusCode}');
       }
     } catch (e) {
       print('Error: $e');

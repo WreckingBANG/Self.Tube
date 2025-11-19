@@ -35,19 +35,29 @@ class _VideoListSectionState extends State<VideoListSection> {
     if (isLoading || !hasMore) return;
 
     setState(() => isLoading = true);
-    final newVideos = await ApiService.fetchVideoList("${widget.query}&page=$currentPage");
-    
-    setState(() {
-      if (newVideos == null || newVideos.isEmpty) {
-        hasMore = false;
-      } else {
-        videos.addAll(newVideos);
-        currentPage++;
-      }
-      isLoading = false;
-    });
 
+    try {
+      final newVideos = await ApiService.fetchVideoList("${widget.query}&page=$currentPage");
+
+      if (newVideos != null) {
+        setState(() {
+          videos.addAll(newVideos.data);
+          if (currentPage >= newVideos.lastPage) {
+            hasMore = false;
+          } else {
+            currentPage++;
+          }
+        });
+      } else {
+        setState(() => hasMore = false);
+      }
+    } catch (e) {
+      print("Error fetching videos: $e");
+    } finally {
+      setState(() => isLoading = false);
+    }
   }
+
 
 @override
   Widget build(BuildContext context) {
