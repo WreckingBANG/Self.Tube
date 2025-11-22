@@ -93,7 +93,11 @@ class AboutScreen extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const FlutterLogo(size: 100),
+                        Image.asset(
+                          'assets/appicon_filled.png',
+                          width: 100,
+                          height: 100,
+                        ),
                         const SizedBox(height: 16),
                         Text(
                           localizations.appTitle,

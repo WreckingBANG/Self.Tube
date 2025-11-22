@@ -1,4 +1,4 @@
-
+![Logo](https://codeberg.org/wreckingbang/Self.Tube/src/branch/main/assets/appicon_filled.png)
 # Self.Tube
 
 **Self.Tube** will be a sleek, lightweight client for [TubeArchivist](https://github.com/tubearchivist/tubearchivist), designed to bring your personal YouTube archive right to your Android or Linux phone.
