@@ -1,6 +1,8 @@
+import 'package:Self.Tube/widgets/containers/list_section_container.dart';
 import 'package:flutter/material.dart';
 import '../../services/settings_service.dart';
 import '../../l10n/generated/app_localizations.dart';
+import 'package:Self.Tube/widgets/containers/expandable_text.dart';
 
 class SponsorblockSettingsScreen extends StatefulWidget {
   @override
@@ -54,112 +56,109 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
     final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(title: Text(localizations.settingsTitle)),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            SwitchListTile(
-              title: Text(localizations.sponsorblockEnable),
-              value: _enableSponsorblock,
-              onChanged: (bool value) {
-                setState(() {
-                  _enableSponsorblock = value;
-                  _saveSettings();
-                });
-              },
+      body: ListSectionContainer(
+        children: [
+          SwitchListTile(
+            title: Text(localizations.sponsorblockEnable),
+            value: _enableSponsorblock,
+            onChanged: (bool value) {
+              setState(() {
+                _enableSponsorblock = value;
+                _saveSettings();
+              });
+            },
+          ),
+          IgnorePointer(
+            ignoring: !_enableSponsorblock,
+            child: Opacity(
+              opacity: _enableSponsorblock ? 1.0 : 0.4,
+              child: Column(
+                children: [
+                  SwitchListTile(
+                    title: Text(localizations.sponsorblockSponsor),
+                    value: _enableSponsor,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _enableSponsor = value;
+                        _saveSettings();
+                      });
+                    },
+                  ),
+                  SwitchListTile(
+                    title: Text(localizations.sponsorblockPromo),
+                    value: _enablePromo,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _enablePromo = value;
+                        _saveSettings();
+                      });
+                    },
+                  ),
+                  SwitchListTile(
+                    title: Text(localizations.sponsorblockInteraction),
+                    value: _enableInteraction,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _enableInteraction = value;
+                        _saveSettings();
+                      });
+                    },
+                  ),
+                  SwitchListTile(
+                    title: Text(localizations.sponsorblockIntro),
+                    value: _enableIntro,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _enableIntro = value;
+                        _saveSettings();
+                      });
+                    },
+                  ),
+                  SwitchListTile(
+                    title: Text(localizations.sponsorblockOutro),
+                    value: _enableOutro,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _enableOutro = value;
+                        _saveSettings();
+                      });
+                    },
+                  ),
+                  SwitchListTile(
+                    title: Text(localizations.sponsorblockPreview),
+                    value: _enablePreview,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _enablePreview = value;
+                        _saveSettings();
+                      });
+                    },
+                  ),
+                  SwitchListTile(
+                    title: Text(localizations.sponsorblockHook),
+                    value: _enableHook,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _enableHook = value;
+                        _saveSettings();
+                      });
+                    },
+                  ),
+                  SwitchListTile(
+                    title: Text(localizations.sponsorblockFiller),
+                    value: _enableFiller,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _enableFiller = value;
+                        _saveSettings();
+                      });
+                    },
+                  ),
+                ],
+              )
             ),
-            IgnorePointer(
-              ignoring: !_enableSponsorblock,
-              child: Opacity(
-                opacity: _enableSponsorblock ? 1.0 : 0.4,
-                child: Column(
-                  children: [
-                    SwitchListTile(
-                      title: Text(localizations.sponsorblockSponsor),
-                      value: _enableSponsor,
-                      onChanged: (bool value) {
-                        setState(() {
-                          _enableSponsor = value;
-                          _saveSettings();
-                        });
-                      },
-                    ),
-                    SwitchListTile(
-                      title: Text(localizations.sponsorblockPromo),
-                      value: _enablePromo,
-                      onChanged: (bool value) {
-                        setState(() {
-                          _enablePromo = value;
-                          _saveSettings();
-                        });
-                      },
-                    ),
-                    SwitchListTile(
-                      title: Text(localizations.sponsorblockInteraction),
-                      value: _enableInteraction,
-                      onChanged: (bool value) {
-                        setState(() {
-                          _enableInteraction = value;
-                          _saveSettings();
-                        });
-                      },
-                    ),
-                    SwitchListTile(
-                      title: Text(localizations.sponsorblockIntro),
-                      value: _enableIntro,
-                      onChanged: (bool value) {
-                        setState(() {
-                          _enableIntro = value;
-                          _saveSettings();
-                        });
-                      },
-                    ),
-                    SwitchListTile(
-                      title: Text(localizations.sponsorblockOutro),
-                      value: _enableOutro,
-                      onChanged: (bool value) {
-                        setState(() {
-                          _enableOutro = value;
-                          _saveSettings();
-                        });
-                      },
-                    ),
-                    SwitchListTile(
-                      title: Text(localizations.sponsorblockPreview),
-                      value: _enablePreview,
-                      onChanged: (bool value) {
-                        setState(() {
-                          _enablePreview = value;
-                          _saveSettings();
-                        });
-                      },
-                    ),
-                    SwitchListTile(
-                      title: Text(localizations.sponsorblockHook),
-                      value: _enableHook,
-                      onChanged: (bool value) {
-                        setState(() {
-                          _enableHook = value;
-                          _saveSettings();
-                        });
-                      },
-                    ),
-                    SwitchListTile(
-                      title: Text(localizations.sponsorblockFiller),
-                      value: _enableFiller,
-                      onChanged: (bool value) {
-                        setState(() {
-                          _enableFiller = value;
-                          _saveSettings();
-                        });
-                      },
-                    ),
-                  ],
-                )
-              ),
-            )
-          ],
-        ),
+          )
+        ]
       ),
     );
   }

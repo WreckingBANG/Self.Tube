@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../l10n/generated/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:Self.Tube/widgets/containers/list_section_container.dart';
 
 class AboutScreen extends StatelessWidget {
   @override
@@ -117,9 +118,7 @@ class AboutScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Divider(),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
+                ListSectionContainer(
                   children: [
                     ListTile(
                       leading: const Icon(Icons.article),
@@ -141,12 +140,12 @@ class AboutScreen extends StatelessWidget {
                       title: Text(localizations.aboutReleases),
                       onTap: () => launchUrl(changelogUrl),
                     ),
-                    const SizedBox(height: 12),
-                    Text(
-                      localizations.aboutScrollDependencies,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
                   ],
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  localizations.aboutScrollDependencies,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
             ),

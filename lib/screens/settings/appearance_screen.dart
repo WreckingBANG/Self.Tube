@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../services/settings_service.dart';
 import '../../l10n/generated/app_localizations.dart';
+import 'package:Self.Tube/widgets/containers/list_section_container.dart';
 
 class AppearanceSettingsScreen extends StatefulWidget {
   @override
@@ -33,32 +34,29 @@ class _AppearanceSettingsScreenState extends State<AppearanceSettingsScreen> {
     final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(title: Text(localizations.settingsTitle)),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            SwitchListTile(
-              title: Text(localizations.settingsShowCommentPics),
-              value: _showCommentPics,
-              onChanged: (bool value) {
-                setState(() {
-                  _showCommentPics = value;
-                  _saveSettings();
-                });
-              },
-            ),
-            SwitchListTile(
-              title: Text("Enable Material-You Colors"),
-              value: _materialYouColors,
-              onChanged: (bool value) {
-                setState(() {
-                  _materialYouColors = value;
-                  _saveSettings();
-                });
-              },
-            ),
-          ],
-        ),
+      body: ListSectionContainer(
+        children: [
+          SwitchListTile(
+            title: Text(localizations.settingsShowCommentPics),
+            value: _showCommentPics,
+            onChanged: (bool value) {
+              setState(() {
+                _showCommentPics = value;
+                _saveSettings();
+              });
+            },
+          ),
+          SwitchListTile(
+            title: Text("Enable Material-You Colors"),
+            value: _materialYouColors,
+            onChanged: (bool value) {
+              setState(() {
+                _materialYouColors = value;
+                _saveSettings();
+              });
+            },
+          ),
+        ]
       ),
     );
   }

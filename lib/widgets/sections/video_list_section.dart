@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../services/api_service.dart';
-import 'video_list_tile.dart';
-import '../l10n/generated/app_localizations.dart';
+import '../../services/api_service.dart';
+import '../tiles/video_list_tile.dart';
+import '../../l10n/generated/app_localizations.dart';
+import 'package:Self.Tube/widgets/containers/list_section_container.dart';
 
 class VideoListSection extends StatefulWidget {
   final String title;
@@ -65,43 +66,21 @@ class _VideoListSectionState extends State<VideoListSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            widget.title,
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondaryContainer,),
-          ),
-        ),
         if (videos.isEmpty && isLoading)
           const Center(child: CircularProgressIndicator())
         else if (videos.isEmpty)
           Center(child: Text(localizations.errorNoDataFound))
         else
-          ...List.generate(videos.length, (index) {
-            final video = videos[index];
-
-            final shape = RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-                top: index == 0
-                    ? const Radius.circular(12)
-                    : const Radius.circular(4),
-                bottom: index == videos.length - 1
-                    ? const Radius.circular(12)
-                    : const Radius.circular(4),
-              ),
-            );
-
-            return Card(
-              shape: shape,
-              clipBehavior: Clip.antiAlias,
-              elevation: 0,
-              margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 1),
-              child: VideoListTile(
-                video: video,
-                hideChannel: widget.hideChannel,
-              ),
-            );
-          }),
+          ListSectionContainer(
+            title: widget.title,
+            children: [
+              ...List.generate(videos.length, (index) {
+                final video = videos[index];
+                return VideoListTile(video: video, hideChannel: widget.hideChannel);
+              })
+            ]
+          ),
+          
         if (isLoading)
           const Padding(
             padding: EdgeInsets.all(8.0),
@@ -120,5 +99,4 @@ class _VideoListSectionState extends State<VideoListSection> {
       ],
     );
   }
-
 }

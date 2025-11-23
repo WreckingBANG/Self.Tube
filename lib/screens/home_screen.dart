@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/video_list_section.dart';
+import '../widgets/sections/video_list_section.dart';
 import '../l10n/generated/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {

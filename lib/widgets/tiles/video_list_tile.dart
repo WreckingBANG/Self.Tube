@@ -1,14 +1,15 @@
 import 'package:Self.Tube/screens/channelpage_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../screens/player_screen.dart';
+import '../../screens/player_screen.dart';
 import 'package:share_plus/share_plus.dart';
-import '../services/api_service.dart';
-import '../services/settings_service.dart';
-import '../l10n/generated/app_localizations.dart';
-import '../utils/duration_formatter.dart';
-import '../utils/number_formatter.dart';
-import '../utils/timeago_formatter.dart';
+import '../../services/api_service.dart';
+import '../../services/settings_service.dart';
+import '../../l10n/generated/app_localizations.dart';
+import '../../utils/duration_formatter.dart';
+import '../../utils/number_formatter.dart';
+import '../../utils/timeago_formatter.dart';
+import 'package:Self.Tube/widgets/containers/list_section_container.dart';
 
 class VideoListTile extends StatelessWidget {
   final dynamic video;
@@ -19,7 +20,6 @@ class VideoListTile extends StatelessWidget {
   static String? apiToken = SettingsService.apiToken;
   static String? baseUrl = SettingsService.instanceUrl;
 
-  @override
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
@@ -149,11 +149,11 @@ class VideoListTile extends StatelessWidget {
             isScrollControlled: true,
             builder: (BuildContext context) {
               return SizedBox(
-                height: 570,
                 child: Padding(
                   padding: EdgeInsets.all(8),
                   child: 
                   Column(
+                    mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -161,14 +161,9 @@ class VideoListTile extends StatelessWidget {
                         style: TextStyle(fontSize: 16),
                       ),
                       SizedBox(height: 16),
-                      Text(
-                        localizations.sheetLocalActions,
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondaryContainer),
-                      ),
-                      Card(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                      ListSectionContainer(
+                        title: localizations.sheetLocalActions,
+                        children: [
                             ListTile(
                               leading: Icon(Icons.timer_outlined),
                               title: Text(localizations.sheetMarkWatched),
@@ -211,31 +206,24 @@ class VideoListTile extends StatelessWidget {
                             ),
                           ]
                         ),
+                      ListSectionContainer(
+                        title: localizations.sheetServerActions,
+                        children: [
+                          ListTile(
+                            leading: Icon(Icons.cloud_download),
+                            title: Text(localizations.sheetRedownloadServer),
+                            subtitle: Text(localizations.sheetComingSoon),
+                            onTap: () {},
+                          ),
+                          ListTile(
+                            leading: Icon(Icons.cloud_off_rounded),
+                            title: Text(localizations.sheetDeleteVideoServer),
+                            subtitle: Text(localizations.sheetComingSoon),
+                            onTap: () {},
+                          ),
+                        ]
                       ),
-                      Text(
-                        localizations.sheetServerActions,
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondaryContainer),
-                      ),
-                      Card(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ListTile(
-                              leading: Icon(Icons.cloud_download),
-                              title: Text(localizations.sheetRedownloadServer),
-                              subtitle: Text(localizations.sheetComingSoon),
-                              onTap: () {},
-                            ),
-                            ListTile(
-                              leading: Icon(Icons.cloud_off_rounded),
-                              title: Text(localizations.sheetDeleteVideoServer),
-                              subtitle: Text(localizations.sheetComingSoon),
-                              onTap: () {},
-                            ),
-                          ]
-                        ),
-                      ),
-                    ],
+                    ]
                   )
                 )
               );
