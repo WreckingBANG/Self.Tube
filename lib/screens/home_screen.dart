@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 hideChannel: false,
                 query: "?order=asc&sort=published&watch=continue",
               ),
-              const Divider(thickness: 2),
+              SizedBox(height: 16),
               VideoListSection(
                 title: localizations.homeLatestVideos,
                 hideChannel: false,

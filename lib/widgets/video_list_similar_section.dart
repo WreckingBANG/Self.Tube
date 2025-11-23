@@ -31,9 +31,33 @@ class VideoListSimilarSection extends StatelessWidget {
           final videos = snapshot.data!;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: videos
-              .map((video) => VideoListTile(video: video, hideChannel: false))
-              .toList(),
+          children: 
+            List.generate(videos.length, (index) {
+                final video = videos[index];
+
+                final shape = RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: index == 0
+                        ? const Radius.circular(12)
+                        : const Radius.circular(4),
+                    bottom: index == videos.length - 1
+                        ? const Radius.circular(12)
+                        : const Radius.circular(4),
+                  ),
+                );
+
+                return Card(
+                  shape: shape,
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 0,
+                  margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 1),
+                  child: VideoListTile(
+                    video: video,
+                    hideChannel: false,
+                  ),
+                );
+              }
+            )
           );
         }
       },

@@ -34,6 +34,7 @@
         devShells.default = pkgs.mkShell {
           buildInputs = [
             #pkgs.android-studio
+            pkgs.android-studio
             pkgs.openjdk17
             android-sdk
             pkgs.flutter

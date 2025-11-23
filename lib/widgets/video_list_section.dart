@@ -59,7 +59,7 @@ class _VideoListSectionState extends State<VideoListSection> {
   }
 
 
-@override
+  @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     return Column(
@@ -67,14 +67,41 @@ class _VideoListSectionState extends State<VideoListSection> {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(widget.title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          child: Text(
+            widget.title,
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondaryContainer,),
+          ),
         ),
         if (videos.isEmpty && isLoading)
           const Center(child: CircularProgressIndicator())
         else if (videos.isEmpty)
           Center(child: Text(localizations.errorNoDataFound))
         else
-          ...videos.map((video) => VideoListTile(video: video,hideChannel: widget.hideChannel)).toList(),
+          ...List.generate(videos.length, (index) {
+            final video = videos[index];
+
+            final shape = RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                top: index == 0
+                    ? const Radius.circular(12)
+                    : const Radius.circular(4),
+                bottom: index == videos.length - 1
+                    ? const Radius.circular(12)
+                    : const Radius.circular(4),
+              ),
+            );
+
+            return Card(
+              shape: shape,
+              clipBehavior: Clip.antiAlias,
+              elevation: 0,
+              margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 1),
+              child: VideoListTile(
+                video: video,
+                hideChannel: widget.hideChannel,
+              ),
+            );
+          }),
         if (isLoading)
           const Padding(
             padding: EdgeInsets.all(8.0),
@@ -93,4 +120,5 @@ class _VideoListSectionState extends State<VideoListSection> {
       ],
     );
   }
+
 }

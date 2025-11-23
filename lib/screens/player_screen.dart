@@ -240,7 +240,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                   ),
                                 ),
                                 SingleChildScrollView(
-                                  padding: const EdgeInsets.all(8.0),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [

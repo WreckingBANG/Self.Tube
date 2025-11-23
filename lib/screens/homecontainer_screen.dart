@@ -59,14 +59,16 @@ class _HomeContainerState extends State<HomeContainer> {
                       padding: EdgeInsets.all(8),
                       child: 
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Text(
+                            localizations.settingsSheetApp,
+                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondaryContainer),
+                          ),
                           Card(
-                            color: Theme.of(context).colorScheme.surfaceContainerLowest,
-                            elevation: 4,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(localizations.settingsSheetApp),
                                 ListTile(
                                   leading: Icon(Icons.settings),
                                   title: Text(localizations.settingsSheetSettings),
@@ -115,13 +117,14 @@ class _HomeContainerState extends State<HomeContainer> {
                               ]
                             ),
                           ),
+                          Text(
+                            localizations.settingsSheetServer,
+                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondaryContainer),
+                          ),
                           Card(
-                            color: Theme.of(context).colorScheme.surfaceContainerLowest,
-                            elevation: 4,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(localizations.settingsSheetServer),
                                 ListTile(
                                   leading: Icon(Icons.settings),
                                   title: Text(localizations.settingsSheetSettings),
