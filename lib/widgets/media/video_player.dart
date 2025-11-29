@@ -6,6 +6,7 @@ import 'package:Self.Tube/services/api_service.dart';
 import 'package:Self.Tube/services/settings_service.dart';
 import 'package:Self.Tube/utils/duration_formatter.dart';
 import 'video_player_ui.dart';
+import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
 class VideoPlayer extends StatefulWidget {
   final String videoTitle;
@@ -93,7 +94,11 @@ class _VideoPlayerState extends State<VideoPlayer> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  "Skipped $category from ${formatDuration(start)} to ${formatDuration(end)}",
+                  AppLocalizations.of(context)!.playerSBSkipped(
+                    category,
+                    formatDuration(start),
+                    formatDuration(end),
+                  ),
                 ),
               ),
             );

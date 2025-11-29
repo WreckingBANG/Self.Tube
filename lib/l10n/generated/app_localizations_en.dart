@@ -342,4 +342,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String yearAgo(Object count) {
     return '$count year ago';
   }
+
+  @override
+  String get playerBrightness => 'Brightness';
+
+  @override
+  String get playerForward => 'Forward';
+
+  @override
+  String get playerRewind => 'Rewind';
+
+  @override
+  String get playerSeconds => 'seconds';
+
+  @override
+  String get playerMinimize => 'Minimize';
+
+  @override
+  String get playerMaximize => 'Maximize';
+
+  @override
+  String get playerPaused => 'Paused';
+
+  @override
+  String get playerPlay => 'Play';
+
+  @override
+  String get playerVolume => 'Volume';
+
+  @override
+  String playerSBSkipped(Object category, Object end, Object start) {
+    return 'Skipped $category from $start to $end';
+  }
 }

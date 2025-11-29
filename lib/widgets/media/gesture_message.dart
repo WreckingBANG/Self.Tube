@@ -13,23 +13,25 @@ class GestureMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.7),
-          borderRadius: BorderRadius.circular(8),
+      child: Card(
+        color: Theme.of(context).colorScheme.surface,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25),
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, color: Colors.white, size: 28),
-            const SizedBox(width: 8),
-            Text(
-              message,
-              style: const TextStyle(color: Colors.white, fontSize: 18),
-            ),
-          ],
-        ),
+        child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
+            child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, size: 28, color: Theme.of(context).colorScheme.primary),
+              const SizedBox(width: 8),
+              Text(
+                message,
+                style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.primary),
+              ),
+            ],
+          ),
+        )
       ),
     );
   }

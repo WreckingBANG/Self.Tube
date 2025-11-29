@@ -6,6 +6,7 @@ import 'package:volume_controller/volume_controller.dart';
 import 'package:Self.Tube/utils/duration_formatter.dart';
 import 'package:Self.Tube/widgets/media/video_player_ui_landscape.dart';
 import 'package:Self.Tube/widgets/media/gesture_message.dart';
+import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
 class SimpleVideoPlayer extends StatefulWidget {
   final Player player;
@@ -92,6 +93,7 @@ class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return AspectRatio(
       aspectRatio: 16 / 9,
       child: GestureDetector(
@@ -115,7 +117,7 @@ class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
                         child: GestureDetector(
                           onDoubleTap: () {
                             _pendingSkipSeconds += 10;
-                            _showMessage("Rewind $_pendingSkipSeconds seconds", Icons.fast_rewind_rounded);
+                            _showMessage("${localizations.playerRewind} $_pendingSkipSeconds ${localizations.playerSeconds}", Icons.fast_rewind_rounded);
                             _skipTimer?.cancel();
                             _skipTimer = Timer(const Duration(milliseconds: 400), () {
                               final newPos = widget.player.state.position - Duration(seconds: _pendingSkipSeconds);
@@ -135,14 +137,18 @@ class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
                         child: GestureDetector(
                           onVerticalDragEnd: (details) {
                                 if (details.primaryVelocity != null && details.primaryVelocity! < 0) {
-                                  _showMessage("Maximize", Icons.fullscreen_rounded);
+                                  _showMessage(localizations.playerMaximize, Icons.fullscreen_rounded);
                                   _openFullscreen();
                                 }
                           },
                           onDoubleTap: () {
-                            widget.player.state.playing
-                                ? widget.player.pause()
-                                : widget.player.play();
+                            if (widget.player.state.playing) {
+                                widget.player.pause();
+                                _showMessage(localizations.playerPaused, Icons.pause);
+                              } else {
+                                widget.player.play();
+                                _showMessage(localizations.playerPlay, Icons.play_arrow);
+                              }
                           },
                           child: Container(color: Colors.transparent),
                         ),
@@ -153,7 +159,7 @@ class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
                         child: GestureDetector(
                           onDoubleTap: () {
                             _pendingSkipSeconds += 10;
-                            _showMessage("Forward $_pendingSkipSeconds seconds", Icons.fast_forward_rounded);
+                            _showMessage("${localizations.playerForward} $_pendingSkipSeconds ${localizations.playerSeconds}", Icons.fast_forward_rounded);
                             _skipTimer?.cancel();
                             _skipTimer = Timer(const Duration(milliseconds: 400), () {
                               final newPos = widget.player.state.position + Duration(seconds: _pendingSkipSeconds);
@@ -177,54 +183,61 @@ class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
                   ),
                 ],
                 if (_showControls) ...[
-                  // Center play/pause button
-                  Center(
-                    child: IconButton(
-                      color: Colors.white,
-                      iconSize: 64,
-                      icon: Icon(
-                        widget.player.state.playing
-                            ? Icons.pause_circle
-                            : Icons.play_circle,
-                      ),
-                      onPressed: () {
-                        widget.player.state.playing
-                            ? widget.player.pause()
-                            : widget.player.play();
-                      },
-                    ),
-                  ),
-
-                  // Bottom controls
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 12, right: 12),
+                    child: Stack(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              formatDuration(widget.player.state.position.inSeconds),
+                        // Center play/pause button
+                        Center(
+                          child: IconButton(
+                            color: Colors.white,
+                            iconSize: 64,
+                            icon: Icon(
+                              widget.player.state.playing
+                                  ? Icons.pause_circle
+                                  : Icons.play_circle,
                             ),
-                            Text(
-                              formatDuration(widget.player.state.duration.inSeconds),
-                            ),
-                          ],
+                            onPressed: () {
+                              widget.player.state.playing
+                                  ? widget.player.pause()
+                                  : widget.player.play();
+                            },
+                          ),
                         ),
-                        Slider(
-                          min: 0,
-                          max: widget.player.state.duration.inSeconds.toDouble(),
-                          value: widget.player.state.position.inSeconds
-                              .toDouble()
-                              .clamp(0, widget.player.state.duration.inSeconds.toDouble()),
-                          onChanged: (value) {
-                            widget.player.seek(Duration(seconds: value.toInt()));
-                          },
+
+                        // Bottom controls
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    formatDuration(widget.player.state.position.inSeconds),
+                                  ),
+                                  Text(
+                                    formatDuration(widget.player.state.duration.inSeconds),
+                                  ),
+                                ],
+                              ),
+                              Slider(
+                                min: 0,
+                                max: widget.player.state.duration.inSeconds.toDouble(),
+                                value: widget.player.state.position.inSeconds
+                                    .toDouble()
+                                    .clamp(0, widget.player.state.duration.inSeconds.toDouble()),
+                                onChanged: (value) {
+                                  widget.player.seek(Duration(seconds: value.toInt()));
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ],
-                    ),
-                  ),
+                    ), 
+                  )
                 ],
               ],
             )

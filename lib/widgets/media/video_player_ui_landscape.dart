@@ -7,6 +7,7 @@ import 'package:volume_controller/volume_controller.dart';
 import 'package:Self.Tube/utils/duration_formatter.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:Self.Tube/widgets/media/gesture_message.dart';
+import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
 class FullscreenVideo extends StatefulWidget {
   final Player player;
@@ -68,6 +69,7 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
     super.initState();
     _controller = VideoController(widget.player);
     _volumeController = VolumeController.instance;
+    _volumeController.showSystemUI = false;
     _initBrightness();
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (mounted) setState(() {});
@@ -111,6 +113,7 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.black,
       body: GestureDetector(
@@ -138,18 +141,18 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                             if (_dragAccumulator <= -10) {
                               _currentBrightness = (_currentBrightness + 0.05).clamp(0.0, 1.0);
                               ScreenBrightness.instance.setApplicationScreenBrightness(_currentBrightness);
-                              _showMessage("Brightness ${(_currentBrightness * 100).round()}%", Icons.brightness_5_rounded);
+                              _showMessage("${localizations.playerBrightness} ${(_currentBrightness * 100).round()}%", Icons.brightness_5_rounded);
                               _dragAccumulator = 0;
                             } else if (_dragAccumulator >= 10) {
                               _currentBrightness = (_currentBrightness - 0.05).clamp(0.0, 1.0);
                               ScreenBrightness.instance.setApplicationScreenBrightness(_currentBrightness);
-                              _showMessage("Brightness ${(_currentBrightness * 100).round()}%", Icons.brightness_5_rounded);
+                              _showMessage("${localizations.playerBrightness} ${(_currentBrightness * 100).round()}%", Icons.brightness_5_rounded);
                               _dragAccumulator = 0;
                             }
                           },
                           onDoubleTap: () {
                             _pendingSkipSeconds += 10;
-                            _showMessage("Rewind $_pendingSkipSeconds seconds", Icons.fast_rewind_rounded);
+                            _showMessage("${localizations.playerRewind} $_pendingSkipSeconds ${localizations.playerSeconds}", Icons.fast_rewind_rounded);
                             _skipTimer?.cancel();
                             _skipTimer = Timer(const Duration(milliseconds: 400), () {
                               final newPos = widget.player.state.position - Duration(seconds: _pendingSkipSeconds);
@@ -160,7 +163,7 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                               _pendingSkipSeconds = 0;
                             });
                           },
-                          child: Container(color: Colors.transparent), // invisible hitbox
+                          child: Container(color: Colors.transparent),
                         ),
                       ),
 
@@ -169,14 +172,18 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                         child: GestureDetector(
                           onVerticalDragEnd: (details) {
                             if (details.primaryVelocity != null && details.primaryVelocity! > 0) {
-                              _showMessage("Minimize", Icons.fullscreen_exit_rounded);
+                              _showMessage(localizations.playerMinimize, Icons.fullscreen_exit_rounded);
                               Navigator.of(context).pop();
                             }
                           },
                           onDoubleTap: () {
-                            widget.player.state.playing
-                                ? widget.player.pause()
-                                : widget.player.play();
+                            if (widget.player.state.playing) {
+                                widget.player.pause();
+                                _showMessage(localizations.playerPaused, Icons.pause);
+                              } else {
+                                widget.player.play();
+                                _showMessage(localizations.playerPlay, Icons.play_arrow);
+                              }
                           },
                           child: Container(color: Colors.transparent),
                         ),
@@ -192,19 +199,19 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                               // Finger moved up enough → increase volume
                               double current = await _volumeController.getVolume();
                               _volumeController.setVolume((current + 0.05).clamp(0.0, 1.0));
-                              _showMessage("Volume ${(current + 0.05).clamp(0.0, 1.0) * 100 ~/ 1}%", Icons.volume_up_rounded);
+                              _showMessage("${localizations.playerVolume} ${(current + 0.05).clamp(0.0, 1.0) * 100 ~/ 1}%", Icons.volume_up_rounded);
                               _dragAccumulator = 0; // reset after applying
                             } else if (_dragAccumulator >= 10) {
                               // Finger moved down enough → decrease volume
                               double current = await _volumeController.getVolume();
                               _volumeController.setVolume((current - 0.05).clamp(0.0, 1.0));
-                              _showMessage("Volume ${(current + 0.05).clamp(0.0, 1.0) * 100 ~/ 1}%", Icons.volume_down_rounded);
+                              _showMessage("${localizations.playerVolume} ${(current + 0.05).clamp(0.0, 1.0) * 100 ~/ 1}%", Icons.volume_down_rounded);
                               _dragAccumulator = 0;
                             }
                           },
                           onDoubleTap: () {
                             _pendingSkipSeconds += 10;
-                            _showMessage("Forward $_pendingSkipSeconds seconds", Icons.fast_forward_rounded);
+                            _showMessage("${localizations.playerForward} $_pendingSkipSeconds ${localizations.playerSeconds}", Icons.fast_forward_rounded);
                             _skipTimer?.cancel();
                             _skipTimer = Timer(const Duration(milliseconds: 400), () {
                               final newPos = widget.player.state.position + Duration(seconds: _pendingSkipSeconds);
@@ -229,68 +236,75 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                 ],
                 // Overlay your controls (play/pause button, slider, etc.)
                 if (_showControls) ...[
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                  Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Stack(
                       children: [
-                        Text(
-                          widget.videoTitle,
-                          
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.videoTitle,
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                              Text(widget.videoCreator)
+                            ],
+                          ),
                         ),
-                        Text(widget.videoCreator)
-                      ],
-                    ),
-                  ),
-                  // Center play/pause button
-                  Center(
-                    child: 
-                      IconButton(
-                        color: Colors.white,
-                        iconSize: 64,
-                        icon: Icon(
-                          widget.player.state.playing
-                              ? Icons.pause_circle
-                              : Icons.play_circle,
+                        // Center play/pause button
+                        Center(
+                          child: 
+                            IconButton(
+                              color: Colors.white,
+                              iconSize: 64,
+                              icon: Icon(
+                                widget.player.state.playing
+                                    ? Icons.pause_circle
+                                    : Icons.play_circle,
+                              ),
+                              onPressed: () {
+                                widget.player.state.playing
+                                    ? widget.player.pause()
+                                    : widget.player.play();
+                              },
+                          ),
                         ),
-                        onPressed: () {
-                          widget.player.state.playing
-                              ? widget.player.pause()
-                              : widget.player.play();
-                        },
-                    ),
-                  ),
 
-                  // Bottom controls
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              formatDuration(widget.player.state.position.inSeconds),
-                            ),
-                            Text(
-                              formatDuration(widget.player.state.duration.inSeconds),
-                            ),
-                          ],
-                        ),
-                        Slider(
-                          min: 0,
-                          max: widget.player.state.duration.inSeconds.toDouble(),
-                          value: widget.player.state.position.inSeconds
-                              .toDouble()
-                              .clamp(0, widget.player.state.duration.inSeconds.toDouble()),
-                          onChanged: (value) {
-                            widget.player.seek(Duration(seconds: value.toInt()));
-                          },
+                        // Bottom controls
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    formatDuration(widget.player.state.position.inSeconds),
+                                  ),
+                                  Text(
+                                    formatDuration(widget.player.state.duration.inSeconds),
+                                  ),
+                                ],
+                              ),
+                              Slider(
+                                min: 0,
+                                max: widget.player.state.duration.inSeconds.toDouble(),
+                                value: widget.player.state.position.inSeconds
+                                    .toDouble()
+                                    .clamp(0, widget.player.state.duration.inSeconds.toDouble()),
+                                onChanged: (value) {
+                                  widget.player.seek(Duration(seconds: value.toInt()));
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                  ),
+                  )
                 ],
               ],
             )

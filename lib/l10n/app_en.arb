@@ -102,5 +102,15 @@
   "daysAgo": "{count} days ago",
   "dayAgo": "{count} day ago",
   "yearsAgo": "{count} years ago",
-  "yearAgo": "{count} year ago"
+  "yearAgo": "{count} year ago",
+  "playerBrightness": "Brightness",
+  "playerForward": "Forward",
+  "playerRewind": "Rewind",
+  "playerSeconds": "seconds",
+  "playerMinimize": "Minimize",
+  "playerMaximize": "Maximize",
+  "playerPaused": "Paused",
+  "playerPlay": "Play",
+  "playerVolume": "Volume",
+  "playerSBSkipped": "Skipped {category} from {start} to {end}"
 }
