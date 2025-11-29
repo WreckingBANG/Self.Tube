@@ -37,6 +37,14 @@ class _AppearanceSettingsScreenState extends State<AppearanceSettingsScreen> {
       body: ListSectionContainer(
         children: [
           SwitchListTile(
+            thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.selected)) {
+                  return const Icon(Icons.check);
+                }
+                return const Icon(Icons.close);
+              },
+            ),
             title: Text(localizations.settingsShowCommentPics),
             value: _showCommentPics,
             onChanged: (bool value) {

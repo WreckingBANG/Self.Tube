@@ -12,6 +12,8 @@ import 'dart:async';
 import '../services/settings_service.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../utils/duration_formatter.dart';
+import 'package:Self.Tube/widgets/media/video_player.dart';
+
 
 
 class PlayerScreen extends StatefulWidget {
@@ -27,36 +29,8 @@ class PlayerScreen extends StatefulWidget {
 }
 
 class _PlayerScreenState extends State<PlayerScreen> {
-  late final Player _player;
-  late final VideoController _videoController;
-  Duration _lastReportedPosition = Duration.zero;
-  StreamSubscription<Duration>? _positionSubscription;
-
   static String? apiToken = SettingsService.apiToken;
   static String? baseUrl = SettingsService.instanceUrl;
-
-  @override
-  void initState() {
-    super.initState();
-    _player = Player();
-    _videoController = VideoController(_player);
-
-    _positionSubscription = _player.stream.position.listen((position) {
-      final seconds = position.inSeconds;
-      if ((seconds - _lastReportedPosition.inSeconds).abs() >= 10) {
-        _lastReportedPosition = position;
-        ApiService.setVideoProgress(widget.youtubeId, seconds);
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _positionSubscription?.cancel();
-    ApiService.setVideoProgress(widget.youtubeId, _lastReportedPosition.inSeconds);
-    _player.dispose();
-    super.dispose();
-  }
 
 
   @override
@@ -77,62 +51,18 @@ class _PlayerScreenState extends State<PlayerScreen> {
               return Center(child: Text(localizations.errorNoDataFound));
             } else {
               final video = snapshot.data!;
-              _player.open(
-                Media(
-                  '$baseUrl${video.videoUrl}',
-                  httpHeaders: {
-                    'Authorization': 'token $apiToken',
-                  },
-                ),
-              );
-              _player.stream.duration.listen((duration) {
-                if (video.videoPosition > 0) {
-                  _player.seek(Duration(seconds: video.videoPosition.toInt()));
-                }
-              });
-
-              final categoryEnabledMap = {
-                'sponsor': SettingsService.sbSponsor,
-                'selfpromo': SettingsService.sbSelfpromo,
-                'interaction': SettingsService.sbInteraction,
-                'intro': SettingsService.sbIntro,
-                'outro': SettingsService.sbOutro,
-                'preview': SettingsService.sbPreview,
-                'hook': SettingsService.sbHook,
-                'filler': SettingsService.sbFiller,
-              };
-
-              if (SettingsService.sponsorBlockEnabled == true) {
-                _player.stream.position.listen((position) {
-                  final currentSeconds = position.inSeconds.toDouble().round();
-
-                  for (final segment in video.sponsorBlock?.segments ?? []) {
-                    final start = segment.segment[0].round();
-                    final end = segment.segment[1].round();
-                    final category = segment.category.toLowerCase();
-
-                    if (categoryEnabledMap[category] == true &&
-                        currentSeconds >= start &&
-                        currentSeconds < end) {
-                      _player.seek(Duration(seconds: end));
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Skipped ${segment.category} from ${formatDuration(start)} to ${formatDuration(end)}")),
-                      );
-                      break;
-                    }
-                  }
-                });
-              }
-
               return SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AspectRatio(
-                        aspectRatio: 16 / 9,
-                        child: Video(controller: _videoController),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: AspectRatio(
+                          aspectRatio: 16 / 9,
+                          child: VideoPlayer(youtubeId: video.videoId, videoUrl: video.videoUrl, videoPosition: video.videoPosition, videoCreator: video.channelName, videoTitle: video.videoTitle, sponsorSegments: video.sponsorBlock?.segments,)
+                        ),
                       ),
                       const SizedBox(height: 12),
                       Text(video.videoTitle, style: const TextStyle(fontSize: 22)),
