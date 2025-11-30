@@ -1,14 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:wakelock_plus/wakelock_plus.dart';
-import 'package:Self.Tube/widgets/media/video_player_interface.dart';
-import 'package:Self.Tube/widgets/media/video_player_factory.dart';
+import 'video_player_interface.dart';
+import 'video_player_factory.dart';
 import 'package:Self.Tube/services/api_service.dart';
 import 'package:Self.Tube/services/settings_service.dart';
 import 'package:Self.Tube/utils/duration_formatter.dart';
-import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'video_player_ui.dart';
-
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 class CustomVideoPlayer extends StatefulWidget {
   final String videoTitle;
@@ -37,14 +35,19 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   Duration _lastReportedPosition = Duration.zero;
   StreamSubscription<Duration>? _positionSubscription;
 
+  // throttle fields
+  Duration _lastCheck = Duration.zero;
+  final Duration _checkInterval = const Duration(milliseconds: 1000);
+
   static String? apiToken = SettingsService.apiToken;
   static String? baseUrl = SettingsService.instanceUrl;
+
+  late final Map<String, bool> _categoryEnabledMap;
 
   @override
   void initState() {
     super.initState();
     WakelockPlus.enable();
-    // Create the correct adapter via factory (video_player or mediakit)
     _player = MediaPlayerFactory.create(
       '$baseUrl${widget.videoUrl}',
       headers: {
@@ -52,72 +55,72 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
       },
     );
 
-    bool _resumeApplied = false;
+    _categoryEnabledMap = {
+      'sponsor': SettingsService.sbSponsor ?? false,
+      'selfpromo': SettingsService.sbSelfpromo ?? false,
+      'interaction': SettingsService.sbInteraction ?? false,
+      'intro': SettingsService.sbIntro ?? false,
+      'outro': SettingsService.sbOutro ?? false,
+      'preview': SettingsService.sbPreview ?? false,
+      'hook': SettingsService.sbHook ?? false,
+      'filler': SettingsService.sbFiller ?? false,
+    };
 
-    _positionSubscription = _player.positionStream.listen((position) {
-      final seconds = position.inSeconds;
+    _positionSubscription = _player.positionStream.listen(_onPosition);
 
-      // Resume from saved position
-      if (!_resumeApplied &&
-          widget.videoPosition > 0 &&
-          _lastReportedPosition == Duration.zero &&
-          seconds > 0) {
-        _player.seek(Duration(seconds: widget.videoPosition.toInt()));
-        _resumeApplied = true;
-        return;
-      }
+    // start playback immediately
+    _player.play();
+  }
 
-      // Report progress...
-      if ((seconds - _lastReportedPosition.inSeconds).abs() >= 10) {
-        _lastReportedPosition = position;
-        ApiService.setVideoProgress(widget.youtubeId, seconds);
-      }
+  void _onPosition(Duration position) {
+    // throttle checks
+    final deltaMs = (position - _lastCheck).inMilliseconds;
+    if (deltaMs < _checkInterval.inMilliseconds) return;
+    _lastCheck = position;
 
-      // SponsorBlock skipping
-      if (_resumeApplied && SettingsService.sponsorBlockEnabled == true) {
-        for (final segment in widget.sponsorSegments ?? []) {
-          final start = segment.segment[0].round();
-          final end = segment.segment[1].round();
-          final category = segment.category.toLowerCase();
+    final seconds = position.inSeconds;
 
-          final categoryEnabledMap = {
-            'sponsor': SettingsService.sbSponsor,
-            'selfpromo': SettingsService.sbSelfpromo,
-            'interaction': SettingsService.sbInteraction,
-            'intro': SettingsService.sbIntro,
-            'outro': SettingsService.sbOutro,
-            'preview': SettingsService.sbPreview,
-            'hook': SettingsService.sbHook,
-            'filler': SettingsService.sbFiller,
-          };
+    // restore starting position once
+    if (widget.videoPosition > 0 &&
+        _lastReportedPosition == Duration.zero &&
+        seconds > 0) {
+      _player.seek(Duration(seconds: widget.videoPosition.toInt()));
+    }
 
-          if (categoryEnabledMap[category] == true &&
-              seconds >= start &&
-              seconds < end) {
-            _player.seek(Duration(seconds: end));
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  AppLocalizations.of(context)!.playerSBSkipped(
-                    category,
-                    formatDuration(start),
-                    formatDuration(end),
-                  ),
-                ),
+    // progress reporting every 10s
+    if ((seconds - _lastReportedPosition.inSeconds).abs() >= 10) {
+      _lastReportedPosition = position;
+      ApiService.setVideoProgress(widget.youtubeId, seconds);
+    }
+
+    // sponsor skipping
+    if (SettingsService.sponsorBlockEnabled == true) {
+      for (final segment in widget.sponsorSegments ?? []) {
+        final start = segment.segment[0].round();
+        final end = segment.segment[1].round();
+        final category = segment.category.toLowerCase();
+
+        if (_categoryEnabledMap[category] == true &&
+            seconds >= start &&
+            seconds < end) {
+          _player.seek(Duration(seconds: end));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                "Skipped $category from ${formatDuration(start)} to ${formatDuration(end)}",
               ),
-            );
-            break;
-          }
+            ),
+          );
+          break;
         }
       }
-    });
-    _player.play();
+    }
   }
 
   @override
   void dispose() {
-    _positionSubscription?.cancel();
     WakelockPlus.disable();
+    _positionSubscription?.cancel();
     ApiService.setVideoProgress(
         widget.youtubeId, _lastReportedPosition.inSeconds);
     _player.dispose();
@@ -126,7 +129,6 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    // Unified UI widget that works with either adapter
     return SimpleVideoPlayer(
       player: _player,
       videoCreator: widget.videoCreator,
