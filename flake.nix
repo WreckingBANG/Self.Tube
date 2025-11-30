@@ -30,25 +30,37 @@
           platforms-android-31
           emulator
         ]);
+
+        buildInputs = [
+          # pkgs.android-studio
+          pkgs.ffmpeg
+          pkgs.mpv
+          pkgs.openjdk17
+          android-sdk
+          pkgs.flutter
+          pkgs.alsa-lib
+          pkgs.pkg-config
+          pkgs.gtk3
+          pkgs.sysprof
+          pkgs.sysprof.dev
+          pkgs.libepoxy
+          pkgs.libass
+          pkgs.libxdmcp
+          pkgs.xorg.libX11
+          pkgs.xorg.libXext
+          pkgs.xorg.libXrender
+          pkgs.xorg.libXrandr
+          pkgs.wayland
+          pkgs.libxkbcommon
+          pkgs.libva
+        ];
       in {
         devShells.default = pkgs.mkShell {
-          buildInputs = [
-            #pkgs.android-studio
-            pkgs.openjdk17
-            android-sdk
-            pkgs.flutter
-            pkgs.alsa-lib
-            pkgs.pkg-config
-            pkgs.gtk3
-            pkgs.sysprof
-            pkgs.sysprof.dev
-            pkgs.libepoxy
-            pkgs.mpv
-            pkgs.libass
-            pkgs.libxdmcp
-          ];
+          inherit buildInputs;
 
           shellHook = ''
+            export LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath buildInputs}:$LD_LIBRARY_PATH
+
             export PKG_CONFIG_PATH="${pkgs.alsa-lib}/lib/pkgconfig:${pkgs.sysprof.dev}/lib/pkgconfig:$PKG_CONFIG_PATH"
             export CMAKE_PREFIX_PATH="${pkgs.alsa-lib}:${pkgs.alsa-lib.dev}:$CMAKE_PREFIX_PATH"
 
@@ -62,6 +74,6 @@
             echo "Ephemeral Android SDK initialized at $ANDROID_SDK_ROOT"
           '';
         };
-      });
+      }
+    );
 }
-
