@@ -1,20 +1,15 @@
 import 'package:Self.Tube/screens/channelpage_screen.dart';
+import 'dart:io';
 import 'package:Self.Tube/widgets/sections/video_list_similar_section.dart';
 import 'package:flutter/material.dart';
-import 'package:media_kit/media_kit.dart';
-import 'package:media_kit_video/media_kit_video.dart';
 import '../utils/number_formatter.dart';
 import '../utils/datetime_formatter.dart';
 import '../widgets/sections/comment_list_section.dart';
 import '../services/api_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'dart:async';
 import '../services/settings_service.dart';
 import '../l10n/generated/app_localizations.dart';
-import '../utils/duration_formatter.dart';
 import 'package:Self.Tube/widgets/media/video_player.dart';
-
-
 
 class PlayerScreen extends StatefulWidget {
   final String youtubeId;
@@ -61,7 +56,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
                         borderRadius: BorderRadius.circular(12),
                         child: AspectRatio(
                           aspectRatio: 16 / 9,
-                          child: VideoPlayer(youtubeId: video.videoId, videoUrl: video.videoUrl, videoPosition: video.videoPosition, videoCreator: video.channelName, videoTitle: video.videoTitle, sponsorSegments: video.sponsorBlock?.segments,)
+                          child: CustomVideoPlayer(
+                            youtubeId: video.videoId, videoUrl: video.videoUrl, videoPosition: video.videoPosition, videoCreator: video.channelName, videoTitle: video.videoTitle, sponsorSegments: video.sponsorBlock?.segments,
+                          )
                         ),
                       ),
                       const SizedBox(height: 12),

@@ -1,14 +1,16 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:media_kit/media_kit.dart';
-import 'package:media_kit_video/media_kit_video.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
+import 'package:Self.Tube/widgets/media/video_player_interface.dart';
+import 'package:Self.Tube/widgets/media/video_player_factory.dart';
 import 'package:Self.Tube/services/api_service.dart';
 import 'package:Self.Tube/services/settings_service.dart';
 import 'package:Self.Tube/utils/duration_formatter.dart';
-import 'video_player_ui.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'video_player_ui.dart';
 
-class VideoPlayer extends StatefulWidget {
+
+class CustomVideoPlayer extends StatefulWidget {
   final String videoTitle;
   final String videoCreator;
   final String youtubeId;
@@ -16,7 +18,7 @@ class VideoPlayer extends StatefulWidget {
   final double videoPosition;
   final List<dynamic>? sponsorSegments;
 
-  const VideoPlayer({
+  const CustomVideoPlayer({
     Key? key,
     required this.videoTitle,
     required this.videoCreator,
@@ -27,12 +29,11 @@ class VideoPlayer extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<VideoPlayer> createState() => _VideoPlayerState();
+  State<CustomVideoPlayer> createState() => _CustomVideoPlayerState();
 }
 
-class _VideoPlayerState extends State<VideoPlayer> {
-  late final Player _player;
-  late final VideoController _videoController;
+class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
+  late final MediaPlayer _player;
   Duration _lastReportedPosition = Duration.zero;
   StreamSubscription<Duration>? _positionSubscription;
 
@@ -42,35 +43,38 @@ class _VideoPlayerState extends State<VideoPlayer> {
   @override
   void initState() {
     super.initState();
-    _player = Player();
-    _videoController = VideoController(_player);
+    WakelockPlus.enable();
+    // Create the correct adapter via factory (video_player or mediakit)
+    _player = MediaPlayerFactory.create(
+      '$baseUrl${widget.videoUrl}',
+      headers: {
+        'Authorization': 'token $apiToken',
+      },
+    );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _player.open(
-        Media(
-          '$baseUrl${widget.videoUrl}',
-          httpHeaders: {
-            'Authorization': 'token $apiToken',
-          },
-        ),
-      );
-    });
+    bool _resumeApplied = false;
 
-    _positionSubscription = _player.stream.position.listen((position) {
+    _positionSubscription = _player.positionStream.listen((position) {
       final seconds = position.inSeconds;
 
-      if (widget.videoPosition > 0 &&
+      // Resume from saved position
+      if (!_resumeApplied &&
+          widget.videoPosition > 0 &&
           _lastReportedPosition == Duration.zero &&
           seconds > 0) {
         _player.seek(Duration(seconds: widget.videoPosition.toInt()));
+        _resumeApplied = true;
+        return;
       }
 
+      // Report progress...
       if ((seconds - _lastReportedPosition.inSeconds).abs() >= 10) {
         _lastReportedPosition = position;
         ApiService.setVideoProgress(widget.youtubeId, seconds);
       }
 
-      if (SettingsService.sponsorBlockEnabled == true) {
+      // SponsorBlock skipping
+      if (_resumeApplied && SettingsService.sponsorBlockEnabled == true) {
         for (final segment in widget.sponsorSegments ?? []) {
           final start = segment.segment[0].round();
           final end = segment.segment[1].round();
@@ -107,11 +111,13 @@ class _VideoPlayerState extends State<VideoPlayer> {
         }
       }
     });
+    _player.play();
   }
 
   @override
   void dispose() {
     _positionSubscription?.cancel();
+    WakelockPlus.disable();
     ApiService.setVideoProgress(
         widget.youtubeId, _lastReportedPosition.inSeconds);
     _player.dispose();
@@ -120,6 +126,11 @@ class _VideoPlayerState extends State<VideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return SimpleVideoPlayer(player: _player, videoCreator: widget.videoCreator, videoTitle: widget.videoTitle);
+    // Unified UI widget that works with either adapter
+    return SimpleVideoPlayer(
+      player: _player,
+      videoCreator: widget.videoCreator,
+      videoTitle: widget.videoTitle,
+    );
   }
 }

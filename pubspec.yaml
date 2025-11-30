@@ -23,6 +23,8 @@ dependencies:
   dynamic_color: ^1.8.1
   url_launcher: ^6.3.2
   screen_brightness: ^2.1.7
+  video_player: ^2.10.1
+  wakelock_plus: ^1.4.0
 
 
 dev_dependencies:

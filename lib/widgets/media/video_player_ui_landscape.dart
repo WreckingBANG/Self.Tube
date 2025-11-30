@@ -1,8 +1,7 @@
 import 'dart:async';
-import 'package:media_kit/media_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:media_kit_video/media_kit_video.dart';
+import 'package:Self.Tube/widgets/media/video_player_interface.dart';
 import 'package:volume_controller/volume_controller.dart';
 import 'package:Self.Tube/utils/duration_formatter.dart';
 import 'package:screen_brightness/screen_brightness.dart';
@@ -10,15 +9,15 @@ import 'package:Self.Tube/widgets/media/gesture_message.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
 class FullscreenVideo extends StatefulWidget {
-  final Player player;
+  final MediaPlayer player;
   final String videoTitle;
   final String videoCreator;
   const FullscreenVideo({
-    Key? key,
+    super.key,
     required this.player,
     required this.videoTitle,
     required this.videoCreator
-  }) : super(key: key);
+  });
 
   @override
   State<FullscreenVideo> createState() => _FullscreenVideoState();
@@ -26,7 +25,6 @@ class FullscreenVideo extends StatefulWidget {
 
 class _FullscreenVideoState extends State<FullscreenVideo> {
   late final VolumeController _volumeController;
-  late final VideoController _controller;
   bool _showControls = false;
   Timer? _timer;
   Timer? _hideTimer;
@@ -67,7 +65,6 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoController(widget.player);
     _volumeController = VolumeController.instance;
     _volumeController.showSystemUI = false;
     _initBrightness();
@@ -75,7 +72,6 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
       if (mounted) setState(() {});
     });
 
-    // Force landscape + hide system UI
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
@@ -100,7 +96,6 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
   void dispose() {
     _hideTimer?.cancel();
     _timer?.cancel();
-    // Restore portrait + system UI
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -121,15 +116,9 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
         onTap: _toggleControls,
         child: Stack(
           children: [
-            Center(
-              child: Video(
-                controller: _controller,
-                controls: null,
-              ),
-            ),
+            Center(child: widget.player.buildView()),
             Stack(
               children: [
-                // Your video widget here
                 Positioned.fill(
                   child: Row(
                     children: [
@@ -155,10 +144,9 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                             _showMessage("${localizations.playerRewind} $_pendingSkipSeconds ${localizations.playerSeconds}", Icons.fast_rewind_rounded);
                             _skipTimer?.cancel();
                             _skipTimer = Timer(const Duration(milliseconds: 400), () {
-                              final newPos = widget.player.state.position - Duration(seconds: _pendingSkipSeconds);
-                              final duration = widget.player.state.duration;
+                              final newPos = widget.player.position - Duration(seconds: _pendingSkipSeconds);
                               widget.player.seek(
-                                newPos <= duration ? newPos : duration,
+                                newPos <= widget.player.duration ? newPos : widget.player.duration,
                               );
                               _pendingSkipSeconds = 0;
                             });
@@ -177,7 +165,7 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                             }
                           },
                           onDoubleTap: () {
-                            if (widget.player.state.playing) {
+                            if (widget.player.isPlaying) {
                                 widget.player.pause();
                                 _showMessage(localizations.playerPaused, Icons.pause);
                               } else {
@@ -196,13 +184,11 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                             _dragAccumulator += details.delta.dy;
 
                             if (_dragAccumulator <= -10) {
-                              // Finger moved up enough → increase volume
                               double current = await _volumeController.getVolume();
                               _volumeController.setVolume((current + 0.05).clamp(0.0, 1.0));
                               _showMessage("${localizations.playerVolume} ${(current + 0.05).clamp(0.0, 1.0) * 100 ~/ 1}%", Icons.volume_up_rounded);
-                              _dragAccumulator = 0; // reset after applying
+                              _dragAccumulator = 0;
                             } else if (_dragAccumulator >= 10) {
-                              // Finger moved down enough → decrease volume
                               double current = await _volumeController.getVolume();
                               _volumeController.setVolume((current - 0.05).clamp(0.0, 1.0));
                               _showMessage("${localizations.playerVolume} ${(current + 0.05).clamp(0.0, 1.0) * 100 ~/ 1}%", Icons.volume_down_rounded);
@@ -214,10 +200,9 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                             _showMessage("${localizations.playerForward} $_pendingSkipSeconds ${localizations.playerSeconds}", Icons.fast_forward_rounded);
                             _skipTimer?.cancel();
                             _skipTimer = Timer(const Duration(milliseconds: 400), () {
-                              final newPos = widget.player.state.position + Duration(seconds: _pendingSkipSeconds);
-                              final duration = widget.player.state.duration;
+                              final newPos = widget.player.position + Duration(seconds: _pendingSkipSeconds);
                               widget.player.seek(
-                                newPos <= duration ? newPos : duration,
+                                newPos <= widget.player.duration ? newPos : widget.player.duration,
                               );
                               _pendingSkipSeconds = 0;
                             });
@@ -234,7 +219,7 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                     icon: _gestureIcon!,
                   ),
                 ],
-                // Overlay your controls (play/pause button, slider, etc.)
+                // Overlay controls
                 if (_showControls) ...[
                   Padding(
                     padding: const EdgeInsets.all(12),
@@ -253,19 +238,19 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                             ],
                           ),
                         ),
-                        // Center play/pause button
+                        // Center
                         Center(
                           child: 
                             IconButton(
                               color: Colors.white,
                               iconSize: 64,
                               icon: Icon(
-                                widget.player.state.playing
+                                widget.player.isPlaying
                                     ? Icons.pause_circle
                                     : Icons.play_circle,
                               ),
                               onPressed: () {
-                                widget.player.state.playing
+                                widget.player.isPlaying
                                     ? widget.player.pause()
                                     : widget.player.play();
                               },
@@ -282,19 +267,19 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    formatDuration(widget.player.state.position.inSeconds),
+                                    formatDuration(widget.player.position.inSeconds),
                                   ),
                                   Text(
-                                    formatDuration(widget.player.state.duration.inSeconds),
+                                    formatDuration(widget.player.duration.inSeconds),
                                   ),
                                 ],
                               ),
                               Slider(
                                 min: 0,
-                                max: widget.player.state.duration.inSeconds.toDouble(),
-                                value: widget.player.state.position.inSeconds
+                                max: widget.player.duration.inSeconds.toDouble(),
+                                value: widget.player.position.inSeconds
                                     .toDouble()
-                                    .clamp(0, widget.player.state.duration.inSeconds.toDouble()),
+                                    .clamp(0, widget.player.duration.inSeconds.toDouble()),
                                 onChanged: (value) {
                                   widget.player.seek(Duration(seconds: value.toInt()));
                                 },

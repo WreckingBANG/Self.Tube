@@ -1,23 +1,23 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:media_kit/media_kit.dart';
-import 'package:media_kit_video/media_kit_video.dart';
-import 'package:volume_controller/volume_controller.dart';
 import 'package:Self.Tube/utils/duration_formatter.dart';
+import 'package:flutter/material.dart';
+import 'package:volume_controller/volume_controller.dart';
 import 'package:Self.Tube/widgets/media/video_player_ui_landscape.dart';
 import 'package:Self.Tube/widgets/media/gesture_message.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'package:Self.Tube/widgets/media/video_player_interface.dart';
 
 class SimpleVideoPlayer extends StatefulWidget {
-  final Player player;
-  final videoTitle;
-  final videoCreator;
+  final MediaPlayer player;
+  final String videoTitle;
+  final String videoCreator;
+
   const SimpleVideoPlayer({
-    Key? key, 
+    super.key,
     required this.player,
     required this.videoTitle,
-    required this.videoCreator
-  }) : super(key: key);
+    required this.videoCreator,
+  });
 
   @override
   State<SimpleVideoPlayer> createState() => _SimpleVideoPlayerState();
@@ -25,13 +25,14 @@ class SimpleVideoPlayer extends StatefulWidget {
 
 class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
   late final VolumeController _volumeController;
-  late final VideoController _controller;
+
   String? _gestureMessage;
   IconData? _gestureIcon;
   Timer? _messageTimer;
+
   bool _showControls = false;
-  Timer? _timer;
   Timer? _hideTimer;
+
   int _pendingSkipSeconds = 0;
   Timer? _skipTimer;
 
@@ -43,24 +44,22 @@ class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
 
     _messageTimer?.cancel();
     _messageTimer = Timer(const Duration(seconds: 1), () {
-      if (mounted) {
-        setState(() {
-          _gestureMessage = null;
-          _gestureIcon = null;
-        });
-      }
+      if (!mounted) return;
+      setState(() {
+        _gestureMessage = null;
+        _gestureIcon = null;
+      });
     });
   }
-  
+
   @override
   void initState() {
     super.initState();
     _hideTimer = Timer(const Duration(seconds: 3), () {
       if (mounted) setState(() => _showControls = false);
     });
-    _controller = VideoController(widget.player);
     _volumeController = VolumeController.instance;
-    _volumeController.showSystemUI = true; 
+    _volumeController.showSystemUI = true;
   }
 
   void _toggleControls() {
@@ -79,7 +78,11 @@ class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
   void _openFullscreen() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => FullscreenVideo(player: widget.player, videoCreator: widget.videoCreator, videoTitle: widget.videoTitle,),
+        builder: (_) => FullscreenVideo(
+          player: widget.player,
+          videoCreator: widget.videoCreator,
+          videoTitle: widget.videoTitle,
+        ),
       ),
     );
   }
@@ -87,13 +90,15 @@ class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
   @override
   void dispose() {
     _hideTimer?.cancel();
-    _timer?.cancel();
+    _messageTimer?.cancel();
+    _skipTimer?.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
+
     return AspectRatio(
       aspectRatio: 16 / 9,
       child: GestureDetector(
@@ -101,72 +106,69 @@ class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
         onTap: _toggleControls,
         child: Stack(
           children: [
-            Center(
-              child: Video(
-                controller: _controller,
-                controls: null,
-              ),
-            ),
+            Center(child: widget.player.buildView()),
+
+            // Gesture layers & controls
             Stack(
               children: [
                 Positioned.fill(
                   child: Row(
                     children: [
-                      // Left zone (seek back)
+                      // Left zone
                       Expanded(
                         child: GestureDetector(
                           onDoubleTap: () {
                             _pendingSkipSeconds += 10;
-                            _showMessage("${localizations.playerRewind} $_pendingSkipSeconds ${localizations.playerSeconds}", Icons.fast_rewind_rounded);
+                            _showMessage(
+                              "${localizations.playerRewind} $_pendingSkipSeconds ${localizations.playerSeconds}",
+                              Icons.fast_rewind_rounded,
+                            );
                             _skipTimer?.cancel();
                             _skipTimer = Timer(const Duration(milliseconds: 400), () {
-                              final newPos = widget.player.state.position - Duration(seconds: _pendingSkipSeconds);
-                              final duration = widget.player.state.duration;
-                              widget.player.seek(
-                                newPos <= duration ? newPos : duration,
-                              );
+                              final newPos = widget.player.position - Duration(seconds: _pendingSkipSeconds);
+                              widget.player.seek(newPos >= Duration.zero ? newPos : Duration.zero);
                               _pendingSkipSeconds = 0;
                             });
-                          },
-                          child: Container(color: Colors.transparent), // invisible hitbox
-                        ),
-                      ),
-
-                      // Center zone (play/pause)
-                      Expanded(
-                        child: GestureDetector(
-                          onVerticalDragEnd: (details) {
-                                if (details.primaryVelocity != null && details.primaryVelocity! < 0) {
-                                  _showMessage(localizations.playerMaximize, Icons.fullscreen_rounded);
-                                  _openFullscreen();
-                                }
-                          },
-                          onDoubleTap: () {
-                            if (widget.player.state.playing) {
-                                widget.player.pause();
-                                _showMessage(localizations.playerPaused, Icons.pause);
-                              } else {
-                                widget.player.play();
-                                _showMessage(localizations.playerPlay, Icons.play_arrow);
-                              }
                           },
                           child: Container(color: Colors.transparent),
                         ),
                       ),
 
-                      // Right zone (seek forward)
+                      // Center zone
+                      Expanded(
+                        child: GestureDetector(
+                          onVerticalDragEnd: (details) {
+                            if (details.primaryVelocity != null && details.primaryVelocity! < 0) {
+                              _showMessage(localizations.playerMaximize, Icons.fullscreen_rounded);
+                              _openFullscreen();
+                            }
+                          },
+                          onDoubleTap: () async {
+                            if (widget.player.isPlaying) {
+                              await widget.player.pause();
+                              _showMessage(localizations.playerPaused, Icons.pause);
+                            } else {
+                              await widget.player.play();
+                              _showMessage(localizations.playerPlay, Icons.play_arrow);
+                            }
+                          },
+                          child: Container(color: Colors.transparent),
+                        ),
+                      ),
+
+                      // Right zone
                       Expanded(
                         child: GestureDetector(
                           onDoubleTap: () {
                             _pendingSkipSeconds += 10;
-                            _showMessage("${localizations.playerForward} $_pendingSkipSeconds ${localizations.playerSeconds}", Icons.fast_forward_rounded);
+                            _showMessage(
+                              "${localizations.playerForward} $_pendingSkipSeconds ${localizations.playerSeconds}",
+                              Icons.fast_forward_rounded,
+                            );
                             _skipTimer?.cancel();
                             _skipTimer = Timer(const Duration(milliseconds: 400), () {
-                              final newPos = widget.player.state.position + Duration(seconds: _pendingSkipSeconds);
-                              final duration = widget.player.state.duration;
-                              widget.player.seek(
-                                newPos <= duration ? newPos : duration,
-                              );
+                              final newPos = widget.player.position + Duration(seconds: _pendingSkipSeconds);
+                              widget.player.seek(newPos <= widget.player.duration ? newPos : widget.player.duration);
                               _pendingSkipSeconds = 0;
                             });
                           },
@@ -176,31 +178,30 @@ class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
                     ],
                   ),
                 ),
-                if (_gestureMessage != null && _gestureIcon != null) ...[
+
+                if (_gestureMessage != null && _gestureIcon != null)
                   GestureMessage(
                     message: _gestureMessage!,
                     icon: _gestureIcon!,
                   ),
-                ],
-                if (_showControls) ...[
+
+                // Overlay controls
+                if (_showControls)
                   Padding(
                     padding: const EdgeInsets.only(left: 12, right: 12),
                     child: Stack(
                       children: [
-                        // Center play/pause button
                         Center(
                           child: IconButton(
                             color: Colors.white,
                             iconSize: 64,
-                            icon: Icon(
-                              widget.player.state.playing
-                                  ? Icons.pause_circle
-                                  : Icons.play_circle,
-                            ),
-                            onPressed: () {
-                              widget.player.state.playing
-                                  ? widget.player.pause()
-                                  : widget.player.play();
+                            icon: Icon(widget.player.isPlaying ? Icons.pause_circle : Icons.play_circle),
+                            onPressed: () async {
+                              if (widget.player.isPlaying) {
+                                await widget.player.pause();
+                              } else {
+                                await widget.player.play();
+                              }
                             },
                           ),
                         ),
@@ -214,20 +215,16 @@ class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    formatDuration(widget.player.state.position.inSeconds),
-                                  ),
-                                  Text(
-                                    formatDuration(widget.player.state.duration.inSeconds),
-                                  ),
+                                  Text(formatDuration(widget.player.position.inSeconds)),
+                                  Text(formatDuration(widget.player.duration.inSeconds)),
                                 ],
                               ),
                               Slider(
                                 min: 0,
-                                max: widget.player.state.duration.inSeconds.toDouble(),
-                                value: widget.player.state.position.inSeconds
+                                max: widget.player.duration.inSeconds.toDouble(),
+                                value: widget.player.position.inSeconds
                                     .toDouble()
-                                    .clamp(0, widget.player.state.duration.inSeconds.toDouble()),
+                                    .clamp(0, widget.player.duration.inSeconds.toDouble()),
                                 onChanged: (value) {
                                   widget.player.seek(Duration(seconds: value.toInt()));
                                 },
@@ -236,11 +233,10 @@ class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
                           ),
                         ),
                       ],
-                    ), 
-                  )
-                ],
+                    ),
+                  ),
               ],
-            )
+            ),
           ],
         ),
       ),
