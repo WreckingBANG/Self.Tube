@@ -151,6 +151,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsSave => 'Speichern';
 
   @override
+  String get settingsM3Colors => 'Dynamische Farben aktivieren';
+
+  @override
   String get searchLabel => 'Suchen...';
 
   @override
@@ -342,5 +345,37 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String yearAgo(Object count) {
     return 'vor $count Jahr';
+  }
+
+  @override
+  String get playerBrightness => 'Helligkeit';
+
+  @override
+  String get playerForward => 'Vorwärts';
+
+  @override
+  String get playerRewind => 'Zurückspulen';
+
+  @override
+  String get playerSeconds => 'Sekunden';
+
+  @override
+  String get playerMinimize => 'Minimieren';
+
+  @override
+  String get playerMaximize => 'Maximieren';
+
+  @override
+  String get playerPaused => 'Pausiert';
+
+  @override
+  String get playerPlay => 'Abspielen';
+
+  @override
+  String get playerVolume => 'Lautstärke';
+
+  @override
+  String playerSBSkipped(Object category, Object end, Object start) {
+    return '$category übersprungen von $start bis $end';
   }
 }

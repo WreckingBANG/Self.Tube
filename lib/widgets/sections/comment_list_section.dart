@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/commentlist_model.dart';
-import '../services/api_service.dart';
-import '../widgets/comment_list_tile.dart';
-import '../l10n/generated/app_localizations.dart';
+import '../../models/commentlist_model.dart';
+import '../../services/api_service.dart';
+import '../tiles/comment_list_tile.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 
 class CommentListWidget extends StatefulWidget {

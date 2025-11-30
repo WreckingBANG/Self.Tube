@@ -9,6 +9,7 @@ import '../screens/settings/overview_screen.dart';
 import '../screens/about_screen.dart';
 import '../services/settings_service.dart';
 import '../main.dart';
+import 'package:Self.Tube/widgets/containers/list_section_container.dart';
 
 class HomeContainerScreen extends StatelessWidget {
   const HomeContainerScreen({super.key});
@@ -54,93 +55,84 @@ class _HomeContainerState extends State<HomeContainer> {
                 context: context,
                 builder: (BuildContext context) {
                   return SizedBox(
-                    height: 470,
                     child: Padding(
                       padding: EdgeInsets.all(8),
                       child: 
                       Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Card(
-                            color: Theme.of(context).colorScheme.surfaceContainerLowest,
-                            elevation: 4,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(localizations.settingsSheetApp),
-                                ListTile(
-                                  leading: Icon(Icons.settings),
-                                  title: Text(localizations.settingsSheetSettings),
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => SettingsScreen()),
-                                    );
-                                  },
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.download),
-                                  title: Text(localizations.settingsSheetDownloads),
-                                  subtitle: Text(localizations.settingsSheetComingSoon),
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.logout),
-                                  title: Text(localizations.settingsSheetLogout),
-                                  onTap: () async {
-                                    Navigator.pop(context);
-                                    await SettingsService.setDoneSetup(false);
-                                    await SettingsService.setInstanceUrl("");
-                                    await SettingsService.setApiToken("");
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => MyApp()),
-                                      (route) => false,
-                                    );
-                                  },
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.info),
-                                  title: Text(localizations.settingsSheetAbout),
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => AboutScreen()),
-                                    );
-                                  },
-                                ),
-                              ]
-                            ),
+                          ListSectionContainer(
+                            title: localizations.settingsSheetApp,
+                            children: [
+                              ListTile(
+                                leading: Icon(Icons.settings),
+                                title: Text(localizations.settingsSheetSettings),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => SettingsScreen()),
+                                  );
+                                },
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.download),
+                                title: Text(localizations.settingsSheetDownloads),
+                                subtitle: Text(localizations.settingsSheetComingSoon),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.logout),
+                                title: Text(localizations.settingsSheetLogout),
+                                onTap: () async {
+                                  Navigator.pop(context);
+                                  await SettingsService.setDoneSetup(false);
+                                  await SettingsService.setInstanceUrl("");
+                                  await SettingsService.setApiToken("");
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => MyApp()),
+                                    (route) => false,
+                                  );
+                                },
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.info),
+                                title: Text(localizations.settingsSheetAbout),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => AboutScreen()),
+                                  );
+                                },
+                              ),
+                            ],
                           ),
-                          Card(
-                            color: Theme.of(context).colorScheme.surfaceContainerLowest,
-                            elevation: 4,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(localizations.settingsSheetServer),
-                                ListTile(
-                                  leading: Icon(Icons.settings),
-                                  title: Text(localizations.settingsSheetSettings),
-                                  subtitle: Text(localizations.settingsSheetComingSoon),
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.bar_chart_rounded),
-                                  title: Text(localizations.settingsSheetLibraryStats),
-                                  subtitle: Text(localizations.settingsSheetComingSoon),
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ]
-                            ),
-                          ),
+                          ListSectionContainer(
+                            title: localizations.settingsSheetServer,
+                            children: [
+                              ListTile(
+                                leading: Icon(Icons.settings),
+                                title: Text(localizations.settingsSheetSettings),
+                                subtitle: Text(localizations.settingsSheetComingSoon),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.bar_chart_rounded),
+                                title: Text(localizations.settingsSheetLibraryStats),
+                                subtitle: Text(localizations.settingsSheetComingSoon),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          )
                         ],
                       )
                     )

@@ -1,12 +1,12 @@
 import 'package:Self.Tube/services/api_service.dart';
-import 'package:Self.Tube/widgets/video_list_section.dart';
+import 'package:Self.Tube/widgets/sections/video_list_section.dart';
 import 'package:flutter/material.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../services/settings_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../models/channel_model.dart';
 import '../utils/number_formatter.dart';
-import '../widgets/expandable_text.dart';
+import '../widgets/containers/expandable_text.dart';
 
 
 class ChannelpageScreen extends StatelessWidget{

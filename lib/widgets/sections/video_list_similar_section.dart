@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../services/api_service.dart';
-import '../models/videolist_similar_model.dart';
-import 'video_list_tile.dart';
-import '../l10n/generated/app_localizations.dart';
+import '../../services/api_service.dart';
+import '../../models/videolist_similar_model.dart';
+import '../tiles/video_list_tile.dart';
+import '../../l10n/generated/app_localizations.dart';
+import 'package:Self.Tube/widgets/containers/list_section_container.dart';
 
 class VideoListSimilarSection extends StatelessWidget {
   final String videoId;
@@ -29,11 +30,13 @@ class VideoListSimilarSection extends StatelessWidget {
           return Center(child: Text(localizations.errorNoDataFound));
         } else {
           final videos = snapshot.data!;
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: videos
-              .map((video) => VideoListTile(video: video, hideChannel: false))
-              .toList(),
+          return ListSectionContainer(
+            children: [
+              ...List.generate(videos.length, (index) {
+                final video = videos[index];
+                return VideoListTile(video: video, hideChannel: false);
+              })
+            ]
           );
         }
       },

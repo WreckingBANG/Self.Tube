@@ -2,6 +2,7 @@ class PlaylistListItemModel {
   final String playlistId;
   final String playlistName;
   final String playlistChannelName;
+  final String playlistChannelThumbUrl;
   final String playlistChannelId;
   final String playlistPic;
   final bool playlistSubscribed;
@@ -10,6 +11,7 @@ class PlaylistListItemModel {
     required this.playlistId,
     required this.playlistName,
     required this.playlistChannelName,
+    required this.playlistChannelThumbUrl,
     required this.playlistChannelId,
     required this.playlistPic,
     required this.playlistSubscribed,
@@ -20,6 +22,7 @@ class PlaylistListItemModel {
       playlistId: json['playlist_id'],
       playlistName: json['playlist_name'],
       playlistChannelName: json['playlist_channel'],
+      playlistChannelThumbUrl: json['channel_thumb_url'] ?? '',
       playlistChannelId: json['playlist_channel_id'],
       playlistPic: json['playlist_thumbnail'],
       playlistSubscribed: json['playlist_subscribed'],

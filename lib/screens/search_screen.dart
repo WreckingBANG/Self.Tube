@@ -1,9 +1,9 @@
-import 'package:Self.Tube/widgets/channel_list_tile.dart';
-import 'package:Self.Tube/widgets/video_list_tile.dart';
+import 'package:Self.Tube/widgets/tiles/channel_list_tile.dart';
+import 'package:Self.Tube/widgets/tiles/video_list_tile.dart';
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
 import '../models/search/searchwrapper_model.dart';
-import '../widgets/playlist_list_tile.dart';
+import '../widgets/tiles/playlist_list_tile.dart';
 import '../l10n/generated/app_localizations.dart';
 
 
@@ -69,34 +69,78 @@ class _SearchScreenState extends State<SearchScreen>{
                         children: [
                           ListView.builder(
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: result.channels.length,
                             itemBuilder: (context, index) {
+                              final shape = RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: index == 0
+                                      ? const Radius.circular(12)
+                                      : const Radius.circular(4),
+                                  bottom: index == result.channels.length - 1
+                                      ? const Radius.circular(12)
+                                      : const Radius.circular(4),
+                                ),
+                              );
+
                               return Card(
-                                elevation: 4,
-                                child: ChannelListTile(channel: result.channels[index])
+                                shape: shape,
+                                clipBehavior: Clip.antiAlias,
+                                margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 1),
+                                child: ChannelListTile(channel: result.channels[index]),
                               );
                             },
                           ),
+
                           ListView.builder(
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: result.videos.length,
                             itemBuilder: (context, index) {
+                              final shape = RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: index == 0
+                                      ? const Radius.circular(12)
+                                      : const Radius.circular(4),
+                                  bottom: index == result.videos.length - 1
+                                      ? const Radius.circular(12)
+                                      : const Radius.circular(4),
+                                ),
+                              );
+
                               return Card(
-                                elevation: 4,
-                                child: VideoListTile(video: result.videos[index], hideChannel: false,)
+                                shape: shape,
+                                clipBehavior: Clip.antiAlias,
+                                margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 1),
+                                child: VideoListTile(
+                                  video: result.videos[index],
+                                  hideChannel: false,
+                                ),
                               );
                             },
                           ),
+
                           ListView.builder(
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: result.playlists.length,
                             itemBuilder: (context, index) {
+                              final shape = RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: index == 0
+                                      ? const Radius.circular(12)
+                                      : const Radius.circular(4),
+                                  bottom: index == result.playlists.length - 1
+                                      ? const Radius.circular(12)
+                                      : const Radius.circular(4),
+                                ),
+                              );
+
                               return Card(
-                                elevation: 4,
-                                child: PlaylistListTile(playlist: result.playlists[index])
+                                shape: shape,
+                                clipBehavior: Clip.antiAlias,
+                                margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 1),
+                                child: PlaylistListTile(playlist: result.playlists[index]),
                               );
                             },
                           ),

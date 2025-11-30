@@ -47,6 +47,7 @@
   "settingsInstanceUrl": "Instanz-URL",
   "settingsApiToken": "API-Token",
   "settingsSave": "Speichern",
+  "settingsM3Colors": "Dynamische Farben aktivieren",
   "searchLabel": "Suchen...",
   "searchTitle": "Suche",
   "playlistTitle": "Wiedergabeliste",
@@ -102,5 +103,15 @@
   "daysAgo": "vor {count} Tagen",
   "dayAgo": "vor {count} Tag",
   "yearsAgo": "vor {count} Jahren",
-  "yearAgo": "vor {count} Jahr"
+  "yearAgo": "vor {count} Jahr",
+  "playerBrightness": "Helligkeit",
+  "playerForward": "Vorwärts",
+  "playerRewind": "Zurückspulen",
+  "playerSeconds": "Sekunden",
+  "playerMinimize": "Minimieren",
+  "playerMaximize": "Maximieren",
+  "playerPaused": "Pausiert",
+  "playerPlay": "Abspielen",
+  "playerVolume": "Lautstärke",
+  "playerSBSkipped": "{category} übersprungen von {start} bis {end}"
 }

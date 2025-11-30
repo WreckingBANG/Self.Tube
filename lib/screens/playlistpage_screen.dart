@@ -1,4 +1,4 @@
-import 'package:Self.Tube/widgets/video_list_section.dart';
+import 'package:Self.Tube/widgets/sections/video_list_section.dart';
 import 'package:flutter/material.dart';
 import '../l10n/generated/app_localizations.dart';
 

@@ -380,6 +380,12 @@ abstract class AppLocalizations {
   /// **'Save'**
   String get settingsSave;
 
+  /// No description provided for @settingsM3Colors.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Dynamic Colors'**
+  String get settingsM3Colors;
+
   /// No description provided for @searchLabel.
   ///
   /// In en, this message translates to:
@@ -715,6 +721,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} year ago'**
   String yearAgo(Object count);
+
+  /// No description provided for @playerBrightness.
+  ///
+  /// In en, this message translates to:
+  /// **'Brightness'**
+  String get playerBrightness;
+
+  /// No description provided for @playerForward.
+  ///
+  /// In en, this message translates to:
+  /// **'Forward'**
+  String get playerForward;
+
+  /// No description provided for @playerRewind.
+  ///
+  /// In en, this message translates to:
+  /// **'Rewind'**
+  String get playerRewind;
+
+  /// No description provided for @playerSeconds.
+  ///
+  /// In en, this message translates to:
+  /// **'seconds'**
+  String get playerSeconds;
+
+  /// No description provided for @playerMinimize.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimize'**
+  String get playerMinimize;
+
+  /// No description provided for @playerMaximize.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximize'**
+  String get playerMaximize;
+
+  /// No description provided for @playerPaused.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused'**
+  String get playerPaused;
+
+  /// No description provided for @playerPlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Play'**
+  String get playerPlay;
+
+  /// No description provided for @playerVolume.
+  ///
+  /// In en, this message translates to:
+  /// **'Volume'**
+  String get playerVolume;
+
+  /// No description provided for @playerSBSkipped.
+  ///
+  /// In en, this message translates to:
+  /// **'Skipped {category} from {start} to {end}'**
+  String playerSBSkipped(Object category, Object end, Object start);
 }
 
 class _AppLocalizationsDelegate

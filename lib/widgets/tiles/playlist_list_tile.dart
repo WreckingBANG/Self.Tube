@@ -1,16 +1,16 @@
-import 'package:Self.Tube/screens/channelpage_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:share_plus/share_plus.dart';
-import '../services/api_service.dart';
-import '../utils/number_formatter.dart';
-import '../services/settings_service.dart';
-import '../l10n/generated/app_localizations.dart';
+import '../../services/api_service.dart';
+import '../../screens/channelpage_screen.dart';
+import '../../screens/playlistpage_screen.dart';
+import '../../services/settings_service.dart';
+import '../../l10n/generated/app_localizations.dart';
 
-class ChannelListTile extends StatelessWidget {
-  final dynamic channel;
+class PlaylistListTile extends StatelessWidget {
+  final dynamic playlist;
 
-  const ChannelListTile({super.key, required this.channel});
+  const PlaylistListTile({super.key, required this.playlist});
 
   static String? apiToken = SettingsService.apiToken;
   static String? baseUrl = SettingsService.instanceUrl;
@@ -18,32 +18,68 @@ class ChannelListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    return Card(
-      elevation: 4,
-      child: ListTile(
-        title: Text(channel.channelName),
-        subtitle: Text("${localizations.channelSubscribers} ${formatNumberCompact(channel.subscribers, context)}"),
-        leading: AspectRatio(
-          aspectRatio: 1 / 1,
-          child: Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              CachedNetworkImage(
-                imageUrl: "$baseUrl/${channel.profilePic}",
-                httpHeaders: {
-                  'Authorization': 'token $apiToken',
-                },
-                fit: BoxFit.cover,
-                placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+    return SizedBox(
+      width: double.infinity,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),  
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 170,
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: CachedNetworkImage(
+                    imageUrl: "$baseUrl/${playlist.playlistPic}",
+                    httpHeaders: {
+                      'Authorization': 'token $apiToken',
+                    },
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                  ),
+                )   
               ),
-            ],
-          ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(4),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      playlist.playlistName,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ChannelpageScreen(channelId: playlist.playlistChannelId)),
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          Text(
+                            playlist.playlistChannelName,
+                            style: TextStyle(fontSize: 13),
+                          )
+                        ],
+                      )
+                    )
+                  ],
+                ),
+              )  
+            ),
+          ],
         ),
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ChannelpageScreen(channelId: channel.channelId)),
+            MaterialPageRoute(builder: (context) => PlaylistpageScreen(playlistId: playlist.playlistId)),
           );
         },
         onLongPress: () {
@@ -58,8 +94,6 @@ class ChannelListTile extends StatelessWidget {
                   Column(
                     children: [
                       Card(
-                        color: Theme.of(context).colorScheme.surfaceContainerLowest,
-                        elevation: 4,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -68,14 +102,14 @@ class ChannelListTile extends StatelessWidget {
                               leading: Icon(Icons.timer_outlined),
                               title: Text(localizations.sheetMarkWatched),
                               onTap: () {
-                                ApiService.setVideoWatched(channel.youtubeId, true);
+                                ApiService.setVideoWatched(playlist.youtubeId, true);
                               },
                             ),
                             ListTile(
                               leading: Icon(Icons.timer_off_outlined),
                               title: Text(localizations.sheetMarkUnwatched),
                               onTap: () {
-                                ApiService.setVideoWatched(channel.youtubeId, false);
+                                ApiService.setVideoWatched(playlist.youtubeId, false);
                               },
                             ),
                             ListTile(
@@ -84,7 +118,7 @@ class ChannelListTile extends StatelessWidget {
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ChannelpageScreen(channelId: channel.channelId)),
+                                  MaterialPageRoute(builder: (context) => ChannelpageScreen(channelId: playlist.channelId)),
                                 );
                               },
                             ),
@@ -93,7 +127,7 @@ class ChannelListTile extends StatelessWidget {
                               title: Text(localizations.sheetShare),
                               onTap: () {
                                 SharePlus.instance.share(
-                                  ShareParams(uri: Uri.parse("https://www.youtube.com/watch?v=${channel.youtubeId}"))
+                                  ShareParams(uri: Uri.parse("https://www.youtube.com/watch?v=${playlist.youtubeId}"))
                                 );
                               },
                             ),
@@ -107,8 +141,6 @@ class ChannelListTile extends StatelessWidget {
                         ),
                       ),
                       Card(
-                        color: Theme.of(context).colorScheme.surfaceContainerLowest,
-                        elevation: 4,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

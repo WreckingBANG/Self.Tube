@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../l10n/generated/app_localizations.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 class ExpandableText extends StatefulWidget {
   final String text;
