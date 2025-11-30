@@ -151,6 +151,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsSave => 'Speichern';
 
   @override
+  String get settingsM3Colors => 'Dynamische Farben aktivieren';
+
+  @override
   String get searchLabel => 'Suchen...';
 
   @override

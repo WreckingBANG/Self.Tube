@@ -2,7 +2,6 @@ import 'package:Self.Tube/widgets/containers/list_section_container.dart';
 import 'package:flutter/material.dart';
 import '../../services/settings_service.dart';
 import '../../l10n/generated/app_localizations.dart';
-import 'package:Self.Tube/widgets/containers/expandable_text.dart';
 
 class SponsorblockSettingsScreen extends StatefulWidget {
   @override
@@ -39,7 +38,6 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
   }
 
   Future<void> _saveSettings() async {
-    final localizations = AppLocalizations.of(context)!;
     await SettingsService.setSponsorBlockEnabled(_enableSponsorblock);
     await SettingsService.setSponsorCategory("sbSponsor", _enableSponsor);
     await SettingsService.setSponsorCategory("sbSelfpromo", _enablePromo);
@@ -75,6 +73,14 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
               child: Column(
                 children: [
                   SwitchListTile(
+                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                      (Set<WidgetState> states) {
+                        if (states.contains(WidgetState.selected)) {
+                          return const Icon(Icons.check);
+                        }
+                        return const Icon(Icons.close);
+                      },
+                    ),
                     title: Text(localizations.sponsorblockSponsor),
                     value: _enableSponsor,
                     onChanged: (bool value) {
@@ -85,6 +91,14 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
                     },
                   ),
                   SwitchListTile(
+                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                      (Set<WidgetState> states) {
+                        if (states.contains(WidgetState.selected)) {
+                          return const Icon(Icons.check);
+                        }
+                        return const Icon(Icons.close);
+                      },
+                    ),
                     title: Text(localizations.sponsorblockPromo),
                     value: _enablePromo,
                     onChanged: (bool value) {
@@ -95,6 +109,14 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
                     },
                   ),
                   SwitchListTile(
+                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                      (Set<WidgetState> states) {
+                        if (states.contains(WidgetState.selected)) {
+                          return const Icon(Icons.check);
+                        }
+                        return const Icon(Icons.close);
+                      },
+                    ),
                     title: Text(localizations.sponsorblockInteraction),
                     value: _enableInteraction,
                     onChanged: (bool value) {
@@ -105,6 +127,14 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
                     },
                   ),
                   SwitchListTile(
+                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                      (Set<WidgetState> states) {
+                        if (states.contains(WidgetState.selected)) {
+                          return const Icon(Icons.check);
+                        }
+                        return const Icon(Icons.close);
+                      },
+                    ),
                     title: Text(localizations.sponsorblockIntro),
                     value: _enableIntro,
                     onChanged: (bool value) {
@@ -115,6 +145,14 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
                     },
                   ),
                   SwitchListTile(
+                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                      (Set<WidgetState> states) {
+                        if (states.contains(WidgetState.selected)) {
+                          return const Icon(Icons.check);
+                        }
+                        return const Icon(Icons.close);
+                      },
+                    ),
                     title: Text(localizations.sponsorblockOutro),
                     value: _enableOutro,
                     onChanged: (bool value) {
@@ -125,6 +163,14 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
                     },
                   ),
                   SwitchListTile(
+                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                      (Set<WidgetState> states) {
+                        if (states.contains(WidgetState.selected)) {
+                          return const Icon(Icons.check);
+                        }
+                        return const Icon(Icons.close);
+                      },
+                    ),
                     title: Text(localizations.sponsorblockPreview),
                     value: _enablePreview,
                     onChanged: (bool value) {
@@ -135,6 +181,14 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
                     },
                   ),
                   SwitchListTile(
+                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                      (Set<WidgetState> states) {
+                        if (states.contains(WidgetState.selected)) {
+                          return const Icon(Icons.check);
+                        }
+                        return const Icon(Icons.close);
+                      },
+                    ),
                     title: Text(localizations.sponsorblockHook),
                     value: _enableHook,
                     onChanged: (bool value) {
@@ -145,6 +199,14 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
                     },
                   ),
                   SwitchListTile(
+                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                      (Set<WidgetState> states) {
+                        if (states.contains(WidgetState.selected)) {
+                          return const Icon(Icons.check);
+                        }
+                        return const Icon(Icons.close);
+                      },
+                    ),
                     title: Text(localizations.sponsorblockFiller),
                     value: _enableFiller,
                     onChanged: (bool value) {

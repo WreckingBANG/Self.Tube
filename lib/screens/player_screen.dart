@@ -1,5 +1,4 @@
 import 'package:Self.Tube/screens/channelpage_screen.dart';
-import 'dart:io';
 import 'package:Self.Tube/widgets/sections/video_list_similar_section.dart';
 import 'package:flutter/material.dart';
 import '../utils/number_formatter.dart';

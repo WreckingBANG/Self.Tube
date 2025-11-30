@@ -151,6 +151,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsSave => 'Save';
 
   @override
+  String get settingsM3Colors => 'Enable Dynamic Colors';
+
+  @override
   String get searchLabel => 'Search...';
 
   @override

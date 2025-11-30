@@ -380,6 +380,12 @@ abstract class AppLocalizations {
   /// **'Save'**
   String get settingsSave;
 
+  /// No description provided for @settingsM3Colors.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Dynamic Colors'**
+  String get settingsM3Colors;
+
   /// No description provided for @searchLabel.
   ///
   /// In en, this message translates to:

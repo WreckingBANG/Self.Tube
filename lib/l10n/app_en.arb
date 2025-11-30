@@ -47,6 +47,7 @@
   "settingsInstanceUrl": "Instance URL",
   "settingsApiToken": "API Token",
   "settingsSave": "Save",
+  "settingsM3Colors": "Enable Dynamic Colors",
   "searchLabel": "Search...",
   "searchTitle": "Search",
   "playlistTitle": "Playlist",

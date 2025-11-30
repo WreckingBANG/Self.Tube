@@ -24,7 +24,6 @@ class _AppearanceSettingsScreenState extends State<AppearanceSettingsScreen> {
   }
 
   Future<void> _saveSettings() async {
-    final localizations = AppLocalizations.of(context)!;
     await SettingsService.setShowCommentPics(_showCommentPics);
     await SettingsService.setMaterialYouColors(_materialYouColors);
   }
@@ -55,7 +54,15 @@ class _AppearanceSettingsScreenState extends State<AppearanceSettingsScreen> {
             },
           ),
           SwitchListTile(
-            title: Text("Enable Material-You Colors"),
+            thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.selected)) {
+                  return const Icon(Icons.check);
+                }
+                return const Icon(Icons.close);
+              },
+            ),
+            title: Text(localizations.settingsM3Colors),
             value: _materialYouColors,
             onChanged: (bool value) {
               setState(() {
