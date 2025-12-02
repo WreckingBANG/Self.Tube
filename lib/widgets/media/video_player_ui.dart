@@ -6,6 +6,7 @@ import 'package:Self.Tube/widgets/media/video_player_ui_landscape.dart';
 import 'package:Self.Tube/widgets/media/gesture_message.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/widgets/media/video_player_interface.dart';
+import 'package:Self.Tube/services/settings_service.dart';
 
 class SimpleVideoPlayer extends StatefulWidget {
   final MediaPlayer player;
@@ -99,25 +100,23 @@ class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
 
-    return AspectRatio(
-      aspectRatio: 16 / 9,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: _toggleControls,
-        child: Stack(
-          children: [
-            Center(child: widget.player.buildView()),
-
-            // Gesture layers & controls
-            Stack(
-              children: [
-                Positioned.fill(
-                  child: Row(
-                    children: [
-                      // Left zone
-                      Expanded(
-                        child: GestureDetector(
-                          onDoubleTap: () {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: _toggleControls,
+      child: Stack(
+        children: [
+          Center(child: widget.player.buildView()),
+          // Gesture layers & controls
+          Stack(
+            children: [
+              Positioned.fill(
+                child: Row(
+                  children: [
+                    // Left zone
+                    Expanded(
+                      child: GestureDetector(
+                        onDoubleTap: () {
+                          if (SettingsService.vpGestureDoubleTap!=false){
                             _pendingSkipSeconds += 10;
                             _showMessage(
                               "${localizations.playerRewind} $_pendingSkipSeconds ${localizations.playerSeconds}",
@@ -129,21 +128,24 @@ class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
                               widget.player.seek(newPos >= Duration.zero ? newPos : Duration.zero);
                               _pendingSkipSeconds = 0;
                             });
-                          },
-                          child: Container(color: Colors.transparent),
-                        ),
+                          }
+                        },
+                        child: Container(color: Colors.transparent),
                       ),
-
-                      // Center zone
-                      Expanded(
-                        child: GestureDetector(
-                          onVerticalDragEnd: (details) {
+                    ),
+                    // Center zone
+                    Expanded(
+                      child: GestureDetector(
+                        onVerticalDragEnd: (details) {
+                          if (SettingsService.vpGestureFullscreen!=false){
                             if (details.primaryVelocity != null && details.primaryVelocity! < 0) {
                               _showMessage(localizations.playerMaximize, Icons.fullscreen_rounded);
                               _openFullscreen();
                             }
-                          },
-                          onDoubleTap: () async {
+                          }
+                        },
+                        onDoubleTap: () async {
+                          if (SettingsService.vpGestureDoubleTap!=false){
                             if (widget.player.isPlaying) {
                               await widget.player.pause();
                               _showMessage(localizations.playerPaused, Icons.pause);
@@ -151,15 +153,16 @@ class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
                               await widget.player.play();
                               _showMessage(localizations.playerPlay, Icons.play_arrow);
                             }
-                          },
-                          child: Container(color: Colors.transparent),
-                        ),
+                          }
+                        },
+                        child: Container(color: Colors.transparent),
                       ),
-
-                      // Right zone
-                      Expanded(
-                        child: GestureDetector(
-                          onDoubleTap: () {
+                    ),
+                    // Right zone
+                    Expanded(
+                      child: GestureDetector(
+                        onDoubleTap: () {
+                          if (SettingsService.vpGestureDoubleTap!=false){
                             _pendingSkipSeconds += 10;
                             _showMessage(
                               "${localizations.playerForward} $_pendingSkipSeconds ${localizations.playerSeconds}",
@@ -171,74 +174,71 @@ class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
                               widget.player.seek(newPos <= widget.player.duration ? newPos : widget.player.duration);
                               _pendingSkipSeconds = 0;
                             });
+                          }
+                        },
+                        child: Container(color: Colors.transparent),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              if (_gestureMessage != null && _gestureIcon != null)
+                GestureMessage(
+                  message: _gestureMessage!,
+                  icon: _gestureIcon!,
+                ),
+              // Overlay controls
+              if (_showControls)
+                Padding(
+                  padding: const EdgeInsets.only(left: 12, right: 12),
+                  child: Stack(
+                    children: [
+                      Center(
+                        child: IconButton(
+                          color: Colors.white,
+                          iconSize: 64,
+                          icon: Icon(widget.player.isPlaying ? Icons.pause_circle : Icons.play_circle),
+                          onPressed: () async {
+                            if (widget.player.isPlaying) {
+                              await widget.player.pause();
+                            } else {
+                              await widget.player.play();
+                            }
                           },
-                          child: Container(color: Colors.transparent),
+                        ),
+                      ),
+                      // Bottom controls
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(formatDuration(widget.player.position.inSeconds)),
+                                Text(formatDuration(widget.player.duration.inSeconds)),
+                              ],
+                            ),
+                            Slider(
+                              min: 0,
+                              max: widget.player.duration.inSeconds.toDouble(),
+                              value: widget.player.position.inSeconds
+                                  .toDouble()
+                                  .clamp(0, widget.player.duration.inSeconds.toDouble()),
+                              onChanged: (value) {
+                                widget.player.seek(Duration(seconds: value.toInt()));
+                              },
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
                 ),
-
-                if (_gestureMessage != null && _gestureIcon != null)
-                  GestureMessage(
-                    message: _gestureMessage!,
-                    icon: _gestureIcon!,
-                  ),
-
-                // Overlay controls
-                if (_showControls)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12, right: 12),
-                    child: Stack(
-                      children: [
-                        Center(
-                          child: IconButton(
-                            color: Colors.white,
-                            iconSize: 64,
-                            icon: Icon(widget.player.isPlaying ? Icons.pause_circle : Icons.play_circle),
-                            onPressed: () async {
-                              if (widget.player.isPlaying) {
-                                await widget.player.pause();
-                              } else {
-                                await widget.player.play();
-                              }
-                            },
-                          ),
-                        ),
-
-                        // Bottom controls
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(formatDuration(widget.player.position.inSeconds)),
-                                  Text(formatDuration(widget.player.duration.inSeconds)),
-                                ],
-                              ),
-                              Slider(
-                                min: 0,
-                                max: widget.player.duration.inSeconds.toDouble(),
-                                value: widget.player.position.inSeconds
-                                    .toDouble()
-                                    .clamp(0, widget.player.duration.inSeconds.toDouble()),
-                                onChanged: (value) {
-                                  widget.player.seek(Duration(seconds: value.toInt()));
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }

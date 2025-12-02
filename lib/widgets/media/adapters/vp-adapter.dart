@@ -16,7 +16,7 @@ class VideoPlayerAdapter implements MediaPlayer {
   @override
   Widget buildView() {
     return AspectRatio(
-      aspectRatio: 16 / 9,
+      aspectRatio: _controller.value.aspectRatio,
       child: VideoPlayer(_controller),
     );
   }

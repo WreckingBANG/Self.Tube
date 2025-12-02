@@ -136,6 +136,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsAppearanceSettingsDesc => '...';
 
   @override
+  String get settingsVideoPlayer => 'Videoplayer';
+
+  @override
+  String get settingsVideoPlayerDesc => 'Gesten-Einstellungen, ...';
+
+  @override
   String get settingsSponsorBlockSettings => 'SponsorBlock';
 
   @override
@@ -152,6 +158,36 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsM3Colors => 'Dynamische Farben aktivieren';
+
+  @override
+  String get settingsVPGesturesTitle => 'Gesten';
+
+  @override
+  String get settingsVPGesturesSwipeCtrl => 'Wischsteuerung';
+
+  @override
+  String get settingsVPGesturesSwipeCtrlDesc =>
+      'Wische auf der linken und rechten Seite des Players, um Lautstärke und Helligkeit anzupassen';
+
+  @override
+  String get settingsVPGesturesFullscreen => 'Vollbild-Geste';
+
+  @override
+  String get settingsVPGesturesFullscreenDesc =>
+      'Wische in der Mitte nach oben/unten, um den Vollbildmodus zu aktivieren/deaktivieren';
+
+  @override
+  String get settingsVPGesturesPinch => 'Zum Zoomen zusammenziehen';
+
+  @override
+  String get settingsVPGesturesPinchDesc => 'Demnächst verfügbar';
+
+  @override
+  String get settingsVPGesturesDoubleTap => 'Doppeltippen';
+
+  @override
+  String get settingsVPGesturesDoubleTapDesc =>
+      'Tippe zweimal schnell auf die rechte oder linke Seite des Players zum Vor- bzw. Zurückspulen und in der Mitte zum Abspielen/Pausieren';
 
   @override
   String get searchLabel => 'Suchen...';

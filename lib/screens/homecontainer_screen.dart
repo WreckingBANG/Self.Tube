@@ -5,7 +5,7 @@ import '../screens/playlists_screen.dart';
 import '../screens/actions_screen.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../screens/search_screen.dart';
-import '../screens/settings/overview_screen.dart';
+import 'package:Self.Tube/screens/settings/overview_settings_screen.dart';
 import '../screens/about_screen.dart';
 import '../services/settings_service.dart';
 import '../main.dart';

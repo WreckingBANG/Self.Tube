@@ -17,6 +17,11 @@ class SettingsService {
   static const _hookKey = 'sbHook';
   static const _fillerKey = 'sbFiller';
 
+  static const _vpGestureSwipe = 'vpGestureSwipe';
+  static const _vpGestureFullscreen = 'vpGestureFullscreen';
+  static const _vpGesturePinch = 'vpGesturePinch';
+  static const _vpGestureDoubleTap = 'vpGestureDoubleTap';
+
   static String? instanceUrl;
   static String? apiToken;
   static bool? showCommentPics;
@@ -33,16 +38,21 @@ class SettingsService {
   static bool? sbHook;
   static bool? sbFiller;
 
+  static bool? vpGestureSwipe;
+  static bool? vpGestureFullscreen;
+  static bool? vpGesturePinch;
+  static bool? vpGestureDoubleTap;
+
   static Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
     instanceUrl = prefs.getString(_instanceUrlKey);
     apiToken = prefs.getString(_apiTokenKey);
     showCommentPics = prefs.getBool(_showCommentPics);
-    materialYouColors = prefs.getBool(_materialYouColors);
+    materialYouColors = prefs.getBool(_materialYouColors)?? true;
     doneSetup = prefs.getBool(_doneSetup);
 
-    sponsorBlockEnabled = prefs.getBool(_sponsorBlockEnabledKey);
-    sbSponsor = prefs.getBool(_sponsorKey);
+    sponsorBlockEnabled = prefs.getBool(_sponsorBlockEnabledKey)?? true;
+    sbSponsor = prefs.getBool(_sponsorKey)?? true;
     sbSelfpromo = prefs.getBool(_selfPromoKey);
     sbInteraction = prefs.getBool(_interactionKey);
     sbIntro = prefs.getBool(_introKey);
@@ -50,6 +60,11 @@ class SettingsService {
     sbPreview = prefs.getBool(_previewKey);
     sbHook = prefs.getBool(_hookKey);
     sbFiller = prefs.getBool(_fillerKey);
+
+    vpGestureSwipe = prefs.getBool(_vpGestureSwipe)?? true;
+    vpGestureFullscreen = prefs.getBool(_vpGestureFullscreen)?? true;
+    vpGesturePinch = prefs.getBool(_vpGesturePinch)?? true;
+    vpGestureDoubleTap = prefs.getBool(_vpGestureDoubleTap)?? true;
   }
 
   static Future<void> setInstanceUrl(String value) async {
@@ -118,5 +133,29 @@ class SettingsService {
         sbFiller = value;
         break;
     }
+  }
+
+  static Future<void> setVPGestureSwipe(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_vpGestureSwipe, value);
+    vpGestureSwipe = value;
+  }
+
+    static Future<void> setVPGestureFullscreen(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_vpGestureFullscreen, value);
+    vpGestureFullscreen = value;
+  }
+
+    static Future<void> setVPGesturePinch(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_vpGesturePinch, value);
+    vpGesturePinch = value;
+  }
+
+    static Future<void> setVPGestureDoubleTap(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_vpGestureDoubleTap, value);
+    vpGestureDoubleTap = value;
   }
 }

@@ -7,6 +7,7 @@ import 'package:Self.Tube/utils/duration_formatter.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:Self.Tube/widgets/media/gesture_message.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'package:Self.Tube/services/settings_service.dart';
 
 class FullscreenVideo extends StatefulWidget {
   final MediaPlayer player;
@@ -126,30 +127,41 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                       Expanded(
                         child: GestureDetector(
                           onVerticalDragUpdate: (details) {
-                            _dragAccumulator += details.delta.dy;
-                            if (_dragAccumulator <= -10) {
-                              _currentBrightness = (_currentBrightness + 0.05).clamp(0.0, 1.0);
-                              ScreenBrightness.instance.setApplicationScreenBrightness(_currentBrightness);
-                              _showMessage("${localizations.playerBrightness} ${(_currentBrightness * 100).round()}%", Icons.brightness_5_rounded);
-                              _dragAccumulator = 0;
-                            } else if (_dragAccumulator >= 10) {
-                              _currentBrightness = (_currentBrightness - 0.05).clamp(0.0, 1.0);
-                              ScreenBrightness.instance.setApplicationScreenBrightness(_currentBrightness);
-                              _showMessage("${localizations.playerBrightness} ${(_currentBrightness * 100).round()}%", Icons.brightness_5_rounded);
-                              _dragAccumulator = 0;
+                            if (SettingsService.vpGestureSwipe!=false) {
+                              _dragAccumulator += details.delta.dy;
+                              if (_dragAccumulator <= -10) {
+                                _currentBrightness = (_currentBrightness + 0.05).clamp(0.0, 1.0);
+                                ScreenBrightness.instance.setApplicationScreenBrightness(_currentBrightness);
+                                _showMessage("${localizations.playerBrightness} ${(_currentBrightness * 100).round()}%", Icons.brightness_5_rounded);
+                                _dragAccumulator = 0;
+                              } else if (_dragAccumulator >= 10) {
+                                _currentBrightness = (_currentBrightness - 0.05).clamp(0.0, 1.0);
+                                ScreenBrightness.instance.setApplicationScreenBrightness(_currentBrightness);
+                                _showMessage("${localizations.playerBrightness} ${(_currentBrightness * 100).round()}%", Icons.brightness_5_rounded);
+                                _dragAccumulator = 0;
+                              }
                             }
                           },
                           onDoubleTap: () {
-                            _pendingSkipSeconds += 10;
-                            _showMessage("${localizations.playerRewind} $_pendingSkipSeconds ${localizations.playerSeconds}", Icons.fast_rewind_rounded);
-                            _skipTimer?.cancel();
-                            _skipTimer = Timer(const Duration(milliseconds: 400), () {
-                              final newPos = widget.player.position - Duration(seconds: _pendingSkipSeconds);
-                              widget.player.seek(
-                                newPos <= widget.player.duration ? newPos : widget.player.duration,
+                            if (SettingsService.vpGestureDoubleTap!=false) {
+                              _pendingSkipSeconds += 10;
+                              _showMessage(
+                                "${localizations.playerRewind} $_pendingSkipSeconds ${localizations.playerSeconds}",
+                                Icons.fast_rewind_rounded,
                               );
-                              _pendingSkipSeconds = 0;
-                            });
+
+                              _skipTimer?.cancel();
+                              _skipTimer = Timer(const Duration(milliseconds: 400), () {
+                                final newPos = widget.player.position -
+                                    Duration(seconds: _pendingSkipSeconds);
+
+                                widget.player.seek(
+                                  newPos <= widget.player.duration ? newPos : widget.player.duration,
+                                );
+
+                                _pendingSkipSeconds = 0;
+                              });
+                            }
                           },
                           child: Container(color: Colors.transparent),
                         ),
@@ -159,20 +171,24 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                       Expanded(
                         child: GestureDetector(
                           onVerticalDragEnd: (details) {
-                            if (details.primaryVelocity != null && details.primaryVelocity! > 0) {
-                              _showMessage(localizations.playerMinimize, Icons.fullscreen_exit_rounded);
-                              Navigator.of(context).pop();
+                            if (SettingsService.vpGestureFullscreen!=false) {
+                              if (details.primaryVelocity != null && details.primaryVelocity! > 0) {
+                                _showMessage(localizations.playerMinimize, Icons.fullscreen_exit_rounded);
+                                Navigator.of(context).pop();
+                              }
                             }
                           },
                           onDoubleTap: () {
-                            if (widget.player.isPlaying) {
-                                widget.player.pause();
-                                _showMessage(localizations.playerPaused, Icons.pause);
-                              } else {
-                                widget.player.play();
-                                _showMessage(localizations.playerPlay, Icons.play_arrow);
+                            if (SettingsService.vpGestureDoubleTap!=false) {
+                              if (widget.player.isPlaying) {
+                                  widget.player.pause();
+                                  _showMessage(localizations.playerPaused, Icons.pause);
+                                } else {
+                                  widget.player.play();
+                                  _showMessage(localizations.playerPlay, Icons.play_arrow);
+                                }
                               }
-                          },
+                            },
                           child: Container(color: Colors.transparent),
                         ),
                       ),
@@ -181,31 +197,34 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                       Expanded(
                         child: GestureDetector(
                           onVerticalDragUpdate: (details) async {
-                            _dragAccumulator += details.delta.dy;
-
-                            if (_dragAccumulator <= -10) {
-                              double current = await _volumeController.getVolume();
-                              _volumeController.setVolume((current + 0.05).clamp(0.0, 1.0));
-                              _showMessage("${localizations.playerVolume} ${(current + 0.05).clamp(0.0, 1.0) * 100 ~/ 1}%", Icons.volume_up_rounded);
-                              _dragAccumulator = 0;
-                            } else if (_dragAccumulator >= 10) {
-                              double current = await _volumeController.getVolume();
-                              _volumeController.setVolume((current - 0.05).clamp(0.0, 1.0));
-                              _showMessage("${localizations.playerVolume} ${(current + 0.05).clamp(0.0, 1.0) * 100 ~/ 1}%", Icons.volume_down_rounded);
-                              _dragAccumulator = 0;
+                            if (SettingsService.vpGestureSwipe!=false) {
+                              _dragAccumulator += details.delta.dy;
+                              if (_dragAccumulator <= -10) {
+                                double current = await _volumeController.getVolume();
+                                _volumeController.setVolume((current + 0.05).clamp(0.0, 1.0));
+                                _showMessage("${localizations.playerVolume} ${(current + 0.05).clamp(0.0, 1.0) * 100 ~/ 1}%", Icons.volume_up_rounded);
+                                _dragAccumulator = 0;
+                              } else if (_dragAccumulator >= 10) {
+                                double current = await _volumeController.getVolume();
+                                _volumeController.setVolume((current - 0.05).clamp(0.0, 1.0));
+                                _showMessage("${localizations.playerVolume} ${(current + 0.05).clamp(0.0, 1.0) * 100 ~/ 1}%", Icons.volume_down_rounded);
+                                _dragAccumulator = 0;
+                              }
                             }
                           },
                           onDoubleTap: () {
-                            _pendingSkipSeconds += 10;
-                            _showMessage("${localizations.playerForward} $_pendingSkipSeconds ${localizations.playerSeconds}", Icons.fast_forward_rounded);
-                            _skipTimer?.cancel();
-                            _skipTimer = Timer(const Duration(milliseconds: 400), () {
-                              final newPos = widget.player.position + Duration(seconds: _pendingSkipSeconds);
-                              widget.player.seek(
-                                newPos <= widget.player.duration ? newPos : widget.player.duration,
-                              );
-                              _pendingSkipSeconds = 0;
-                            });
+                            if (SettingsService.vpGestureDoubleTap!=false) {
+                              _pendingSkipSeconds += 10;
+                              _showMessage("${localizations.playerForward} $_pendingSkipSeconds ${localizations.playerSeconds}", Icons.fast_forward_rounded);
+                              _skipTimer?.cancel();
+                              _skipTimer = Timer(const Duration(milliseconds: 400), () {
+                                final newPos = widget.player.position + Duration(seconds: _pendingSkipSeconds);
+                                widget.player.seek(
+                                  newPos <= widget.player.duration ? newPos : widget.player.duration,
+                                );
+                                _pendingSkipSeconds = 0;
+                              });
+                            }
                           },
                           child: Container(color: Colors.transparent),
                         ),

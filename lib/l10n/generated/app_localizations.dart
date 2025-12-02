@@ -350,6 +350,18 @@ abstract class AppLocalizations {
   /// **'...'**
   String get settingsAppearanceSettingsDesc;
 
+  /// No description provided for @settingsVideoPlayer.
+  ///
+  /// In en, this message translates to:
+  /// **'Video Player'**
+  String get settingsVideoPlayer;
+
+  /// No description provided for @settingsVideoPlayerDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Gesture Settings, ...'**
+  String get settingsVideoPlayerDesc;
+
   /// No description provided for @settingsSponsorBlockSettings.
   ///
   /// In en, this message translates to:
@@ -385,6 +397,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enable Dynamic Colors'**
   String get settingsM3Colors;
+
+  /// No description provided for @settingsVPGesturesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Gestures'**
+  String get settingsVPGesturesTitle;
+
+  /// No description provided for @settingsVPGesturesSwipeCtrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe controls'**
+  String get settingsVPGesturesSwipeCtrl;
+
+  /// No description provided for @settingsVPGesturesSwipeCtrlDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe the left and right parts of the player to adjust volume and brightness'**
+  String get settingsVPGesturesSwipeCtrlDesc;
+
+  /// No description provided for @settingsVPGesturesFullscreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Fullscreen gesture'**
+  String get settingsVPGesturesFullscreen;
+
+  /// No description provided for @settingsVPGesturesFullscreenDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe up/down in the center to enter/exit fullscreen'**
+  String get settingsVPGesturesFullscreenDesc;
+
+  /// No description provided for @settingsVPGesturesPinch.
+  ///
+  /// In en, this message translates to:
+  /// **'Pinch to zoom'**
+  String get settingsVPGesturesPinch;
+
+  /// No description provided for @settingsVPGesturesPinchDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming Soon'**
+  String get settingsVPGesturesPinchDesc;
+
+  /// No description provided for @settingsVPGesturesDoubleTap.
+  ///
+  /// In en, this message translates to:
+  /// **'Double Tap'**
+  String get settingsVPGesturesDoubleTap;
+
+  /// No description provided for @settingsVPGesturesDoubleTapDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap twice quickly on the right and left side of the player to skip/rewind and the center to play/pause'**
+  String get settingsVPGesturesDoubleTapDesc;
 
   /// No description provided for @searchLabel.
   ///
