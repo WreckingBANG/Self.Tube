@@ -6,9 +6,9 @@ ThemeData lightThemeFrom(ColorScheme colorScheme) {
   return ThemeData(
     useMaterial3: true,
     colorScheme: colorScheme,
-    scaffoldBackgroundColor: colorScheme.surfaceContainerHighest.withOpacity(0.75),
+    scaffoldBackgroundColor: colorScheme.surface,
     cardTheme: CardThemeData(
-      color: colorScheme.surface,
+      color: colorScheme.primary.withValues(alpha: 0.1),
       elevation: 0,
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       shape: RoundedRectangleBorder(
@@ -30,9 +30,9 @@ ThemeData darkThemeFrom(ColorScheme colorScheme) {
   return ThemeData(
     useMaterial3: true,
     colorScheme: colorScheme,
-    scaffoldBackgroundColor: colorScheme.surfaceContainerHighest,
+    scaffoldBackgroundColor: colorScheme.surface,
     cardTheme: CardThemeData(
-      color: colorScheme.primary.withOpacity(0.08),
+      color: colorScheme.primary.withValues(alpha: 0.08),
       surfaceTintColor: null,
       elevation: 0,
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
