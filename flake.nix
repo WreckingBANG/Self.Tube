@@ -33,6 +33,11 @@
 
         buildInputs = [
           # pkgs.android-studio
+          pkgs.fontconfig
+          pkgs.glibcLocales
+          pkgs.gtk3
+          pkgs.glib
+          pkgs.xorg.libXi
           pkgs.ffmpeg
           pkgs.mpv
           pkgs.openjdk17
@@ -40,7 +45,6 @@
           pkgs.flutter
           pkgs.alsa-lib
           pkgs.pkg-config
-          pkgs.gtk3
           pkgs.sysprof
           pkgs.sysprof.dev
           pkgs.libepoxy
@@ -59,6 +63,11 @@
           inherit buildInputs;
 
           shellHook = ''
+            export LANG=en_US.UTF-8
+            export LC_ALL=en_US.UTF-8
+            export FONTCONFIG_FILE=${pkgs.fontconfig.out}/etc/fonts/fonts.conf
+            export GDK_BACKEND=x11
+
             export LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath buildInputs}:$LD_LIBRARY_PATH
 
             export PKG_CONFIG_PATH="${pkgs.alsa-lib}/lib/pkgconfig:${pkgs.sysprof.dev}/lib/pkgconfig:$PKG_CONFIG_PATH"
