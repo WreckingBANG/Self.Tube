@@ -4,20 +4,31 @@ import '../video_player_interface.dart';
 
 class VideoPlayerAdapter implements MediaPlayer {
   final VideoPlayerController _controller;
+  late Future<void> _initializeFuture;
 
   VideoPlayerAdapter(String url, {Map<String, String>? headers})
       : _controller = VideoPlayerController.networkUrl(
           Uri.parse(url),
           httpHeaders: headers ?? const {},
         ) {
-    _controller.initialize();
+    _initializeFuture = _controller.initialize();
   }
 
   @override
   Widget buildView() {
-    return AspectRatio(
-      aspectRatio: _controller.value.aspectRatio,
-      child: VideoPlayer(_controller),
+    return FutureBuilder(
+      future: _initializeFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            _controller.value.isInitialized) {
+          return AspectRatio(
+            aspectRatio: _controller.value.aspectRatio,
+            child: VideoPlayer(_controller),
+          );
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
 
@@ -38,9 +49,9 @@ class VideoPlayerAdapter implements MediaPlayer {
 
   @override
   Stream<Duration> get positionStream =>
-    Stream.periodic(const Duration(milliseconds: 500), (_) {
-      return _controller.value.position;
-    });
+      Stream.periodic(const Duration(milliseconds: 500), (_) {
+        return _controller.value.position;
+      });
 
   @override
   bool get isPlaying => _controller.value.isPlaying;

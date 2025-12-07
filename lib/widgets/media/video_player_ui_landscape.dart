@@ -84,12 +84,18 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
     if (_showControls) {
       _hideTimer?.cancel();
       setState(() => _showControls = false);
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     } else {
       setState(() => _showControls = true);
       _hideTimer?.cancel();
       _hideTimer = Timer(const Duration(seconds: 3), () {
-        if (mounted) setState(() => _showControls = false);
+        if (mounted) {
+          setState(() => _showControls = false);
+          // Hide again when auto‑closing
+          SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+        }
       });
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     }
   }
 
@@ -240,75 +246,125 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                 ],
                 // Overlay controls
                 if (_showControls) ...[
-                  Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: Stack(
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                widget.videoTitle,
-                                style: const TextStyle(fontSize: 18),
+                  Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Stack(
+                          children: [
+                            Container(
+                              height: 150,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Colors.black.withValues(alpha: 0.8),
+                                    Colors.transparent,
+                                  ],
+                                ),
                               ),
-                              Text(widget.videoCreator)
-                            ],
-                          ),
-                        ),
-                        // Center
-                        Center(
-                          child: 
-                            IconButton(
-                              color: Colors.white,
-                              iconSize: 64,
-                              icon: Icon(
-                                widget.player.isPlaying
-                                    ? Icons.pause_circle
-                                    : Icons.play_circle,
-                              ),
-                              onPressed: () {
-                                widget.player.isPlaying
-                                    ? widget.player.pause()
-                                    : widget.player.play();
-                              },
-                          ),
-                        ),
-
-                        // Bottom controls
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 12, top: 30), 
+                              child:
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    formatDuration(widget.player.position.inSeconds),
+                                    widget.videoTitle,
+                                    style: const TextStyle(fontSize: 18),
                                   ),
-                                  Text(
-                                    formatDuration(widget.player.duration.inSeconds),
+                                  Text(widget.videoCreator)
+                                ],
+                              )
+                            )
+                          ],
+                        ),
+                      ),
+                      // Center
+                      Center(
+                        child: 
+                          IconButton(
+                            color: Colors.white,
+                            iconSize: 64,
+                            icon: Icon(
+                              widget.player.isPlaying
+                                  ? Icons.pause_circle
+                                  : Icons.play_circle,
+                            ),
+                            onPressed: () {
+                              widget.player.isPlaying
+                                  ? widget.player.pause()
+                                  : widget.player.play();
+                            },
+                        ),
+                      ), 
+                      // Bottom controls
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Stack(
+                          children: [
+                            Container(
+                              height: 75,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Colors.transparent,
+                                    Colors.black.withValues(alpha: 0.8),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            // Foreground controls
+                            Padding(
+                              padding: EdgeInsets.only(left: 12, right: 12, bottom: 10),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "${formatDuration(widget.player.position.inSeconds)} • ${formatDuration(widget.player.duration.inSeconds)}",
+                                        style: TextStyle(color: Colors.white), // ensure visible
+                                      ),
+                                      IconButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        icon: Icon(Icons.fullscreen_exit, color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                  SliderTheme(
+                                    data: SliderTheme.of(context).copyWith(
+                                      trackHeight: 10,
+                                      thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
+                                      overlayShape: const RoundSliderOverlayShape(overlayRadius: 6), 
+                                    ),
+                                    child: Slider(
+                                      min: 0,
+                                      max: widget.player.duration.inSeconds.toDouble(),
+                                      value: widget.player.position.inSeconds.toDouble(),
+                                      onChanged: (value) {
+                                        widget.player.seek(Duration(seconds: value.toInt()));
+                                      },
+                                    ),
                                   ),
                                 ],
                               ),
-                              Slider(
-                                min: 0,
-                                max: widget.player.duration.inSeconds.toDouble(),
-                                value: widget.player.position.inSeconds
-                                    .toDouble()
-                                    .clamp(0, widget.player.duration.inSeconds.toDouble()),
-                                onChanged: (value) {
-                                  widget.player.seek(Duration(seconds: value.toInt()));
-                                },
-                              ),
-                            ],
-                          ),
+                            )
+                          ],
                         ),
-                      ],
-                    ),
-                  )
+                      )
+                    ],
+                  ),
                 ],
               ],
             )
