@@ -26,7 +26,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
   static String? apiToken = SettingsService.apiToken;
   static String? baseUrl = SettingsService.instanceUrl;
 
-
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
@@ -45,142 +44,142 @@ class _PlayerScreenState extends State<PlayerScreen> {
               return Center(child: Text(localizations.errorNoDataFound));
             } else {
               final video = snapshot.data!;
-              return SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: AspectRatio(
-                          aspectRatio: 16 / 9,
-                          child: CustomVideoPlayer(
-                            youtubeId: video.videoId, videoUrl: video.videoUrl, videoPosition: video.videoPosition, videoCreator: video.channelName, videoTitle: video.videoTitle, sponsorSegments: video.sponsorBlock?.segments,
-                          )
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Text(video.videoTitle, style: const TextStyle(fontSize: 22)),
-                      const SizedBox(height: 8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              return NestedScrollView(
+                headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Text("${formatNumberCompact(video.videoViewCount, context)} ${localizations.playerViews}"),
-                                  const Text(" • "),
-                                  Text(formatDateTime(video.videoDate, context)),
-                                ],
-                              )
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Row(
-                                children: [
-                                  const Icon(Icons.thumb_up),
-                                  const SizedBox(width: 5),
-                                  Text(formatNumberCompact(video.videoLikeCount, context)),
-                                  const Text(" • "),
-                                  const Icon(Icons.thumb_down),
-                                  const SizedBox(width: 5),
-                                  Text(formatNumberCompact(video.videoDislikeCount, context)),
-                                ],
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      ListTile(
-                        title: Text(video.channelName),
-                        subtitle: Text(formatNumberCompact(video.channelSubCount, context)),
-                        leading: AspectRatio(
-                          aspectRatio: 1 / 1,
-                          child: ClipRRect(
+                          ClipRRect(
                             borderRadius: BorderRadius.circular(12),
-                            child: CachedNetworkImage(
-                              imageUrl: "$baseUrl/${video.channelThumbUrl}",
-                              httpHeaders: {
-                                'Authorization': 'token $apiToken',
-                              },
-                              fit: BoxFit.cover,
-                              placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                              errorWidget: (context, url, error) => const Icon(Icons.error),
+                            child: AspectRatio(
+                              aspectRatio: 16 / 9,
+                              child: CustomVideoPlayer(
+                                youtubeId: video.videoId,
+                                videoUrl: video.videoUrl,
+                                videoPosition: video.videoPosition,
+                                videoCreator: video.channelName,
+                                videoTitle: video.videoTitle,
+                                sponsorSegments: video.sponsorBlock?.segments,
+                              ),
                             ),
                           ),
-                        ),
-                        trailing: video.channelSubscribed
-                            ? FilledButton(
-                                onPressed: () {},
-                                child: Text(localizations.playerUnsubscribe),
-                              )
-                            : OutlinedButton(
-                                onPressed: () {},
-                                child: Text(localizations.playerSubscribe),
+                          const SizedBox(height: 12),
+                          Text(video.videoTitle,style: const TextStyle(fontSize: 22)),
+                          const SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text("${formatNumberCompact(video.videoViewCount, context)} ${localizations.playerViews}"),
+                                      const Text(" • "),
+                                      Text(formatDateTime(video.videoDate, context)),
+                                    ],
+                                  )
+                                ],
                               ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => ChannelpageScreen(channelId: video.channelId))
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 12),
-                      TabBar(
-                        tabs: <Widget>[
-                          Tab(icon: const Icon(Icons.description), text: localizations.playerDescription),
-                          Tab(icon: const Icon(Icons.comment), text: localizations.playerComments),
-                          Tab(icon: const Icon(Icons.video_collection), text: localizations.playerSimilar),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.thumb_up),
+                                      const SizedBox(width: 5),
+                                      Text(formatNumberCompact(video.videoLikeCount, context)),
+                                      const Text(" • "),
+                                      const Icon(Icons.thumb_down),
+                                      const SizedBox(width: 5),
+                                      Text(formatNumberCompact(video.videoDislikeCount, context)),
+                                    ],
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          ListTile(
+                            title: Text(video.channelName),
+                            subtitle: Text(formatNumberCompact(video.channelSubCount, context)),
+                            leading: AspectRatio(
+                              aspectRatio: 1 / 1,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: CachedNetworkImage(
+                                  imageUrl: "$baseUrl/${video.channelThumbUrl}",
+                                  httpHeaders: {
+                                    'Authorization': 'token $apiToken',
+                                  },
+                                  fit: BoxFit.cover,
+                                  placeholder: (context, url) =>
+                                      const Center(child: CircularProgressIndicator()),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
+                                ),
+                              ),
+                            ),
+                            trailing: video.channelSubscribed
+                                ? FilledButton(
+                                    onPressed: () {},
+                                    child: Text(localizations.playerUnsubscribe),
+                                  )
+                                : OutlinedButton(
+                                    onPressed: () {},
+                                    child: Text(localizations.playerSubscribe),
+                                  ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ChannelpageScreen(
+                                    channelId: video.channelId,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 12),
+                          TabBar(
+                            tabs: [
+                              Tab(
+                                  icon: const Icon(Icons.description),
+                                  text: localizations.playerDescription),
+                              Tab(
+                                  icon: const Icon(Icons.comment),
+                                  text: localizations.playerComments),
+                              Tab(
+                                  icon: const Icon(Icons.video_collection),
+                                  text: localizations.playerSimilar),
+                            ],
+                          ),
                         ],
                       ),
-                      const SizedBox(height: 12),
-                      LayoutBuilder(
-                        builder: (context, constraints) {
-                          return SizedBox(
-                            height: MediaQuery.of(context).size.height,
-                            child: TabBarView(
-                              physics: const NeverScrollableScrollPhysics(),
-                              children: <Widget>[
-                                SingleChildScrollView(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(video.videoDescription),
-                                    ],
-                                  ),
-                                ),
-                                SingleChildScrollView(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      CommentListWidget(videoId: video.videoId),
-                                    ],
-                                  ),
-                                ),
-                                SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      VideoListSimilarSection(videoId: widget.youtubeId, query: ""),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-
-                          );
-                        },
-                      ),
-                    ],
+                    ),
                   ),
+                ],
+                body: TabBarView(
+                  children: [
+                    SingleChildScrollView(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(video.videoDescription),
+                    ),
+                    SingleChildScrollView(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CommentListWidget(videoId: video.videoId),
+                    ),
+                    SingleChildScrollView(
+                      padding: const EdgeInsets.all(8.0),
+                      child: VideoListSimilarSection(
+                        videoId: widget.youtubeId,
+                        query: "",
+                      ),
+                    ),
+                  ],
                 ),
               );
             }
