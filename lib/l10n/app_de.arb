@@ -59,6 +59,8 @@
   "settingsVPGesturesPinchDesc": "Demnächst verfügbar",
   "settingsVPGesturesDoubleTap": "Doppeltippen",
   "settingsVPGesturesDoubleTapDesc": "Tippe zweimal schnell auf die rechte oder linke Seite des Players zum Vor- bzw. Zurückspulen und in der Mitte zum Abspielen/Pausieren",
+  "settingsVPUseMediaKit": "Nutze media_kit anstelle von video_player",
+  "settingsVPUseMediaKitDesc": "Nur ändern, wenn du dich auskennst",
   "searchLabel": "Suchen...",
   "searchTitle": "Suche",
   "playlistTitle": "Wiedergabeliste",

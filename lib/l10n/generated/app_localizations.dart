@@ -452,6 +452,18 @@ abstract class AppLocalizations {
   /// **'Tap twice quickly on the right and left side of the player to skip/rewind and the center to play/pause'**
   String get settingsVPGesturesDoubleTapDesc;
 
+  /// No description provided for @settingsVPUseMediaKit.
+  ///
+  /// In en, this message translates to:
+  /// **'Use media_kit instead of video_player'**
+  String get settingsVPUseMediaKit;
+
+  /// No description provided for @settingsVPUseMediaKitDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Dont change this unless you know what you are doing'**
+  String get settingsVPUseMediaKitDesc;
+
   /// No description provided for @searchLabel.
   ///
   /// In en, this message translates to:

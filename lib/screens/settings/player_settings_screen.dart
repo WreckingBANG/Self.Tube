@@ -145,8 +145,8 @@ class _PlayerSettingsScreenState extends State<PlayerSettingsScreen> {
                         return const Icon(Icons.close);
                       },
                     ),
-                    title: Text("Use media_kit instead of video_player"),
-                    subtitle: Text("Dont change unless you know what you are doing"),
+                    title: Text(localizations.settingsVPUseMediaKit),
+                    subtitle: Text(localizations.settingsVPUseMediaKitDesc),
                     secondary: const Icon(Icons.play_arrow_rounded),
                     value: _vpUseMediaKit,
                     onChanged: (bool value) {

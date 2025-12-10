@@ -190,6 +190,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Tap twice quickly on the right and left side of the player to skip/rewind and the center to play/pause';
 
   @override
+  String get settingsVPUseMediaKit => 'Use media_kit instead of video_player';
+
+  @override
+  String get settingsVPUseMediaKitDesc =>
+      'Dont change this unless you know what you are doing';
+
+  @override
   String get searchLabel => 'Search...';
 
   @override
