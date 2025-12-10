@@ -21,6 +21,7 @@ class SettingsService {
   static const _vpGestureFullscreen = 'vpGestureFullscreen';
   static const _vpGesturePinch = 'vpGesturePinch';
   static const _vpGestureDoubleTap = 'vpGestureDoubleTap';
+  static const _vpUseMediaKit = 'vpUseMediaKit';
 
   static String? instanceUrl;
   static String? apiToken;
@@ -42,6 +43,7 @@ class SettingsService {
   static bool? vpGestureFullscreen;
   static bool? vpGesturePinch;
   static bool? vpGestureDoubleTap;
+  static bool? vpUseMediaKit;
 
   static Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
@@ -65,6 +67,7 @@ class SettingsService {
     vpGestureFullscreen = prefs.getBool(_vpGestureFullscreen)?? true;
     vpGesturePinch = prefs.getBool(_vpGesturePinch)?? true;
     vpGestureDoubleTap = prefs.getBool(_vpGestureDoubleTap)?? true;
+    vpUseMediaKit = prefs.getBool(_vpUseMediaKit)?? false;
   }
 
   static Future<void> setInstanceUrl(String value) async {
@@ -141,21 +144,27 @@ class SettingsService {
     vpGestureSwipe = value;
   }
 
-    static Future<void> setVPGestureFullscreen(bool value) async {
+  static Future<void> setVPGestureFullscreen(bool value) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_vpGestureFullscreen, value);
     vpGestureFullscreen = value;
   }
 
-    static Future<void> setVPGesturePinch(bool value) async {
+  static Future<void> setVPGesturePinch(bool value) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_vpGesturePinch, value);
     vpGesturePinch = value;
   }
 
-    static Future<void> setVPGestureDoubleTap(bool value) async {
+  static Future<void> setVPGestureDoubleTap(bool value) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_vpGestureDoubleTap, value);
     vpGestureDoubleTap = value;
+  }
+
+  static Future<void> setVPUseMediaKit(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_vpUseMediaKit, value);
+    vpUseMediaKit = value;
   }
 }
