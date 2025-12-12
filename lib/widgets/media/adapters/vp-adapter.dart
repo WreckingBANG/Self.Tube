@@ -54,8 +54,15 @@ class VideoPlayerAdapter implements MediaPlayer {
       });
 
   @override
+  Stream<bool> get playingStream =>
+      Stream.periodic(const Duration(milliseconds: 500), (_) {
+        return _controller.value.isPlaying;
+      });
+
+  @override
   bool get isPlaying => _controller.value.isPlaying;
 
   @override
   void dispose() => _controller.dispose();
 }
+

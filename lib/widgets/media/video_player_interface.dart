@@ -5,12 +5,14 @@ abstract class MediaPlayer {
   Future<void> pause();
   Future<void> seek(Duration position);
 
-  Stream<Duration> get positionStream;
   bool get isPlaying;
 
   Widget buildView();
   Duration get position;
   Duration get duration;
+
+  Stream<Duration> get positionStream;
+  Stream<bool> get playingStream;
 
   void dispose();
 }

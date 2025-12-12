@@ -194,44 +194,76 @@ class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
                   child: Stack(
                     children: [
                       Center(
-                        child: IconButton(
-                          color: Colors.white,
-                          iconSize: 64,
-                          icon: Icon(widget.player.isPlaying ? Icons.pause_circle : Icons.play_circle),
-                          onPressed: () async {
-                            if (widget.player.isPlaying) {
-                              await widget.player.pause();
-                            } else {
-                              await widget.player.play();
-                            }
-                          },
-                        ),
-                      ),
+                        child: StreamBuilder(
+                          stream: widget.player.playingStream,
+                          initialData: widget.player.isPlaying, 
+                          builder: (context, snapshot) {
+                            final isP = snapshot.data ?? true;
+                            return IconButton(
+                                color: Colors.white,
+                                iconSize: 64,
+                                icon: Icon(
+                                  isP
+                                    ? Icons.pause_circle
+                                    : Icons.play_circle,
+                                ),
+                                onPressed: () {
+                                  isP
+                                    ? widget.player.pause()
+                                    : widget.player.play();
+                                },
+                            );
+                          }
+                        )
+                      ), 
                       // Bottom controls
                       Align(
                         alignment: Alignment.bottomCenter,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(formatDuration(widget.player.position.inSeconds)),
-                                Text(formatDuration(widget.player.duration.inSeconds)),
-                              ],
-                            ),
-                            Slider(
-                              min: 0,
-                              max: widget.player.duration.inSeconds.toDouble(),
-                              value: widget.player.position.inSeconds
-                                  .toDouble()
-                                  .clamp(0, widget.player.duration.inSeconds.toDouble()),
-                              onChanged: (value) {
-                                widget.player.seek(Duration(seconds: value.toInt()));
-                              },
-                            ),
-                          ],
-                        ),
+                        child: StreamBuilder<Duration>(
+                          stream: widget.player.positionStream,
+                          initialData: widget.player.position,
+                          builder: (context, snapshot) {
+                            final pos = snapshot.data ?? Duration.zero;
+                            return Padding(
+                              padding: const EdgeInsets.only(left: 12, right: 12, bottom: 10),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "${formatDuration(pos.inSeconds)} • ${formatDuration(widget.player.duration.inSeconds)}",
+                                        style: const TextStyle(color: Colors.white),
+                                      ),
+                                      IconButton(
+                                        onPressed: () {
+                                          _openFullscreen();
+                                        },
+                                        icon: const Icon(Icons.fullscreen, color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                  SliderTheme(
+                                    data: SliderTheme.of(context).copyWith(
+                                      trackHeight: 10,
+                                      thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
+                                      overlayShape: const RoundSliderOverlayShape(overlayRadius: 6),
+                                    ),
+                                    child: Slider(
+                                      min: 0,
+                                      max: widget.player.duration.inSeconds.toDouble(),
+                                      value: pos.inSeconds.toDouble(),
+                                      onChanged: (value) {
+                                        widget.player.seek(Duration(seconds: value.toInt()));
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        )
                       ),
                     ],
                   ),

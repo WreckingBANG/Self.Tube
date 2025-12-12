@@ -5,27 +5,26 @@ import '../video_player_interface.dart';
 
 class MediaKitAdapter implements MediaPlayer {
   final Player _player;
+  late final VideoController _videoController;
+  late final Widget _videoView;
 
   MediaKitAdapter(String url, {Map<String, String>? headers})
       : _player = Player() {
     _player.open(
-      Media(
-        url,
-        httpHeaders: headers,
-      ),
+      Media(url, httpHeaders: headers),
     );
+    _videoController = VideoController(_player);
+    _videoView = Video(controller: _videoController, controls: null);
   }
 
   @override
-  Widget buildView() {
-    return Video(controller: VideoController(_player), controls: null);
-  }
+  Widget buildView() => _videoView;
 
-@override
-Duration get position => _player.state.position;
+  @override
+  Duration get position => _player.state.position;
 
-@override
-Duration get duration => _player.state.duration;
+  @override
+  Duration get duration => _player.state.duration;
 
   @override
   Future<void> play() => _player.play();
@@ -38,6 +37,9 @@ Duration get duration => _player.state.duration;
 
   @override
   Stream<Duration> get positionStream => _player.stream.position;
+
+  @override
+  Stream<bool> get playingStream => _player.stream.playing.asBroadcastStream();
 
   @override
   bool get isPlaying => _player.state.playing;

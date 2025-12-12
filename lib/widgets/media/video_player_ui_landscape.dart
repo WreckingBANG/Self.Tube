@@ -27,7 +27,6 @@ class FullscreenVideo extends StatefulWidget {
 class _FullscreenVideoState extends State<FullscreenVideo> {
   late final VolumeController _volumeController;
   bool _showControls = false;
-  Timer? _timer;
   Timer? _hideTimer;
   double _dragAccumulator = 0;
   String? _gestureMessage;
@@ -69,9 +68,6 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
     _volumeController = VolumeController.instance;
     _volumeController.showSystemUI = false;
     _initBrightness();
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (mounted) setState(() {});
-    });
 
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     SystemChrome.setPreferredOrientations([
@@ -102,7 +98,6 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
   @override
   void dispose() {
     _hideTimer?.cancel();
-    _timer?.cancel();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -286,21 +281,27 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                       ),
                       // Center
                       Center(
-                        child: 
-                          IconButton(
-                            color: Colors.white,
-                            iconSize: 64,
-                            icon: Icon(
-                              widget.player.isPlaying
-                                  ? Icons.pause_circle
-                                  : Icons.play_circle,
-                            ),
-                            onPressed: () {
-                              widget.player.isPlaying
-                                  ? widget.player.pause()
-                                  : widget.player.play();
-                            },
-                        ),
+                        child: StreamBuilder(
+                          stream: widget.player.playingStream,
+                          initialData: widget.player.isPlaying, 
+                          builder: (context, snapshot) {
+                            final isP = snapshot.data ?? true;
+                            return IconButton(
+                                color: Colors.white,
+                                iconSize: 64,
+                                icon: Icon(
+                                  isP
+                                    ? Icons.pause_circle
+                                    : Icons.play_circle,
+                                ),
+                                onPressed: () {
+                                  isP
+                                    ? widget.player.pause()
+                                    : widget.player.play();
+                                },
+                            );
+                          }
+                        )
                       ), 
                       // Bottom controls
                       Align(
@@ -322,43 +323,50 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                               ),
                             ),
                             // Foreground controls
-                            Padding(
-                              padding: EdgeInsets.only(left: 12, right: 12, bottom: 10),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            StreamBuilder<Duration>(
+                              stream: widget.player.positionStream,
+                              initialData: widget.player.position,
+                              builder: (context, snapshot) {
+                                final pos = snapshot.data ?? Duration.zero;
+                                return Padding(
+                                  padding: const EdgeInsets.only(left: 12, right: 12, bottom: 10),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Text(
-                                        "${formatDuration(widget.player.position.inSeconds)} • ${formatDuration(widget.player.duration.inSeconds)}",
-                                        style: TextStyle(color: Colors.white), // ensure visible
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "${formatDuration(pos.inSeconds)} • ${formatDuration(widget.player.duration.inSeconds)}",
+                                            style: const TextStyle(color: Colors.white),
+                                          ),
+                                          IconButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            icon: const Icon(Icons.fullscreen_exit, color: Colors.white),
+                                          ),
+                                        ],
                                       ),
-                                      IconButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        icon: Icon(Icons.fullscreen_exit, color: Colors.white),
+                                      SliderTheme(
+                                        data: SliderTheme.of(context).copyWith(
+                                          trackHeight: 10,
+                                          thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
+                                          overlayShape: const RoundSliderOverlayShape(overlayRadius: 6),
+                                        ),
+                                        child: Slider(
+                                          min: 0,
+                                          max: widget.player.duration.inSeconds.toDouble(),
+                                          value: pos.inSeconds.toDouble(),
+                                          onChanged: (value) {
+                                            widget.player.seek(Duration(seconds: value.toInt()));
+                                          },
+                                        ),
                                       ),
                                     ],
                                   ),
-                                  SliderTheme(
-                                    data: SliderTheme.of(context).copyWith(
-                                      trackHeight: 10,
-                                      thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
-                                      overlayShape: const RoundSliderOverlayShape(overlayRadius: 6), 
-                                    ),
-                                    child: Slider(
-                                      min: 0,
-                                      max: widget.player.duration.inSeconds.toDouble(),
-                                      value: widget.player.position.inSeconds.toDouble(),
-                                      onChanged: (value) {
-                                        widget.player.seek(Duration(seconds: value.toInt()));
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                );
+                              },
                             )
                           ],
                         ),
