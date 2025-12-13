@@ -19,6 +19,14 @@ ThemeData lightThemeFrom(ColorScheme colorScheme) {
       iconColor: colorScheme.onPrimaryContainer,
       textColor: colorScheme.onPrimaryContainer,
     ),
+    snackBarTheme: SnackBarThemeData(
+      backgroundColor: colorScheme.surface,
+      contentTextStyle: TextStyle(color: colorScheme.onSurface),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      behavior: SnackBarBehavior.floating,
+    ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
       bodyLarge: TextStyle(fontSize: 18),
@@ -43,6 +51,14 @@ ThemeData darkThemeFrom(ColorScheme colorScheme) {
     listTileTheme: ListTileThemeData(
       iconColor: colorScheme.onPrimaryContainer,
       textColor: colorScheme.onPrimaryContainer,
+    ),
+    snackBarTheme: SnackBarThemeData(
+      backgroundColor: colorScheme.surface,
+      contentTextStyle: TextStyle(color: colorScheme.onSurface),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      behavior: SnackBarBehavior.floating,
     ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),

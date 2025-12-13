@@ -44,6 +44,8 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
 
   late final Map<String, bool> _categoryEnabledMap;
 
+  final Set<String> _unskippedSegments = {};
+
   @override
   void initState() {
     super.initState();
@@ -99,16 +101,32 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
         final start = segment.segment[0].round();
         final end = segment.segment[1].round();
         final category = segment.category.toLowerCase();
+        final segmentId = "$start-$end-$category";
 
         if (_categoryEnabledMap[category] == true &&
             seconds >= start &&
-            seconds < end) {
+            seconds < end &&
+            !_unskippedSegments.contains(segmentId)) {
+              
           _player.seek(Duration(seconds: end));
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(
-                "Skipped $category from ${formatDuration(start)} to ${formatDuration(end)}",
+              action: SnackBarAction(
+                label: "Undo", 
+                onPressed: () {
+                  if (_player.isPlaying != true) { _player.play(); }
+                  _unskippedSegments.add(segmentId);
+                  _player.seek(Duration(seconds: start - 1));
+                }
               ),
+              content: Row(
+                children: [
+                  Icon(Icons.money_off),
+                  Text(
+                    "Skipped $category from ${formatDuration(start)} to ${formatDuration(end)}",
+                  )
+                ],
+              )
             ),
           );
           break;

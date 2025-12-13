@@ -33,7 +33,15 @@ class MediaKitAdapter implements MediaPlayer {
   Future<void> pause() => _player.pause();
 
   @override
-  Future<void> seek(Duration position) => _player.seek(position);
+  Future<void> seek(Duration position) async {
+    if (position < Duration.zero) {
+      return _player.seek(Duration.zero);
+    } else if (position > duration) {
+      return _player.seek(duration);
+    } else {
+      return _player.seek(position);
+    }
+  }
 
   @override
   Stream<Duration> get positionStream => _player.stream.position;

@@ -45,7 +45,15 @@ class VideoPlayerAdapter implements MediaPlayer {
   Future<void> pause() => _controller.pause();
 
   @override
-  Future<void> seek(Duration position) => _controller.seekTo(position);
+  Future<void> seek(Duration position) async {
+    if (position < Duration.zero) {
+      return _controller.seekTo(Duration.zero);
+    } else if (position > duration) {
+      return _controller.seekTo(duration);
+    } else {
+      return _controller.seekTo(position);
+    }
+  }
 
   @override
   Stream<Duration> get positionStream =>
