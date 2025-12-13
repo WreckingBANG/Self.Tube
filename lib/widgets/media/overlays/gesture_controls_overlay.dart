@@ -1,0 +1,175 @@
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:Self.Tube/widgets/media/video_player_interface.dart';
+import 'package:Self.Tube/services/settings_service.dart';
+import 'package:screen_brightness/screen_brightness.dart';
+import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'package:volume_controller/volume_controller.dart';
+
+class GestureControlsOverlay extends StatefulWidget {
+  final MediaPlayer player;
+  final bool fullscreen;
+  final void Function(String message, IconData icon) onShowMessage;
+  final VoidCallback? onOpenFullscreen;
+
+  const GestureControlsOverlay({
+    super.key,
+    required this.player,
+    required this.fullscreen,
+    required this.onShowMessage,
+    this.onOpenFullscreen,
+  });
+
+  @override
+  State<GestureControlsOverlay> createState() => _GestureControlsOverlayState();
+}
+
+class _GestureControlsOverlayState extends State<GestureControlsOverlay> {
+  late final VolumeController _volumeController;
+  double _currentBrightness = 0;
+  double _dragAccumulator = 0;
+  int _pendingSkipSeconds = 0;
+  Timer? _skipTimer;
+  
+  @override
+  void initState() {
+    _initBrightness();
+    _volumeController = VolumeController.instance;
+    _volumeController.showSystemUI = false;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    ScreenBrightness.instance.setAutoReset(true);
+    ScreenBrightness.instance.resetApplicationScreenBrightness();
+    super.dispose();
+  }
+
+
+  Future<void> _initBrightness() async {
+    final value = await ScreenBrightness.instance.system;
+    if (mounted) {
+      setState(() {
+        _currentBrightness = value;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    return Positioned.fill(
+      child: Row(
+        children: [
+          // Left zone
+          Expanded(
+            child: GestureDetector(
+              onVerticalDragUpdate: (details) {
+                if (SettingsService.vpGestureSwipe!=false && widget.fullscreen == true) {
+                  _dragAccumulator += details.delta.dy;
+                  if (_dragAccumulator <= -10) {
+                    _currentBrightness = (_currentBrightness + 0.05).clamp(0.0, 1.0);
+                    ScreenBrightness.instance.setApplicationScreenBrightness(_currentBrightness);
+                    widget.onShowMessage("${localizations.playerBrightness} ${(_currentBrightness * 100).round()}%", Icons.brightness_5_rounded);
+                    _dragAccumulator = 0;
+                  } else if (_dragAccumulator >= 10) {
+                    _currentBrightness = (_currentBrightness - 0.05).clamp(0.0, 1.0);
+                    ScreenBrightness.instance.setApplicationScreenBrightness(_currentBrightness);
+                    widget.onShowMessage("${localizations.playerBrightness} ${(_currentBrightness * 100).round()}%", Icons.brightness_5_rounded);
+                    _dragAccumulator = 0;
+                  }
+                }
+              },
+              onDoubleTap: () {
+                if (SettingsService.vpGestureDoubleTap!=false) {
+                  _pendingSkipSeconds += 10;
+                  widget.onShowMessage(
+                    "${localizations.playerRewind} $_pendingSkipSeconds ${localizations.playerSeconds}",
+                    Icons.fast_rewind_rounded,
+                  );
+                  _skipTimer?.cancel();
+                  _skipTimer = Timer(const Duration(milliseconds: 400), () {
+                    final newPos = widget.player.position -
+                        Duration(seconds: _pendingSkipSeconds);
+                    widget.player.seek(
+                      newPos <= widget.player.duration ? newPos : widget.player.duration,
+                    );
+                    _pendingSkipSeconds = 0;
+                  });
+                }
+              },
+              child: Container(color: Colors.transparent),
+            ),
+          ),
+          // Center zone
+          Expanded(
+            child: GestureDetector(
+              onVerticalDragEnd: (details) {
+                if (SettingsService.vpGestureFullscreen!=false) {
+                  if (details.primaryVelocity != null && details.primaryVelocity! > 0) {
+                    if (widget.fullscreen) {
+                      widget.onShowMessage(localizations.playerMinimize, Icons.fullscreen_exit_rounded);
+                      Navigator.of(context).pop();
+                    } else {
+                      widget.onShowMessage(localizations.playerMaximize, Icons.fullscreen_rounded);
+                      widget.onOpenFullscreen?.call();
+                    }
+                  }
+                }
+              },
+              onDoubleTap: () {
+                if (SettingsService.vpGestureDoubleTap!=false) {
+                  if (widget.player.isPlaying) {
+                      widget.player.pause();
+                      widget.onShowMessage(localizations.playerPaused, Icons.pause);
+                    } else {
+                      widget.player.play();
+                      widget.onShowMessage(localizations.playerPlay, Icons.play_arrow);
+                    }
+                  }
+                },
+              child: Container(color: Colors.transparent),
+            ),
+          ),
+          // Right zone
+          Expanded(
+            child: GestureDetector(
+              onVerticalDragUpdate: (details) async {
+                if (SettingsService.vpGestureSwipe!=false && widget.fullscreen == true) {
+                  _dragAccumulator += details.delta.dy;
+                  if (_dragAccumulator <= -10) {
+                    double current = await _volumeController.getVolume();
+                    _volumeController.setVolume((current + 0.05).clamp(0.0, 1.0));
+                    widget.onShowMessage("${localizations.playerVolume} ${(current + 0.05).clamp(0.0, 1.0) * 100 ~/ 1}%", Icons.volume_up_rounded);
+                    _dragAccumulator = 0;
+                  } else if (_dragAccumulator >= 10) {
+                    double current = await _volumeController.getVolume();
+                    _volumeController.setVolume((current - 0.05).clamp(0.0, 1.0));
+                    widget.onShowMessage("${localizations.playerVolume} ${(current + 0.05).clamp(0.0, 1.0) * 100 ~/ 1}%", Icons.volume_down_rounded);
+                    _dragAccumulator = 0;
+                  }
+                }
+              },
+              onDoubleTap: () {
+                if (SettingsService.vpGestureDoubleTap!=false) {
+                  _pendingSkipSeconds += 10;
+                  widget.onShowMessage("${localizations.playerForward} $_pendingSkipSeconds ${localizations.playerSeconds}", Icons.fast_forward_rounded);
+                  _skipTimer?.cancel();
+                  _skipTimer = Timer(const Duration(milliseconds: 400), () {
+                    final newPos = widget.player.position + Duration(seconds: _pendingSkipSeconds);
+                    widget.player.seek(
+                      newPos <= widget.player.duration ? newPos : widget.player.duration,
+                    );
+                    _pendingSkipSeconds = 0;
+                  });
+                }
+              },
+              child: Container(color: Colors.transparent),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

@@ -1,13 +1,12 @@
 import 'dart:async';
+import 'package:Self.Tube/widgets/media/overlays/bottom_controls_overlay.dart';
+import 'package:Self.Tube/widgets/media/overlays/top_controls_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:Self.Tube/widgets/media/video_player_interface.dart';
-import 'package:volume_controller/volume_controller.dart';
-import 'package:Self.Tube/utils/duration_formatter.dart';
-import 'package:screen_brightness/screen_brightness.dart';
 import 'package:Self.Tube/widgets/media/gesture_message.dart';
-import 'package:Self.Tube/l10n/generated/app_localizations.dart';
-import 'package:Self.Tube/services/settings_service.dart';
+import './overlays/gesture_controls_overlay.dart';
+import './overlays/center_controls_overlay.dart';
 
 class FullscreenVideo extends StatefulWidget {
   final MediaPlayer player;
@@ -25,16 +24,11 @@ class FullscreenVideo extends StatefulWidget {
 }
 
 class _FullscreenVideoState extends State<FullscreenVideo> {
-  late final VolumeController _volumeController;
   bool _showControls = false;
   Timer? _hideTimer;
-  double _dragAccumulator = 0;
   String? _gestureMessage;
   IconData? _gestureIcon;
   Timer? _messageTimer;
-  double _currentBrightness = 0;
-  int _pendingSkipSeconds = 0;
-  Timer? _skipTimer;
 
   void _showMessage(String message, IconData icon) {
     setState(() {
@@ -53,22 +47,9 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
     });
   }
 
-  Future<void> _initBrightness() async {
-    final value = await ScreenBrightness.instance.system;
-    if (mounted) {
-      setState(() {
-        _currentBrightness = value;
-      });
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-    _volumeController = VolumeController.instance;
-    _volumeController.showSystemUI = false;
-    _initBrightness();
-
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
@@ -103,14 +84,11 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    ScreenBrightness.instance.setAutoReset(true);
-    ScreenBrightness.instance.resetApplicationScreenBrightness();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.black,
       body: GestureDetector(
@@ -121,118 +99,7 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
             Center(child: widget.player.buildView()),
             Stack(
               children: [
-                Positioned.fill(
-                  child: Row(
-                    children: [
-                      // Left zone (seek back)
-                      Expanded(
-                        child: GestureDetector(
-                          onVerticalDragUpdate: (details) {
-                            if (SettingsService.vpGestureSwipe!=false) {
-                              _dragAccumulator += details.delta.dy;
-                              if (_dragAccumulator <= -10) {
-                                _currentBrightness = (_currentBrightness + 0.05).clamp(0.0, 1.0);
-                                ScreenBrightness.instance.setApplicationScreenBrightness(_currentBrightness);
-                                _showMessage("${localizations.playerBrightness} ${(_currentBrightness * 100).round()}%", Icons.brightness_5_rounded);
-                                _dragAccumulator = 0;
-                              } else if (_dragAccumulator >= 10) {
-                                _currentBrightness = (_currentBrightness - 0.05).clamp(0.0, 1.0);
-                                ScreenBrightness.instance.setApplicationScreenBrightness(_currentBrightness);
-                                _showMessage("${localizations.playerBrightness} ${(_currentBrightness * 100).round()}%", Icons.brightness_5_rounded);
-                                _dragAccumulator = 0;
-                              }
-                            }
-                          },
-                          onDoubleTap: () {
-                            if (SettingsService.vpGestureDoubleTap!=false) {
-                              _pendingSkipSeconds += 10;
-                              _showMessage(
-                                "${localizations.playerRewind} $_pendingSkipSeconds ${localizations.playerSeconds}",
-                                Icons.fast_rewind_rounded,
-                              );
-
-                              _skipTimer?.cancel();
-                              _skipTimer = Timer(const Duration(milliseconds: 400), () {
-                                final newPos = widget.player.position -
-                                    Duration(seconds: _pendingSkipSeconds);
-
-                                widget.player.seek(
-                                  newPos <= widget.player.duration ? newPos : widget.player.duration,
-                                );
-
-                                _pendingSkipSeconds = 0;
-                              });
-                            }
-                          },
-                          child: Container(color: Colors.transparent),
-                        ),
-                      ),
-
-                      // Center zone (play/pause)
-                      Expanded(
-                        child: GestureDetector(
-                          onVerticalDragEnd: (details) {
-                            if (SettingsService.vpGestureFullscreen!=false) {
-                              if (details.primaryVelocity != null && details.primaryVelocity! > 0) {
-                                _showMessage(localizations.playerMinimize, Icons.fullscreen_exit_rounded);
-                                Navigator.of(context).pop();
-                              }
-                            }
-                          },
-                          onDoubleTap: () {
-                            if (SettingsService.vpGestureDoubleTap!=false) {
-                              if (widget.player.isPlaying) {
-                                  widget.player.pause();
-                                  _showMessage(localizations.playerPaused, Icons.pause);
-                                } else {
-                                  widget.player.play();
-                                  _showMessage(localizations.playerPlay, Icons.play_arrow);
-                                }
-                              }
-                            },
-                          child: Container(color: Colors.transparent),
-                        ),
-                      ),
-
-                      // Right zone (seek forward)
-                      Expanded(
-                        child: GestureDetector(
-                          onVerticalDragUpdate: (details) async {
-                            if (SettingsService.vpGestureSwipe!=false) {
-                              _dragAccumulator += details.delta.dy;
-                              if (_dragAccumulator <= -10) {
-                                double current = await _volumeController.getVolume();
-                                _volumeController.setVolume((current + 0.05).clamp(0.0, 1.0));
-                                _showMessage("${localizations.playerVolume} ${(current + 0.05).clamp(0.0, 1.0) * 100 ~/ 1}%", Icons.volume_up_rounded);
-                                _dragAccumulator = 0;
-                              } else if (_dragAccumulator >= 10) {
-                                double current = await _volumeController.getVolume();
-                                _volumeController.setVolume((current - 0.05).clamp(0.0, 1.0));
-                                _showMessage("${localizations.playerVolume} ${(current + 0.05).clamp(0.0, 1.0) * 100 ~/ 1}%", Icons.volume_down_rounded);
-                                _dragAccumulator = 0;
-                              }
-                            }
-                          },
-                          onDoubleTap: () {
-                            if (SettingsService.vpGestureDoubleTap!=false) {
-                              _pendingSkipSeconds += 10;
-                              _showMessage("${localizations.playerForward} $_pendingSkipSeconds ${localizations.playerSeconds}", Icons.fast_forward_rounded);
-                              _skipTimer?.cancel();
-                              _skipTimer = Timer(const Duration(milliseconds: 400), () {
-                                final newPos = widget.player.position + Duration(seconds: _pendingSkipSeconds);
-                                widget.player.seek(
-                                  newPos <= widget.player.duration ? newPos : widget.player.duration,
-                                );
-                                _pendingSkipSeconds = 0;
-                              });
-                            }
-                          },
-                          child: Container(color: Colors.transparent),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                GestureControlsOverlay(player: widget.player, fullscreen: true, onShowMessage: _showMessage),
                 if (_gestureMessage != null && _gestureIcon != null) ...[
                   GestureMessage(
                     message: _gestureMessage!,
@@ -243,134 +110,11 @@ class _FullscreenVideoState extends State<FullscreenVideo> {
                 if (_showControls) ...[
                   Stack(
                     children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Stack(
-                          children: [
-                            Container(
-                              height: 150,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Colors.black.withValues(alpha: 0.8),
-                                    Colors.transparent,
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 12, top: 30), 
-                              child:
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    widget.videoTitle,
-                                    style: const TextStyle(fontSize: 18),
-                                  ),
-                                  Text(widget.videoCreator)
-                                ],
-                              )
-                            )
-                          ],
-                        ),
-                      ),
+                      TopControlsOverlay(player: widget.player, videoCreator: widget.videoCreator, videoTitle: widget.videoTitle),
                       // Center
-                      Center(
-                        child: StreamBuilder(
-                          stream: widget.player.playingStream,
-                          initialData: widget.player.isPlaying, 
-                          builder: (context, snapshot) {
-                            final isP = snapshot.data ?? true;
-                            return IconButton(
-                                color: Colors.white,
-                                iconSize: 64,
-                                icon: Icon(
-                                  isP
-                                    ? Icons.pause_circle
-                                    : Icons.play_circle,
-                                ),
-                                onPressed: () {
-                                  isP
-                                    ? widget.player.pause()
-                                    : widget.player.play();
-                                },
-                            );
-                          }
-                        )
-                      ), 
+                      CenterControlsOverlay(player: widget.player),
                       // Bottom controls
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Stack(
-                          children: [
-                            Container(
-                              height: 75,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Colors.transparent,
-                                    Colors.black.withValues(alpha: 0.8),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            // Foreground controls
-                            StreamBuilder<Duration>(
-                              stream: widget.player.positionStream,
-                              initialData: widget.player.position,
-                              builder: (context, snapshot) {
-                                final pos = snapshot.data ?? Duration.zero;
-                                return Padding(
-                                  padding: const EdgeInsets.only(left: 12, right: 12, bottom: 10),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "${formatDuration(pos.inSeconds)} • ${formatDuration(widget.player.duration.inSeconds)}",
-                                            style: const TextStyle(color: Colors.white),
-                                          ),
-                                          IconButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            icon: const Icon(Icons.fullscreen_exit, color: Colors.white),
-                                          ),
-                                        ],
-                                      ),
-                                      SliderTheme(
-                                        data: SliderTheme.of(context).copyWith(
-                                          trackHeight: 10,
-                                          thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
-                                          overlayShape: const RoundSliderOverlayShape(overlayRadius: 6),
-                                        ),
-                                        child: Slider(
-                                          min: 0,
-                                          max: widget.player.duration.inSeconds.toDouble(),
-                                          value: pos.inSeconds.toDouble(),
-                                          onChanged: (value) {
-                                            widget.player.seek(Duration(seconds: value.toInt()));
-                                          },
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            )
-                          ],
-                        ),
-                      )
+                      BottomControlsOverlay(player: widget.player, fullscreen: true)
                     ],
                   ),
                 ],
