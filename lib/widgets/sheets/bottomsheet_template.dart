@@ -16,9 +16,13 @@ Future<void> showBottomSheetTemplate({
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (title != null)
-              Text( title, style: const TextStyle(fontSize: 16)),
+            if (title != null) ...[
+              Text(
+                title,
+                style: const TextStyle(fontSize: 16),
+              ),
               const SizedBox(height: 16),
+            ],
             ...children
           ],
         ),

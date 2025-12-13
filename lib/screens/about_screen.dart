@@ -79,6 +79,21 @@ class AboutScreen extends StatelessWidget {
         "license": "BSD-3-Clause",
         "url": "https://github.com/flutter/packages/blob/main/packages/url_launcher/url_launcher/LICENSE"
       },
+      {
+        "name": "screen_brightness",
+        "license": "MIT",
+        "url": "https://github.com/aaassseee/screen_brightness/blob/master/screen_brightness/LICENSE"
+      },
+      {
+        "name": "video_player",
+        "license": "BSD-3-Clause",
+        "url": "https://github.com/flutter/packages/blob/main/packages/video_player/video_player/LICENSE"
+      },
+      {
+        "name": "wakelock_plus",
+        "license": "BSD-3-Clause",
+        "url": "https://github.com/fluttercommunity/wakelock_plus/blob/main/wakelock_plus/LICENSE"
+      },
     ];
 
     return Scaffold(
