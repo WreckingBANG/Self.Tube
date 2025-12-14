@@ -1,6 +1,7 @@
 import 'package:Self.Tube/screens/channelpage_screen.dart';
 import 'package:Self.Tube/widgets/sections/video_list_similar_section.dart';
 import 'package:flutter/material.dart';
+import 'package:Self.Tube/widgets/containers/selectable_text.dart';
 import '../utils/number_formatter.dart';
 import '../utils/datetime_formatter.dart';
 import '../widgets/sections/comment_list_section.dart';
@@ -166,7 +167,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
                   children: [
                     SingleChildScrollView(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(video.videoDescription),
+                      child: SelectableLinkText(
+                        text: video.videoDescription,
+                      ),
                     ),
                     SingleChildScrollView(
                       padding: const EdgeInsets.all(8.0),

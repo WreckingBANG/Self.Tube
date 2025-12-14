@@ -25,6 +25,7 @@ dependencies:
   screen_brightness: ^2.1.7
   video_player: ^2.10.1
   wakelock_plus: ^1.4.0
+  flutter_linkify: ^6.0.0
 
 
 dev_dependencies:
