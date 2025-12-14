@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/widgets/media/video_player_interface.dart';
+import 'package:Self.Tube/widgets/sheets/video_player_bottomsheet.dart';
 
 class TopControlsOverlay extends StatefulWidget {
   final MediaPlayer player;
@@ -45,17 +46,27 @@ class _TopControlsOverlayState extends State<TopControlsOverlay> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 12, top: 30), 
-            child:
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
+            padding: EdgeInsets.only(left: 12, right: 12, top: 30), 
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  widget.videoTitle,
-                  style: const TextStyle(fontSize: 18),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      widget.videoTitle,
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                    Text(widget.videoCreator),
+                  ],
                 ),
-                Text(widget.videoCreator)
+                IconButton(
+                  onPressed: () {
+                    showVideoPlayerBottomSheet(context: context);
+                  },
+                  icon: Icon(Icons.settings_outlined)
+                )
               ],
             )
           )

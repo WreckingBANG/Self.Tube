@@ -107,14 +107,12 @@ class _GestureControlsOverlayState extends State<GestureControlsOverlay> {
             child: GestureDetector(
               onVerticalDragEnd: (details) {
                 if (SettingsService.vpGestureFullscreen!=false) {
-                  if (details.primaryVelocity != null && details.primaryVelocity! > 0) {
-                    if (widget.fullscreen) {
-                      widget.onShowMessage(localizations.playerMinimize, Icons.fullscreen_exit_rounded);
-                      Navigator.of(context).pop();
-                    } else {
-                      widget.onShowMessage(localizations.playerMaximize, Icons.fullscreen_rounded);
-                      widget.onOpenFullscreen?.call();
-                    }
+                  if (details.primaryVelocity != null && details.primaryVelocity! > 0 && widget.fullscreen == true) {
+                    widget.onShowMessage(localizations.playerMinimize, Icons.fullscreen_exit_rounded);
+                    Navigator.of(context).pop();
+                  } else if (details.primaryVelocity != null && details.primaryVelocity! < 0 && widget.fullscreen != true) {
+                    widget.onShowMessage(localizations.playerMaximize, Icons.fullscreen_rounded);
+                    widget.onOpenFullscreen?.call();
                   }
                 }
               },

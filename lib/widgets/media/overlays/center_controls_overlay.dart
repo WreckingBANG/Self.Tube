@@ -25,15 +25,17 @@ class _CenterControlsOverlayState extends State<CenterControlsOverlay> {
     return Center(
       child: Stack(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              gradient: RadialGradient(
-                colors: [
-                  Colors.black.withValues(alpha: 0.2),
-                  Colors.transparent,
-                ],
+          IgnorePointer(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  colors: [
+                    Colors.black.withValues(alpha: 0.2),
+                    Colors.transparent,
+                  ],
+                ),
               ),
-            ),
+            ), 
           ),
           Align(
             alignment: Alignment.center,

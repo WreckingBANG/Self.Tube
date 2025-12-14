@@ -12,19 +12,21 @@ Future<void> showBottomSheetTemplate({
     builder: (BuildContext context) {
       return Padding(
         padding: const EdgeInsets.all(8),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (title != null) ...[
-              Text(
-                title,
-                style: const TextStyle(fontSize: 16),
-              ),
-              const SizedBox(height: 16),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (title != null) ...[
+                Text(
+                  title,
+                  style: const TextStyle(fontSize: 16),
+                ),
+                const SizedBox(height: 16),
+              ],
+              ...children,
             ],
-            ...children
-          ],
+          ),
         ),
       );
     },

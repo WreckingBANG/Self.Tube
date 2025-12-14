@@ -111,6 +111,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
           _player.seek(Duration(seconds: end));
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
+              duration: Duration(seconds: 3),
               action: SnackBarAction(
                 label: "Undo", 
                 onPressed: () {
