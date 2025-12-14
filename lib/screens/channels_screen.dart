@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../services/api_service.dart';
 import '../l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/widgets/containers/refresh_container.dart';
 
 
 class ChannelsScreen extends StatelessWidget {
@@ -10,28 +11,32 @@ class ChannelsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: FutureBuilder<List?>(
-          future: ApiService.fetchChannelList(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              return Center(child: Text(localizations.errorFailedToLoadData));
-            } else if (!snapshot.hasData) {
-              return Center(child: Text(localizations.errorNoDataFound));
-            } else {
-              final channel = snapshot.data!;
-              return ListSectionContainer(
-                children: [
-                  ...List.generate(channel.length, (index) {
-                    return ChannelListTile(channel: channel[index]);
-                  }),
-                ],
-              );
-            }
-          },
-        ),
+      body: RefreshContainer(
+        child: ListView(
+          children: [
+            FutureBuilder<List?>(
+              future: ApiService.fetchChannelList(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text(localizations.errorFailedToLoadData));
+                } else if (!snapshot.hasData) {
+                  return Center(child: Text(localizations.errorNoDataFound));
+                } else {
+                  final channel = snapshot.data!;
+                  return ListSectionContainer(
+                    children: [
+                      ...List.generate(channel.length, (index) {
+                        return ChannelListTile(channel: channel[index]);
+                      }),
+                    ],
+                  );
+                }
+              },
+            )
+          ]
+        )
       )
     );
   }

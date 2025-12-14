@@ -7,6 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../models/channel_model.dart';
 import '../utils/number_formatter.dart';
 import '../widgets/containers/expandable_text.dart';
+import 'package:Self.Tube/widgets/containers/refresh_container.dart';
 
 
 class ChannelpageScreen extends StatelessWidget{
@@ -27,68 +28,71 @@ class ChannelpageScreen extends StatelessWidget{
       appBar: AppBar(
         title: Text(localizations.channelTitle),
       ),
-      body: 
-      FutureBuilder<ChannelItemModel?>(
-        future: ApiService.fetchChannel(channelId), 
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text(localizations.errorFailedToLoadData));
-          } else if (!snapshot.hasData) {
-            return Center(child: Text(localizations.errorNoDataFound));
-          } else {
-            final channel = snapshot.data!;
-            return SingleChildScrollView(
-              child: Column(
+      body: RefreshContainer(
+        child: FutureBuilder<ChannelItemModel?>(
+          future: ApiService.fetchChannel(channelId), 
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text(localizations.errorFailedToLoadData));
+            } else if (!snapshot.hasData) {
+              return Center(child: Text(localizations.errorNoDataFound));
+            } else {
+              final channel = snapshot.data!;
+              return ListView(
                 children: [
-                  CachedNetworkImage(
-                    imageUrl: "$baseUrl/${channel.banner}",
-                    httpHeaders: {
-                      'Authorization': 'token $apiToken',
-                    },
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
-                  ),
-                  ListTile(
-                    title: Text(channel.channelName),
-                    subtitle: Text(formatNumberCompact(channel.subscribers, context)),
-                    leading: AspectRatio(
-                      aspectRatio: 1 / 1,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: CachedNetworkImage(
-                          imageUrl: "$baseUrl/${channel.profilePic}",
-                          httpHeaders: {
-                              'Authorization': 'token $apiToken',
-                          },
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                          errorWidget: (context, url, error) => const Icon(Icons.error),
-                        ),
+                  Column(
+                    children: [
+                      CachedNetworkImage(
+                        imageUrl: "$baseUrl/${channel.banner}",
+                        httpHeaders: {
+                          'Authorization': 'token $apiToken',
+                        },
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) => const Icon(Icons.error),
                       ),
-                    ),
-                    trailing: channel.subscribed
-                      ? FilledButton(
-                          onPressed: () {},
-                          child: Text(localizations.playerUnsubscribe),
-                        )
-                      : OutlinedButton(
-                          onPressed: () {},
-                          child: Text(localizations.playerSubscribe),
+                      ListTile(
+                        title: Text(channel.channelName),
+                        subtitle: Text(formatNumberCompact(channel.subscribers, context)),
+                        leading: AspectRatio(
+                          aspectRatio: 1 / 1,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: CachedNetworkImage(
+                              imageUrl: "$baseUrl/${channel.profilePic}",
+                              httpHeaders: {
+                                  'Authorization': 'token $apiToken',
+                              },
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                              errorWidget: (context, url, error) => const Icon(Icons.error),
+                            ),
+                          ),
                         ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsGeometry.all(16),
-                    child: ExpandableText(channel.description),
-                  ), 
-                  VideoListSection(title: localizations.channelVideos, hideChannel: true, query: "?channel=${channelId}&order=desc&sort=published&type=videos")
-                ],
-              ),
-            );
+                        trailing: channel.subscribed
+                          ? FilledButton(
+                              onPressed: () {},
+                              child: Text(localizations.playerUnsubscribe),
+                            )
+                          : OutlinedButton(
+                              onPressed: () {},
+                              child: Text(localizations.playerSubscribe),
+                            ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsGeometry.all(16),
+                        child: ExpandableText(channel.description),
+                      ), 
+                      VideoListSection(title: localizations.channelVideos, hideChannel: true, query: "?channel=${channelId}&order=desc&sort=published&type=videos")
+                    ],
+                  )
+                ]
+              );
+            }
           }
-        }
+        )
       )
     );
   }
