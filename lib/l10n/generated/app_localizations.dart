@@ -476,6 +476,24 @@ abstract class AppLocalizations {
   /// **'Search'**
   String get searchTitle;
 
+  /// No description provided for @searchVideos.
+  ///
+  /// In en, this message translates to:
+  /// **'Videos'**
+  String get searchVideos;
+
+  /// No description provided for @searchChannels.
+  ///
+  /// In en, this message translates to:
+  /// **'Channels'**
+  String get searchChannels;
+
+  /// No description provided for @searchPlaylists.
+  ///
+  /// In en, this message translates to:
+  /// **'Playlists'**
+  String get searchPlaylists;
+
   /// No description provided for @playlistTitle.
   ///
   /// In en, this message translates to:

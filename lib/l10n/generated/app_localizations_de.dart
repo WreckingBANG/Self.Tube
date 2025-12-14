@@ -203,6 +203,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get searchTitle => 'Suche';
 
   @override
+  String get searchVideos => 'Videos';
+
+  @override
+  String get searchChannels => 'Kanäle';
+
+  @override
+  String get searchPlaylists => 'Wiedergabelisten';
+
+  @override
   String get playlistTitle => 'Wiedergabeliste';
 
   @override

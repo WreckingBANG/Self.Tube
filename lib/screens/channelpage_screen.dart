@@ -68,7 +68,7 @@ class ChannelpageScreen extends StatelessWidget{
                       Padding(
                         padding: const EdgeInsets.all(16),
                         child: SizedBox(
-                          width: double.infinity, // forces full width
+                          width: double.infinity,
                           child: ExpandableText(channel.description),
                         ),
                       ),

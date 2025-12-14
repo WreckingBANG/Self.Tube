@@ -5,6 +5,7 @@ import '../services/api_service.dart';
 import '../models/search/searchwrapper_model.dart';
 import '../widgets/tiles/playlist_list_tile.dart';
 import '../l10n/generated/app_localizations.dart';
+import 'package:Self.Tube/widgets/containers/list_section_container.dart';
 
 
 class SearchScreen extends StatefulWidget {
@@ -67,83 +68,38 @@ class _SearchScreenState extends State<SearchScreen>{
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: result.channels.length,
-                            itemBuilder: (context, index) {
-                              final shape = RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                                  top: index == 0
-                                      ? const Radius.circular(12)
-                                      : const Radius.circular(4),
-                                  bottom: index == result.channels.length - 1
-                                      ? const Radius.circular(12)
-                                      : const Radius.circular(4),
-                                ),
-                              );
-
-                              return Card(
-                                shape: shape,
-                                clipBehavior: Clip.antiAlias,
-                                margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 1),
-                                child: ChannelListTile(channel: result.channels[index]),
-                              );
-                            },
+                          ListSectionContainer(
+                            title: localizations.searchChannels,
+                            children: [
+                              ...List.generate(result.channels.length, (index) {
+                                  return ChannelListTile(channel: result.channels[index]);
+                                }
+                              )
+                            ]
                           ),
 
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: result.videos.length,
-                            itemBuilder: (context, index) {
-                              final shape = RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                                  top: index == 0
-                                      ? const Radius.circular(12)
-                                      : const Radius.circular(4),
-                                  bottom: index == result.videos.length - 1
-                                      ? const Radius.circular(12)
-                                      : const Radius.circular(4),
-                                ),
-                              );
-
-                              return Card(
-                                shape: shape,
-                                clipBehavior: Clip.antiAlias,
-                                margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 1),
-                                child: VideoListTile(
-                                  video: result.videos[index],
-                                  hideChannel: false,
-                                ),
-                              );
-                            },
+                          ListSectionContainer(
+                            title: localizations.searchVideos,
+                            children: [
+                              ...List.generate(result.videos.length, (index) {
+                                  return VideoListTile(
+                                    video: result.videos[index],
+                                    hideChannel: false,
+                                  );
+                                }
+                              )
+                            ]
                           ),
 
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: result.playlists.length,
-                            itemBuilder: (context, index) {
-                              final shape = RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                                  top: index == 0
-                                      ? const Radius.circular(12)
-                                      : const Radius.circular(4),
-                                  bottom: index == result.playlists.length - 1
-                                      ? const Radius.circular(12)
-                                      : const Radius.circular(4),
-                                ),
-                              );
-
-                              return Card(
-                                shape: shape,
-                                clipBehavior: Clip.antiAlias,
-                                margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 1),
-                                child: PlaylistListTile(playlist: result.playlists[index]),
-                              );
-                            },
-                          ),
+                          ListSectionContainer(
+                            title: localizations.searchPlaylists,
+                            children: [
+                              ...List.generate(result.playlists.length, (index) {
+                                  return PlaylistListTile(playlist: result.playlists[index]);
+                                }
+                              )
+                            ]
+                          )
                         ],
                       ),
                     )
