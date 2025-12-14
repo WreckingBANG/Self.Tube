@@ -1,6 +1,6 @@
 import 'package:Self.Tube/screens/channelpage_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:Self.Tube/widgets/media/images/custom_network_image.dart';
 import '../../screens/player_screen.dart';
 import '../../services/settings_service.dart';
 import '../../l10n/generated/app_localizations.dart';
@@ -37,15 +37,7 @@ class VideoListTile extends StatelessWidget {
                   child: Stack(
                     alignment: Alignment.bottomCenter,
                     children: [
-                      CachedNetworkImage(
-                        imageUrl: "$baseUrl/${video.thumbnail}",
-                        httpHeaders: {
-                          'Authorization': 'token $apiToken',
-                        },
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) => const Icon(Icons.error),
-                      ),
+                      CustomNetwokImage(imageLink: video.thumbnail),
                       video.progress != 0 || video.watched == true
                         ? LinearProgressIndicator(
                             value: video.progress != 0 ? video.progress / 100 : 1.0,
@@ -106,15 +98,7 @@ class VideoListTile extends StatelessWidget {
                                   child: Stack(
                                     alignment: Alignment.bottomCenter,
                                     children: [
-                                      CachedNetworkImage(
-                                        imageUrl: "$baseUrl/${video.channelThumb}",
-                                        httpHeaders: {
-                                          'Authorization': 'token $apiToken',
-                                        },
-                                        fit: BoxFit.cover,
-                                        placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                                        errorWidget: (context, url, error) => const Icon(Icons.error),
-                                      ),
+                                      CustomNetwokImage(imageLink: video.channelThumb)
                                     ],
                                   ),
                                 )   

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
-import '../video_player_interface.dart';
+import '../../video_player_interface.dart';
 
 class MediaKitAdapter implements MediaPlayer {
   final Player _player;

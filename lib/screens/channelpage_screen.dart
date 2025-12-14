@@ -3,11 +3,11 @@ import 'package:Self.Tube/widgets/sections/video_list_section.dart';
 import 'package:flutter/material.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../services/settings_service.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import '../models/channel_model.dart';
 import '../utils/number_formatter.dart';
 import '../widgets/containers/expandable_text.dart';
 import 'package:Self.Tube/widgets/containers/refresh_container.dart';
+import 'package:Self.Tube/widgets/media/images/custom_network_image.dart';
 
 
 class ChannelpageScreen extends StatelessWidget{
@@ -44,15 +44,7 @@ class ChannelpageScreen extends StatelessWidget{
                 children: [
                   Column(
                     children: [
-                      CachedNetworkImage(
-                        imageUrl: "$baseUrl/${channel.banner}",
-                        httpHeaders: {
-                          'Authorization': 'token $apiToken',
-                        },
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) => const Icon(Icons.error),
-                      ),
+                      CustomNetwokImage(imageLink: channel.banner),
                       ListTile(
                         title: Text(channel.channelName),
                         subtitle: Text(formatNumberCompact(channel.subscribers, context)),
@@ -60,15 +52,7 @@ class ChannelpageScreen extends StatelessWidget{
                           aspectRatio: 1 / 1,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
-                            child: CachedNetworkImage(
-                              imageUrl: "$baseUrl/${channel.profilePic}",
-                              httpHeaders: {
-                                  'Authorization': 'token $apiToken',
-                              },
-                              fit: BoxFit.cover,
-                              placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                              errorWidget: (context, url, error) => const Icon(Icons.error),
-                            ),
+                            child: CustomNetwokImage(imageLink: channel.profilePic)
                           ),
                         ),
                         trailing: channel.subscribed

@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'adapters/vp-adapter.dart';
-import 'adapters/mk-adapter.dart';
+import 'video/adapters/vp-adapter.dart';
+import 'video/adapters/mk-adapter.dart';
 import 'video_player_interface.dart';
 import 'package:Self.Tube/services/settings_service.dart';
 

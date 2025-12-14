@@ -1,12 +1,12 @@
 import 'dart:async';
-import 'package:Self.Tube/widgets/media/overlays/bottom_controls_overlay.dart';
-import 'package:Self.Tube/widgets/media/overlays/top_controls_overlay.dart';
+import 'package:Self.Tube/widgets/media/video/bottom_controls_overlay.dart';
+import 'package:Self.Tube/widgets/media/video/top_controls_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:Self.Tube/widgets/media/video_player_interface.dart';
 import 'package:Self.Tube/widgets/media/gesture_message.dart';
-import './overlays/gesture_controls_overlay.dart';
-import './overlays/center_controls_overlay.dart';
+import 'video/gesture_controls_overlay.dart';
+import 'video/center_controls_overlay.dart';
 
 class FullscreenVideo extends StatefulWidget {
   final MediaPlayer player;

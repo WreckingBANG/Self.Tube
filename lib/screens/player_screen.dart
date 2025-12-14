@@ -6,10 +6,9 @@ import '../utils/number_formatter.dart';
 import '../utils/datetime_formatter.dart';
 import '../widgets/sections/comment_list_section.dart';
 import '../services/api_service.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import '../services/settings_service.dart';
 import '../l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/widgets/media/video_player.dart';
+import 'package:Self.Tube/widgets/media/images/custom_network_image.dart';
 
 class PlayerScreen extends StatefulWidget {
   final String youtubeId;
@@ -24,9 +23,6 @@ class PlayerScreen extends StatefulWidget {
 }
 
 class _PlayerScreenState extends State<PlayerScreen> {
-  static String? apiToken = SettingsService.apiToken;
-  static String? baseUrl = SettingsService.instanceUrl;
-
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
@@ -111,17 +107,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                               aspectRatio: 1 / 1,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(12),
-                                child: CachedNetworkImage(
-                                  imageUrl: "$baseUrl/${video.channelThumbUrl}",
-                                  httpHeaders: {
-                                    'Authorization': 'token $apiToken',
-                                  },
-                                  fit: BoxFit.cover,
-                                  placeholder: (context, url) =>
-                                      const Center(child: CircularProgressIndicator()),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
-                                ),
+                                child: CustomNetwokImage(imageLink: video.channelThumbUrl)
                               ),
                             ),
                             trailing: video.channelSubscribed

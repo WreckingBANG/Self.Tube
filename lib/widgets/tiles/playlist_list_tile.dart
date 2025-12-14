@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:Self.Tube/widgets/media/images/custom_network_image.dart';
 import '../../screens/channelpage_screen.dart';
 import '../../screens/playlistpage_screen.dart';
 import '../../services/settings_service.dart';
@@ -27,15 +27,7 @@ class PlaylistListTile extends StatelessWidget {
                 aspectRatio: 16 / 9,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(4),
-                  child: CachedNetworkImage(
-                    imageUrl: "$baseUrl/${playlist.playlistPic}",
-                    httpHeaders: {
-                      'Authorization': 'token $apiToken',
-                    },
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
-                  ),
+                  child: CustomNetwokImage(imageLink: playlist.playlistPic)
                 )   
               ),
             ),
