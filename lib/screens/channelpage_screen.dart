@@ -82,9 +82,12 @@ class ChannelpageScreen extends StatelessWidget{
                             ),
                       ),
                       Padding(
-                        padding: EdgeInsetsGeometry.all(16),
-                        child: ExpandableText(channel.description),
-                      ), 
+                        padding: const EdgeInsets.all(16),
+                        child: SizedBox(
+                          width: double.infinity, // forces full width
+                          child: ExpandableText(channel.description),
+                        ),
+                      ),
                       VideoListSection(title: localizations.channelVideos, hideChannel: true, query: "?channel=${channelId}&order=desc&sort=published&type=videos")
                     ],
                   )
