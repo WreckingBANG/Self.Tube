@@ -25,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 VideoListSection(
                   title: localizations.homeContinueWatching,
                   hideChannel: false,
+                  hideIfEmpty: true,
                   query: "?order=asc&sort=published&watch=continue",
                 ),
                 SizedBox(height: 16),

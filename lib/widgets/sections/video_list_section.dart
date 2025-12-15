@@ -8,12 +8,14 @@ class VideoListSection extends StatefulWidget {
   final String title;
   final bool hideChannel;
   final String query;
+  final bool hideIfEmpty;
 
   const VideoListSection({
     super.key,
     required this.title,
     required this.hideChannel,
     required this.query,
+    this.hideIfEmpty = false,
   });
 
   @override
@@ -68,7 +70,9 @@ class _VideoListSectionState extends State<VideoListSection> {
       children: [
         if (videos.isEmpty && isLoading)
           const Center(child: CircularProgressIndicator())
-        else if (videos.isEmpty)
+        else if (videos.isEmpty && widget.hideIfEmpty)
+          const SizedBox.shrink() // do nothing
+        else if (videos.isEmpty && !widget.hideIfEmpty)
           Center(child: Text(localizations.errorNoDataFound))
         else
           ListSectionContainer(
