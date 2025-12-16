@@ -11,13 +11,14 @@ import '../models/playlistlist_model.dart';
 import '../services/settings_service.dart';
 import '../models/ping_model.dart';
 import '../models/channel_model.dart';
+import '../models/session_model.dart';
+import 'api_headers.dart';
 
 class ApiService {
 
-  static String? apiToken = SettingsService.apiToken;
   static String? baseUrl = SettingsService.instanceUrl;
-
-  static Future<PingModel?> testConnection(String tApiToken, String tBaseUrl) async {
+  
+  static Future<PingModel?> testConnectionToken(String tApiToken, String tBaseUrl) async {
     try {
       final response = await http.get(
           Uri.parse('$tBaseUrl/api/ping'),
@@ -37,14 +38,61 @@ class ApiService {
     }
   }
 
+  static Future<PingModel?> testConnectionSesssion(String tBaseUrl, String tSessionToken, String tCSRFToken) async {
+    try {
+      final response = await http.get(
+          Uri.parse('$tBaseUrl/api/ping'),
+          headers: {
+              'Content-Type': 'application/json',
+              'Cookie': 'sessionid=$tSessionToken',
+              'X-CSRFToken': tCSRFToken,
+          },
+        );
+      if (response.statusCode == 200) {
+        return PingModel.fromJson(json.decode(response.body));
+      } else {
+        throw Exception(response);
+      }
+    } catch (e) {
+      print('Error: $e');
+      return null;
+    }
+  }
+
+  static Future<SessionResponseModel?> fetchSession(
+      String tBaseUrl, String tUsername, String tPassword) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$tBaseUrl/api/user/login/'),
+        headers: {
+          'accept': '*/*',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'username': tUsername,
+          'password': tPassword,
+          'remember_me': 'off',
+        }),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 204) {
+        final setCookie = response.headers['set-cookie'];
+        if (setCookie != null) {
+          return SessionResponseModel.fromCookies(setCookie);
+        }
+      }
+      throw Exception('Login failed: ${response.statusCode}');
+    } catch (e) {
+      print('Error: $e');
+      return null;
+    }
+  }
+
   static Future<VideoListWrapperModel?> fetchVideoList(String options) async {
     try {
       final response = await http.get(
         Uri.parse('$baseUrl/api/video$options'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'token $apiToken',
-        },
+        headers: ApiHeaders.authHeaders(),
       );
 
       if (response.statusCode == 200) {
@@ -63,10 +111,7 @@ class ApiService {
     try {
       final response = await http.get(
           Uri.parse('$baseUrl/api/video/$videoId/similar'),
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'token $apiToken',
-          },
+          headers: ApiHeaders.authHeaders(),
         );
       if (response.statusCode == 200) {
         return VideoListSimilarItemModel.fromJsonList(json.decode(response.body));
@@ -83,10 +128,7 @@ class ApiService {
     try {
       final response = await http.get(
           Uri.parse('$baseUrl/api/video/$videoId'),
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'token $apiToken',
-          },
+          headers: ApiHeaders.authHeaders(),
         );
       if (response.statusCode == 200) {
         return VideoPlayerModel.fromJson(json.decode(response.body));
@@ -103,10 +145,7 @@ class ApiService {
     try {
       final response = await http.get(
           Uri.parse('$baseUrl/api/channel/?filter=subscribed'),
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'token $apiToken',
-          },
+          headers: ApiHeaders.authHeaders(),
         );
       if (response.statusCode == 200) {
         return ChannelListItemModel.fromJsonList(json.decode(response.body));
@@ -123,10 +162,7 @@ class ApiService {
     try {
       final response = await http.get(
           Uri.parse('$baseUrl/api/channel/$channelId'),
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'token $apiToken',
-          },
+          headers: ApiHeaders.authHeaders(),
         );
       if (response.statusCode == 200) {
         return ChannelItemModel.fromJson(json.decode(response.body));
@@ -143,10 +179,7 @@ class ApiService {
     try {
       final response = await http.get(
           Uri.parse('$baseUrl/api/playlist'),
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'token $apiToken',
-          },
+          headers: ApiHeaders.authHeaders(),
         );
       if (response.statusCode == 200) {
         return PlaylistListItemModel.fromJsonList(json.decode(response.body));
@@ -163,10 +196,7 @@ class ApiService {
     try {
       final response = await http.post(
         Uri.parse('$baseUrl/api/video/$videoId/progress/'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'token $apiToken',
-        },
+        headers: ApiHeaders.authHeaders(),
         body: json.encode({'position': position}),
       );
 
@@ -185,10 +215,7 @@ class ApiService {
     try {
       final response = await http.post(
         Uri.parse('$baseUrl/api/watched/'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'token $apiToken',
-        },
+        headers: ApiHeaders.authHeaders(),
         body: json.encode({
           "id": videoId,
           'is_watched': watched
@@ -209,10 +236,7 @@ class ApiService {
     try {
       final response = await http.get(
         Uri.parse('$baseUrl/api/video/$videoId/comment/'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'token $apiToken',
-        },
+        headers: ApiHeaders.authHeaders(),
       );
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body) as List<dynamic>;
@@ -230,10 +254,7 @@ class ApiService {
     try {
       final response = await http.get(
           Uri.parse('$baseUrl/api/user/account/'),
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'token $apiToken',
-          },
+          headers: ApiHeaders.authHeaders(),
         );
       if (response.statusCode == 200) {
         return UserInfoModel.fromJson(json.decode(response.body));
@@ -250,10 +271,7 @@ class ApiService {
     try {
       final response = await http.get(
           Uri.parse('$baseUrl/api/search/?query=$query'),
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'token $apiToken',
-          },
+          headers: ApiHeaders.authHeaders(),
         );
       if (response.statusCode == 200) {
         final jsonBody = json.decode(response.body);

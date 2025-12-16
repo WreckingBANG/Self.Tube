@@ -2,7 +2,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsService {
   static const _instanceUrlKey = 'instanceUrl';
+  static const _apiTokenAuth = 'apiTokenAuth';
   static const _apiTokenKey = 'apiToken';
+  static const _sessionToken = 'sessionToken';
+  static const _csrfToken = 'csrfToken';
+
   static const _showCommentPics = 'showCommentPics';
   static const _materialYouColors = 'materialYouColors';
   static const _doneSetup = 'doneSetup';
@@ -24,7 +28,11 @@ class SettingsService {
   static const _vpUseMediaKit = 'vpUseMediaKit';
 
   static String? instanceUrl;
+  static bool? apiTokenAuth;
   static String? apiToken;
+  static String? sessionToken;
+  static String? csrfToken;
+
   static bool? showCommentPics;
   static bool? materialYouColors;
   static bool? doneSetup;
@@ -48,7 +56,11 @@ class SettingsService {
   static Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
     instanceUrl = prefs.getString(_instanceUrlKey);
+    apiTokenAuth = prefs.getBool(_apiTokenAuth);
     apiToken = prefs.getString(_apiTokenKey);
+    sessionToken = prefs.getString(_sessionToken);
+    csrfToken = prefs.getString(_csrfToken);
+
     showCommentPics = prefs.getBool(_showCommentPics);
     materialYouColors = prefs.getBool(_materialYouColors)?? true;
     doneSetup = prefs.getBool(_doneSetup);
@@ -80,6 +92,24 @@ class SettingsService {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_apiTokenKey, value);
     apiToken = value;
+  }
+
+  static Future<void> setApiTokenAuth(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_apiTokenAuth, value);
+    apiTokenAuth = value;
+  }
+
+  static Future<void> setSessionToken(String value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_sessionToken, value);
+    sessionToken = value;
+  }
+
+  static Future<void> setCSRFToken(String value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_csrfToken, value);
+    csrfToken = value;
   }
 
   static Future<void> setShowCommentPics(bool value) async {

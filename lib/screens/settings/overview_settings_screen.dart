@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/screens/settings/instance_settings_screen.dart';
 import 'package:Self.Tube/screens/settings/appearance_settings_screen.dart';
 import 'package:Self.Tube/screens/settings/sponsorblock_settings_screen.dart';
 import 'package:Self.Tube/screens/settings/player_settings_screen.dart';
@@ -20,17 +19,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(title: Text(localizations.settingsTitle)),
       body: ListSectionContainer(
         children: [
-          ListTile(
-            title: Text(localizations.settingsAccountSettings),
-            subtitle: Text(localizations.settingsAccountSettingsDesc),
-            leading: Icon(Icons.account_circle_outlined),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => InstanceSettingsScreen()),
-                );
-            },
-          ),
           ListTile(
             title: Text(localizations.settingsAppearanceSettings),
             subtitle: Text(localizations.settingsAppearanceSettingsDesc),

@@ -148,15 +148,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsSponsorBlockSettingsDesc => 'SponsorBlock-Einstellungen';
 
   @override
-  String get settingsInstanceUrl => 'Instanz-URL';
-
-  @override
-  String get settingsApiToken => 'API-Token';
-
-  @override
-  String get settingsSave => 'Speichern';
-
-  @override
   String get settingsM3Colors => 'Dynamische Farben aktivieren';
 
   @override
@@ -255,6 +246,18 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get onboardingUrlExample => 'https://tubearchivist.example.com';
+
+  @override
+  String get onboardingUsername => 'Benutzername';
+
+  @override
+  String get onboardingPassword => 'Passwort';
+
+  @override
+  String get onboardingToken => 'Api-Token';
+
+  @override
+  String get onboardingInstanceUrl => 'Instanz URL';
 
   @override
   String get onboardingTokenExample =>

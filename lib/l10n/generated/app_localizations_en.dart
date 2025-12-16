@@ -148,15 +148,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsSponsorBlockSettingsDesc => 'Settings for SponsorBlock';
 
   @override
-  String get settingsInstanceUrl => 'Instance URL';
-
-  @override
-  String get settingsApiToken => 'API Token';
-
-  @override
-  String get settingsSave => 'Save';
-
-  @override
   String get settingsM3Colors => 'Enable Dynamic Colors';
 
   @override
@@ -255,6 +246,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingUrlExample => 'https://tubearchivist.example.com';
+
+  @override
+  String get onboardingUsername => 'Username';
+
+  @override
+  String get onboardingPassword => 'Password';
+
+  @override
+  String get onboardingToken => 'Api-Token';
+
+  @override
+  String get onboardingInstanceUrl => 'Instance URL';
 
   @override
   String get onboardingTokenExample =>

@@ -6,6 +6,7 @@ import 'package:Self.Tube/services/api_service.dart';
 import 'package:Self.Tube/services/settings_service.dart';
 import 'package:Self.Tube/utils/duration_formatter.dart';
 import 'video_player_ui.dart';
+import 'package:Self.Tube/services/api_headers.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 class CustomVideoPlayer extends StatefulWidget {
@@ -39,7 +40,6 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   Duration _lastCheck = Duration.zero;
   final Duration _checkInterval = const Duration(milliseconds: 1000);
 
-  static String? apiToken = SettingsService.apiToken;
   static String? baseUrl = SettingsService.instanceUrl;
 
   late final Map<String, bool> _categoryEnabledMap;
@@ -52,9 +52,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
     WakelockPlus.enable();
     _player = MediaPlayerFactory.create(
       '$baseUrl${widget.videoUrl}',
-      headers: {
-        'Authorization': 'token $apiToken',
-      },
+      headers: ApiHeaders.authHeaders()
     );
 
     _categoryEnabledMap = {

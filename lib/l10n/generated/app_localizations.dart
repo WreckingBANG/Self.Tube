@@ -374,24 +374,6 @@ abstract class AppLocalizations {
   /// **'Settings for SponsorBlock'**
   String get settingsSponsorBlockSettingsDesc;
 
-  /// No description provided for @settingsInstanceUrl.
-  ///
-  /// In en, this message translates to:
-  /// **'Instance URL'**
-  String get settingsInstanceUrl;
-
-  /// No description provided for @settingsApiToken.
-  ///
-  /// In en, this message translates to:
-  /// **'API Token'**
-  String get settingsApiToken;
-
-  /// No description provided for @settingsSave.
-  ///
-  /// In en, this message translates to:
-  /// **'Save'**
-  String get settingsSave;
-
   /// No description provided for @settingsM3Colors.
   ///
   /// In en, this message translates to:
@@ -583,6 +565,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'https://tubearchivist.example.com'**
   String get onboardingUrlExample;
+
+  /// No description provided for @onboardingUsername.
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get onboardingUsername;
+
+  /// No description provided for @onboardingPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get onboardingPassword;
+
+  /// No description provided for @onboardingToken.
+  ///
+  /// In en, this message translates to:
+  /// **'Api-Token'**
+  String get onboardingToken;
+
+  /// No description provided for @onboardingInstanceUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Instance URL'**
+  String get onboardingInstanceUrl;
 
   /// No description provided for @onboardingTokenExample.
   ///
