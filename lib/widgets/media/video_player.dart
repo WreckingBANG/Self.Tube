@@ -36,7 +36,6 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   Duration _lastReportedPosition = Duration.zero;
   StreamSubscription<Duration>? _positionSubscription;
 
-  // throttle fields
   Duration _lastCheck = Duration.zero;
   final Duration _checkInterval = const Duration(milliseconds: 1000);
 
@@ -105,29 +104,38 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
             seconds >= start &&
             seconds < end &&
             !_unskippedSegments.contains(segmentId)) {
-              
+          
           _player.seek(Duration(seconds: end));
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              duration: Duration(milliseconds: 1500),
-              action: SnackBarAction(
-                label: "Undo", 
-                onPressed: () {
-                  if (_player.isPlaying != true) { _player.play(); }
-                  _unskippedSegments.add(segmentId);
-                  _player.seek(Duration(seconds: start - 1));
+
+          final messenger = ScaffoldMessenger.of(context);
+
+          final snackBar = SnackBar(
+            duration: const Duration(milliseconds: 1500),
+            action: SnackBarAction(
+              label: "Undo",
+              onPressed: () {
+                if (_player.isPlaying != true) {
+                  _player.play();
                 }
-              ),
-              content: Row(
-                children: [
-                  Icon(Icons.money_off),
-                  Text(
-                    "Skipped $category from ${formatDuration(start)} to ${formatDuration(end)}",
-                  )
-                ],
-              )
+                _unskippedSegments.add(segmentId);
+                _player.seek(Duration(seconds: start - 1));
+              },
+            ),
+            content: Row(
+              children: [
+                const Icon(Icons.money_off),
+                Text(
+                  "Skipped $category from ${formatDuration(start)} to ${formatDuration(end)}",
+                ),
+              ],
             ),
           );
+          
+          messenger.showSnackBar(snackBar);
+
+          Future.delayed(const Duration(milliseconds: 1500), () {
+            messenger.hideCurrentSnackBar();
+          });
           break;
         }
       }
