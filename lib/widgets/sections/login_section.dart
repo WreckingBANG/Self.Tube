@@ -98,7 +98,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
                   TextField(
                     controller: _apiTokenController,
                     decoration: InputDecoration(
-                      labelText: localizations.onboardingInstanceUrl,
+                      labelText: localizations.onboardingToken,
                       hint: Text(localizations.onboardingTokenExample),
                       border: InputBorder.none,
                     ),
