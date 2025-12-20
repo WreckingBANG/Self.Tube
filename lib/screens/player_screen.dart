@@ -7,7 +7,7 @@ import '../utils/datetime_formatter.dart';
 import '../widgets/sections/comment_list_section.dart';
 import '../services/api_service.dart';
 import '../l10n/generated/app_localizations.dart';
-import 'package:Self.Tube/widgets/media/video_player.dart';
+import 'package:Self.Tube/widgets/media/video/video_player.dart';
 import 'package:Self.Tube/widgets/media/images/custom_network_image.dart';
 
 class PlayerScreen extends StatefulWidget {

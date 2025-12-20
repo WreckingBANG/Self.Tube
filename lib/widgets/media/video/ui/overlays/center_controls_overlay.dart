@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/widgets/media/video_player_interface.dart';
+import 'package:Self.Tube/widgets/media/video/video_player_interface.dart';
 
 class CenterControlsOverlay extends StatefulWidget {
   final MediaPlayer player;

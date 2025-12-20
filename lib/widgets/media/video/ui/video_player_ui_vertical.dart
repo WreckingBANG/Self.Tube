@@ -1,18 +1,18 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/widgets/media/video_player_ui_landscape.dart';
-import 'package:Self.Tube/widgets/media/gesture_message.dart';
-import 'package:Self.Tube/widgets/media/video_player_interface.dart';
-import 'video/bottom_controls_overlay.dart';
-import 'video/gesture_controls_overlay.dart';
-import 'video/center_controls_overlay.dart';
+import 'video_player_ui_landscape.dart';
+import 'overlays/gesture_message.dart';
+import '../video_player_interface.dart';
+import 'overlays/bottom_controls_overlay.dart';
+import 'overlays/gesture_controls_overlay.dart';
+import 'overlays/center_controls_overlay.dart';
 
-class SimpleVideoPlayer extends StatefulWidget {
+class VideoPlayerVerticalUI extends StatefulWidget {
   final MediaPlayer player;
   final String videoTitle;
   final String videoCreator;
 
-  const SimpleVideoPlayer({
+  const VideoPlayerVerticalUI({
     super.key,
     required this.player,
     required this.videoTitle,
@@ -20,10 +20,10 @@ class SimpleVideoPlayer extends StatefulWidget {
   });
 
   @override
-  State<SimpleVideoPlayer> createState() => _SimpleVideoPlayerState();
+  State<VideoPlayerVerticalUI> createState() => _VideoPlayerVerticalUIState();
 }
 
-class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
+class _VideoPlayerVerticalUIState extends State<VideoPlayerVerticalUI> {
   String? _gestureMessage;
   IconData? _gestureIcon;
   Timer? _messageTimer;
@@ -70,7 +70,7 @@ class _SimpleVideoPlayerState extends State<SimpleVideoPlayer> {
   void _openFullscreen() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => FullscreenVideo(
+        builder: (_) => VideoPlayerLandscapeUI(
           player: widget.player,
           videoCreator: widget.videoCreator,
           videoTitle: widget.videoTitle,

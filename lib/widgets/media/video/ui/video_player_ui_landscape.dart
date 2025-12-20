@@ -1,18 +1,18 @@
 import 'dart:async';
-import 'package:Self.Tube/widgets/media/video/bottom_controls_overlay.dart';
-import 'package:Self.Tube/widgets/media/video/top_controls_overlay.dart';
+import 'overlays/bottom_controls_overlay.dart';
+import 'overlays/top_controls_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:Self.Tube/widgets/media/video_player_interface.dart';
-import 'package:Self.Tube/widgets/media/gesture_message.dart';
-import 'video/gesture_controls_overlay.dart';
-import 'video/center_controls_overlay.dart';
+import '../video_player_interface.dart';
+import 'overlays/gesture_message.dart';
+import 'overlays/gesture_controls_overlay.dart';
+import 'overlays/center_controls_overlay.dart';
 
-class FullscreenVideo extends StatefulWidget {
+class VideoPlayerLandscapeUI extends StatefulWidget {
   final MediaPlayer player;
   final String videoTitle;
   final String videoCreator;
-  const FullscreenVideo({
+  const VideoPlayerLandscapeUI({
     super.key,
     required this.player,
     required this.videoTitle,
@@ -20,10 +20,10 @@ class FullscreenVideo extends StatefulWidget {
   });
 
   @override
-  State<FullscreenVideo> createState() => _FullscreenVideoState();
+  State<VideoPlayerLandscapeUI> createState() => _VideoPlayerLandscapeUIState();
 }
 
-class _FullscreenVideoState extends State<FullscreenVideo> {
+class _VideoPlayerLandscapeUIState extends State<VideoPlayerLandscapeUI> {
   bool _showControls = false;
   Timer? _hideTimer;
   String? _gestureMessage;

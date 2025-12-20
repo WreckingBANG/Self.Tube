@@ -5,7 +5,7 @@ import 'video_player_factory.dart';
 import 'package:Self.Tube/services/api_service.dart';
 import 'package:Self.Tube/services/settings_service.dart';
 import 'package:Self.Tube/utils/duration_formatter.dart';
-import 'video_player_ui.dart';
+import 'ui/video_player_ui_vertical.dart';
 import 'package:Self.Tube/services/api_headers.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
@@ -67,7 +67,6 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
 
     _positionSubscription = _player.positionStream.listen(_onPosition);
 
-    // start playback immediately
     _player.play();
   }
 
@@ -154,7 +153,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return SimpleVideoPlayer(
+    return VideoPlayerVerticalUI(
       player: _player,
       videoCreator: widget.videoCreator,
       videoTitle: widget.videoTitle,

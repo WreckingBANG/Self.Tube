@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/widgets/media/video_player_interface.dart';
+import 'package:Self.Tube/widgets/media/video/video_player_interface.dart';
 import 'package:Self.Tube/services/settings_service.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';

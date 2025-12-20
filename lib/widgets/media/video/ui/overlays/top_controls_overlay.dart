@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/widgets/media/video_player_interface.dart';
+import 'package:Self.Tube/widgets/media/video/video_player_interface.dart';
 import 'package:Self.Tube/widgets/sheets/video_player_bottomsheet.dart';
 
 class TopControlsOverlay extends StatefulWidget {

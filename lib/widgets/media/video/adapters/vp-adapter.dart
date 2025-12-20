@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-import '../../video_player_interface.dart';
+import '../video_player_interface.dart';
 
 class VideoPlayerAdapter implements MediaPlayer {
   final VideoPlayerController _controller;
