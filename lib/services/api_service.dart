@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'package:Self.Tube/models/userinfo_model.dart';
 import 'package:http/http.dart' as http;
-import '../models/videolistwrapper_model.dart';
+import '../models/videolist_wrapper_model.dart';
 import '../models/videolist_similar_model.dart';
 import '../models/videoplayer_model.dart';
-import '../models/channellist_model.dart';
+import '../models/channellist_wrapper_model.dart';
 import '../models/search/searchwrapper_model.dart';
 import '../models/commentlist_model.dart';
-import '../models/playlistlist_model.dart';
+import '../models/playlistlist_wrapper_model.dart';
 import '../services/settings_service.dart';
 import '../models/ping_model.dart';
 import '../models/channel_model.dart';
@@ -141,14 +141,15 @@ class ApiService {
     }
   }
 
-  static Future<List<ChannelListItemModel>?> fetchChannelList() async {
+  static Future<ChannelListWrapperModel?> fetchChannelList(String options) async {
     try {
       final response = await http.get(
-          Uri.parse('$baseUrl/api/channel/?filter=subscribed'),
+          Uri.parse('$baseUrl/api/channel$options'),
           headers: ApiHeaders.authHeaders(),
         );
       if (response.statusCode == 200) {
-        return ChannelListItemModel.fromJsonList(json.decode(response.body));
+        final Map<String, dynamic> jsonMap = json.decode(response.body);
+        return ChannelListWrapperModel.fromJson(jsonMap);
       } else {
         throw Exception(response);
       }
@@ -175,14 +176,15 @@ class ApiService {
     }
   }
 
-  static Future<List<PlaylistListItemModel>?> fetchPlaylistList() async {
+  static Future<PlaylistListWrapperModel?> fetchPlaylistList() async {
     try {
       final response = await http.get(
           Uri.parse('$baseUrl/api/playlist'),
           headers: ApiHeaders.authHeaders(),
         );
       if (response.statusCode == 200) {
-        return PlaylistListItemModel.fromJsonList(json.decode(response.body));
+        final Map<String, dynamic> jsonMap = json.decode(response.body);
+        return PlaylistListWrapperModel.fromJson(jsonMap);
       } else {
         throw Exception(response);
       }

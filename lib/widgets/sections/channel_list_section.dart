@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
 import '../../services/api_service.dart';
-import '../tiles/video_list_tile.dart';
+import '../tiles/channel_list_tile.dart';
 import '../../l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/widgets/containers/list_section_container.dart';
 
-class VideoListSection extends StatefulWidget {
+class ChannelListSection extends StatefulWidget {
   final String title;
-  final bool hideChannel;
   final String query;
   final bool hideIfEmpty;
 
-  const VideoListSection({
+  const ChannelListSection({
     super.key,
-    this.title = "",
-    required this.hideChannel,
     required this.query,
+    this.title = "",
     this.hideIfEmpty = false,
   });
 
   @override
-  State<VideoListSection> createState() => _VideoListSectionState();
+  State<ChannelListSection> createState() => _ChannelListSectionState();
 }
 
-class _VideoListSectionState extends State<VideoListSection> {
-  List videos = [];
+class _ChannelListSectionState extends State<ChannelListSection> {
+  List channels = [];
   int currentPage = 1;
   bool isLoading = false;
   bool hasMore = true;
@@ -31,21 +29,21 @@ class _VideoListSectionState extends State<VideoListSection> {
   @override
   void initState() {
     super.initState();
-    fetchVideos(); 
+    fetchChannels(); 
   }
 
-  Future<void> fetchVideos() async {
+  Future<void> fetchChannels() async {
     if (isLoading || !hasMore) return;
 
     setState(() => isLoading = true);
 
     try {
-      final newVideos = await ApiService.fetchVideoList("${widget.query}&page=$currentPage");
+      final newChannels = await ApiService.fetchChannelList("${widget.query}&page=$currentPage");
 
-      if (newVideos != null) {
+      if (newChannels != null) {
         setState(() {
-          videos.addAll(newVideos.data);
-          if (currentPage >= newVideos.lastPage) {
+          channels.addAll(newChannels.data);
+          if (currentPage >= newChannels.lastPage) {
             hasMore = false;
           } else {
             currentPage++;
@@ -55,7 +53,7 @@ class _VideoListSectionState extends State<VideoListSection> {
         setState(() => hasMore = false);
       }
     } catch (e) {
-      print("Error fetching videos: $e");
+      print("Error fetching channels: $e");
     } finally {
       setState(() => isLoading = false);
     }
@@ -68,19 +66,17 @@ class _VideoListSectionState extends State<VideoListSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (videos.isEmpty && isLoading)
+        if (channels.isEmpty && isLoading)
           const Center(child: CircularProgressIndicator())
-        else if (videos.isEmpty && widget.hideIfEmpty)
-          const SizedBox.shrink() // do nothing
-        else if (videos.isEmpty && !widget.hideIfEmpty)
+        else if (channels.isEmpty && !widget.hideIfEmpty)
           Center(child: Text(localizations.errorNoDataFound))
         else
           ListSectionContainer(
             title: widget.title,
             children: [
-              ...List.generate(videos.length, (index) {
-                final video = videos[index];
-                return VideoListTile(video: video, hideChannel: widget.hideChannel);
+              ...List.generate(channels.length, (index) {
+                final channel = channels[index];
+                return ChannelListTile(channel: channel,);
               })
             ]
           ),
@@ -90,12 +86,12 @@ class _VideoListSectionState extends State<VideoListSection> {
             padding: EdgeInsets.all(8.0),
             child: Center(child: CircularProgressIndicator()),
           )
-        else if (!isLoading && hasMore && videos.isNotEmpty)
+        else if (!isLoading && hasMore && channels.isNotEmpty)
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Center(
               child: TextButton(
-                onPressed: fetchVideos,
+                onPressed: fetchChannels,
                 child: Text(localizations.listShowMore),
               ),
             ),

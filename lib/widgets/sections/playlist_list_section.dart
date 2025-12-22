@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
 import '../../services/api_service.dart';
-import '../tiles/video_list_tile.dart';
+import '../tiles/playlist_list_tile.dart';
 import '../../l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/widgets/containers/list_section_container.dart';
 
-class VideoListSection extends StatefulWidget {
+class PlaylistListSection extends StatefulWidget {
   final String title;
-  final bool hideChannel;
-  final String query;
   final bool hideIfEmpty;
 
-  const VideoListSection({
+  const PlaylistListSection({
     super.key,
     this.title = "",
-    required this.hideChannel,
-    required this.query,
     this.hideIfEmpty = false,
   });
 
   @override
-  State<VideoListSection> createState() => _VideoListSectionState();
+  State<PlaylistListSection> createState() => _PlaylistListSectionState();
 }
 
-class _VideoListSectionState extends State<VideoListSection> {
-  List videos = [];
+class _PlaylistListSectionState extends State<PlaylistListSection> {
+  List playlists = [];
   int currentPage = 1;
   bool isLoading = false;
   bool hasMore = true;
@@ -31,21 +27,21 @@ class _VideoListSectionState extends State<VideoListSection> {
   @override
   void initState() {
     super.initState();
-    fetchVideos(); 
+    fetchplaylists(); 
   }
 
-  Future<void> fetchVideos() async {
+  Future<void> fetchplaylists() async {
     if (isLoading || !hasMore) return;
 
     setState(() => isLoading = true);
 
     try {
-      final newVideos = await ApiService.fetchVideoList("${widget.query}&page=$currentPage");
+      final newplaylists = await ApiService.fetchPlaylistList();
 
-      if (newVideos != null) {
+      if (newplaylists != null) {
         setState(() {
-          videos.addAll(newVideos.data);
-          if (currentPage >= newVideos.lastPage) {
+          playlists.addAll(newplaylists.data);
+          if (currentPage >= newplaylists.lastPage) {
             hasMore = false;
           } else {
             currentPage++;
@@ -55,7 +51,7 @@ class _VideoListSectionState extends State<VideoListSection> {
         setState(() => hasMore = false);
       }
     } catch (e) {
-      print("Error fetching videos: $e");
+      print("Error fetching playlists: $e");
     } finally {
       setState(() => isLoading = false);
     }
@@ -68,19 +64,17 @@ class _VideoListSectionState extends State<VideoListSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (videos.isEmpty && isLoading)
+        if (playlists.isEmpty && isLoading)
           const Center(child: CircularProgressIndicator())
-        else if (videos.isEmpty && widget.hideIfEmpty)
-          const SizedBox.shrink() // do nothing
-        else if (videos.isEmpty && !widget.hideIfEmpty)
+        else if (playlists.isEmpty && !widget.hideIfEmpty)
           Center(child: Text(localizations.errorNoDataFound))
         else
           ListSectionContainer(
             title: widget.title,
             children: [
-              ...List.generate(videos.length, (index) {
-                final video = videos[index];
-                return VideoListTile(video: video, hideChannel: widget.hideChannel);
+              ...List.generate(playlists.length, (index) {
+                final playlist = playlists[index];
+                return PlaylistListTile(playlist: playlist);
               })
             ]
           ),
@@ -90,12 +84,12 @@ class _VideoListSectionState extends State<VideoListSection> {
             padding: EdgeInsets.all(8.0),
             child: Center(child: CircularProgressIndicator()),
           )
-        else if (!isLoading && hasMore && videos.isNotEmpty)
+        else if (!isLoading && hasMore && playlists.isNotEmpty)
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Center(
               child: TextButton(
-                onPressed: fetchVideos,
+                onPressed: fetchplaylists,
                 child: Text(localizations.listShowMore),
               ),
             ),
