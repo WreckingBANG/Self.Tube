@@ -1,4 +1,5 @@
 import 'package:Self.Tube/screens/channelpage_screen.dart';
+import 'package:Self.Tube/widgets/sheets/channel_list_bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/widgets/media/images/custom_network_image.dart';
 import '../../utils/number_formatter.dart';
@@ -58,6 +59,12 @@ class ChannelListTile extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => ChannelpageScreen(channelId: channel.channelId)),
+          );
+        },
+        onLongPress: () {
+          showChannelListBottomSheet(
+            context: context, 
+            channel: channel
           );
         },
       ),

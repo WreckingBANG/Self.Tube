@@ -1,3 +1,4 @@
+import 'package:Self.Tube/widgets/sheets/playlist_list_bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/widgets/media/images/custom_network_image.dart';
 import '../../screens/channelpage_screen.dart';
@@ -70,6 +71,12 @@ class PlaylistListTile extends StatelessWidget {
             MaterialPageRoute(builder: (context) => PlaylistpageScreen(playlistId: playlist.playlistId)),
           );
         },
+        onLongPress: () {
+          showPlaylistListBottomSheet(
+            context: context, 
+            playlist: playlist
+          );
+        }
       ),
     );
   }
