@@ -1,6 +1,9 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SettingsService {
+  static const FlutterSecureStorage _secure = FlutterSecureStorage();
+
   static const _instanceUrlKey = 'instanceUrl';
   static const _apiTokenAuth = 'apiTokenAuth';
   static const _apiTokenKey = 'apiToken';
@@ -57,9 +60,9 @@ class SettingsService {
     final prefs = await SharedPreferences.getInstance();
     instanceUrl = prefs.getString(_instanceUrlKey);
     apiTokenAuth = prefs.getBool(_apiTokenAuth);
-    apiToken = prefs.getString(_apiTokenKey);
-    sessionToken = prefs.getString(_sessionToken);
-    csrfToken = prefs.getString(_csrfToken);
+    apiToken = await _secure.read(key: _apiTokenKey);
+    sessionToken = await _secure.read(key: _sessionToken);
+    csrfToken = await _secure.read(key: _csrfToken);
 
     showCommentPics = prefs.getBool(_showCommentPics);
     materialYouColors = prefs.getBool(_materialYouColors)?? true;
@@ -89,8 +92,7 @@ class SettingsService {
   }
 
   static Future<void> setApiToken(String value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_apiTokenKey, value);
+    await _secure.write(key: _apiTokenKey, value: value);
     apiToken = value;
   }
 
@@ -101,14 +103,12 @@ class SettingsService {
   }
 
   static Future<void> setSessionToken(String value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_sessionToken, value);
+    await _secure.write(key: _sessionToken, value: value);
     sessionToken = value;
   }
 
   static Future<void> setCSRFToken(String value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_csrfToken, value);
+    await _secure.write(key: _csrfToken, value: value);
     csrfToken = value;
   }
 
