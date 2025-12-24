@@ -1,9 +1,9 @@
-import 'package:Self.Tube/services/api_service.dart';
+import 'package:Self.Tube/services/api/channel_api.dart';
 import 'package:Self.Tube/widgets/sections/video_list_section.dart';
 import 'package:flutter/material.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../services/settings_service.dart';
-import '../models/channel_model.dart';
+import '../models/channel/channel_model.dart';
 import '../utils/number_formatter.dart';
 import '../widgets/containers/expandable_text.dart';
 import 'package:Self.Tube/widgets/containers/refresh_container.dart';
@@ -30,7 +30,7 @@ class ChannelpageScreen extends StatelessWidget{
       ),
       body: RefreshContainer(
         child: FutureBuilder<ChannelItemModel?>(
-          future: ApiService.fetchChannel(channelId), 
+          future: ChannelApi().fetchChannel(channelId), 
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());

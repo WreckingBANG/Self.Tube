@@ -1,6 +1,6 @@
+import 'package:Self.Tube/services/api/user_api.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/services/settings_service.dart';
-import 'package:Self.Tube/services/api_service.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/widgets/containers/list_section_container.dart';
 
@@ -113,13 +113,13 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
           onPressed: () async {
             String url = _instanceUrlController.text;
             if (_tabController.index == 0) {
-              final response = await ApiService.fetchSession(
+              final response = await UserApi().fetchSession(
                 url,
                 _usernameController.text,
                 _passwordController.text
               );
               if (response?.sessionToken != null && response?.csrfToken != null){
-                final ping = await ApiService.testConnectionSesssion(
+                final ping = await UserApi().testConnectionSession(
                   url, 
                   response!.sessionToken, 
                   response.csrfToken
@@ -134,7 +134,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
                 }
               }
             } else if (_tabController.index == 1) {
-              final ping = await ApiService.testConnectionToken(
+              final ping = await UserApi().testConnectionToken(
                 _apiTokenController.text,
                 url,
               );

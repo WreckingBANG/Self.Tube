@@ -1,7 +1,7 @@
+import 'package:Self.Tube/services/api/search_api.dart';
 import 'package:Self.Tube/widgets/tiles/channel_list_tile.dart';
 import 'package:Self.Tube/widgets/tiles/video_list_tile.dart';
 import 'package:flutter/material.dart';
-import '../services/api_service.dart';
 import '../models/search/searchwrapper_model.dart';
 import '../widgets/tiles/playlist_list_tile.dart';
 import '../l10n/generated/app_localizations.dart';
@@ -54,7 +54,7 @@ class _SearchScreenState extends State<SearchScreen>{
           ),
           _searchQuery != ""  
           ?  FutureBuilder<SearchWrapperModel?>(
-              future: ApiService.fetchSearch(_searchQuery),
+              future: SearchApi().fetchSearch(_searchQuery),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());

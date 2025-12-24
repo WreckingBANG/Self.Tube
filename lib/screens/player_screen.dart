@@ -1,11 +1,11 @@
 import 'package:Self.Tube/screens/channelpage_screen.dart';
+import 'package:Self.Tube/services/api/video_api.dart';
 import 'package:Self.Tube/widgets/sections/video_list_similar_section.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/widgets/containers/selectable_text.dart';
 import '../utils/number_formatter.dart';
 import '../utils/datetime_formatter.dart';
 import '../widgets/sections/comment_list_section.dart';
-import '../services/api_service.dart';
 import '../l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/widgets/media/video/video_player.dart';
 import 'package:Self.Tube/widgets/media/images/custom_network_image.dart';
@@ -31,7 +31,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
       child: Scaffold(
         appBar: AppBar(title: Text(localizations.playerTitle)),
         body: FutureBuilder(
-          future: ApiService.fetchVideoPlayer(widget.youtubeId),
+          future: VideoApi.fetchVideoPlayer(widget.youtubeId),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());

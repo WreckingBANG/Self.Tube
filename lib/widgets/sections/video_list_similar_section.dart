@@ -1,6 +1,6 @@
+import 'package:Self.Tube/services/api/video_api.dart';
 import 'package:flutter/material.dart';
-import '../../services/api_service.dart';
-import '../../models/videolist_similar_model.dart';
+import '../../models/video/videolist_similar_model.dart';
 import '../tiles/video_list_tile.dart';
 import '../../l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/widgets/containers/list_section_container.dart';
@@ -20,7 +20,7 @@ class VideoListSimilarSection extends StatelessWidget {
     final localizations = AppLocalizations.of(context)!;
 
     return FutureBuilder<List<VideoListSimilarItemModel>?>(
-      future: ApiService.fetchSimilarVideoList(videoId),
+      future: VideoApi().fetchSimilarVideoList(videoId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());

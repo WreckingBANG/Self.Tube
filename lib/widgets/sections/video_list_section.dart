@@ -1,5 +1,5 @@
+import 'package:Self.Tube/services/api/video_api.dart';
 import 'package:flutter/material.dart';
-import '../../services/api_service.dart';
 import '../tiles/video_list_tile.dart';
 import '../../l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/widgets/containers/list_section_container.dart';
@@ -40,7 +40,7 @@ class _VideoListSectionState extends State<VideoListSection> {
     setState(() => isLoading = true);
 
     try {
-      final newVideos = await ApiService.fetchVideoList("${widget.query}&page=$currentPage");
+      final newVideos = await VideoApi().fetchVideoList("${widget.query}&page=$currentPage");
 
       if (newVideos != null) {
         setState(() {

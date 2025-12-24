@@ -1,5 +1,5 @@
+import 'package:Self.Tube/services/api/channel_api.dart';
 import 'package:flutter/material.dart';
-import '../../services/api_service.dart';
 import '../tiles/channel_list_tile.dart';
 import '../../l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/widgets/containers/list_section_container.dart';
@@ -38,7 +38,7 @@ class _ChannelListSectionState extends State<ChannelListSection> {
     setState(() => isLoading = true);
 
     try {
-      final newChannels = await ApiService.fetchChannelList("${widget.query}&page=$currentPage");
+      final newChannels = await ChannelApi().fetchChannelList("${widget.query}&page=$currentPage");
 
       if (newChannels != null) {
         setState(() {

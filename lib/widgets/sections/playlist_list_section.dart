@@ -1,5 +1,5 @@
+import 'package:Self.Tube/services/api/playlist_api.dart';
 import 'package:flutter/material.dart';
-import '../../services/api_service.dart';
 import '../tiles/playlist_list_tile.dart';
 import '../../l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/widgets/containers/list_section_container.dart';
@@ -36,7 +36,7 @@ class _PlaylistListSectionState extends State<PlaylistListSection> {
     setState(() => isLoading = true);
 
     try {
-      final newplaylists = await ApiService.fetchPlaylistList();
+      final newplaylists = await PlaylistApi().fetchPlaylistList();
 
       if (newplaylists != null) {
         setState(() {

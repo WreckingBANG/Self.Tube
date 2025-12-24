@@ -1,7 +1,7 @@
+import 'package:Self.Tube/services/api/video_api.dart';
 import 'package:flutter/material.dart';
 import './bottomsheet_template.dart';
 import 'package:Self.Tube/widgets/containers/list_section_container.dart';
-import 'package:Self.Tube/services/api_service.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/screens/channelpage_screen.dart';
 import 'package:share_plus/share_plus.dart';
@@ -25,14 +25,14 @@ Future<void> showVideoListBottomSheet({
             leading: Icon(Icons.timer_outlined),
             title: Text(localizations.sheetMarkWatched),
             onTap: () {
-              ApiService.setVideoWatched(video.youtubeId, true);
+              VideoApi.setVideoWatched(video.youtubeId, true);
             },
           ),
           ListTile(
             leading: Icon(Icons.timer_off_outlined),
             title: Text(localizations.sheetMarkUnwatched),
             onTap: () {
-              ApiService.setVideoWatched(video.youtubeId, false);
+              VideoApi.setVideoWatched(video.youtubeId, false);
             },
           ),
           if (!hideChannel)

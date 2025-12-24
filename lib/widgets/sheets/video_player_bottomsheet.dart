@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import './bottomsheet_template.dart';
 import 'package:Self.Tube/widgets/containers/list_section_container.dart';
-import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
 Future<void> showVideoPlayerBottomSheet({
   required BuildContext context,
 
   String? title,
 }) {
-  final localizations = AppLocalizations.of(context)!;
   return showBottomSheetTemplate(
     context: context, 
     children: [

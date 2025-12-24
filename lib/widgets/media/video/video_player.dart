@@ -1,12 +1,12 @@
 import 'dart:async';
+import 'package:Self.Tube/services/api/video_api.dart';
 import 'package:flutter/material.dart';
 import 'video_player_interface.dart';
 import 'video_player_factory.dart';
-import 'package:Self.Tube/services/api_service.dart';
 import 'package:Self.Tube/services/settings_service.dart';
 import 'package:Self.Tube/utils/duration_formatter.dart';
 import 'ui/video_player_ui_vertical.dart';
-import 'package:Self.Tube/services/api_headers.dart';
+import 'package:Self.Tube/services/api/api_headers.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 class CustomVideoPlayer extends StatefulWidget {
@@ -88,7 +88,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
     // progress reporting every 10s
     if ((seconds - _lastReportedPosition.inSeconds).abs() >= 10) {
       _lastReportedPosition = position;
-      ApiService.setVideoProgress(widget.youtubeId, seconds);
+      VideoApi.setVideoProgress(widget.youtubeId, seconds);
     }
 
     // sponsor skipping
@@ -145,8 +145,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   void dispose() {
     WakelockPlus.disable();
     _positionSubscription?.cancel();
-    ApiService.setVideoProgress(
-        widget.youtubeId, _lastReportedPosition.inSeconds);
+    VideoApi.setVideoProgress(widget.youtubeId, _lastReportedPosition.inSeconds);
     _player.dispose();
     super.dispose();
   }

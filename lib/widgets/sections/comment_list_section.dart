@@ -1,6 +1,6 @@
+import 'package:Self.Tube/services/api/comment_api.dart';
 import 'package:flutter/material.dart';
-import '../../models/commentlist_model.dart';
-import '../../services/api_service.dart';
+import '../../models/comment/commentlist_model.dart';
 import '../tiles/comment_list_tile.dart';
 import '../../l10n/generated/app_localizations.dart';
 
@@ -21,7 +21,7 @@ class _CommentListWidgetState extends State<CommentListWidget> {
   @override
   void initState() {
     super.initState();
-    _commentsFuture = ApiService.fetchCommentList(widget.videoId);
+    _commentsFuture = CommentApi().fetchCommentList(widget.videoId);
   }
 
   @override

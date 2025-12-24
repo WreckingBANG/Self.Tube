@@ -1,4 +1,4 @@
-import 'settings_service.dart';
+import '../settings_service.dart';
 
 class ApiHeaders {
   static Map<String, String> authHeaders() {
