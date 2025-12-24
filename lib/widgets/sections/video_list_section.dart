@@ -68,11 +68,9 @@ class _VideoListSectionState extends State<VideoListSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (videos.isEmpty && isLoading)
-          const Center(child: CircularProgressIndicator())
-        else if (videos.isEmpty && widget.hideIfEmpty)
+        if (videos.isEmpty && widget.hideIfEmpty && !isLoading)
           const SizedBox.shrink() // do nothing
-        else if (videos.isEmpty && !widget.hideIfEmpty)
+        else if (videos.isEmpty && !widget.hideIfEmpty && !isLoading)
           Center(child: Text(localizations.errorNoDataFound))
         else
           ListSectionContainer(

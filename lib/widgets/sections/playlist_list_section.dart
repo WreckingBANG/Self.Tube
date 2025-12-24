@@ -64,9 +64,7 @@ class _PlaylistListSectionState extends State<PlaylistListSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (playlists.isEmpty && isLoading)
-          const Center(child: CircularProgressIndicator())
-        else if (playlists.isEmpty && !widget.hideIfEmpty)
+        if (playlists.isEmpty && !widget.hideIfEmpty && !isLoading)
           Center(child: Text(localizations.errorNoDataFound))
         else
           ListSectionContainer(

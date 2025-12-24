@@ -66,9 +66,7 @@ class _ChannelListSectionState extends State<ChannelListSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (channels.isEmpty && isLoading)
-          const Center(child: CircularProgressIndicator())
-        else if (channels.isEmpty && !widget.hideIfEmpty)
+        if (channels.isEmpty && !widget.hideIfEmpty && !isLoading)
           Center(child: Text(localizations.errorNoDataFound))
         else
           ListSectionContainer(
