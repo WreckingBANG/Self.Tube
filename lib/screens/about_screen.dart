@@ -123,6 +123,7 @@ class AboutScreen extends StatelessWidget {
                           'assets/appicon_filled.png',
                           width: 100,
                           height: 100,
+                          package: 'Self.Tube',
                         ),
                         const SizedBox(height: 16),
                         Text(

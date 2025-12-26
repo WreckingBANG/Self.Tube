@@ -1,0 +1,102 @@
+id: com.wreckingbang.selftube
+runtime: org.gnome.Platform
+runtime-version: '48'
+sdk: org.gnome.Sdk
+
+command: Self.Tube
+
+add-extensions:
+  org.freedesktop.Platform.ffmpeg-full:
+    directory: lib/ffmpeg
+    version: '24.08'
+    add-ld-path: .
+
+cleanup-commands:
+  - mkdir -p /app/lib/ffmpeg
+
+finish-args:
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --share=network
+  - --filesystem=xdg-run/pipewire-0:ro
+  - --device=dri
+  - --filesystem=xdg-data/icons:ro
+  - --filesystem=/usr/share/icons:ro
+  - --talk-name=org.freedesktop.secrets
+  - --env=FLUTTER_ASSETS=/app/bin/data/flutter_assets
+  - --env=FLUTTER_ICU_DATA_FILE=/app/bin/icudtl.dat
+  - --env=LD_LIBRARY_PATH=/app/lib
+
+modules:
+  - name: mpv
+    buildsystem: meson
+    config-opts:
+      - -Dlibmpv=true
+      - -Dcplayer=false
+      - -Dbuild-date=false
+      - -Dmanpage-build=disabled
+      - -Dvaapi=enabled
+      - -Dpulse=enabled
+      - -Dalsa=enabled
+      - --libdir=/app/lib
+    cleanup:
+      - /lib/pkgconfig
+      - /share
+      - /include
+    sources:
+      - type: git
+        url: https://github.com/mpv-player/mpv.git
+        tag: v0.39.0
+        commit: a0fba7be57f3822d967b04f0f6b6d6341e7516e7
+
+    modules:
+      - name: libass
+        config-opts:
+          - --enable-shared
+          - --disable-static
+          - --libdir=/app/lib
+        cleanup:
+          - /lib/*.la
+          - /lib/pkgconfig
+          - /include
+        sources:
+          - type: git
+            url: https://github.com/libass/libass.git
+            tag: 0.17.3
+            commit: e46aedea0a0d17da4c4ef49d84b94a7994664ab5
+
+      - name: libplacebo
+        buildsystem: meson
+        config-opts:
+          - -Dvulkan=enabled
+          - -Dshaderc=enabled
+          - --libdir=/app/lib
+        sources:
+          - type: git
+            url: https://code.videolan.org/videolan/libplacebo.git
+            tag: v7.349.0
+            commit: 1fd3c7bde7b943fe8985c893310b5269a09b46c5
+
+  - name: selftube
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/bin
+      - cp -r build/linux/x64/release/bundle/* /app/bin/
+      - chmod +x /app/bin/Self.Tube
+
+      - mkdir -p /app/share/applications
+      - cp flatpak/SelfTube.desktop /app/share/applications/
+
+      - mkdir -p /app/share/icons/hicolor/512x512/apps 
+      - mkdir -p /app/share/icons/hicolor/128x128/apps 
+      - mkdir -p /app/share/icons/hicolor/64x64/apps
+
+      - cp flatpak/icons/512/com.wreckingbang.selftube.png /app/share/icons/hicolor/512x512/apps/
+      - cp flatpak/icons/128/com.wreckingbang.selftube.png /app/share/icons/hicolor/128x128/apps/
+      - cp flatpak/icons/64/com.wreckingbang.selftube.png  /app/share/icons/hicolor/64x64/apps/
+
+    sources:
+      - type: dir
+        path: ..
