@@ -38,5 +38,5 @@ flutter:
   generate: true
   uses-material-design: true
   assets:
-  - assets/appicon.png
-  - assets/appicon_filled.png
+    - assets/appicon.png
+    - assets/appicon_filled.png

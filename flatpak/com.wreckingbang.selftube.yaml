@@ -87,7 +87,7 @@ modules:
       - chmod +x /app/bin/Self.Tube
 
       - mkdir -p /app/share/applications
-      - cp flatpak/SelfTube.desktop /app/share/applications/
+      - cp flatpak/com.wreckingbang.selftube.desktop /app/share/applications/
 
       - mkdir -p /app/share/icons/hicolor/512x512/apps 
       - mkdir -p /app/share/icons/hicolor/128x128/apps 

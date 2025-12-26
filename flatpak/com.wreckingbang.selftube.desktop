@@ -1,10 +1,11 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Name=Self.Tube
-StartupWMClass=com.wreckingbang.selftube
 Comment=A TubeArchivist Client.
 Exec=Self.Tube
 Icon=com.wreckingbang.selftube
 Terminal=false
 Type=Application
 Categories=Entertainment;
+StartupWMClass=com.wreckingbang.selftube
+X-Flatpak=com.wreckingbang.selftube
