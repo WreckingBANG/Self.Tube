@@ -9,11 +9,15 @@ jobs:
     runs-on: codeberg-aarch64-1
     container: 
       image: ubuntu:22.04
-    arch: arm64
     steps:
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+      - name: Setup Node
+        run: |
+          apt update
+          apt install -y curl
+          curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+          apt install -y nodejs
+          node -v
+          npm -v
       - uses: actions/checkout@v6
       - name: Setup Flatpak
         run: |
@@ -27,7 +31,7 @@ jobs:
         run: |
           cd "$GITHUB_WORKSPACE"
           apt update
-          apt install -y cmake ninja-build clang pkg-config libgtk-3-dev build-essential
+          apt install -y cmake ninja-build clang pkg-config libgtk-3-dev build-essential unzip libmpv-dev libasound2-dev libsecret-1-dev git
           git clone https://github.com/flutter/flutter.git -b stable
           export PATH="$GITHUB_WORKSPACE/flutter/bin:$PATH"
           export PATH="$GITHUB_WORKSPACE/flutter/bin/cache/dart-sdk/bin:$PATH"
@@ -45,6 +49,7 @@ jobs:
       - name: Build Flatpak
         run: |
           cd "$GITHUB_WORKSPACE/flatpak"
+          git config --global protocol.file.allow always
           flatpak-builder --disable-rofiles-fuse build-dir com.wreckingbang.selftube.yaml --force-clean --repo=repo
           flatpak build-bundle repo selftube.flatpak com.wreckingbang.selftube
           mv $GITHUB_WORKSPACE/flatpak/selftube.flatpak $GITHUB_WORKSPACE/flatpak/selftube-linux-aarch64.flatpak
@@ -59,11 +64,15 @@ jobs:
     runs-on: codeberg-x86-1
     container: 
       image: ubuntu:22.04
-    arch: x64
     steps:
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+      - name: Setup Node
+        run: |
+          apt update
+          apt install -y curl
+          curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+          apt install -y nodejs
+          node -v
+          npm -v
       - uses: actions/checkout@v6
       - name: Setup Flatpak
         run: |
@@ -77,7 +86,7 @@ jobs:
         run: |
           cd "$GITHUB_WORKSPACE"
           apt update
-          apt install -y cmake ninja-build clang pkg-config libgtk-3-dev build-essential
+          apt install -y cmake ninja-build clang pkg-config libgtk-3-dev build-essential unzip libmpv-dev libasound2-dev libsecret-1-dev git
           git clone https://github.com/flutter/flutter.git -b stable
           export PATH="$GITHUB_WORKSPACE/flutter/bin:$PATH"
           export PATH="$GITHUB_WORKSPACE/flutter/bin/cache/dart-sdk/bin:$PATH"
@@ -95,6 +104,7 @@ jobs:
       - name: Build Flatpak
         run: |
           cd "$GITHUB_WORKSPACE/flatpak"
+          git config --global protocol.file.allow always
           flatpak-builder --disable-rofiles-fuse build-dir com.wreckingbang.selftube.yaml --force-clean --repo=repo
           flatpak build-bundle repo selftube.flatpak com.wreckingbang.selftube
           mv $GITHUB_WORKSPACE/flatpak/selftube.flatpak $GITHUB_WORKSPACE/flatpak/selftube-linux-86_x64.flatpak
@@ -109,11 +119,15 @@ jobs:
     runs-on: codeberg-x86-2
     container: 
       image: ubuntu:22.04
-    arch: x64
     steps:
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+      - name: Setup Node
+        run: |
+          apt update
+          apt install -y curl
+          curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+          apt install -y nodejs
+          node -v
+          npm -v
       - uses: actions/checkout@v6
       - uses: actions/setup-java@v5 
         with: 
@@ -140,6 +154,8 @@ jobs:
       - name: Setup Flutter
         run: |
           cd "$GITHUB_WORKSPACE"
+          apt update
+          apt install -y cmake ninja-build clang pkg-config libgtk-3-dev build-essential unzip libmpv-dev libasound2-dev libsecret-1-dev git
           git clone https://github.com/flutter/flutter.git -b stable
           export PATH="$GITHUB_WORKSPACE/flutter/bin:$PATH"
           export PATH="$GITHUB_WORKSPACE/flutter/bin/cache/dart-sdk/bin:$PATH"
