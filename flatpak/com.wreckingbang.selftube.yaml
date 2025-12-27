@@ -83,7 +83,7 @@ modules:
     buildsystem: simple
     build-commands:
       - mkdir -p /app/bin
-      - cp -r build/linux/x64/release/bundle/* /app/bin/
+      - cp -r build/linux/*/release/bundle/* /app/bin/
       - chmod +x /app/bin/Self.Tube
 
       - mkdir -p /app/share/applications
@@ -96,7 +96,6 @@ modules:
       - cp flatpak/icons/512/com.wreckingbang.selftube.png /app/share/icons/hicolor/512x512/apps/
       - cp flatpak/icons/128/com.wreckingbang.selftube.png /app/share/icons/hicolor/128x128/apps/
       - cp flatpak/icons/64/com.wreckingbang.selftube.png  /app/share/icons/hicolor/64x64/apps/
-
     sources:
       - type: dir
         path: ..
