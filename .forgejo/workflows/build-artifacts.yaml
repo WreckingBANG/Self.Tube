@@ -8,11 +8,15 @@ jobs:
   build_flatpak-aarch64:
     runs-on: codeberg-aarch64-1
     container: 
-      image: ubuntu:22.04
+      image: ubuntu:24.04
     steps:
       - name: Setup Node
         run: |
+          export DEBIAN_FRONTEND=noninteractive
+          ln -fs /usr/share/zoneinfo/UTC /etc/localtime
           apt update
+          apt install -y tzdata
+          dpkg-reconfigure --frontend noninteractive tzdata
           apt install -y curl
           curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
           apt install -y nodejs
@@ -63,11 +67,15 @@ jobs:
   build_flatpak-86_x64:
     runs-on: codeberg-x86-1
     container: 
-      image: ubuntu:22.04
+      image: ubuntu:24.04
     steps:
       - name: Setup Node
         run: |
+          export DEBIAN_FRONTEND=noninteractive
+          ln -fs /usr/share/zoneinfo/UTC /etc/localtime
           apt update
+          apt install -y tzdata
+          dpkg-reconfigure --frontend noninteractive tzdata
           apt install -y curl
           curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
           apt install -y nodejs
@@ -118,11 +126,15 @@ jobs:
   build_apk:
     runs-on: codeberg-x86-2
     container: 
-      image: ubuntu:22.04
+      image: ubuntu:24.04
     steps:
       - name: Setup Node
         run: |
+          export DEBIAN_FRONTEND=noninteractive
+          ln -fs /usr/share/zoneinfo/UTC /etc/localtime
           apt update
+          apt install -y tzdata
+          dpkg-reconfigure --frontend noninteractive tzdata
           apt install -y curl
           curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
           apt install -y nodejs
