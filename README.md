@@ -20,7 +20,7 @@ With a streamlined interface and direct connection to your TubeArchivist server,
 - [x]  Stream directly from your server
 - [x]  Android phone support
 - [x]  Sponsorblock support
-- [ ]  Linux phone support ([#1](https://codeberg.org/WreckingBANG/Self.Tube/issues/1))
+- [X]  Linux phone support (tested with PostmarketOS)
 - [ ]  Subtitle support ([#6](https://codeberg.org/WreckingBANG/Self.Tube/issues/6))
 - [ ]  Library management ([#15](https://codeberg.org/WreckingBANG/Self.Tube/issues/15))
 - [ ]  Offline playback ([#23](https://codeberg.org/WreckingBANG/Self.Tube/issues/23))
@@ -31,30 +31,7 @@ With a streamlined interface and direct connection to your TubeArchivist server,
 ## Why Self.Tube
 
 TubeArchivist is amazing for archiving, but it’s built for use in a Web-Browser. Self.Tube fills the gap by giving you a native app experience tailored for mobile devices. It’s open-source, privacy-respecting, and built for power users who want full control of their media.
-## Building
 
-You can build and run Self.Tube using the provided Nix Flake setup. This ensures a reproducible development environment with all dependencies preconfigured.
-
-### Prerequisites
-- Install [Nix](https://nixos.org/download)
-- Enable experimental features for flakes and the `nix develop` command
-
-### Steps
-
-```bash
-1. Install Nix (if not already installed)
-    → https://nixos.org/download
-
-2. Clone the repository
-   git clone https://codeberg.org/wreckingbang/self.tube
-   cd self.tube
-
-3. Enter the development shell using flakes
-   nix develop --experimental-features 'nix-command flakes'
-
-4. Run the app with Flutter
-   flutter run
-```
 ## Contributing
 
 Every help is welcome. Feel free to open issues, suggest improvements, or submit pull requests.
