@@ -104,6 +104,11 @@ class AboutScreen extends StatelessWidget {
         "license": "BSD-3-Clause",
         "url": "https://github.com/juliansteenbakker/flutter_secure_storage/blob/develop/flutter_secure_storage/LICENSE"
       },
+      {
+        "name": "window_manager",
+        "license": "MIT",
+        "url": "https://github.com/leanflutter/window_manager/blob/main/LICENSE"
+      },
     ];
 
     return Scaffold(
