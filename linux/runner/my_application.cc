@@ -5,6 +5,9 @@
 #include <gdk/gdkx.h>
 #endif
 
+#include <stdlib.h>
+#include <string.h>
+
 #include "flutter/generated_plugin_registrant.h"
 
 struct _MyApplication {
@@ -19,6 +22,22 @@ static void first_frame_cb(MyApplication* self, FlView *view)
 {
   gtk_widget_show(gtk_widget_get_toplevel(GTK_WIDGET(view)));
 }
+
+static bool is_mobile_env() {
+  const char* desktop = getenv("XDG_CURRENT_DESKTOP");
+  if (!desktop) return false;
+
+  return strstr(desktop, "phosh") ||
+         strstr(desktop, "Phosh") ||
+         strstr(desktop, "Phosh:GNOME") ||
+         strstr(desktop, "plasma-mobile") ||
+         strstr(desktop, "lomiri") ||
+         strstr(desktop, "GNOME-Mobile") || 
+         strstr(desktop, "GNOME Mobile") || 
+         strstr(desktop, "GNOME-Shell-Mobile") || 
+         strstr(desktop, "GNOME Shell Mobile");
+}
+
 
 // Implements GApplication::activate.
 static void my_application_activate(GApplication* application) {
@@ -45,15 +64,22 @@ static void my_application_activate(GApplication* application) {
     }
   }
 #endif
-  if (use_header_bar) {
-    GtkHeaderBar* header_bar = GTK_HEADER_BAR(gtk_header_bar_new());
-    gtk_widget_show(GTK_WIDGET(header_bar));
-    gtk_header_bar_set_title(header_bar, "Self.Tube");
-    gtk_header_bar_set_show_close_button(header_bar, TRUE);
-    gtk_window_set_titlebar(window, GTK_WIDGET(header_bar));
+  if (is_mobile_env()) {
+      // Remove all window decorations (no native title bar at all)
+      gtk_window_set_decorated(window, FALSE);
+      gtk_window_set_titlebar(window, NULL);
+      gtk_window_set_title(window, "Self.Tube");
+  } else if (use_header_bar) {
+      GtkHeaderBar* header_bar = GTK_HEADER_BAR(gtk_header_bar_new());
+      gtk_widget_show(GTK_WIDGET(header_bar));
+      gtk_header_bar_set_title(header_bar, "Self.Tube");
+      gtk_header_bar_set_show_close_button(header_bar, TRUE);
+      gtk_window_set_titlebar(window, GTK_WIDGET(header_bar));
   } else {
-    gtk_window_set_title(window, "Self.Tube");
+      gtk_window_set_title(window, "Self.Tube");
   }
+
+
 
   gtk_window_set_default_size(window, 1280, 720);
 

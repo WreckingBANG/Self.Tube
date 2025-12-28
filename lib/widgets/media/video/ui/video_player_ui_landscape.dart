@@ -7,6 +7,7 @@ import '../video_player_interface.dart';
 import 'overlays/gesture_message.dart';
 import 'overlays/gesture_controls_overlay.dart';
 import 'overlays/center_controls_overlay.dart';
+import 'package:window_manager/window_manager.dart';
 
 class VideoPlayerLandscapeUI extends StatefulWidget {
   final MediaPlayer player;
@@ -55,6 +56,7 @@ class _VideoPlayerLandscapeUIState extends State<VideoPlayerLandscapeUI> {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
+    windowManager.setFullScreen(true);
   }
 
   void _toggleControls() {
@@ -84,6 +86,7 @@ class _VideoPlayerLandscapeUIState extends State<VideoPlayerLandscapeUI> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    windowManager.setFullScreen(false);
     super.dispose();
   }
 
