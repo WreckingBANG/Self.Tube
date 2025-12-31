@@ -2,12 +2,11 @@ import 'dart:async';
 import 'overlays/bottom_controls_overlay.dart';
 import 'overlays/top_controls_overlay.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../video_player_interface.dart';
 import 'overlays/gesture_message.dart';
 import 'overlays/gesture_controls_overlay.dart';
 import 'overlays/center_controls_overlay.dart';
-import 'package:window_manager/window_manager.dart';
+import 'package:Self.Tube/services/device_service.dart';
 
 class VideoPlayerLandscapeUI extends StatefulWidget {
   final MediaPlayer player;
@@ -51,42 +50,31 @@ class _VideoPlayerLandscapeUIState extends State<VideoPlayerLandscapeUI> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-    windowManager.setFullScreen(true);
+    DeviceService.setFullScreen(true);
   }
 
   void _toggleControls() {
     if (_showControls) {
       _hideTimer?.cancel();
       setState(() => _showControls = false);
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+      DeviceService.showSystemUI(false);
     } else {
       setState(() => _showControls = true);
       _hideTimer?.cancel();
       _hideTimer = Timer(const Duration(seconds: 3), () {
         if (mounted) {
           setState(() => _showControls = false);
-          // Hide again when auto‑closing
-          SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+          DeviceService.showSystemUI(false);
         }
       });
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+      DeviceService.showSystemUI(true);
     }
   }
 
   @override
   void dispose() {
     _hideTimer?.cancel();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-    windowManager.setFullScreen(false);
+    DeviceService.setFullScreen(false);
     super.dispose();
   }
 

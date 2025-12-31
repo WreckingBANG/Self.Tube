@@ -1,3 +1,4 @@
+import 'package:Self.Tube/services/device_service.dart';
 import 'package:Self.Tube/services/settings_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -12,6 +13,7 @@ import 'misc/theme.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SettingsService.load();
+  await DeviceService.init();
   MediaKit.ensureInitialized();
   runApp(const MyApp());
 }

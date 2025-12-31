@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:Self.Tube/services/api/video_api.dart';
+import 'package:Self.Tube/services/device_service.dart';
 import 'package:flutter/material.dart';
 import 'video_player_interface.dart';
 import 'video_player_factory.dart';
@@ -7,7 +8,6 @@ import 'package:Self.Tube/services/settings_service.dart';
 import 'package:Self.Tube/utils/duration_formatter.dart';
 import 'ui/video_player_ui_vertical.dart';
 import 'package:Self.Tube/services/api/api_headers.dart';
-import 'package:wakelock_plus/wakelock_plus.dart';
 
 class CustomVideoPlayer extends StatefulWidget {
   final String videoTitle;
@@ -48,7 +48,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   @override
   void initState() {
     super.initState();
-    WakelockPlus.enable();
+    DeviceService.setWakeLock(true);
     _player = MediaPlayerFactory.create(
       '$baseUrl${widget.videoUrl}',
       headers: ApiHeaders.authHeaders()
@@ -143,7 +143,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
 
   @override
   void dispose() {
-    WakelockPlus.disable();
+    DeviceService.setWakeLock(false);
     _positionSubscription?.cancel();
     VideoApi.setVideoProgress(widget.youtubeId, _lastReportedPosition.inSeconds);
     _player.dispose();

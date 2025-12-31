@@ -1,10 +1,10 @@
 import 'dart:async';
+import 'dart:io';
+import 'package:Self.Tube/services/device_service.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/widgets/media/video/video_player_interface.dart';
 import 'package:Self.Tube/services/settings_service.dart';
-import 'package:screen_brightness/screen_brightness.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
-import 'package:volume_controller/volume_controller.dart';
 
 class GestureControlsOverlay extends StatefulWidget {
   final MediaPlayer player;
@@ -25,35 +25,18 @@ class GestureControlsOverlay extends StatefulWidget {
 }
 
 class _GestureControlsOverlayState extends State<GestureControlsOverlay> {
-  late final VolumeController _volumeController;
-  double _currentBrightness = 0;
   double _dragAccumulator = 0;
   int _pendingSkipSeconds = 0;
   Timer? _skipTimer;
   
   @override
   void initState() {
-    _initBrightness();
-    _volumeController = VolumeController.instance;
-    _volumeController.showSystemUI = false;
     super.initState();
   }
 
   @override
   void dispose() {
-    ScreenBrightness.instance.setAutoReset(true);
-    ScreenBrightness.instance.resetApplicationScreenBrightness();
     super.dispose();
-  }
-
-
-  Future<void> _initBrightness() async {
-    final value = await ScreenBrightness.instance.system;
-    if (mounted) {
-      setState(() {
-        _currentBrightness = value;
-      });
-    }
   }
 
   @override
@@ -65,18 +48,19 @@ class _GestureControlsOverlayState extends State<GestureControlsOverlay> {
           // Left zone
           Expanded(
             child: GestureDetector(
-              onVerticalDragUpdate: (details) {
-                if (SettingsService.vpGestureSwipe!=false && widget.fullscreen == true) {
+              onVerticalDragUpdate: (details) async {
+                if (SettingsService.vpGestureSwipe!=false && widget.fullscreen == true && Platform.isAndroid) {
                   _dragAccumulator += details.delta.dy;
+                  double brightness = await DeviceService.getBrightness() ?? 0.0;
                   if (_dragAccumulator <= -10) {
-                    _currentBrightness = (_currentBrightness + 0.05).clamp(0.0, 1.0);
-                    ScreenBrightness.instance.setApplicationScreenBrightness(_currentBrightness);
-                    widget.onShowMessage("${localizations.playerBrightness} ${(_currentBrightness * 100).round()}%", Icons.brightness_5_rounded);
+                    brightness = (brightness + 0.05).clamp(0.0, 1.0);
+                    DeviceService.setBrightness(brightness);
+                    widget.onShowMessage("${localizations.playerBrightness} ${(brightness * 100).round()}%", Icons.brightness_5_rounded);
                     _dragAccumulator = 0;
                   } else if (_dragAccumulator >= 10) {
-                    _currentBrightness = (_currentBrightness - 0.05).clamp(0.0, 1.0);
-                    ScreenBrightness.instance.setApplicationScreenBrightness(_currentBrightness);
-                    widget.onShowMessage("${localizations.playerBrightness} ${(_currentBrightness * 100).round()}%", Icons.brightness_5_rounded);
+                    brightness = (brightness - 0.05).clamp(0.0, 1.0);
+                    DeviceService.setBrightness(brightness);
+                    widget.onShowMessage("${localizations.playerBrightness} ${(brightness * 100).round()}%", Icons.brightness_5_rounded);
                     _dragAccumulator = 0;
                   }
                 }
@@ -137,13 +121,13 @@ class _GestureControlsOverlayState extends State<GestureControlsOverlay> {
                 if (SettingsService.vpGestureSwipe!=false && widget.fullscreen == true) {
                   _dragAccumulator += details.delta.dy;
                   if (_dragAccumulator <= -10) {
-                    double current = await _volumeController.getVolume();
-                    _volumeController.setVolume((current + 0.05).clamp(0.0, 1.0));
+                    double current = await DeviceService.getVolume() ?? 0.0;
+                    DeviceService.setVolume((current + 0.05).clamp(0.0, 1.0));
                     widget.onShowMessage("${localizations.playerVolume} ${(current + 0.05).clamp(0.0, 1.0) * 100 ~/ 1}%", Icons.volume_up_rounded);
                     _dragAccumulator = 0;
                   } else if (_dragAccumulator >= 10) {
-                    double current = await _volumeController.getVolume();
-                    _volumeController.setVolume((current - 0.05).clamp(0.0, 1.0));
+                    double current = await DeviceService.getVolume() ?? 0.0;
+                    DeviceService.setVolume((current - 0.05).clamp(0.0, 1.0));
                     widget.onShowMessage("${localizations.playerVolume} ${(current + 0.05).clamp(0.0, 1.0) * 100 ~/ 1}%", Icons.volume_down_rounded);
                     _dragAccumulator = 0;
                   }
