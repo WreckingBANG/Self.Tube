@@ -35,6 +35,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   late final MediaPlayer _player;
   Duration _lastReportedPosition = Duration.zero;
   StreamSubscription<Duration>? _positionSubscription;
+  bool _restoringInitialPosition = true;
 
   Duration _lastCheck = Duration.zero;
   final Duration _checkInterval = const Duration(milliseconds: 1000);
@@ -66,8 +67,6 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
     };
 
     _positionSubscription = _player.positionStream.listen(_onPosition);
-
-    _player.play();
   }
 
   void _onPosition(Duration position) {
@@ -79,10 +78,12 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
     final seconds = position.inSeconds;
 
     // restore starting position once
-    if (widget.videoPosition > 0 &&
-        _lastReportedPosition == Duration.zero &&
+    if (_restoringInitialPosition &&
+        widget.videoPosition > 0 &&
         seconds > 0) {
+      _restoringInitialPosition = false;
       _player.seek(Duration(seconds: widget.videoPosition.toInt()));
+      return;
     }
 
     // progress reporting every 10s

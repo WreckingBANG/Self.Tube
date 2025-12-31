@@ -57,17 +57,17 @@ class _VideoPlayerLandscapeUIState extends State<VideoPlayerLandscapeUI> {
     if (_showControls) {
       _hideTimer?.cancel();
       setState(() => _showControls = false);
-      DeviceService.showSystemUI(false);
+      DeviceService.showSystemUI(true);
     } else {
       setState(() => _showControls = true);
       _hideTimer?.cancel();
       _hideTimer = Timer(const Duration(seconds: 3), () {
         if (mounted) {
           setState(() => _showControls = false);
-          DeviceService.showSystemUI(false);
+          DeviceService.showSystemUI(true);
         }
       });
-      DeviceService.showSystemUI(true);
+      DeviceService.showSystemUI(false);
     }
   }
 

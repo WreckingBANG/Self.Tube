@@ -11,7 +11,10 @@ class VideoPlayerAdapter implements MediaPlayer {
           Uri.parse(url),
           httpHeaders: headers ?? const {},
         ) {
-    _initializeFuture = _controller.initialize();
+    _initializeFuture = _controller.initialize().then((_) async {
+      await _controller.seekTo(const Duration(milliseconds: 1));
+      _controller.play();
+    });
   }
 
   @override
