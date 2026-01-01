@@ -883,6 +883,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Skipped {category} from {start} to {end}'**
   String playerSBSkipped(Object category, Object end, Object start);
+
+  /// No description provided for @playerRepeat.
+  ///
+  /// In en, this message translates to:
+  /// **'Repeat'**
+  String get playerRepeat;
+
+  /// No description provided for @playerBorderMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Border Mode'**
+  String get playerBorderMode;
+
+  /// No description provided for @playerBorderModeContain.
+  ///
+  /// In en, this message translates to:
+  /// **'Contain (Black Bars)'**
+  String get playerBorderModeContain;
+
+  /// No description provided for @playerBorderModeCover.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover (Crop)'**
+  String get playerBorderModeCover;
+
+  /// No description provided for @playerBorderModeStretch.
+  ///
+  /// In en, this message translates to:
+  /// **'Stretch'**
+  String get playerBorderModeStretch;
+
+  /// No description provided for @playerPlaybackSpeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Playback Speed'**
+  String get playerPlaybackSpeed;
 }
 
 class _AppLocalizationsDelegate

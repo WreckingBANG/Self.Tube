@@ -130,5 +130,11 @@
   "playerPaused": "Paused",
   "playerPlay": "Play",
   "playerVolume": "Volume",
-  "playerSBSkipped": "Skipped {category} from {start} to {end}"
+  "playerSBSkipped": "Skipped {category} from {start} to {end}",
+  "playerRepeat": "Repeat",
+  "playerBorderMode": "Border Mode",
+  "playerBorderModeContain": "Contain (Black Bars)",
+  "playerBorderModeCover": "Cover (Crop)",
+  "playerBorderModeStretch": "Stretch",
+  "playerPlaybackSpeed": "Playback Speed"
 }

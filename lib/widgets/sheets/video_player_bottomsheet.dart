@@ -1,46 +1,87 @@
+import 'package:Self.Tube/widgets/media/video/video_player_interface.dart';
 import 'package:flutter/material.dart';
 import './bottomsheet_template.dart';
 import 'package:Self.Tube/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
 Future<void> showVideoPlayerBottomSheet({
   required BuildContext context,
-
+  required MediaPlayer player,
   String? title,
 }) {
+  final localizations = AppLocalizations.of(context)!;
   return showBottomSheetTemplate(
     context: context, 
     children: [
       ListSectionContainer(
         children: [
-          ListTile(
-            leading: Icon(Icons.repeat_rounded),
-            title: Text("Repeat mode"),
-            subtitle: Text("None"),
-            onTap: () {},
+          ValueListenableBuilder<bool>(
+            valueListenable: player.repeatNotifier,
+            builder: (context, repeat, _) {
+              return SwitchListTile(
+                secondary: Icon(Icons.repeat_rounded),
+                title: Text(localizations.playerRepeat),
+                value: repeat,
+                onChanged: (value) => player.setRepeat(value),
+                thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.selected)) {
+                      return const Icon(Icons.check);
+                    }
+                    return const Icon(Icons.close);
+                  },
+                ),
+              );
+            },
           ),
-          ListTile(
-            leading: Icon(Icons.fit_screen_rounded),
-            title: Text("Border Mode"),
-            subtitle: Text("Fit-Screen"),
-            onTap: () {},
+          ValueListenableBuilder<BorderMode>(
+            valueListenable: player.borderModeNotifier,
+            builder: (context, mode, _) {
+              return ListTile(
+                title: Text(localizations.playerBorderMode),
+                leading: Icon(Icons.fit_screen_rounded),
+                trailing: DropdownButton<BorderMode>(
+                  value: mode,
+                  underline: const SizedBox(),
+                  items: [
+                    DropdownMenuItem(
+                      value: BorderMode.contain,
+                      child: Text(localizations.playerBorderModeContain),
+                    ),
+                    DropdownMenuItem(
+                      value: BorderMode.cover,
+                      child: Text(localizations.playerBorderModeCover),
+                    ),
+                    DropdownMenuItem(
+                      value: BorderMode.stretch,
+                      child: Text(localizations.playerBorderModeStretch),
+                    ),
+                  ],
+                  onChanged: (value) => player.setBorderMode(value!),
+                ),
+              );
+            },
           ),
-          ListTile(
-            leading: Icon(Icons.speed),
-            title: Text("Playback Speed"),
-            subtitle: Text("1.0x"),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.high_quality_outlined),
-            title: Text("Quality"),
-            subtitle: Text("Default - TubeArchivist"),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.subtitles_rounded),
-            title: Text("Subtitles"),
-            subtitle: Text("Coming Soon"),
-            onTap: () {},
+          ValueListenableBuilder<PlaybackSpeed>(
+            valueListenable: player.speedNotifier,
+            builder: (context, speed, _) {
+              return ListTile(
+                leading: Icon(Icons.speed),
+                title: Text(localizations.playerPlaybackSpeed),
+                trailing: DropdownButton<PlaybackSpeed>(
+                  value: speed,
+                  underline: const SizedBox(),
+                  isDense: true,
+                  items: PlaybackSpeed.values.map((s) {
+                    return DropdownMenuItem(
+                      value: s,
+                      child: Text("${s.value}x"),
+                    );
+                  }).toList(),
+                  onChanged: (value) => player.setPlaybackSpeed(value!),
+                ),
+              );
+            },
           ),
         ],
       )

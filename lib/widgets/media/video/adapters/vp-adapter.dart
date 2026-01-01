@@ -16,6 +16,10 @@ class VideoPlayerAdapter implements MediaPlayer {
   int _lastEmitMs = 0;
   bool _disposed = false;
 
+  final ValueNotifier<bool> _repeatNotifier = ValueNotifier(false);
+  final ValueNotifier<BorderMode> _borderModeNotifier = ValueNotifier(BorderMode.contain);
+  final ValueNotifier<PlaybackSpeed> _speedNotifier = ValueNotifier(PlaybackSpeed.x1_0);
+
   VideoPlayerAdapter(String url, {Map<String, String>? headers})
       : _controller = VideoPlayerController.networkUrl(
           Uri.parse(url),
@@ -48,6 +52,11 @@ class VideoPlayerAdapter implements MediaPlayer {
       _playingController.add(value.isPlaying);
     }
 
+    if (_repeatNotifier.value && value.position >= value.duration) { 
+      _controller.seekTo(Duration.zero); 
+      _controller.play(); 
+    }
+
     final nowMs = DateTime.now().millisecondsSinceEpoch;
     if (nowMs - _lastEmitMs >= 150) {
       if (value.position != _lastPosition) {
@@ -60,20 +69,38 @@ class VideoPlayerAdapter implements MediaPlayer {
 
   @override
   Widget buildView() {
-    return FutureBuilder(
-      future: _initializeFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done &&
-            _controller.value.isInitialized) {
-          return AspectRatio(
-            aspectRatio: _controller.value.aspectRatio,
-            child: VideoPlayer(_controller),
-          );
-        } else {
-          return const Center(child: CircularProgressIndicator());
+    return ValueListenableBuilder<BorderMode>(
+      valueListenable: _borderModeNotifier,
+      builder: (context, mode, _) {
+        if (!_controller.value.isInitialized) {
+          return const SizedBox.shrink();
         }
+
+        final size = _controller.value.size;
+
+        return SizedBox.expand(
+          child: FittedBox(
+            fit: _mapBorderMode(mode),
+            child: SizedBox(
+              width: size.width,
+              height: size.height,
+              child: VideoPlayer(_controller),
+            ),
+          ),
+        );
       },
     );
+  }
+
+  BoxFit _mapBorderMode(BorderMode mode) {
+    switch (mode) {
+      case BorderMode.contain:
+        return BoxFit.contain;
+      case BorderMode.cover:
+        return BoxFit.cover;
+      case BorderMode.stretch:
+        return BoxFit.fill;
+    }
   }
 
   @override
@@ -105,6 +132,31 @@ class VideoPlayerAdapter implements MediaPlayer {
 
   @override
   bool get isPlaying => _controller.value.isPlaying;
+
+  @override 
+  ValueNotifier<bool> get repeatNotifier => _repeatNotifier;
+
+  @override
+  Future<void> setRepeat(bool value) async {
+    _repeatNotifier.value = value;
+  }
+
+  @override 
+  ValueNotifier<BorderMode> get borderModeNotifier => _borderModeNotifier; 
+  
+  @override 
+  Future<void> setBorderMode(BorderMode mode) async { 
+    _borderModeNotifier.value = mode; 
+  } 
+
+  @override
+  ValueNotifier<PlaybackSpeed> get speedNotifier => _speedNotifier;
+
+  @override
+  Future<void> setPlaybackSpeed(PlaybackSpeed speed) async {
+    _speedNotifier.value = speed;
+    await _controller.setPlaybackSpeed(speed.value);
+  }
 
   @override
   void dispose() {

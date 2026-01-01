@@ -130,5 +130,11 @@
   "playerPaused": "Pausiert",
   "playerPlay": "Abspielen",
   "playerVolume": "Lautstärke",
-  "playerSBSkipped": "{category} übersprungen von {start} bis {end}"
+  "playerSBSkipped": "{category} übersprungen von {start} bis {end}",
+  "playerRepeat": "Wiederholen",
+  "playerBorderMode": "Darstellungsmodus",
+  "playerBorderModeContain": "Anpassen",
+  "playerBorderModeCover": "Vergrößern",
+  "playerBorderModeStretch": "Ausfüllen",
+  "playerPlaybackSpeed": "Wiedergabegeschwindigkeit"
 }

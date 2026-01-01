@@ -432,4 +432,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String playerSBSkipped(Object category, Object end, Object start) {
     return 'Skipped $category from $start to $end';
   }
+
+  @override
+  String get playerRepeat => 'Repeat';
+
+  @override
+  String get playerBorderMode => 'Border Mode';
+
+  @override
+  String get playerBorderModeContain => 'Contain (Black Bars)';
+
+  @override
+  String get playerBorderModeCover => 'Cover (Crop)';
+
+  @override
+  String get playerBorderModeStretch => 'Stretch';
+
+  @override
+  String get playerPlaybackSpeed => 'Playback Speed';
 }

@@ -433,4 +433,22 @@ class AppLocalizationsDe extends AppLocalizations {
   String playerSBSkipped(Object category, Object end, Object start) {
     return '$category übersprungen von $start bis $end';
   }
+
+  @override
+  String get playerRepeat => 'Wiederholen';
+
+  @override
+  String get playerBorderMode => 'Darstellungsmodus';
+
+  @override
+  String get playerBorderModeContain => 'Anpassen';
+
+  @override
+  String get playerBorderModeCover => 'Vergrößern';
+
+  @override
+  String get playerBorderModeStretch => 'Ausfüllen';
+
+  @override
+  String get playerPlaybackSpeed => 'Wiedergabegeschwindigkeit';
 }
