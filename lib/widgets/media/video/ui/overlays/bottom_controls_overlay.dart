@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/widgets/media/video/video_player_interface.dart';
 import 'package:Self.Tube/utils/duration_formatter.dart';
@@ -19,11 +21,22 @@ class BottomControlsOverlay extends StatefulWidget {
 }
 
 class _BottomControlsOverlayState extends State<BottomControlsOverlay> {
+  bool scrubbing = false;
+  final sliderController = StreamController<Duration>.broadcast();
+  Duration sliderpos = Duration();
   
   @override
   void initState() {
     super.initState();
+    sliderpos = widget.player.position;
+    widget.player.positionStream.listen((pos) {
+      if (!scrubbing) {
+        sliderController.add(pos);
+      }
+    });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +60,10 @@ class _BottomControlsOverlayState extends State<BottomControlsOverlay> {
           ),
           // Foreground controls
           StreamBuilder<Duration>(
-            stream: widget.player.positionStream,
+            stream: sliderController.stream,
             initialData: widget.player.position,
             builder: (context, snapshot) {
-              final pos = snapshot.data ?? Duration.zero;
+              final sliderValue = snapshot.data ?? Duration.zero;
               return Padding(
                 padding: const EdgeInsets.only(left: 12, right: 12, bottom: 10),
                 child: Column(
@@ -60,7 +73,7 @@ class _BottomControlsOverlayState extends State<BottomControlsOverlay> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "${formatDuration(pos.inSeconds)} • ${formatDuration(widget.player.duration.inSeconds)}",
+                          "${formatDuration(sliderValue.inSeconds)} • ${formatDuration(widget.player.duration.inSeconds)}",
                           style: const TextStyle(color: Colors.white),
                         ),
                         widget.fullscreen
@@ -85,8 +98,13 @@ class _BottomControlsOverlayState extends State<BottomControlsOverlay> {
                       child: Slider(
                         min: 0,
                         max: widget.player.duration.inSeconds.toDouble(),
-                        value: pos.inSeconds.toDouble(),
+                        value: sliderValue.inSeconds.toDouble(),
                         onChanged: (value) {
+                          scrubbing = true;
+                          sliderController.add(Duration(seconds: value.toInt()));
+                        },
+                        onChangeEnd: (value) {
+                          scrubbing = false;
                           widget.player.seek(Duration(seconds: value.toInt()));
                         },
                       ),

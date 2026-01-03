@@ -6,7 +6,7 @@ import 'video_player_interface.dart';
 import 'video_player_factory.dart';
 import 'package:Self.Tube/services/settings_service.dart';
 import 'package:Self.Tube/utils/duration_formatter.dart';
-import 'ui/video_player_ui_vertical.dart';
+import 'ui/video_player_ui.dart';
 import 'package:Self.Tube/services/api/api_headers.dart';
 
 class CustomVideoPlayer extends StatefulWidget {
@@ -110,7 +110,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
           final messenger = ScaffoldMessenger.of(context);
 
           final snackBar = SnackBar(
-            duration: const Duration(milliseconds: 1500),
+            duration: const Duration(seconds: 3),
             action: SnackBarAction(
               label: "Undo",
               onPressed: () {
@@ -153,7 +153,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return VideoPlayerVerticalUI(
+    return VideoPlayerUI(
       player: _player,
       videoCreator: widget.videoCreator,
       videoTitle: widget.videoTitle,

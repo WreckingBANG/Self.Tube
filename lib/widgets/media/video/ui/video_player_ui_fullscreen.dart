@@ -8,11 +8,11 @@ import 'overlays/gesture_controls_overlay.dart';
 import 'overlays/center_controls_overlay.dart';
 import 'package:Self.Tube/services/device_service.dart';
 
-class VideoPlayerLandscapeUI extends StatefulWidget {
+class VideoPlayerFullscreenUI extends StatefulWidget {
   final MediaPlayer player;
   final String videoTitle;
   final String videoCreator;
-  const VideoPlayerLandscapeUI({
+  const VideoPlayerFullscreenUI({
     super.key,
     required this.player,
     required this.videoTitle,
@@ -20,10 +20,10 @@ class VideoPlayerLandscapeUI extends StatefulWidget {
   });
 
   @override
-  State<VideoPlayerLandscapeUI> createState() => _VideoPlayerLandscapeUIState();
+  State<VideoPlayerFullscreenUI> createState() => _VideoPlayerFullscreenUIState();
 }
 
-class _VideoPlayerLandscapeUIState extends State<VideoPlayerLandscapeUI> {
+class _VideoPlayerFullscreenUIState extends State<VideoPlayerFullscreenUI> {
   bool _showControls = false;
   Timer? _hideTimer;
   String? _gestureMessage;

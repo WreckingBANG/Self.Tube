@@ -1,18 +1,19 @@
 import 'dart:async';
+import 'package:Self.Tube/widgets/media/video/ui/overlays/top_controls_overlay.dart';
 import 'package:flutter/material.dart';
-import 'video_player_ui_landscape.dart';
+import 'video_player_ui_fullscreen.dart';
 import 'overlays/gesture_message.dart';
 import '../video_player_interface.dart';
 import 'overlays/bottom_controls_overlay.dart';
 import 'overlays/gesture_controls_overlay.dart';
 import 'overlays/center_controls_overlay.dart';
 
-class VideoPlayerVerticalUI extends StatefulWidget {
+class VideoPlayerUI extends StatefulWidget {
   final MediaPlayer player;
   final String videoTitle;
   final String videoCreator;
 
-  const VideoPlayerVerticalUI({
+  const VideoPlayerUI({
     super.key,
     required this.player,
     required this.videoTitle,
@@ -20,10 +21,10 @@ class VideoPlayerVerticalUI extends StatefulWidget {
   });
 
   @override
-  State<VideoPlayerVerticalUI> createState() => _VideoPlayerVerticalUIState();
+  State<VideoPlayerUI> createState() => _VideoPlayerUIState();
 }
 
-class _VideoPlayerVerticalUIState extends State<VideoPlayerVerticalUI> {
+class _VideoPlayerUIState extends State<VideoPlayerUI> {
   String? _gestureMessage;
   IconData? _gestureIcon;
   Timer? _messageTimer;
@@ -70,7 +71,7 @@ class _VideoPlayerVerticalUIState extends State<VideoPlayerVerticalUI> {
   void _openFullscreen() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => VideoPlayerLandscapeUI(
+        builder: (_) => VideoPlayerFullscreenUI(
           player: widget.player,
           videoCreator: widget.videoCreator,
           videoTitle: widget.videoTitle,
@@ -94,19 +95,28 @@ class _VideoPlayerVerticalUIState extends State<VideoPlayerVerticalUI> {
       child: Stack(
         children: [
           Center(child: widget.player.buildView()),
-          // Gesture layers & controls
           Stack(
             children: [
-              GestureControlsOverlay(player: widget.player, fullscreen: false, onShowMessage: _showMessage, onOpenFullscreen: _openFullscreen),
+              GestureControlsOverlay(
+                player: widget.player, 
+                fullscreen: false, 
+                onShowMessage: _showMessage, 
+                onOpenFullscreen: _openFullscreen
+              ),
               if (_gestureMessage != null && _gestureIcon != null)
                 GestureMessage(
                   message: _gestureMessage!,
                   icon: _gestureIcon!,
                 ),
-              // Overlay controls
               if (_showControls)
                 Stack(
                   children: [
+                    TopControlsOverlay(
+                      player: widget.player, 
+                      videoCreator: widget.videoCreator, 
+                      videoTitle: widget.videoTitle,
+                      hideTitle: true,
+                    ),
                     CenterControlsOverlay(player: widget.player),  
                     BottomControlsOverlay(
                       player: widget.player, 

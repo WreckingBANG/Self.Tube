@@ -6,12 +6,14 @@ class TopControlsOverlay extends StatefulWidget {
   final MediaPlayer player;
   final String videoTitle;
   final String videoCreator;
+  final bool hideTitle;
 
   const TopControlsOverlay({
     super.key,
     required this.player,
     required this.videoCreator,
-    required this.videoTitle
+    required this.videoTitle,
+    this.hideTitle = false
   });
 
   @override
@@ -50,17 +52,19 @@ class _TopControlsOverlayState extends State<TopControlsOverlay> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      widget.videoTitle,
-                      style: const TextStyle(fontSize: 18),
+                widget.hideTitle
+                  ? SizedBox(width: 1)
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          widget.videoTitle,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                        Text(widget.videoCreator),
+                      ],
                     ),
-                    Text(widget.videoCreator),
-                  ],
-                ),
                 IconButton(
                   onPressed: () {
                     showVideoPlayerBottomSheet(context: context, player: widget.player);
