@@ -925,6 +925,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Playback Speed'**
   String get playerPlaybackSpeed;
+
+  /// No description provided for @chipsOrderAsc.
+  ///
+  /// In en, this message translates to:
+  /// **'Ascending'**
+  String get chipsOrderAsc;
+
+  /// No description provided for @chipsOrderDes.
+  ///
+  /// In en, this message translates to:
+  /// **'Descending'**
+  String get chipsOrderDes;
+
+  /// No description provided for @chipsSortPub.
+  ///
+  /// In en, this message translates to:
+  /// **'Published'**
+  String get chipsSortPub;
+
+  /// No description provided for @chipsSortDow.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloaded'**
+  String get chipsSortDow;
+
+  /// No description provided for @chipsSortVie.
+  ///
+  /// In en, this message translates to:
+  /// **'Views'**
+  String get chipsSortVie;
+
+  /// No description provided for @chipsSortLik.
+  ///
+  /// In en, this message translates to:
+  /// **'Likes'**
+  String get chipsSortLik;
+
+  /// No description provided for @chipsSortDur.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get chipsSortDur;
+
+  /// No description provided for @chipsSortSiz.
+  ///
+  /// In en, this message translates to:
+  /// **'Media Size'**
+  String get chipsSortSiz;
+
+  /// No description provided for @chipsSortWid.
+  ///
+  /// In en, this message translates to:
+  /// **'Width'**
+  String get chipsSortWid;
+
+  /// No description provided for @chipsSortHei.
+  ///
+  /// In en, this message translates to:
+  /// **'Height'**
+  String get chipsSortHei;
+
+  /// No description provided for @chipsTypeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get chipsTypeAll;
+
+  /// No description provided for @chipsTypeVid.
+  ///
+  /// In en, this message translates to:
+  /// **'Videos'**
+  String get chipsTypeVid;
+
+  /// No description provided for @chipsTypeStr.
+  ///
+  /// In en, this message translates to:
+  /// **'Streams'**
+  String get chipsTypeStr;
+
+  /// No description provided for @chipsTypeSho.
+  ///
+  /// In en, this message translates to:
+  /// **'Shorts'**
+  String get chipsTypeSho;
+
+  /// No description provided for @chipsWatchedAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get chipsWatchedAll;
+
+  /// No description provided for @chipsWatchedWat.
+  ///
+  /// In en, this message translates to:
+  /// **'Watched'**
+  String get chipsWatchedWat;
+
+  /// No description provided for @chipsWatchedUnw.
+  ///
+  /// In en, this message translates to:
+  /// **'Unwatched'**
+  String get chipsWatchedUnw;
+
+  /// No description provided for @chipsWatchedCon.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get chipsWatchedCon;
 }
 
 class _AppLocalizationsDelegate

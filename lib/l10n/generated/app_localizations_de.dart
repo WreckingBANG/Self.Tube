@@ -454,4 +454,58 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get playerPlaybackSpeed => 'Wiedergabegeschwindigkeit';
+
+  @override
+  String get chipsOrderAsc => 'Aufsteigend';
+
+  @override
+  String get chipsOrderDes => 'Absteigend';
+
+  @override
+  String get chipsSortPub => 'Veröffentlicht';
+
+  @override
+  String get chipsSortDow => 'Heruntergeladen';
+
+  @override
+  String get chipsSortVie => 'Klicks';
+
+  @override
+  String get chipsSortLik => 'Likes';
+
+  @override
+  String get chipsSortDur => 'Länge';
+
+  @override
+  String get chipsSortSiz => 'Medien-Größe';
+
+  @override
+  String get chipsSortWid => 'Breite';
+
+  @override
+  String get chipsSortHei => 'Höhe';
+
+  @override
+  String get chipsTypeAll => 'Alle';
+
+  @override
+  String get chipsTypeVid => 'Videos';
+
+  @override
+  String get chipsTypeStr => 'Streams';
+
+  @override
+  String get chipsTypeSho => 'Shorts';
+
+  @override
+  String get chipsWatchedAll => 'Alle';
+
+  @override
+  String get chipsWatchedWat => 'Angesehen';
+
+  @override
+  String get chipsWatchedUnw => 'Unangesehen';
+
+  @override
+  String get chipsWatchedCon => 'Weiterschauen';
 }

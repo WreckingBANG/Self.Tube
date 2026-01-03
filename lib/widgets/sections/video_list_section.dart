@@ -1,4 +1,5 @@
 import 'package:Self.Tube/services/api/video_api.dart';
+import 'package:Self.Tube/widgets/sections/sort_chips_section.dart';
 import 'package:flutter/material.dart';
 import '../tiles/video_list_tile.dart';
 import '../../l10n/generated/app_localizations.dart';
@@ -7,6 +8,7 @@ import 'package:Self.Tube/widgets/containers/list_section_container.dart';
 class VideoListSection extends StatefulWidget {
   final String title;
   final bool hideChannel;
+  final bool showSorting;
   final String query;
   final bool hideIfEmpty;
 
@@ -16,6 +18,7 @@ class VideoListSection extends StatefulWidget {
     required this.hideChannel,
     required this.query,
     this.hideIfEmpty = false,
+    this.showSorting = false,
   });
 
   @override
@@ -27,6 +30,8 @@ class _VideoListSectionState extends State<VideoListSection> {
   int currentPage = 1;
   bool isLoading = false;
   bool hasMore = true;
+
+  String sortOptions = "";
 
   @override
   void initState() {
@@ -40,7 +45,7 @@ class _VideoListSectionState extends State<VideoListSection> {
     setState(() => isLoading = true);
 
     try {
-      final newVideos = await VideoApi().fetchVideoList("${widget.query}&page=$currentPage");
+      final newVideos = await VideoApi().fetchVideoList("${widget.query}$sortOptions&page=$currentPage");
 
       if (newVideos != null) {
         setState(() {
@@ -68,13 +73,31 @@ class _VideoListSectionState extends State<VideoListSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 0),
+          child: Text(
+            widget.title,
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondaryContainer),
+          ),
+        ),
+        if (widget.showSorting)
+          SortChipsSection(
+            sortOptions: (value) {
+              setState(() {
+                sortOptions = value;
+                videos.clear();
+                currentPage = 1;
+                hasMore = true;
+              });
+              fetchVideos();
+            },
+          ),
         if (videos.isEmpty && widget.hideIfEmpty && !isLoading)
           const SizedBox.shrink() // do nothing
         else if (videos.isEmpty && !widget.hideIfEmpty && !isLoading)
           Center(child: Text(localizations.errorNoDataFound))
         else
           ListSectionContainer(
-            title: widget.title,
             children: [
               ...List.generate(videos.length, (index) {
                 final video = videos[index];

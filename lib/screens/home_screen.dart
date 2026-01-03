@@ -32,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 VideoListSection(
                   title: localizations.homeLatestVideos,
                   hideChannel: false,
+                  showSorting: true,
                   query: "?order=desc&sort=published&type=videos",
                 ),
               ],
