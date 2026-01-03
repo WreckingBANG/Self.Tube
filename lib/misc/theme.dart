@@ -31,11 +31,6 @@ ThemeData lightThemeFrom(ColorScheme colorScheme) {
       displayLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
       bodyLarge: TextStyle(fontSize: 18),
     ),
-    pageTransitionsTheme: const PageTransitionsTheme(
-      builders: <TargetPlatform, PageTransitionsBuilder>{
-        TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
-      },
-    ),
   );
 }
 
@@ -68,11 +63,6 @@ ThemeData darkThemeFrom(ColorScheme colorScheme) {
     textTheme: const TextTheme(
       displayLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
       bodyLarge: TextStyle(fontSize: 18),
-    ),
-    pageTransitionsTheme: const PageTransitionsTheme(
-      builders: <TargetPlatform, PageTransitionsBuilder>{
-        TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
-      },
     ),
   );
 }

@@ -60,6 +60,7 @@
   "settingsVPUseMediaKitDesc": "Dont change this unless you know what you are doing",
   "searchLabel": "Search...",
   "searchTitle": "Search",
+  "searchTooltip": "Type to search",
   "searchVideos": "Videos",
   "searchChannels": "Channels",
   "searchPlaylists": "Playlists",

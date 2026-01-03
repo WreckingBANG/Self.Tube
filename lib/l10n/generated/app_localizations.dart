@@ -458,6 +458,12 @@ abstract class AppLocalizations {
   /// **'Search'**
   String get searchTitle;
 
+  /// No description provided for @searchTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Type to search'**
+  String get searchTooltip;
+
   /// No description provided for @searchVideos.
   ///
   /// In en, this message translates to:

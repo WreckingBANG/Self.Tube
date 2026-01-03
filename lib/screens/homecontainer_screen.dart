@@ -1,10 +1,10 @@
+import 'package:Self.Tube/widgets/sections/search_section.dart';
 import 'package:flutter/material.dart';
 import '../screens/home_screen.dart';
 import '../screens/channels_screen.dart';
 import '../screens/playlists_screen.dart';
 import '../screens/actions_screen.dart';
 import '../l10n/generated/app_localizations.dart';
-import '../screens/search_screen.dart';
 import 'package:Self.Tube/widgets/sheets/app_settings_bottomsheet.dart';
 
 class HomeContainerScreen extends StatelessWidget {
@@ -33,14 +33,7 @@ class _HomeContainerState extends State<HomeContainer> {
       appBar: AppBar(
         title: Text(localizations.appTitle),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            tooltip: localizations.tooltipSearch,
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SearchScreen()),
-            ),
-          ),
+          SearchScreenWidget(),
           IconButton(
             icon: const Icon(Icons.manage_accounts_outlined),
             tooltip: localizations.tooltipSettings,

@@ -194,6 +194,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get searchTitle => 'Search';
 
   @override
+  String get searchTooltip => 'Type to search';
+
+  @override
   String get searchVideos => 'Videos';
 
   @override

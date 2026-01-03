@@ -60,6 +60,7 @@
   "settingsVPUseMediaKitDesc": "Nur ändern, wenn du dich auskennst",
   "searchLabel": "Suchen...",
   "searchTitle": "Suche",
+  "searchTooltip": "Tippe um zu suchen",
   "searchVideos": "Videos",
   "searchChannels": "Kanäle",
   "searchPlaylists": "Wiedergabelisten",
