@@ -1,14 +1,13 @@
-import 'package:Self.Tube/services/device_service.dart';
-import 'package:Self.Tube/services/settings_service.dart';
+import 'package:Self.Tube/data/services/device_service.dart';
+import 'package:Self.Tube/data/services/settings_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:dynamic_color/dynamic_color.dart';
-import 'l10n/generated/app_localizations.dart';
-import 'screens/homecontainer_screen.dart';
-import 'screens/onboarding/privacypolicy_screen.dart';
+import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'package:Self.Tube/ui/screens/homecontainer_screen.dart';
+import 'package:Self.Tube/ui/screens/onboarding/privacypolicy_screen.dart';
 import 'package:media_kit/media_kit.dart'; 
-import 'misc/theme.dart';
-
+import 'package:Self.Tube/ui/misc/theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
