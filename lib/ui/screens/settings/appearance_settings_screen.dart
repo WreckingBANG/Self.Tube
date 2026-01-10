@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/domain/controllers/appearance_controller.dart';
-import '../../../l10n/generated/app_localizations.dart';
+import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/ui/widgets/containers/list_section_container.dart';
 
 class AppearanceSettingsScreen extends StatefulWidget {

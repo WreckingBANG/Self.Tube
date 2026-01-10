@@ -3,15 +3,11 @@ import 'package:Self.Tube/ui/widgets/sheets/playlist_list_bottomsheet.dart';
 import 'package:Self.Tube/ui/widgets/media/images/custom_network_image.dart';
 import 'package:Self.Tube/ui/screens/channelpage_screen.dart';
 import 'package:Self.Tube/ui/screens/playlistpage_screen.dart';
-import 'package:Self.Tube/data/services/settings_service.dart';
 
 class PlaylistListTile extends StatelessWidget {
   final dynamic playlist;
 
   const PlaylistListTile({super.key, required this.playlist});
-
-  static String? apiToken = SettingsService.apiToken;
-  static String? baseUrl = SettingsService.instanceUrl;
 
   @override
   Widget build(BuildContext context) {

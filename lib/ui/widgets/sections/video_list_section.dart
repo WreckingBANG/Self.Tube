@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/data/services/api/video_api.dart';
+import 'package:Self.Tube/domain/controllers/videolist_controller.dart';
 import 'package:Self.Tube/ui/widgets/sections/sort_chips_section.dart';
 import 'package:Self.Tube/ui/widgets/tiles/video_list_tile.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
@@ -26,12 +26,9 @@ class VideoListSection extends StatefulWidget {
 }
 
 class _VideoListSectionState extends State<VideoListSection> {
-  List videos = [];
-  int currentPage = 1;
+  final controller = VideoListController(); 
+  List videos = []; 
   bool isLoading = false;
-  bool hasMore = true;
-
-  String sortOptions = "";
 
   @override
   void initState() {
@@ -40,32 +37,17 @@ class _VideoListSectionState extends State<VideoListSection> {
   }
 
   Future<void> fetchVideos() async {
-    if (isLoading || !hasMore) return;
+    if (isLoading || !controller.hasMore) return;
 
     setState(() => isLoading = true);
 
-    try {
-      final newVideos = await VideoApi().fetchVideoList("${widget.query}$sortOptions&page=$currentPage");
+    final newVideos = await controller.fetchVideos(widget.query);
 
-      if (newVideos != null) {
-        setState(() {
-          videos.addAll(newVideos.data);
-          if (currentPage >= newVideos.lastPage) {
-            hasMore = false;
-          } else {
-            currentPage++;
-          }
-        });
-      } else {
-        setState(() => hasMore = false);
-      }
-    } catch (e) {
-      print("Error fetching videos: $e");
-    } finally {
-      setState(() => isLoading = false);
-    }
+    setState(() {
+      videos.addAll(newVideos);
+      isLoading = false;
+    });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -84,16 +66,14 @@ class _VideoListSectionState extends State<VideoListSection> {
           SortChipsSection(
             sortOptions: (value) {
               setState(() {
-                sortOptions = value;
                 videos.clear();
-                currentPage = 1;
-                hasMore = true;
+                controller.reset(sort: value);
               });
               fetchVideos();
             },
           ),
         if (videos.isEmpty && widget.hideIfEmpty && !isLoading)
-          const SizedBox.shrink() // do nothing
+          const SizedBox.shrink()
         else if (videos.isEmpty && !widget.hideIfEmpty && !isLoading)
           Center(child: Text(localizations.errorNoDataFound))
         else
@@ -111,7 +91,7 @@ class _VideoListSectionState extends State<VideoListSection> {
             padding: EdgeInsets.all(8.0),
             child: Center(child: CircularProgressIndicator()),
           )
-        else if (!isLoading && hasMore && videos.isNotEmpty)
+        else if (!isLoading && controller.hasMore && videos.isNotEmpty)
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Center(

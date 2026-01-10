@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:Self.Tube/ui/screens/channelpage_screen.dart';
 import 'package:Self.Tube/ui/widgets/media/images/custom_network_image.dart';
 import 'package:Self.Tube/ui/screens/player_screen.dart';
-import 'package:Self.Tube/data/services/settings_service.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/ui/utils/duration_formatter.dart';
 import 'package:Self.Tube/ui/utils/number_formatter.dart';
@@ -14,9 +13,6 @@ class VideoListTile extends StatelessWidget {
   final bool hideChannel;
 
   const VideoListTile({super.key, required this.video,required this.hideChannel});
-
-  static String? apiToken = SettingsService.apiToken;
-  static String? baseUrl = SettingsService.instanceUrl;
 
   @override
   Widget build(BuildContext context) {
