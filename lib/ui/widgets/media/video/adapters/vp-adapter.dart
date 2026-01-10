@@ -9,10 +9,11 @@ class VideoPlayerAdapter implements MediaPlayer {
   final _positionController = StreamController<Duration>.broadcast();
   final _playingController = StreamController<bool>.broadcast();
 
+  Timer? _pollTimer;
+
   Duration? _lastPosition;
   bool? _lastPlaying;
 
-  int _lastEmitMs = 0;
   bool _disposed = false;
 
   final ValueNotifier<bool> _repeatNotifier = ValueNotifier(false);
@@ -36,11 +37,15 @@ class VideoPlayerAdapter implements MediaPlayer {
       _positionController.add(_lastPosition!);
 
       _controller.play();
-      _controller.addListener(_onControllerUpdate);
+
+      _pollTimer = Timer.periodic(
+        const Duration(milliseconds: 200),
+        _pollController,
+      );
     });
   }
 
-  void _onControllerUpdate() {
+  void _pollController(Timer timer) {
     if (_disposed) return;
 
     final value = _controller.value;
@@ -51,18 +56,14 @@ class VideoPlayerAdapter implements MediaPlayer {
       _playingController.add(value.isPlaying);
     }
 
-    if (_repeatNotifier.value && value.position >= value.duration) { 
-      _controller.seekTo(Duration.zero); 
-      _controller.play(); 
+    if (_repeatNotifier.value && value.position >= value.duration) {
+      _controller.seekTo(Duration.zero);
+      _controller.play();
     }
-
-    final nowMs = DateTime.now().millisecondsSinceEpoch;
-    if (nowMs - _lastEmitMs >= 150) {
-      if (value.position != _lastPosition) {
-        _lastPosition = value.position;
-        _lastEmitMs = nowMs;
-        _positionController.add(value.position);
-      }
+    
+    if (value.position != _lastPosition) {
+      _lastPosition = value.position;
+      _positionController.add(value.position);
     }
   }
 
@@ -160,7 +161,7 @@ class VideoPlayerAdapter implements MediaPlayer {
   @override
   void dispose() {
     _disposed = true;
-    _controller.removeListener(_onControllerUpdate);
+    _pollTimer?.cancel();
     _controller.dispose();
     _positionController.close();
     _playingController.close();
