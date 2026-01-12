@@ -29,8 +29,8 @@ jobs:
           apt update
           apt install flatpak flatpak-builder -y
           flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-          flatpak install -y flathub org.gnome.Platform//48
-          flatpak install -y flathub org.gnome.Sdk//48
+          flatpak install -y flathub org.gnome.Platform//49
+          flatpak install -y flathub org.gnome.Sdk//49
       - name: Setup Flutter
         run: |
           cd "$GITHUB_WORKSPACE"
@@ -88,8 +88,8 @@ jobs:
           apt update
           apt install flatpak flatpak-builder -y
           flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-          flatpak install -y flathub org.gnome.Platform//48
-          flatpak install -y flathub org.gnome.Sdk//48
+          flatpak install -y flathub org.gnome.Platform//49
+          flatpak install -y flathub org.gnome.Sdk//49
       - name: Setup Flutter
         run: |
           cd "$GITHUB_WORKSPACE"
