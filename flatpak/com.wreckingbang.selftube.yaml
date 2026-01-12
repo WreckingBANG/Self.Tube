@@ -72,7 +72,7 @@ modules:
         config-opts:
           - -Dvulkan=enabled
           - -Dshaderc=enabled
-          - -Ddemo=false
+          - -Dexamples=false
           - --libdir=/app/lib
         sources:
           - type: git
