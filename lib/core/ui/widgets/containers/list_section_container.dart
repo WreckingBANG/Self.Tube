@@ -5,10 +5,10 @@ class ListSectionContainer extends StatelessWidget {
   final String? title;
 
   const ListSectionContainer({
-    Key? key,
+    super.key,
     required this.children,
     this.title,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

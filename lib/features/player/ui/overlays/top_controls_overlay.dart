@@ -1,6 +1,6 @@
+import 'package:Self.Tube/features/player/domain/video_player_interface.dart';
+import 'package:Self.Tube/features/player/ui/sheets/video_player_bottomsheet.dart';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/ui/widgets/media/video/video_player_interface.dart';
-import 'package:Self.Tube/ui/widgets/sheets/video_player_bottomsheet.dart';
 
 class TopControlsOverlay extends StatefulWidget {
   final MediaPlayer player;

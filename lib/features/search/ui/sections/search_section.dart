@@ -1,14 +1,15 @@
+import 'package:Self.Tube/core/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/core/ui/widgets/tiles/video_list_tile.dart';
+import 'package:Self.Tube/features/channel/ui/tiles/channel_list_tile.dart';
+import 'package:Self.Tube/features/playlist/ui/tiles/playlist_list_tile.dart';
+import 'package:Self.Tube/features/search/data/api/search_api.dart';
+import 'package:Self.Tube/features/search/data/models/searchwrapper_model.dart';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/data/services/api/search_api.dart';
-import 'package:Self.Tube/ui/widgets/tiles/channel_list_tile.dart';
-import 'package:Self.Tube/ui/widgets/tiles/video_list_tile.dart';
-import 'package:Self.Tube/data/models/search/searchwrapper_model.dart';
-import 'package:Self.Tube/ui/widgets/tiles/playlist_list_tile.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
-import 'package:Self.Tube/ui/widgets/containers/list_section_container.dart';
-
 
 class SearchScreenWidget extends StatefulWidget {
+  const SearchScreenWidget({super.key});
+
   @override
   State<SearchScreenWidget> createState() => _SearchScreenWidgetState();
 }

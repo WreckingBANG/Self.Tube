@@ -4,7 +4,7 @@ import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 class ExpandableText extends StatefulWidget {
   final String text;
 
-  const ExpandableText(this.text, {Key? key}) : super(key: key);
+  const ExpandableText(this.text, {super.key});
 
   @override
   _ExpandableTextState createState() => _ExpandableTextState();

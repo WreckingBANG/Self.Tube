@@ -6,9 +6,9 @@ class SelectableLinkText extends StatelessWidget {
   final String text;
 
   const SelectableLinkText({
-    Key? key,
+    super.key,
     required this.text,
-  }) : super(key: key);
+  });
 
 
   Future<void> _onOpen(LinkableElement link) async {

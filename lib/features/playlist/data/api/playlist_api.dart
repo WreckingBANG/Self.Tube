@@ -1,5 +1,5 @@
-import 'api_service.dart';
-import 'package:Self.Tube/data/models/playlist/playlistlist_wrapper_model.dart';
+import 'package:Self.Tube/core/data/services/api/api_service.dart';
+import 'package:Self.Tube/features/playlist/data/models/playlistlist_wrapper_model.dart';
 
 class PlaylistApi {
   Future<PlaylistListWrapperModel?> fetchPlaylistList() {

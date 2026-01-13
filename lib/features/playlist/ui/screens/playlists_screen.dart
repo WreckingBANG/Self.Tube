@@ -1,8 +1,10 @@
+import 'package:Self.Tube/core/ui/widgets/containers/refresh_container.dart';
+import 'package:Self.Tube/features/playlist/ui/sections/playlist_list_section.dart';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/ui/widgets/sections/playlist_list_section.dart';
-import 'package:Self.Tube/ui/widgets/containers/refresh_container.dart';
 
 class PlaylistsScreen extends StatelessWidget {
+  const PlaylistsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

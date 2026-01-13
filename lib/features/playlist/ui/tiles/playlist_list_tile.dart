@@ -1,8 +1,8 @@
+import 'package:Self.Tube/core/ui/widgets/media/custom_network_image.dart';
+import 'package:Self.Tube/features/channel/ui/screens/channelpage_screen.dart';
+import 'package:Self.Tube/features/playlist/ui/screens/playlistpage_screen.dart';
+import 'package:Self.Tube/features/playlist/ui/sheets/playlist_list_bottomsheet.dart';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/ui/widgets/sheets/playlist_list_bottomsheet.dart';
-import 'package:Self.Tube/ui/widgets/media/images/custom_network_image.dart';
-import 'package:Self.Tube/ui/screens/channelpage_screen.dart';
-import 'package:Self.Tube/ui/screens/playlistpage_screen.dart';
 
 class PlaylistListTile extends StatelessWidget {
   final dynamic playlist;

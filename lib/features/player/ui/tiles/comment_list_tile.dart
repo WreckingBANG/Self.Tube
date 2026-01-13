@@ -1,6 +1,6 @@
+import 'package:Self.Tube/core/data/services/settings/settings_service.dart';
+import 'package:Self.Tube/core/utils/number_formatter.dart';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/ui/utils/number_formatter.dart';
-import 'package:Self.Tube/data/services/settings_service.dart';
 
 class CommentListTile extends StatelessWidget {
   final dynamic commentText;

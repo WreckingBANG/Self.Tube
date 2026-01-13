@@ -1,4 +1,4 @@
-import 'package:Self.Tube/data/services/settings_service.dart';
+import 'package:Self.Tube/core/data/services/settings/settings_service.dart';
 
 class AppearanceController {
   Future<bool> loadShowCommentPics() async {

@@ -1,12 +1,12 @@
 import 'dart:async';
+import 'package:Self.Tube/features/player/domain/video_player_interface.dart';
+import 'package:Self.Tube/features/player/ui/overlays/top_controls_overlay.dart';
 import 'package:flutter/material.dart';
 import 'video_player_ui_fullscreen.dart';
 import 'overlays/gesture_message.dart';
 import 'overlays/bottom_controls_overlay.dart';
 import 'overlays/gesture_controls_overlay.dart';
 import 'overlays/center_controls_overlay.dart';
-import 'package:Self.Tube/ui/widgets/media/video/video_player_interface.dart';
-import 'package:Self.Tube/ui/widgets/media/video/ui/overlays/top_controls_overlay.dart';
 
 class VideoPlayerUI extends StatefulWidget {
   final MediaPlayer player;

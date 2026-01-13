@@ -1,9 +1,9 @@
+import 'package:Self.Tube/core/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/features/channel/ui/screens/channelpage_screen.dart';
+import 'package:Self.Tube/features/player/data/api/video_api.dart';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/data/services/api/video_api.dart';
 import 'bottomsheet_template.dart';
-import 'package:Self.Tube/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
-import 'package:Self.Tube/ui/screens/channelpage_screen.dart';
 import 'package:share_plus/share_plus.dart';
 
 Future<void> showVideoListBottomSheet({

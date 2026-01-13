@@ -34,6 +34,7 @@ class _SortChipsSectionState extends State<SortChipsSection> {
     widget.sortOptions(query);
   }
 
+  @override
   Widget build (BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
 

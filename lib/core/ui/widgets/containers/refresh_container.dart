@@ -4,9 +4,9 @@ class RefreshContainer extends StatefulWidget {
   final Widget child;
 
   const RefreshContainer({
-    Key? key,
+    super.key,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   State<RefreshContainer> createState() => _RefreshContainerState();

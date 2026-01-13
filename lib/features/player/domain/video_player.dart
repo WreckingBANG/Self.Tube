@@ -1,13 +1,13 @@
+import 'package:Self.Tube/core/data/services/api/api_headers.dart';
+import 'package:Self.Tube/core/data/services/device/device_service.dart';
+import 'package:Self.Tube/core/data/services/settings/settings_service.dart';
+import 'package:Self.Tube/core/utils/duration_formatter.dart';
+import 'package:Self.Tube/features/player/data/api/video_api.dart';
+import 'package:Self.Tube/features/player/ui/video_player_ui.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'video_player_interface.dart';
 import 'video_player_factory.dart';
-import 'ui/video_player_ui.dart';
-import 'package:Self.Tube/data/services/api/video_api.dart';
-import 'package:Self.Tube/data/services/device_service.dart';
-import 'package:Self.Tube/data/services/settings_service.dart';
-import 'package:Self.Tube/ui/utils/duration_formatter.dart';
-import 'package:Self.Tube/data/services/api/api_headers.dart';
 
 class CustomVideoPlayer extends StatefulWidget {
   final String videoTitle;
@@ -18,14 +18,14 @@ class CustomVideoPlayer extends StatefulWidget {
   final List<dynamic>? sponsorSegments;
 
   const CustomVideoPlayer({
-    Key? key,
+    super.key,
     required this.videoTitle,
     required this.videoCreator,
     required this.youtubeId,
     required this.videoUrl,
     required this.videoPosition,
     this.sponsorSegments,
-  }) : super(key: key);
+  });
 
   @override
   State<CustomVideoPlayer> createState() => _CustomVideoPlayerState();

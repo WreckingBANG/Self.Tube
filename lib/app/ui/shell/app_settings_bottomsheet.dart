@@ -1,10 +1,10 @@
+import 'package:Self.Tube/app/ui/about/about_screen.dart';
+import 'package:Self.Tube/core/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/features/onboarding/domain/controllers/auth_controller.dart';
+import 'package:Self.Tube/features/settings/ui/screens/overview_settings_screen.dart';
 import 'package:flutter/material.dart';
-import 'bottomsheet_template.dart';
+import 'package:Self.Tube/core/ui/widgets/sheets/bottomsheet_template.dart';
 import 'package:Self.Tube/main.dart';
-import 'package:Self.Tube/domain/controllers/auth_controller.dart';
-import 'package:Self.Tube/ui/screens/about_screen.dart';
-import 'package:Self.Tube/ui/widgets/containers/list_section_container.dart';
-import 'package:Self.Tube/ui/screens/settings/overview_settings_screen.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
 Future<void> showAppSettingsBottomSheet({

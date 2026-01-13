@@ -1,11 +1,13 @@
+import 'package:Self.Tube/core/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/features/settings/ui/screens/appearance_settings_screen.dart';
+import 'package:Self.Tube/features/settings/ui/screens/player_settings_screen.dart';
+import 'package:Self.Tube/features/settings/ui/screens/sponsorblock_settings_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/ui/screens/settings/appearance_settings_screen.dart';
-import 'package:Self.Tube/ui/screens/settings/sponsorblock_settings_screen.dart';
-import 'package:Self.Tube/ui/screens/settings/player_settings_screen.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
-import 'package:Self.Tube/ui/widgets/containers/list_section_container.dart';
 
 class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({super.key});
+
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
 }

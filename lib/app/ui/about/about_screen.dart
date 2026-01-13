@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
-import 'package:Self.Tube/constants/dependencies.dart';
-import 'package:Self.Tube/constants/urls.dart';
-import 'package:Self.Tube/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/core/constants/dependencies.dart';
+import 'package:Self.Tube/core/constants/urls.dart';
+import 'package:Self.Tube/core/ui/widgets/containers/list_section_container.dart';
 
 class AboutScreen extends StatelessWidget {
+  const AboutScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;

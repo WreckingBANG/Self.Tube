@@ -1,9 +1,11 @@
+import 'package:Self.Tube/features/onboarding/ui/widgets/login_section.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/main.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
-import 'package:Self.Tube/ui/widgets/sections/login_section.dart';
 
 class OnBoardingLoginScreen extends StatefulWidget {
+  const OnBoardingLoginScreen({super.key});
+
   @override
   _OnBoardingLoginScreenState createState() => _OnBoardingLoginScreenState();
 }

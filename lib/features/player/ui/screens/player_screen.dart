@@ -1,22 +1,22 @@
+import 'package:Self.Tube/core/ui/widgets/containers/selectable_text.dart';
+import 'package:Self.Tube/core/ui/widgets/media/custom_network_image.dart';
+import 'package:Self.Tube/core/utils/datetime_formatter.dart';
+import 'package:Self.Tube/core/utils/number_formatter.dart';
+import 'package:Self.Tube/features/channel/ui/screens/channelpage_screen.dart';
+import 'package:Self.Tube/features/player/data/api/video_api.dart';
+import 'package:Self.Tube/features/player/domain/video_player.dart';
+import 'package:Self.Tube/features/player/ui/sections/comment_list_section.dart';
+import 'package:Self.Tube/features/player/ui/sections/video_list_similar_section.dart';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/ui/screens/channelpage_screen.dart';
-import 'package:Self.Tube/data/services/api/video_api.dart';
-import 'package:Self.Tube/ui/widgets/sections/video_list_similar_section.dart';
-import 'package:Self.Tube/ui/widgets/containers/selectable_text.dart';
-import 'package:Self.Tube/ui/utils/number_formatter.dart';
-import 'package:Self.Tube/ui/utils/datetime_formatter.dart';
-import 'package:Self.Tube/ui/widgets/sections/comment_list_section.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
-import 'package:Self.Tube/ui/widgets/media/video/video_player.dart';
-import 'package:Self.Tube/ui/widgets/media/images/custom_network_image.dart';
 
 class PlayerScreen extends StatefulWidget {
   final String youtubeId;
 
   const PlayerScreen({
-    Key? key,
+    super.key,
     required this.youtubeId,
-  }) : super(key: key);
+  });
 
   @override
   State<PlayerScreen> createState() => _PlayerScreenState();

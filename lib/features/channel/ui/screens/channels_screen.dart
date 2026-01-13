@@ -1,8 +1,10 @@
+import 'package:Self.Tube/core/ui/widgets/containers/refresh_container.dart';
+import 'package:Self.Tube/features/channel/ui/sections/channel_list_section.dart';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/ui/widgets/containers/refresh_container.dart';
-import 'package:Self.Tube/ui/widgets/sections/channel_list_section.dart';
 
 class ChannelsScreen extends StatelessWidget {
+  const ChannelsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

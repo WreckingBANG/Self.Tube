@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'api_service.dart';
-import 'package:Self.Tube/data/models/video/videolist_similar_model.dart';
-import 'package:Self.Tube/data/models/video/videolist_wrapper_model.dart';
-import 'package:Self.Tube/data/models/video/videoplayer_model.dart';
+import 'package:Self.Tube/core/data/models/videolist_wrapper_model.dart';
+import 'package:Self.Tube/core/data/services/api/api_service.dart';
+import 'package:Self.Tube/features/player/data/models/videolist_similar_model.dart';
+import 'package:Self.Tube/features/player/data/models/videoplayer_model.dart';
 
 class VideoApi {
   Future<VideoListWrapperModel?> fetchVideoList(String options) {

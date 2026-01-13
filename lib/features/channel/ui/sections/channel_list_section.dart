@@ -1,8 +1,8 @@
+import 'package:Self.Tube/core/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/features/channel/data/api/channel_api.dart';
+import 'package:Self.Tube/features/channel/ui/tiles/channel_list_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/data/services/api/channel_api.dart';
-import 'package:Self.Tube/ui/widgets/tiles/channel_list_tile.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
-import 'package:Self.Tube/ui/widgets/containers/list_section_container.dart';
 
 class ChannelListSection extends StatefulWidget {
   final String title;

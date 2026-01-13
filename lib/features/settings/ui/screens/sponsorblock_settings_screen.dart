@@ -1,9 +1,11 @@
+import 'package:Self.Tube/core/data/services/settings/settings_service.dart';
+import 'package:Self.Tube/core/ui/widgets/containers/list_section_container.dart';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/ui/widgets/containers/list_section_container.dart';
-import 'package:Self.Tube/data/services/settings_service.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
 class SponsorblockSettingsScreen extends StatefulWidget {
+  const SponsorblockSettingsScreen({super.key});
+
   @override
   _SponsorblockSettingsScreenState createState() => _SponsorblockSettingsScreenState();
 }

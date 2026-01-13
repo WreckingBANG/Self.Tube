@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'package:Self.Tube/core/utils/duration_formatter.dart';
+import 'package:Self.Tube/features/player/domain/video_player_interface.dart';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/ui/widgets/media/video/video_player_interface.dart';
-import 'package:Self.Tube/ui/utils/duration_formatter.dart';
 
 class BottomControlsOverlay extends StatefulWidget {
   final MediaPlayer player;

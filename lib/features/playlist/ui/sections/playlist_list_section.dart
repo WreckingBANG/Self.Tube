@@ -1,8 +1,8 @@
+import 'package:Self.Tube/core/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/features/playlist/data/api/playlist_api.dart';
+import 'package:Self.Tube/features/playlist/ui/tiles/playlist_list_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/data/services/api/playlist_api.dart';
-import 'package:Self.Tube/ui/widgets/tiles/playlist_list_tile.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
-import 'package:Self.Tube/ui/widgets/containers/list_section_container.dart';
 
 class PlaylistListSection extends StatefulWidget {
   final String title;

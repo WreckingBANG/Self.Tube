@@ -1,5 +1,5 @@
-import 'api_service.dart';
-import 'package:Self.Tube/data/models/comment/commentlist_model.dart';
+import 'package:Self.Tube/core/data/services/api/api_service.dart';
+import 'package:Self.Tube/features/player/data/models/commentlist_model.dart';
 
 class CommentApi {
   Future<List<CommentListItemModel>?> fetchCommentList(String id) {

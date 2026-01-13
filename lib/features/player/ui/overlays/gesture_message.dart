@@ -5,10 +5,10 @@ class GestureMessage extends StatelessWidget {
   final IconData icon;
 
   const GestureMessage({
-    Key? key,
+    super.key,
     required this.message,
     required this.icon,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

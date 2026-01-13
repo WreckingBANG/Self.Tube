@@ -1,22 +1,22 @@
+import 'package:Self.Tube/core/data/services/api/api_headers.dart';
+import 'package:Self.Tube/core/data/services/settings/settings_service.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:Self.Tube/data/services/settings_service.dart';
-import 'package:Self.Tube/data/services/api/api_headers.dart';
 
 class CustomNetwokImage extends StatelessWidget {
   final String imageLink;
 
   const CustomNetwokImage({
-    Key? key,
+    super.key,
     required this.imageLink,
-  }) : super(key: key);
+  });
 
   static String? baseUrl = SettingsService.instanceUrl;
 
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      imageUrl: "$baseUrl/${imageLink}",
+      imageUrl: "$baseUrl/$imageLink",
       httpHeaders: ApiHeaders.authHeaders(),
       fit: BoxFit.cover,
       placeholder: (context, url) => const Center(child: CircularProgressIndicator()),

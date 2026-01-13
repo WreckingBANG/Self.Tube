@@ -1,7 +1,7 @@
+import 'package:Self.Tube/features/player/data/api/comment_api.dart';
+import 'package:Self.Tube/features/player/data/models/commentlist_model.dart';
+import 'package:Self.Tube/features/player/ui/tiles/comment_list_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/data/services/api/comment_api.dart';
-import 'package:Self.Tube/data/models/comment/commentlist_model.dart';
-import 'package:Self.Tube/ui/widgets/tiles/comment_list_tile.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
 

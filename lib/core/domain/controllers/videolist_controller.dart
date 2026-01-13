@@ -1,4 +1,4 @@
-import 'package:Self.Tube/data/services/api/video_api.dart';
+import 'package:Self.Tube/features/player/data/api/video_api.dart';
 
 class VideoListController {
   int _currentPage = 1;

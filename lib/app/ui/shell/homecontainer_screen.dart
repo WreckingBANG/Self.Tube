@@ -1,11 +1,11 @@
+import 'package:Self.Tube/app/ui/home/home_screen.dart';
+import 'package:Self.Tube/app/ui/shell/app_settings_bottomsheet.dart';
+import 'package:Self.Tube/features/admin/ui/screens/actions_screen.dart';
+import 'package:Self.Tube/features/channel/ui/screens/channels_screen.dart';
+import 'package:Self.Tube/features/playlist/ui/screens/playlists_screen.dart';
+import 'package:Self.Tube/features/search/ui/sections/search_section.dart';
 import 'package:flutter/material.dart';
-import 'home_screen.dart';
-import 'channels_screen.dart';
-import 'playlists_screen.dart';
-import 'actions_screen.dart';
-import 'package:Self.Tube/ui/widgets/sections/search_section.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
-import 'package:Self.Tube/ui/widgets/sheets/app_settings_bottomsheet.dart';
 
 class HomeContainerScreen extends StatelessWidget {
   const HomeContainerScreen({super.key});

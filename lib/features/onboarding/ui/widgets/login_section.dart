@@ -1,15 +1,15 @@
+import 'package:Self.Tube/core/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/features/onboarding/domain/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/domain/controllers/auth_controller.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
-import 'package:Self.Tube/ui/widgets/containers/list_section_container.dart';
 
 class LoginSectionWidget extends StatefulWidget{
   final VoidCallback? onLoginSuccess;
 
   const LoginSectionWidget({
-    Key? key, 
+    super.key, 
     this.onLoginSuccess
-  }) : super(key: key);
+  });
 
   @override
   _LoginSectionWidgetState createState() => _LoginSectionWidgetState();

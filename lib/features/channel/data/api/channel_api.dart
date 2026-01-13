@@ -1,6 +1,6 @@
-import 'api_service.dart';
-import 'package:Self.Tube/data/models/channel/channel_model.dart';
-import 'package:Self.Tube/data/models/channel/channellist_wrapper_model.dart';
+import 'package:Self.Tube/core/data/services/api/api_service.dart';
+import 'package:Self.Tube/features/channel/data/models/channel_model.dart';
+import 'package:Self.Tube/features/channel/data/models/channellist_wrapper_model.dart';
 
 class ChannelApi {
   Future<ChannelItemModel?> fetchChannel(String id) {
