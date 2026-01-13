@@ -1,6 +1,6 @@
 id: com.wreckingbang.selftube
 runtime: org.gnome.Platform
-runtime-version: '49'
+runtime-version: '48'
 sdk: org.gnome.Sdk
 
 command: Self.Tube
@@ -72,7 +72,6 @@ modules:
         config-opts:
           - -Dvulkan=enabled
           - -Dshaderc=enabled
-          - -Dexamples=false
           - --libdir=/app/lib
         sources:
           - type: git
