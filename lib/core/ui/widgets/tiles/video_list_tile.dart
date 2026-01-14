@@ -1,10 +1,9 @@
+import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/core/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/core/ui/widgets/sheets/video_list_bottomsheet.dart';
 import 'package:Self.Tube/core/utils/duration_formatter.dart';
 import 'package:Self.Tube/core/utils/number_formatter.dart';
 import 'package:Self.Tube/core/utils/timeago_formatter.dart';
-import 'package:Self.Tube/features/channel/ui/screens/channelpage_screen.dart';
-import 'package:Self.Tube/features/player/ui/screens/player_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
@@ -78,9 +77,10 @@ class VideoListTile extends StatelessWidget {
                     if (!hideChannel)
                       InkWell(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => ChannelpageScreen(channelId: video.channelId)),
+                          Navigator.pushNamed(
+                            context, 
+                            AppRouter.channelpageScreen,
+                            arguments: video.channelId
                           );
                         },
                         child: Row(
@@ -115,9 +115,10 @@ class VideoListTile extends StatelessWidget {
           ],
         ),
         onTap: () {
-          Navigator.push(
+          Navigator.pushNamed(
             context,
-            MaterialPageRoute(builder: (context) => PlayerScreen(youtubeId: video.youtubeId)),
+            AppRouter.player,
+            arguments: video.youtubeId,
           );
         },
         onLongPress: () {

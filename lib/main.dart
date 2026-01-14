@@ -1,11 +1,10 @@
+import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/core/data/services/device/device_service.dart';
 import 'package:Self.Tube/core/data/services/settings/settings_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
-import 'package:Self.Tube/app/ui/shell/homecontainer_screen.dart';
-import 'package:Self.Tube/features/onboarding/ui/screens/privacypolicy_screen.dart';
 import 'package:media_kit/media_kit.dart'; 
 import 'package:Self.Tube/core/theme/theme.dart';
 
@@ -59,9 +58,10 @@ class MyApp extends StatelessWidget {
           darkTheme: darkThemeFrom(
             _resolveColorScheme(isDark: true, dynamicScheme: darkDynamic),
           ),
-          home: SettingsService.doneSetup == true
-              ? const HomeContainer()
-              : OnBoardingPrivacyPolicyScreen(),
+          initialRoute: SettingsService.doneSetup == true
+              ? AppRouter.home
+              : AppRouter.onboarding,
+          onGenerateRoute: AppRouter.onGenerateRoute,
         );
       },
     );

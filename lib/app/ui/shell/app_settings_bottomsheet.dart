@@ -1,7 +1,6 @@
-import 'package:Self.Tube/app/ui/about/about_screen.dart';
+import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/core/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/features/onboarding/domain/controllers/auth_controller.dart';
-import 'package:Self.Tube/features/settings/ui/screens/overview_settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/core/ui/widgets/sheets/bottomsheet_template.dart';
 import 'package:Self.Tube/main.dart';
@@ -24,9 +23,9 @@ Future<void> showAppSettingsBottomSheet({
             title: Text(localizations.settingsSheetSettings),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(
+              Navigator.pushNamed(
                 context,
-                MaterialPageRoute(builder: (context) => SettingsScreen()),
+                AppRouter.settingsOverview,
               );
             },
           ),
@@ -50,9 +49,9 @@ Future<void> showAppSettingsBottomSheet({
             title: Text(localizations.settingsSheetAbout),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(
+              Navigator.pushNamed(
                 context,
-                MaterialPageRoute(builder: (context) => AboutScreen()),
+                AppRouter.about,
               );
             },
           ),

@@ -1,6 +1,5 @@
+import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/core/ui/widgets/media/custom_network_image.dart';
-import 'package:Self.Tube/features/channel/ui/screens/channelpage_screen.dart';
-import 'package:Self.Tube/features/playlist/ui/screens/playlistpage_screen.dart';
 import 'package:Self.Tube/features/playlist/ui/sheets/playlist_list_bottomsheet.dart';
 import 'package:flutter/material.dart';
 
@@ -41,9 +40,10 @@ class PlaylistListTile extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ChannelpageScreen(channelId: playlist.playlistChannelId)),
+                        Navigator.pushNamed(
+                          context, 
+                          AppRouter.channelpageScreen,
+                          arguments: playlist.channelId
                         );
                       },
                       child: Row(
@@ -62,9 +62,10 @@ class PlaylistListTile extends StatelessWidget {
           ],
         ),
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => PlaylistpageScreen(playlistId: playlist.playlistId)),
+          Navigator.pushNamed(
+            context, 
+            AppRouter.playlistpageScreen,
+            arguments: playlist.playlistId
           );
         },
         onLongPress: () {

@@ -1,5 +1,5 @@
+import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/core/ui/widgets/containers/list_section_container.dart';
-import 'package:Self.Tube/features/channel/ui/screens/channelpage_screen.dart';
 import 'package:Self.Tube/features/player/data/api/video_api.dart';
 import 'package:flutter/material.dart';
 import 'bottomsheet_template.dart';
@@ -40,9 +40,10 @@ Future<void> showVideoListBottomSheet({
               leading: Icon(Icons.person_2_rounded),
               title: Text(localizations.sheetOpenChannel),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ChannelpageScreen(channelId: video.channelId)),
+                Navigator.pushNamed(
+                  context, 
+                  AppRouter.channelpageScreen,
+                  arguments: video.channelId
                 );
               },
             ),

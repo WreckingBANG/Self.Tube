@@ -1,6 +1,6 @@
+import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/core/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/core/utils/number_formatter.dart';
-import 'package:Self.Tube/features/channel/ui/screens/channelpage_screen.dart';
 import 'package:Self.Tube/features/channel/ui/sheets/channel_list_bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
@@ -52,9 +52,10 @@ class ChannelListTile extends StatelessWidget {
           ],
         ),
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ChannelpageScreen(channelId: channel.channelId)),
+          Navigator.pushNamed(
+            context, 
+            AppRouter.channelpageScreen,
+            arguments: channel.channelId
           );
         },
         onLongPress: () {

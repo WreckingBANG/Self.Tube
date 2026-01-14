@@ -1,7 +1,5 @@
+import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/core/ui/widgets/containers/list_section_container.dart';
-import 'package:Self.Tube/features/settings/ui/screens/appearance_settings_screen.dart';
-import 'package:Self.Tube/features/settings/ui/screens/player_settings_screen.dart';
-import 'package:Self.Tube/features/settings/ui/screens/sponsorblock_settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
@@ -26,10 +24,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             subtitle: Text(localizations.settingsAppearanceSettingsDesc),
             leading: Icon(Icons.design_services_outlined),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AppearanceSettingsScreen()),
-                );
+              Navigator.pushNamed(
+                context, 
+                AppRouter.settingsAppearance,
+              );
             },
           ),
           ListTile(
@@ -37,10 +35,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             subtitle: Text(localizations.settingsVideoPlayerDesc),
             leading: Icon(Icons.play_arrow_rounded),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => PlayerSettingsScreen()),
-                );
+              Navigator.pushNamed(
+                context, 
+                AppRouter.settingsPlayer,
+              );
             },
           ),
           ListTile(
@@ -48,10 +46,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             subtitle: Text(localizations.settingsSponsorBlockSettings),
             leading: Icon(Icons.money_off),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SponsorblockSettingsScreen()),
-                );
+              Navigator.pushNamed(
+                context, 
+                AppRouter.settingsSponsorblock,
+              );
             },
           ),
         ]

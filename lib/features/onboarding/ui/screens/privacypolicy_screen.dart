@@ -1,6 +1,6 @@
+import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/core/constants/urls.dart';
 import 'package:flutter/material.dart';
-import 'login_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
@@ -59,9 +59,9 @@ class OnBoardingPrivacyPolicyScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.check),
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => OnBoardingLoginScreen()),
+          Navigator.pushNamed(
+            context, 
+            AppRouter.onboardingLogin
           );
         },
         label: Text(localizations.onboardingContinue),
