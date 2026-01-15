@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:Self.Tube/core/data/models/videolist_wrapper_model.dart';
-import 'package:Self.Tube/core/data/services/api/api_service.dart';
+import 'package:Self.Tube/common/data/models/videolist_wrapper_model.dart';
+import 'package:Self.Tube/common/data/services/api/api_service.dart';
 import 'package:Self.Tube/features/player/data/models/videolist_similar_model.dart';
 import 'package:Self.Tube/features/player/data/models/videoplayer_model.dart';
 

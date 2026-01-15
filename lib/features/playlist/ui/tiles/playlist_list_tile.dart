@@ -1,5 +1,5 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
-import 'package:Self.Tube/core/ui/widgets/media/custom_network_image.dart';
+import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/features/playlist/ui/sheets/playlist_list_bottomsheet.dart';
 import 'package:flutter/material.dart';
 

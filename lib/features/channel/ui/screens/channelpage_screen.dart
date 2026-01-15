@@ -1,9 +1,9 @@
-import 'package:Self.Tube/core/data/services/settings/settings_service.dart';
-import 'package:Self.Tube/core/ui/widgets/containers/expandable_text.dart';
-import 'package:Self.Tube/core/ui/widgets/containers/refresh_container.dart';
-import 'package:Self.Tube/core/ui/widgets/media/custom_network_image.dart';
-import 'package:Self.Tube/core/ui/widgets/sections/video_list_section.dart';
-import 'package:Self.Tube/core/utils/number_formatter.dart';
+import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
+import 'package:Self.Tube/common/ui/widgets/containers/expandable_text.dart';
+import 'package:Self.Tube/common/ui/widgets/containers/refresh_container.dart';
+import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
+import 'package:Self.Tube/common/ui/widgets/sections/video_list_section.dart';
+import 'package:Self.Tube/common/utils/number_formatter.dart';
 import 'package:Self.Tube/features/channel/data/api/channel_api.dart';
 import 'package:Self.Tube/features/channel/data/models/channel_model.dart';
 import 'package:flutter/material.dart';

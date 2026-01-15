@@ -1,4 +1,4 @@
-import 'package:Self.Tube/core/ui/widgets/containers/refresh_container.dart';
+import 'package:Self.Tube/common/ui/widgets/containers/refresh_container.dart';
 import 'package:Self.Tube/features/channel/ui/sections/channel_list_section.dart';
 import 'package:flutter/material.dart';
 

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:Self.Tube/core/data/services/api/api_service.dart';
+import 'package:Self.Tube/common/data/services/api/api_service.dart';
 import 'package:Self.Tube/features/onboarding/data/models/ping_model.dart';
 import 'package:Self.Tube/features/onboarding/data/models/session_model.dart';
 import 'package:Self.Tube/features/onboarding/data/models/userinfo_model.dart';

@@ -1,5 +1,5 @@
-import 'package:Self.Tube/core/ui/widgets/containers/list_section_container.dart';
-import 'package:Self.Tube/core/ui/widgets/tiles/video_list_tile.dart';
+import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/common/ui/widgets/tiles/video_list_tile.dart';
 import 'package:Self.Tube/features/channel/ui/tiles/channel_list_tile.dart';
 import 'package:Self.Tube/features/playlist/ui/tiles/playlist_list_tile.dart';
 import 'package:Self.Tube/features/search/data/api/search_api.dart';

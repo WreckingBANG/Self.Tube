@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/core/ui/widgets/sections/video_list_section.dart';
+import 'package:Self.Tube/common/ui/widgets/sections/video_list_section.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
-import 'package:Self.Tube/core/ui/widgets/containers/refresh_container.dart';
+import 'package:Self.Tube/common/ui/widgets/containers/refresh_container.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

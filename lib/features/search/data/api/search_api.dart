@@ -1,4 +1,4 @@
-import 'package:Self.Tube/core/data/services/api/api_service.dart';
+import 'package:Self.Tube/common/data/services/api/api_service.dart';
 import 'package:Self.Tube/features/search/data/models/searchwrapper_model.dart';
 
 class SearchApi {

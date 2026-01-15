@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:Self.Tube/core/data/services/device/device_service.dart';
+import 'package:Self.Tube/common/data/services/device/device_service.dart';
 import 'package:Self.Tube/features/player/domain/video_player_interface.dart';
 import 'package:flutter/material.dart';
 import 'overlays/bottom_controls_overlay.dart';

@@ -1,12 +1,12 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
-import 'package:Self.Tube/core/data/services/device/device_service.dart';
-import 'package:Self.Tube/core/data/services/settings/settings_service.dart';
+import 'package:Self.Tube/common/data/services/device/device_service.dart';
+import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:media_kit/media_kit.dart'; 
-import 'package:Self.Tube/core/theme/theme.dart';
+import 'package:Self.Tube/common/theme/theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

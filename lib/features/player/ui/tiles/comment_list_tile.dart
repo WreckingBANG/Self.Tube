@@ -1,5 +1,5 @@
-import 'package:Self.Tube/core/data/services/settings/settings_service.dart';
-import 'package:Self.Tube/core/utils/number_formatter.dart';
+import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
+import 'package:Self.Tube/common/utils/number_formatter.dart';
 import 'package:flutter/material.dart';
 
 class CommentListTile extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:Self.Tube/core/ui/widgets/containers/refresh_container.dart';
+import 'package:Self.Tube/common/ui/widgets/containers/refresh_container.dart';
 import 'package:Self.Tube/features/playlist/ui/sections/playlist_list_section.dart';
 import 'package:flutter/material.dart';
 

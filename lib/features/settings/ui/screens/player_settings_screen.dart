@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:Self.Tube/core/data/services/settings/settings_service.dart';
-import 'package:Self.Tube/core/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
+import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 

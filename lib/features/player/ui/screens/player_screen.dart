@@ -1,8 +1,8 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
-import 'package:Self.Tube/core/ui/widgets/containers/selectable_text.dart';
-import 'package:Self.Tube/core/ui/widgets/media/custom_network_image.dart';
-import 'package:Self.Tube/core/utils/datetime_formatter.dart';
-import 'package:Self.Tube/core/utils/number_formatter.dart';
+import 'package:Self.Tube/common/ui/widgets/containers/selectable_text.dart';
+import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
+import 'package:Self.Tube/common/utils/datetime_formatter.dart';
+import 'package:Self.Tube/common/utils/number_formatter.dart';
 import 'package:Self.Tube/features/player/data/api/video_api.dart';
 import 'package:Self.Tube/features/player/domain/video_player.dart';
 import 'package:Self.Tube/features/player/ui/sections/comment_list_section.dart';

@@ -1,4 +1,4 @@
-import 'package:Self.Tube/core/data/services/settings/settings_service.dart';
+import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/features/onboarding/data/api/user_api.dart';
 
 class AuthController {

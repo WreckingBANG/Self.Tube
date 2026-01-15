@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:Self.Tube/core/data/services/api/api_headers.dart';
-import 'package:Self.Tube/core/data/services/settings/settings_service.dart';
+import 'package:Self.Tube/common/data/services/api/api_headers.dart';
+import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {

@@ -1,5 +1,5 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
-import 'package:Self.Tube/core/constants/urls.dart';
+import 'package:Self.Tube/common/constants/urls.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
