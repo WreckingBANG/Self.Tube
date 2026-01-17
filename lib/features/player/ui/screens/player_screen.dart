@@ -5,8 +5,8 @@ import 'package:Self.Tube/common/utils/datetime_formatter.dart';
 import 'package:Self.Tube/common/utils/number_formatter.dart';
 import 'package:Self.Tube/features/player/data/api/player_api.dart';
 import 'package:Self.Tube/features/player/domain/video_player.dart';
-import 'package:Self.Tube/features/player/ui/sections/comment_list_section.dart';
-import 'package:Self.Tube/features/player/ui/sections/video_list_similar_section.dart';
+import 'package:Self.Tube/features/videos/ui/sections/comment_list_section.dart';
+import 'package:Self.Tube/features/videos/ui/sections/video_list_similar_section.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 

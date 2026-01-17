@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:Self.Tube/common/data/services/api/api_service.dart';
-import 'package:Self.Tube/features/player/data/models/videolist_similar_model.dart';
+import 'package:Self.Tube/features/videos/data/models/videolist_similar_model.dart';
 import 'package:Self.Tube/features/player/data/models/videoplayer_model.dart';
 
 class VideoApi {
