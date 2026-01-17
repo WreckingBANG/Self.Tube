@@ -1,6 +1,6 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
-import 'package:Self.Tube/common/ui/widgets/tiles/video_list_tile.dart';
-import 'package:Self.Tube/features/player/data/api/video_api.dart';
+import 'package:Self.Tube/features/videos/ui/tiles/video_list_tile.dart';
+import 'package:Self.Tube/features/player/data/api/player_api.dart';
 import 'package:Self.Tube/features/player/data/models/videolist_similar_model.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';

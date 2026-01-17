@@ -1,8 +1,8 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
-import 'package:Self.Tube/features/player/data/api/video_api.dart';
+import 'package:Self.Tube/features/videos/data/api/video_api.dart';
 import 'package:flutter/material.dart';
-import 'bottomsheet_template.dart';
+import '../../../../common/ui/widgets/sheets/bottomsheet_template.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:share_plus/share_plus.dart';
 

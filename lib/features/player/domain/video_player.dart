@@ -2,7 +2,7 @@ import 'package:Self.Tube/common/data/services/api/api_headers.dart';
 import 'package:Self.Tube/common/data/services/device/device_service.dart';
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/common/utils/duration_formatter.dart';
-import 'package:Self.Tube/features/player/data/api/video_api.dart';
+import 'package:Self.Tube/features/player/data/api/player_api.dart';
 import 'package:Self.Tube/features/player/ui/video_player_ui.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';

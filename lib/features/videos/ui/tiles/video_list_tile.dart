@@ -1,6 +1,6 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
-import 'package:Self.Tube/common/ui/widgets/sheets/video_list_bottomsheet.dart';
+import 'package:Self.Tube/features/videos/ui/sheets/video_list_bottomsheet.dart';
 import 'package:Self.Tube/common/utils/duration_formatter.dart';
 import 'package:Self.Tube/common/utils/number_formatter.dart';
 import 'package:Self.Tube/common/utils/timeago_formatter.dart';
