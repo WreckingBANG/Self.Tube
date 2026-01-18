@@ -1,10 +1,17 @@
+import 'dart:io';
 import 'package:Self.Tube/common/data/services/api/api_headers.dart';
 import 'package:Self.Tube/common/data/services/device/device_service.dart';
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/common/utils/duration_formatter.dart';
 import 'package:Self.Tube/features/player/data/api/player_api.dart';
 import 'package:Self.Tube/features/player/ui/video_player_ui.dart';
+import 'package:Self.Tube/features/player/data/audio/audio_player_handler.dart';
+import 'package:Self.Tube/main.dart';
+import 'package:audio_service/audio_service.dart';
+import 'package:audio_session/audio_session.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 import 'dart:async';
 import 'video_player_interface.dart';
 import 'video_player_factory.dart';
@@ -14,6 +21,7 @@ class CustomVideoPlayer extends StatefulWidget {
   final String videoCreator;
   final String youtubeId;
   final String videoUrl;
+  final String videoThumbnail;
   final double videoPosition;
   final List<dynamic>? sponsorSegments;
 
@@ -23,6 +31,7 @@ class CustomVideoPlayer extends StatefulWidget {
     required this.videoCreator,
     required this.youtubeId,
     required this.videoUrl,
+    required this.videoThumbnail,
     required this.videoPosition,
     this.sponsorSegments,
   });
@@ -35,6 +44,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   late final MediaPlayer _player;
   Duration _lastReportedPosition = Duration.zero;
   StreamSubscription<Duration>? _positionSubscription;
+  StreamSubscription<bool>? _playStateSubscription;
   bool _restoringInitialPosition = true;
 
   Duration _lastCheck = Duration.zero;
@@ -54,6 +64,27 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
       '$baseUrl${widget.videoUrl}',
       headers: ApiHeaders.authHeaders()
     );
+    
+    BackgroundAudioHandler.currentInternalPlayer = _player;
+
+    audioHandler.mediaItem.add(MediaItem(
+      id: widget.youtubeId,
+      album: widget.videoCreator,
+      title: widget.videoTitle,
+      artist: widget.videoCreator,
+      duration: _player.duration,
+    ));
+
+    _initBackgroundAudio();
+
+    _playStateSubscription = _player.playingStream.listen((playing) {
+      audioHandler.syncStateWithPlayer(_player);
+      if (audioHandler.mediaItem.value?.duration == Duration.zero && _player.duration > Duration.zero) {
+        _updateMediaMetadata();
+      }
+    });
+
+    _updateMediaMetadata();
 
     _categoryEnabledMap = {
       'sponsor': SettingsService.sbSponsor ?? false,
@@ -67,6 +98,49 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
     };
 
     _positionSubscription = _player.positionStream.listen(_onPosition);
+  }
+
+  Future<void> _updateMediaMetadata() async {
+    Uri? localArtUri;
+    try {
+      final tempDir = await getTemporaryDirectory();
+      final file = File('${tempDir.path}/${widget.youtubeId}.jpg');
+
+      if (!await file.exists()) {
+        final response = await http.get(
+          Uri.parse("${SettingsService.instanceUrl}${widget.videoThumbnail}"),
+          headers: ApiHeaders.authHeaders(),
+        );
+        if (response.statusCode == 200) {
+          await file.writeAsBytes(response.bodyBytes);
+          localArtUri = file.uri;
+        }
+      } else {
+        localArtUri = file.uri;
+      }
+    } catch (e) {
+      debugPrint("Thumbnail Error: $e");
+    }
+
+    if (!mounted) return;
+
+    audioHandler.mediaItem.add(MediaItem(
+      id: widget.youtubeId,
+      album: widget.videoCreator,
+      title: widget.videoTitle,
+      artist: widget.videoCreator,
+      duration: _player.duration,
+      artUri: localArtUri,
+    ));
+  }
+
+
+  Future<void> _initBackgroundAudio() async {
+    final session = await AudioSession.instance;
+    await session.configure(const AudioSessionConfiguration.music());
+    if (await session.setActive(true)) {
+      audioHandler.syncStateWithPlayer(_player);
+    }
   }
 
   void _onPosition(Duration position) {
@@ -146,6 +220,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   void dispose() {
     DeviceService.setWakeLock(false);
     _positionSubscription?.cancel();
+    _playStateSubscription?.cancel();
     VideoApi.setVideoProgress(widget.youtubeId, _lastReportedPosition.inSeconds);
     _player.dispose();
     super.dispose();

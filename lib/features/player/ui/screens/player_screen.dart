@@ -59,6 +59,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 videoPosition: video.videoPosition,
                                 videoCreator: video.channelName,
                                 videoTitle: video.videoTitle,
+                                videoThumbnail: video.videoThumbnail,
                                 sponsorSegments: video.sponsorBlock?.segments,
                               ),
                             ),

@@ -29,6 +29,8 @@ dependencies:
   flutter_secure_storage: ^10.0.0
   window_manager: ^0.5.1
   audio_service: ^0.18.18
+  audio_session: ^0.2.2
+  path_provider: ^2.1.5
 
 dependency_overrides: 
   wakelock_plus: 

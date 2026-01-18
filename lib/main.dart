@@ -1,6 +1,8 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/data/services/device/device_service.dart';
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
+import 'package:Self.Tube/features/player/data/audio/audio_player_handler.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:dynamic_color/dynamic_color.dart';
@@ -8,11 +10,21 @@ import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:media_kit/media_kit.dart'; 
 import 'package:Self.Tube/common/theme/theme.dart';
 
+late BackgroundAudioHandler audioHandler;
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SettingsService.load();
   await DeviceService.init();
   MediaKit.ensureInitialized();
+  audioHandler = await AudioService.init(
+    builder: () => BackgroundAudioHandler(),
+    config: const AudioServiceConfig(
+      androidNotificationChannelId: 'com.wreckingbang.selftube.channel.audio',
+      androidNotificationChannelName: 'Audio Playback',
+      androidStopForegroundOnPause: true,
+    ),
+  );
   runApp(const MyApp());
 }
 
