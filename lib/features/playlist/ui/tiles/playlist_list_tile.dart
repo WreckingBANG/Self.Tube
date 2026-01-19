@@ -38,23 +38,29 @@ class PlaylistListTile extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context, 
-                          AppRouter.channelpageScreen,
-                          arguments: playlist.channelId
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            playlist.playlistChannelName,
-                            style: TextStyle(fontSize: 13),
-                          )
-                        ],
+                    if (playlist.playlistType == "regular")
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context, 
+                            AppRouter.channelpageScreen,
+                            arguments: playlist.channelId
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              playlist.playlistChannelName,
+                              style: TextStyle(fontSize: 13),
+                            )
+                          ],
+                        )
                       )
-                    )
+                    else
+                      Text(
+                        "Local Playlist",
+                        style: TextStyle(fontSize: 13),
+                      )
                   ],
                 ),
               )  

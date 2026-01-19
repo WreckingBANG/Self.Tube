@@ -1,12 +1,35 @@
+import 'dart:convert';
+
 import 'package:Self.Tube/common/data/services/api/api_service.dart';
 import 'package:Self.Tube/features/playlist/data/models/playlistlist_wrapper_model.dart';
 
 class PlaylistApi {
-  Future<PlaylistListWrapperModel?> fetchPlaylistList() {
+  Future<PlaylistListWrapperModel?> fetchPlaylistList(String options) {
     return ApiService.request(
-      url: '/api/playlist',
+      url: '/api/playlist/$options',
       method: 'GET',
       parser: (json) => PlaylistListWrapperModel.fromJson(json),
     );
-  } 
+  }
+
+  static Future<bool?> modifyPlaylistItems(String playlistId, String videoId, String action){
+    return ApiService.request(
+      url: '/api/playlist/custom/$playlistId/', 
+      method: 'POST', 
+      body: json.encode({
+        "action": action,
+        "video_id": videoId
+      }),
+      parser: (_) => true,
+    );
+  }
+
+  static Future<bool?> deletePlaylist(String playlistId, bool deleteVideos){
+    return ApiService.request(
+      url: '/api/playlist/$playlistId/?delete_videos=$deleteVideos', 
+      method: 'DELETE', 
+      parser: (_) => true,
+    );
+  }
+
 }

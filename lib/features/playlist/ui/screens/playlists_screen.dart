@@ -8,6 +8,11 @@ class PlaylistsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: "Add Playlist",
+        child: Icon(Icons.add),
+      ),
       body: RefreshContainer(
         child: ListView(
           children: [

@@ -5,6 +5,7 @@ class PlaylistListItemModel {
   final String playlistChannelThumbUrl;
   final String playlistChannelId;
   final String playlistPic;
+  final String playlistType;
   final bool playlistSubscribed;
 
   PlaylistListItemModel({
@@ -14,18 +15,20 @@ class PlaylistListItemModel {
     required this.playlistChannelThumbUrl,
     required this.playlistChannelId,
     required this.playlistPic,
+    required this.playlistType,
     required this.playlistSubscribed,
   });
 
   factory PlaylistListItemModel.fromJson(Map<String, dynamic> json) {
     return PlaylistListItemModel(
-      playlistId: json['playlist_id'],
+      playlistId: json['playlist_id'] ?? '',
       playlistName: json['playlist_name'],
-      playlistChannelName: json['playlist_channel'],
+      playlistChannelName: json['playlist_channel'] ?? '',
       playlistChannelThumbUrl: json['channel_thumb_url'] ?? '',
-      playlistChannelId: json['playlist_channel_id'],
-      playlistPic: json['playlist_thumbnail'],
-      playlistSubscribed: json['playlist_subscribed'],
+      playlistChannelId: json['playlist_channel_id'] ?? '',
+      playlistPic: json['playlist_thumbnail'] ?? '',
+      playlistType: json['playlist_type'],
+      playlistSubscribed: json['playlist_subscribed'] ?? '',
     );
   }
 

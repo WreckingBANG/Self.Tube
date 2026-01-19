@@ -36,7 +36,7 @@ class _PlaylistListSectionState extends State<PlaylistListSection> {
     setState(() => isLoading = true);
 
     try {
-      final newplaylists = await PlaylistApi().fetchPlaylistList();
+      final newplaylists = await PlaylistApi().fetchPlaylistList("");
 
       if (newplaylists != null) {
         setState(() {
