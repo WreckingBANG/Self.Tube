@@ -1,4 +1,5 @@
 import 'package:Self.Tube/common/ui/widgets/containers/refresh_container.dart';
+import 'package:Self.Tube/features/playlist/ui/dialogs/add_playlist_dialog.dart';
 import 'package:Self.Tube/features/playlist/ui/sections/playlist_list_section.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,12 @@ class PlaylistsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) => AddPlaylistDialog()
+        );
+      },
         tooltip: "Add Playlist",
         child: Icon(Icons.add),
       ),

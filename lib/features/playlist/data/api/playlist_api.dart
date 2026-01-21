@@ -24,6 +24,33 @@ class PlaylistApi {
     );
   }
 
+  static Future<bool?> createCustomPlaylist(String name) {
+    return ApiService.request(
+      url: '/api/playlist/custom/',
+      method: 'POST',
+      body: json.encode({
+        "playlist_name": name
+      }),
+      parser: (_) => true,
+    );
+  }
+
+  static Future<bool?> addRegularPlaylist(String id) {
+    return ApiService.request(
+      url: '/api/playlist/',
+      method: 'POST',
+      body: json.encode({
+        "data": [
+          {
+            "playlist_id": id,
+            "playlist_subscribed": "true"
+          }
+        ]
+      }),
+      parser: (_) => true,
+    );
+  }
+
   static Future<bool?> deletePlaylist(String playlistId, bool deleteVideos){
     return ApiService.request(
       url: '/api/playlist/$playlistId/?delete_videos=$deleteVideos', 
