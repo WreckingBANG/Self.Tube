@@ -90,7 +90,7 @@ class _AddToPlaylistDialogState extends State<AddToPlaylistDialog> {
               onPressed: () {
                 print(selectedPlaylist);
                 print(widget.videoId);
-                PlaylistApi.modifyPlaylistItems(selectedPlaylist!, widget.videoId, "create");
+                PlaylistApi.modifyCustomPlaylistItems(selectedPlaylist!, widget.videoId, "create");
                 Navigator.pop(context, selectedPlaylist);
               },
               child: const Text('Add'),
