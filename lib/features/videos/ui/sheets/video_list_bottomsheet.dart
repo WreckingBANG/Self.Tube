@@ -26,6 +26,7 @@ Future<void> showVideoListBottomSheet({
             leading: Icon(Icons.timer_outlined),
             title: Text(localizations.sheetMarkWatched),
             onTap: () {
+              Navigator.pop(context);
               VideoApi.setVideoWatched(video.youtubeId, true);
             },
           ),
@@ -33,6 +34,7 @@ Future<void> showVideoListBottomSheet({
             leading: Icon(Icons.timer_off_outlined),
             title: Text(localizations.sheetMarkUnwatched),
             onTap: () {
+              Navigator.pop(context);
               VideoApi.setVideoWatched(video.youtubeId, false);
             },
           ),
