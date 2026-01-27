@@ -1,4 +1,5 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
+import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/features/playlist/ui/sheets/playlist_list_bottomsheet.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,8 @@ class PlaylistListTile extends StatelessWidget {
   const PlaylistListTile({super.key, required this.playlist});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  
+    final localizations = AppLocalizations.of(context)!;
     return SizedBox(
       width: double.infinity,
       child: InkWell(
@@ -38,23 +40,29 @@ class PlaylistListTile extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context, 
-                          AppRouter.channelpageScreen,
-                          arguments: playlist.channelId
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            playlist.playlistChannelName,
-                            style: TextStyle(fontSize: 13),
-                          )
-                        ],
+                    if (playlist.playlistType == "regular")
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context, 
+                            AppRouter.channelpageScreen,
+                            arguments: playlist.channelId
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              playlist.playlistChannelName,
+                              style: TextStyle(fontSize: 13),
+                            )
+                          ],
+                        )
                       )
-                    )
+                    else
+                      Text(
+                        localizations.playlistLocal,
+                        style: TextStyle(fontSize: 13),
+                      )
                   ],
                 ),
               )  

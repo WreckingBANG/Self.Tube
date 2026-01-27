@@ -212,6 +212,33 @@ class AppLocalizationsDe extends AppLocalizations {
   String get playlistVideos => 'Videos';
 
   @override
+  String get playlistAdd => 'Playlist hinzufügen';
+
+  @override
+  String get playlistLocal => 'Lokale Playlist';
+
+  @override
+  String get playlistDelete => 'Playlist löschen';
+
+  @override
+  String get playlistRegular => 'Normal';
+
+  @override
+  String get playlistCustom => 'Benutzerdefiniert';
+
+  @override
+  String get playlistName => 'Playlist Name';
+
+  @override
+  String get playlistNameHint => 'Später anschauen...';
+
+  @override
+  String get playlistUrl => 'Playlist URL';
+
+  @override
+  String get playlistUrlHint => 'https://youtube.com/playlist...';
+
+  @override
   String get channelSubscribers => 'Abonnenten: ';
 
   @override

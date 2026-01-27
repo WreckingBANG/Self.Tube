@@ -1,5 +1,7 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
+import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
+import 'package:Self.Tube/features/playlist/data/api/playlist_api.dart';
 import 'package:Self.Tube/features/videos/ui/sheets/video_list_bottomsheet.dart';
 import 'package:Self.Tube/common/utils/duration_formatter.dart';
 import 'package:Self.Tube/common/utils/number_formatter.dart';
@@ -10,8 +12,16 @@ import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 class VideoListTile extends StatelessWidget {
   final dynamic video;
   final bool hideChannel;
+  final String playlistId;
+  final String playlistType;
 
-  const VideoListTile({super.key, required this.video,required this.hideChannel});
+  const VideoListTile({
+    super.key, 
+    required this.video,
+    required this.hideChannel,
+    this.playlistId = "",
+    this.playlistType = "",
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -112,6 +122,23 @@ class VideoListTile extends StatelessWidget {
                 ),
               )  
             ),
+            playlistId != "" && playlistType == "custom"
+              ? IconButton(
+                  onPressed: () {
+                    ConfirmationDialog(
+                      context: context, 
+                      onSure: () {
+                        PlaylistApi.modifyCustomPlaylistItems(
+                          playlistId, 
+                          video.youtubeId, 
+                          "remove"
+                        );
+                      }
+                    );
+                  },
+                  icon: Icon(Icons.playlist_remove),
+                )
+              : SizedBox()
           ],
         ),
         onTap: () {

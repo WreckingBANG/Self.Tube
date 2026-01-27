@@ -1,4 +1,6 @@
 import 'package:Self.Tube/common/ui/widgets/containers/refresh_container.dart';
+import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'package:Self.Tube/features/playlist/ui/dialogs/add_playlist_dialog.dart';
 import 'package:Self.Tube/features/playlist/ui/sections/playlist_list_section.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +9,18 @@ class PlaylistsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) => AddPlaylistDialog()
+        );
+      },
+        tooltip: localizations.playlistAdd,
+        child: Icon(Icons.add),
+      ),
       body: RefreshContainer(
         child: ListView(
           children: [

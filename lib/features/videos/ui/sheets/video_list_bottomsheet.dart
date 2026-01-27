@@ -1,5 +1,6 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/features/playlist/ui/dialogs/add_to_playlist_dialog.dart';
 import 'package:Self.Tube/features/videos/data/api/video_api.dart';
 import 'package:flutter/material.dart';
 import '../../../../common/ui/widgets/sheets/bottomsheet_template.dart';
@@ -53,6 +54,17 @@ Future<void> showVideoListBottomSheet({
             onTap: () {
               SharePlus.instance.share(
                 ShareParams(uri: Uri.parse("https://www.youtube.com/watch?v=${video.youtubeId}"))
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.playlist_add_check_rounded),
+            title: Text("Add to Playlist"),
+            onTap: () {
+              Navigator.pop(context);
+              showDialog(
+                context: context,
+                builder: (context) => AddToPlaylistDialog(videoId: video.youtubeId),
               );
             },
           ),

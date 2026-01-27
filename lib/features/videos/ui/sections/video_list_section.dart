@@ -11,6 +11,8 @@ class VideoListSection extends StatefulWidget {
   final bool showSorting;
   final String query;
   final bool hideIfEmpty;
+  final String playlistId;
+  final String playlistType;
 
   const VideoListSection({
     super.key,
@@ -18,6 +20,8 @@ class VideoListSection extends StatefulWidget {
     required this.hideChannel,
     required this.query,
     this.hideIfEmpty = false,
+    this.playlistId = "",
+    this.playlistType = "",
     this.showSorting = false,
   });
 
@@ -81,7 +85,12 @@ class _VideoListSectionState extends State<VideoListSection> {
             children: [
               ...List.generate(videos.length, (index) {
                 final video = videos[index];
-                return VideoListTile(video: video, hideChannel: widget.hideChannel);
+                return VideoListTile(
+                  video: video, 
+                  hideChannel: widget.hideChannel, 
+                  playlistId: widget.playlistId, 
+                  playlistType: widget.playlistType
+                );
               })
             ]
           ),

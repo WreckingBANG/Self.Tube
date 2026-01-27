@@ -494,6 +494,60 @@ abstract class AppLocalizations {
   /// **'Videos'**
   String get playlistVideos;
 
+  /// No description provided for @playlistAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Playlist'**
+  String get playlistAdd;
+
+  /// No description provided for @playlistLocal.
+  ///
+  /// In en, this message translates to:
+  /// **'Local Playlist'**
+  String get playlistLocal;
+
+  /// No description provided for @playlistDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Playlist'**
+  String get playlistDelete;
+
+  /// No description provided for @playlistRegular.
+  ///
+  /// In en, this message translates to:
+  /// **'Regular'**
+  String get playlistRegular;
+
+  /// No description provided for @playlistCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get playlistCustom;
+
+  /// No description provided for @playlistName.
+  ///
+  /// In en, this message translates to:
+  /// **'Playlist Name'**
+  String get playlistName;
+
+  /// No description provided for @playlistNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch Later...'**
+  String get playlistNameHint;
+
+  /// No description provided for @playlistUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Playlist URL'**
+  String get playlistUrl;
+
+  /// No description provided for @playlistUrlHint.
+  ///
+  /// In en, this message translates to:
+  /// **'https://youtube.com/playlist...'**
+  String get playlistUrlHint;
+
   /// No description provided for @channelSubscribers.
   ///
   /// In en, this message translates to:
