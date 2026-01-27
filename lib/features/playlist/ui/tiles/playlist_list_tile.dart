@@ -1,4 +1,5 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
+import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/features/playlist/ui/sheets/playlist_list_bottomsheet.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,8 @@ class PlaylistListTile extends StatelessWidget {
   const PlaylistListTile({super.key, required this.playlist});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  
+    final localizations = AppLocalizations.of(context)!;
     return SizedBox(
       width: double.infinity,
       child: InkWell(
@@ -58,7 +60,7 @@ class PlaylistListTile extends StatelessWidget {
                       )
                     else
                       Text(
-                        "Local Playlist",
+                        localizations.playlistLocal,
                         style: TextStyle(fontSize: 13),
                       )
                   ],

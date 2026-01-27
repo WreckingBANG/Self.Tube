@@ -1,5 +1,6 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/features/playlist/data/api/playlist_api.dart';
+import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class AddPlaylistDialog extends StatefulWidget {
@@ -20,6 +21,7 @@ class _AddPlaylistDialogState extends State<AddPlaylistDialog> with TickerProvid
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
@@ -29,16 +31,16 @@ class _AddPlaylistDialogState extends State<AddPlaylistDialog> with TickerProvid
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("Add Playlist", style: const TextStyle(fontSize: 20)),
+            Text(localizations.playlistAdd, style: const TextStyle(fontSize: 20)),
             const SizedBox(height: 16),
             TabBar(
               controller: _tabController,
               tabs: [
                 Tab(
-                  text: "Regular",
+                  text: localizations.playlistRegular,
                 ),
                 Tab(
-                  text: "Custom",
+                  text: localizations.playlistCustom,
                 )
               ]
             ),
@@ -52,8 +54,8 @@ class _AddPlaylistDialogState extends State<AddPlaylistDialog> with TickerProvid
                       TextField(
                         controller: _playlistUrlController,
                         decoration: InputDecoration(
-                          labelText: "Playlist URL",
-                          hint: Text("https://youtube.com/playlist..."),
+                          labelText: localizations.playlistUrl,
+                          hint: Text(localizations.playlistUrlHint),
                           border: InputBorder.none,
                         )
                       ),
@@ -64,8 +66,8 @@ class _AddPlaylistDialogState extends State<AddPlaylistDialog> with TickerProvid
                       TextField(
                         controller: _playlistNameController,
                         decoration: InputDecoration(
-                          labelText: "Playlist Name",
-                          hint: Text("Watch Later ..."),
+                          labelText: localizations.playlistName,
+                          hint: Text(localizations.playlistNameHint),
                           border: InputBorder.none,
                         ),
                       )
@@ -78,7 +80,7 @@ class _AddPlaylistDialogState extends State<AddPlaylistDialog> with TickerProvid
               onPressed: () {
                 _handlePlaylists(context);
               },
-              child: Text("Add")
+              child: Text(localizations.playlistAdd)
             )
           ],
         ),
@@ -88,8 +90,6 @@ class _AddPlaylistDialogState extends State<AddPlaylistDialog> with TickerProvid
 
 
   Future<void> _handlePlaylists(BuildContext context) async {
-    print(_playlistUrlController.text);
-
     if (_tabController.index == 0) {
       await PlaylistApi.addRegularPlaylist(_playlistUrlController.text);
     } else {

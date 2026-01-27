@@ -30,7 +30,7 @@ Future<void> showPlaylistListBottomSheet({
             ),
           ListTile(
             leading: Icon(Icons.delete_forever),
-            title: Text("Delete Playlist"),
+            title: Text(localizations.playlistDelete),
             onTap: () {
               ConfirmationDialog(
                 context: context, 
