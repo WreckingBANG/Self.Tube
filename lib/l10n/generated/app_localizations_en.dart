@@ -269,7 +269,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get channelTitle => 'Channel';
 
   @override
+  String get channelUrl => 'Channel Url';
+
+  @override
   String get channelVideos => 'Videos';
+
+  @override
+  String get channelAdd => 'Add Channel';
+
+  @override
+  String get channelDelete => 'Delete Channel';
 
   @override
   String get onboardingLogin => 'Login';

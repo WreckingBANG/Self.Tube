@@ -1,6 +1,7 @@
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/expandable_text.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/refresh_container.dart';
+import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/features/videos/ui/sections/video_list_section.dart';
 import 'package:Self.Tube/common/utils/number_formatter.dart';
@@ -58,11 +59,20 @@ class ChannelpageScreen extends StatelessWidget{
                         ),
                         trailing: channel.subscribed
                           ? FilledButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                ConfirmationDialog(
+                                  context: context, 
+                                  onSure: () {
+                                    ChannelApi().modifyChannel(channel.channelId, false);
+                                  } 
+                                );
+                              },
                               child: Text(localizations.playerUnsubscribe),
                             )
                           : OutlinedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                ChannelApi().modifyChannel(channel.channelId, true);
+                              },
                               child: Text(localizations.playerSubscribe),
                             ),
                       ),

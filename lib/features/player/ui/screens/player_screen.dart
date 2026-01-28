@@ -1,8 +1,10 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/selectable_text.dart';
+import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/common/utils/datetime_formatter.dart';
 import 'package:Self.Tube/common/utils/number_formatter.dart';
+import 'package:Self.Tube/features/channel/data/api/channel_api.dart';
 import 'package:Self.Tube/features/player/data/api/player_api.dart';
 import 'package:Self.Tube/features/player/domain/video_player.dart';
 import 'package:Self.Tube/features/videos/ui/sections/comment_list_section.dart';
@@ -112,11 +114,20 @@ class _PlayerScreenState extends State<PlayerScreen> {
                             ),
                             trailing: video.channelSubscribed
                                 ? FilledButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      ConfirmationDialog(
+                                        context: context, 
+                                        onSure: () {
+                                          ChannelApi().modifyChannel(video.channelId, false);
+                                        }
+                                      );
+                                    },
                                     child: Text(localizations.playerUnsubscribe),
                                   )
                                 : OutlinedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      ChannelApi().modifyChannel(video.channelId, true);
+                                    },
                                     child: Text(localizations.playerSubscribe),
                                   ),
                             onTap: () {

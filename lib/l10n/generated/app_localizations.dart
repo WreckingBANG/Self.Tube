@@ -608,11 +608,29 @@ abstract class AppLocalizations {
   /// **'Channel'**
   String get channelTitle;
 
+  /// No description provided for @channelUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Channel Url'**
+  String get channelUrl;
+
   /// No description provided for @channelVideos.
   ///
   /// In en, this message translates to:
   /// **'Videos'**
   String get channelVideos;
+
+  /// No description provided for @channelAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Channel'**
+  String get channelAdd;
+
+  /// No description provided for @channelDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Channel'**
+  String get channelDelete;
 
   /// No description provided for @onboardingLogin.
   ///
