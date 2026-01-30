@@ -22,4 +22,12 @@ class VideoApi {
       parser: (_) => true,
     );
   }
+
+  static Future<bool?> deleteVideo(String id){
+    return ApiService.request(
+      url: '/api/video/$id/',
+      method: 'DELETE', 
+      parser: (_) => true
+    );
+  }
 }
