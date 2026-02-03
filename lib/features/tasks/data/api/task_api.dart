@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:Self.Tube/features/admin/data/models/queue_wrapper_model.dart';
+import 'package:Self.Tube/features/tasks/data/models/queue_wrapper_model.dart';
 import 'package:Self.Tube/common/data/services/api/api_service.dart';
-import 'package:Self.Tube/features/admin/data/models/task_model.dart';
+import 'package:Self.Tube/features/tasks/data/models/task_model.dart';
 
-class AdminApi {
+class TaskApi {
   Future<QueueWrapperModel?> fetchQueue(String options) {
     return ApiService.request(
       url: '/api/download/?filter=pending',
@@ -57,4 +57,21 @@ class AdminApi {
       parser: (_) => true,
     );
   }
+
+  Future<bool?> rescanSubscriptions() {
+    return ApiService.request(
+      url: '/api/task/by-name/update_subscribed/',
+      method: 'POST',
+      parser: (_) => true,
+    );
+  }
+
+  Future<bool?> startDownloads() {
+    return ApiService.request(
+      url: '/api/task/by-name/download_pending/',
+      method: 'POST',
+      parser: (_) => true,
+    );
+  }
+
 }

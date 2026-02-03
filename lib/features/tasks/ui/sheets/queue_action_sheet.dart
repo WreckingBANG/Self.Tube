@@ -1,5 +1,5 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
-import 'package:Self.Tube/features/admin/data/api/admin_api.dart';
+import 'package:Self.Tube/features/tasks/data/api/task_api.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/common/ui/widgets/sheets/bottomsheet_template.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
@@ -21,7 +21,7 @@ Future<void> showQueueActionBottomSheet({
             leading: Icon(Icons.timer_outlined),
             title: Text("Download Now"),
             onTap: () {
-              AdminApi().changeVideoQueueStatus(video.youtubeId, "priority");
+              TaskApi().changeVideoQueueStatus(video.youtubeId, "priority");
               Navigator.pop(context);
             },
           ),
@@ -29,7 +29,7 @@ Future<void> showQueueActionBottomSheet({
             leading: Icon(Icons.timer_off_outlined),
             title: Text("Ignore"),
             onTap: () {
-              AdminApi().changeVideoQueueStatus(video.youtubeId, "ignore");
+              TaskApi().changeVideoQueueStatus(video.youtubeId, "ignore");
               Navigator.pop(context);
             },
           ),
@@ -37,7 +37,7 @@ Future<void> showQueueActionBottomSheet({
             leading: Icon(Icons.timer_off_outlined),
             title: Text("Delete from Queue"),
             onTap: () {
-              AdminApi().deleteSingleVideoQueue(video.youtubeId);
+              TaskApi().deleteSingleVideoQueue(video.youtubeId);
               Navigator.pop(context);
             },
           ),

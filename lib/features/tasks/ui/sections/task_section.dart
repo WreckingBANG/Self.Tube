@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
-import 'package:Self.Tube/features/admin/data/models/task_model.dart';
-import 'package:Self.Tube/features/admin/ui/tiles/task_list_tile.dart';
+import 'package:Self.Tube/features/tasks/data/models/task_model.dart';
+import 'package:Self.Tube/features/tasks/ui/tiles/task_list_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/features/admin/data/api/admin_api.dart';
+import 'package:Self.Tube/features/tasks/data/api/task_api.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
 class TaskSection extends StatefulWidget {
@@ -49,7 +49,7 @@ class _TaskSectionState extends State<TaskSection> {
   Future<void> fetchTasks() async {
 
     try {
-      final result = await AdminApi().fetchTasks();
+      final result = await TaskApi().fetchTasks();
       setState(() {
         tasks = result;
       });

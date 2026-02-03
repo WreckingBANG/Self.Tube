@@ -1,7 +1,7 @@
-import 'package:Self.Tube/features/admin/domain/controllers/queue_controller.dart';
+import 'package:Self.Tube/features/tasks/domain/controllers/queue_controller.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/common/ui/widgets/sections/sort_chips_section.dart';
-import 'package:Self.Tube/features/admin/ui/tiles/queue_list_tile.dart';
+import 'package:Self.Tube/features/tasks/ui/tiles/queue_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 

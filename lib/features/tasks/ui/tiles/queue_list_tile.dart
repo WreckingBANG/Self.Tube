@@ -1,6 +1,6 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
-import 'package:Self.Tube/features/admin/ui/sheets/queue_action_sheet.dart';
+import 'package:Self.Tube/features/tasks/ui/sheets/queue_action_sheet.dart';
 import 'package:Self.Tube/features/videos/ui/sheets/video_list_bottomsheet.dart';
 import 'package:Self.Tube/common/utils/timeago_formatter.dart';
 import 'package:flutter/material.dart';

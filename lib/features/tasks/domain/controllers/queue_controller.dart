@@ -1,4 +1,4 @@
-import 'package:Self.Tube/features/admin/data/api/admin_api.dart';
+import 'package:Self.Tube/features/tasks/data/api/task_api.dart';
 import 'package:media_kit/ffi/src/arena.dart';
 
 class QueueController {
@@ -19,7 +19,7 @@ class QueueController {
 
     final query = "$baseQuery$_sortOptions&page=$_currentPage";
 
-    final response = await AdminApi().fetchQueue(query);
+    final response = await TaskApi().fetchQueue(query);
 
     if (response == null) {
       _hasMore = false;

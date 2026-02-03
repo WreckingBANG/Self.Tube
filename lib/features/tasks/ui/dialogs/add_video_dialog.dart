@@ -1,4 +1,4 @@
-import 'package:Self.Tube/features/admin/data/api/admin_api.dart';
+import 'package:Self.Tube/features/tasks/data/api/task_api.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/features/channel/data/api/channel_api.dart';
@@ -46,7 +46,7 @@ class AddVideoDialog extends StatelessWidget{
   }
 
   Future<void> _hanleChannels(BuildContext context) async {
-    await AdminApi().addVideo(_videoUrlController.text);
+    await TaskApi().addVideo(_videoUrlController.text);
     Navigator.pop(context);
   }
 }
