@@ -543,5 +543,29 @@ class AppLocalizationsDe extends AppLocalizations {
   String get chipsWatchedUnw => 'Unangesehen';
 
   @override
-  String get chipsWatchedCon => 'Weiterschauen';
+  String get chipsWatchedCon => 'Continue';
+
+  @override
+  String get taskAddVideo => 'Video hinzufügen';
+
+  @override
+  String get taskAddVideoLabel => 'Video Url';
+
+  @override
+  String get taskRescanSubs => 'Abos scannen';
+
+  @override
+  String get taskStartDownloads => 'Downloads starten';
+
+  @override
+  String get taskDownloadNow => 'Download priorisieren';
+
+  @override
+  String get taskIgnore => 'Ignorieren';
+
+  @override
+  String get taskDeleteFromQueue => 'Aus Queue löschen';
+
+  @override
+  String get taskQueueEmpty => 'Queue leer';
 }

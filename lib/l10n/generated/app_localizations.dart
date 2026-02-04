@@ -1105,6 +1105,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Continue'**
   String get chipsWatchedCon;
+
+  /// No description provided for @taskAddVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Video'**
+  String get taskAddVideo;
+
+  /// No description provided for @taskAddVideoLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Video Url'**
+  String get taskAddVideoLabel;
+
+  /// No description provided for @taskRescanSubs.
+  ///
+  /// In en, this message translates to:
+  /// **'Rescan Subs'**
+  String get taskRescanSubs;
+
+  /// No description provided for @taskStartDownloads.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Downloads'**
+  String get taskStartDownloads;
+
+  /// No description provided for @taskDownloadNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Download Now'**
+  String get taskDownloadNow;
+
+  /// No description provided for @taskIgnore.
+  ///
+  /// In en, this message translates to:
+  /// **'Ignore'**
+  String get taskIgnore;
+
+  /// No description provided for @taskDeleteFromQueue.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete from Queue'**
+  String get taskDeleteFromQueue;
+
+  /// No description provided for @taskQueueEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Queue Empty'**
+  String get taskQueueEmpty;
 }
 
 class _AppLocalizationsDelegate

@@ -167,5 +167,14 @@
   "chipsWatchedAll": "Alle",
   "chipsWatchedWat": "Angesehen",
   "chipsWatchedUnw": "Unangesehen",
-  "chipsWatchedCon": "Weiterschauen"
+  "chipsWatchedCon": "Weiterschauen",
+  "chipsWatchedCon": "Continue",
+  "taskAddVideo": "Video hinzufügen",
+  "taskAddVideoLabel": "Video Url",
+  "taskRescanSubs": "Abos scannen",
+  "taskStartDownloads": "Downloads starten",
+  "taskDownloadNow": "Download priorisieren",
+  "taskIgnore": "Ignorieren",
+  "taskDeleteFromQueue": "Aus Queue löschen",
+  "taskQueueEmpty": "Queue leer"
 }
