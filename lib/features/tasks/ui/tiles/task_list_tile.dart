@@ -1,8 +1,5 @@
-import 'package:Self.Tube/app/navigation/app_navigation.dart';
-import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
-import 'package:Self.Tube/common/utils/timeago_formatter.dart';
+import 'package:Self.Tube/features/tasks/data/api/task_api.dart';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
 class TaskListTile extends StatelessWidget {
   final dynamic task;
@@ -19,24 +16,35 @@ class TaskListTile extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.all(4),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    task.title,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          task.title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        Text(
+                          task.messages.toString(),
+                          style: const TextStyle(fontSize: 13),
+                        ),
+                      ],
+                    ),
                   ),
-                  Text(
-                    task.messages.toString(),
-                    style: TextStyle(fontSize: 13),
-                  ),
-                ],
-              ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    TaskApi().stopTask(task.taskId);
+                  },
+                  icon: const Icon(Icons.pause),
+                ),
+              ],
             ),
             SizedBox(
               height: 4,

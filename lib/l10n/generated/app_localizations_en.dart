@@ -543,4 +543,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chipsWatchedCon => 'Continue';
+
+  @override
+  String get taskAddVideo => 'Add Video';
+
+  @override
+  String get taskAddVideoLabel => 'Video Url';
+
+  @override
+  String get taskRescanSubs => 'Rescan Subs';
+
+  @override
+  String get taskStartDownloads => 'Start Downloads';
+
+  @override
+  String get taskDownloadNow => 'Download Now';
+
+  @override
+  String get taskIgnore => 'Ignore';
+
+  @override
+  String get taskDeleteFromQueue => 'Delete from Queue';
+
+  @override
+  String get taskQueueEmpty => 'Queue Empty';
 }

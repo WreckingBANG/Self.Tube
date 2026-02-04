@@ -26,25 +26,30 @@ class ActionsScreen extends StatelessWidget {
         child: Column(
           children: [
             TaskSection(),
-            Row(
-              children: [
-              Expanded(child: 
-                ElevatedButton(
-                  onPressed: () {
-                    TaskApi().rescanSubscriptions();
-                  },
-                  child: Text("Rescan Subs"),
-                ),
+            SizedBox(height: 20),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 14),
+              child: Row(
+                children: [
+                  Expanded(child: 
+                    FilledButton(
+                      onPressed: () {
+                        TaskApi().rescanSubscriptions();
+                      },
+                      child: Text(localizations.taskRescanSubs),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(child: 
+                    FilledButton(
+                      onPressed: () {
+                        TaskApi().startDownloads();
+                      },
+                      child: Text(localizations.taskStartDownloads),
+                    )
+                  )
+                ]
               ),
-              Expanded(child: 
-                ElevatedButton(
-                  onPressed: () {
-                    TaskApi().startDownloads();
-                  },
-                  child: Text("Start Downloads"),
-                )
-              )
-              ]
             ),
             QueueSection(hideChannel: false, query: "")
           ],

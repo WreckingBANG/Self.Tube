@@ -1,7 +1,6 @@
 import 'package:Self.Tube/features/tasks/data/api/task_api.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
-import 'package:Self.Tube/features/channel/data/api/channel_api.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 
 class AddVideoDialog extends StatelessWidget{
@@ -19,14 +18,14 @@ class AddVideoDialog extends StatelessWidget{
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("Add Video", style: const TextStyle(fontSize: 20)),
+            Text(localizations.taskAddVideo, style: const TextStyle(fontSize: 20)),
             const SizedBox(height: 16),
             ListSectionContainer(
               children: [
                 TextField(
                   controller: _videoUrlController,
                   decoration: InputDecoration(
-                    labelText: "https://youtube.com/watch?v=Yd7v",
+                    labelText: localizations.taskAddVideoLabel,
                     border: InputBorder.none
                   )
                 )
@@ -37,7 +36,7 @@ class AddVideoDialog extends StatelessWidget{
               onPressed: () {
                 _hanleChannels(context);
               },
-              child: Text("Add Video")
+              child: Text(localizations.taskAddVideo)
             )
           ],
         ), 

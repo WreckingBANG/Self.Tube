@@ -79,7 +79,7 @@ class _QueueSectionState extends State<QueueSection> {
         if (videos.isEmpty && widget.hideIfEmpty && !isLoading)
           const SizedBox.shrink()
         else if (videos.isEmpty && !widget.hideIfEmpty && !isLoading)
-          Center(child: Text(localizations.errorNoDataFound))
+          Center(child: Text(localizations.taskQueueEmpty))
         else
           ListSectionContainer(
             children: [

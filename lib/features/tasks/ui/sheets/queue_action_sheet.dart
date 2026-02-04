@@ -18,24 +18,24 @@ Future<void> showQueueActionBottomSheet({
       ListSectionContainer(
         children: [
           ListTile(
-            leading: Icon(Icons.timer_outlined),
-            title: Text("Download Now"),
+            leading: Icon(Icons.file_download_rounded),
+            title: Text(localizations.taskDownloadNow),
             onTap: () {
               TaskApi().changeVideoQueueStatus(video.youtubeId, "priority");
               Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.timer_off_outlined),
-            title: Text("Ignore"),
+            leading: Icon(Icons.file_download_off_rounded),
+            title: Text(localizations.taskIgnore),
             onTap: () {
               TaskApi().changeVideoQueueStatus(video.youtubeId, "ignore");
               Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.timer_off_outlined),
-            title: Text("Delete from Queue"),
+            leading: Icon(Icons.delete_rounded),
+            title: Text(localizations.taskDeleteFromQueue),
             onTap: () {
               TaskApi().deleteSingleVideoQueue(video.youtubeId);
               Navigator.pop(context);

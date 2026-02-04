@@ -73,5 +73,15 @@ class TaskApi {
       parser: (_) => true,
     );
   }
-
+  
+  Future<bool?> stopTask(String id) {
+    return ApiService.request(
+      url: '/api/task/by-id/$id/',
+      method: 'POST',
+      body: json.encode({
+        "command": "stop" 
+      }),
+      parser: (_) => true,
+    );
+  }
 }
