@@ -57,6 +57,12 @@ class DeviceService {
     }
   }
 
+  static Future<void> resetBrightness() async {
+    if(Platform.isAndroid) {
+      return ScreenBrightness().resetApplicationScreenBrightness();
+    }
+  }
+
   static Future<void> setVolume(double value) async {
     _volume.setVolume(value);
   }

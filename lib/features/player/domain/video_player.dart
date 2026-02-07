@@ -89,7 +89,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
     // progress reporting every 10s
     if ((seconds - _lastReportedPosition.inSeconds).abs() >= 10) {
       _lastReportedPosition = position;
-      VideoApi.setVideoProgress(widget.youtubeId, seconds);
+      PlayerApi.setVideoProgress(widget.youtubeId, seconds);
     }
 
     // sponsor skipping
@@ -145,8 +145,9 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   @override
   void dispose() {
     DeviceService.setWakeLock(false);
+    DeviceService.resetBrightness();
     _positionSubscription?.cancel();
-    VideoApi.setVideoProgress(widget.youtubeId, _lastReportedPosition.inSeconds);
+    PlayerApi.setVideoProgress(widget.youtubeId, _lastReportedPosition.inSeconds);
     _player.dispose();
     super.dispose();
   }

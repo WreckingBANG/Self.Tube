@@ -20,7 +20,7 @@ class VideoListSimilarSection extends StatelessWidget {
     final localizations = AppLocalizations.of(context)!;
 
     return FutureBuilder<List<VideoListSimilarItemModel>?>(
-      future: VideoApi().fetchSimilarVideoList(videoId),
+      future: PlayerApi().fetchSimilarVideoList(videoId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());

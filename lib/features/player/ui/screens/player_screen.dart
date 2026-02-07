@@ -33,7 +33,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
       child: Scaffold(
         appBar: AppBar(title: Text(localizations.playerTitle)),
         body: FutureBuilder(
-          future: VideoApi.fetchVideoPlayer(widget.youtubeId),
+          future: PlayerApi.fetchVideoPlayer(widget.youtubeId),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
