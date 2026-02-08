@@ -2,6 +2,7 @@ import 'package:Self.Tube/app/ui/about/about_screen.dart';
 import 'package:Self.Tube/features/channel/ui/screens/channelpage_screen.dart';
 import 'package:Self.Tube/features/onboarding/ui/screens/login_screen.dart';
 import 'package:Self.Tube/features/player/ui/screens/player_screen.dart';
+import 'package:Self.Tube/features/player/ui/tiles/mini_player_tile.dart';
 import 'package:Self.Tube/features/playlist/ui/screens/playlistpage_screen.dart';
 import 'package:Self.Tube/features/settings/ui/screens/appearance_settings_screen.dart';
 import 'package:Self.Tube/features/settings/ui/screens/overview_settings_screen.dart';
@@ -20,7 +21,6 @@ class AppRouter {
   static const settingsAppearance = '/settings/appearance';
   static const settingsPlayer = '/settings/player';
   static const settingsSponsorblock = '/settings/sponsorblock';
-  static const player = '/player';
   static const channelpageScreen = '/channel';
   static const playlistpageScreen = '/playlist';
 
@@ -51,17 +51,23 @@ class AppRouter {
       case settingsSponsorblock:
         return MaterialPageRoute(builder: (_) => SponsorblockSettingsScreen());
 
-      case player:
-        final youtubeId = settings.arguments as String;
-        return MaterialPageRoute(builder: (_) => PlayerScreen(youtubeId: youtubeId));
-      
       case channelpageScreen:
         final channelId = settings.arguments as String;
-        return MaterialPageRoute(builder: (_) => ChannelpageScreen(channelId: channelId));
+        return MaterialPageRoute(builder: (_) => MiniPlayerTile(
+          child: ChannelpageScreen(
+            channelId: channelId
+          )
+        )
+      );
 
       case playlistpageScreen:
         final playlistId = settings.arguments as String;
-        return MaterialPageRoute(builder: (_) => PlaylistpageScreen(playlistId: playlistId));
+        return MaterialPageRoute(builder: (_) => MiniPlayerTile(
+          child: PlaylistpageScreen(
+            playlistId: playlistId
+          )
+        )
+      );
 
       default:
         return MaterialPageRoute(

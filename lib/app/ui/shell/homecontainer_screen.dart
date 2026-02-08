@@ -1,5 +1,6 @@
 import 'package:Self.Tube/app/ui/home/home_screen.dart';
 import 'package:Self.Tube/app/ui/shell/app_settings_bottomsheet.dart';
+import 'package:Self.Tube/features/player/ui/tiles/mini_player_tile.dart';
 import 'package:Self.Tube/features/tasks/ui/screens/actions_screen.dart';
 import 'package:Self.Tube/features/channel/ui/screens/channels_screen.dart';
 import 'package:Self.Tube/features/playlist/ui/screens/playlists_screen.dart';
@@ -73,17 +74,18 @@ class _HomeContainerState extends State<HomeContainer> {
           ),
         ],
       ),
-      body: <Widget>[
+      body: MiniPlayerTile(
+        child: <Widget>[
+          HomeScreen(), 
+          
+          ChannelsScreen(),
 
-        HomeScreen(),
+          PlaylistsScreen(),
 
-        ChannelsScreen(),
-
-        PlaylistsScreen(),
-
-        ActionsScreen(),
+          ActionsScreen(),
 
         ][currentPageIndex],
+      )
     );
   }
 }

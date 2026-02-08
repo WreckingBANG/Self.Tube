@@ -28,6 +28,7 @@ dependencies:
   flutter_linkify: ^6.0.0
   flutter_secure_storage: ^10.0.0
   window_manager: ^0.5.1
+  rxdart: ^0.28.0
 
 dependency_overrides: 
   wakelock_plus: 

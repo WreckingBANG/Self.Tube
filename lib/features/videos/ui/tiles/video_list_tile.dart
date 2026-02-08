@@ -1,6 +1,7 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
+import 'package:Self.Tube/features/player/domain/video_player_service.dart';
 import 'package:Self.Tube/features/playlist/data/api/playlist_api.dart';
 import 'package:Self.Tube/features/videos/ui/sheets/video_list_bottomsheet.dart';
 import 'package:Self.Tube/common/utils/duration_formatter.dart';
@@ -142,11 +143,7 @@ class VideoListTile extends StatelessWidget {
           ],
         ),
         onTap: () {
-          Navigator.pushNamed(
-            context,
-            AppRouter.player,
-            arguments: video.youtubeId,
-          );
+          VideoPlayerService.loadVideo(video.youtubeId, true, context);
         },
         onLongPress: () {
           showVideoListBottomSheet(

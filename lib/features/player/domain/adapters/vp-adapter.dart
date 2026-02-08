@@ -16,6 +16,7 @@ class VideoPlayerAdapter implements MediaPlayer {
 
   bool _disposed = false;
 
+  late final Future<void> _initialized;
   final ValueNotifier<bool> _repeatNotifier = ValueNotifier(false);
   final ValueNotifier<BorderMode> _borderModeNotifier = ValueNotifier(BorderMode.contain);
   final ValueNotifier<PlaybackSpeed> _speedNotifier = ValueNotifier(PlaybackSpeed.x1_0);
@@ -25,7 +26,7 @@ class VideoPlayerAdapter implements MediaPlayer {
           Uri.parse(url),
           httpHeaders: headers ?? const {},
         ) {
-    _controller.initialize().then((_) {
+    _initialized = _controller.initialize().then((_) {
       if (!_controller.value.isInitialized) return;
 
       final value = _controller.value;
@@ -102,6 +103,10 @@ class VideoPlayerAdapter implements MediaPlayer {
         return BoxFit.fill;
     }
   }
+
+
+  @override 
+  Future<void> get initialized => _initialized;
 
   @override
   Duration get position => _controller.value.position;
