@@ -1,6 +1,7 @@
-
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
+import 'package:Self.Tube/common/utils/duration_formatter.dart';
 import 'package:Self.Tube/features/player/domain/video_player_service.dart';
+import 'package:flutter/material.dart';
 
 class SponsorblockService  {
   static dynamic _video;
@@ -29,6 +30,7 @@ class SponsorblockService  {
             categoryName,
             segment.segment[0].round(),
             segment.segment[1].round(),
+            false
           ]);
         }
       }
@@ -36,13 +38,15 @@ class SponsorblockService  {
   }
 
   static void checkTimestamp(Duration position) {
-    for (final segment in _processedSegments ?? []) {
+    for (var i = 0; i < (_processedSegments).length; i++) {
+      final segment = _processedSegments[i];
       final start = segment[1].round();
       final end = segment[2].round();
-      //final category = segment.category.toLowerCase();
-      //final segmentId = "$start-$end-$category";
-      if (position.inSeconds >= start && position.inSeconds < end) {
+      final category = segment[0].toLowerCase();
+
+      if (position.inSeconds >= start && position.inSeconds < end && !segment[3]) {
         VideoPlayerService.player?.seek(Duration(seconds: end));
+        //showSnackBar(category, start, end, i);
       } 
     }
   }

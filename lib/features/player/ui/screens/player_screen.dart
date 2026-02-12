@@ -29,7 +29,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
   @override
   void initState() {
     super.initState();
-    DeviceService.setWakeLock(false);
+    DeviceService.setWakeLock(true);
   }
 
   @override

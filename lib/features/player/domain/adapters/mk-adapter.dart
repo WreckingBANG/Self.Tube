@@ -89,6 +89,11 @@ class MediaKitAdapter implements MediaPlayer {
 
   @override
   Future<void> setRepeat(bool value) async {
+    if (value) {
+      _player.setPlaylistMode(PlaylistMode.single);
+    } else {
+      _player.setPlaylistMode(PlaylistMode.none);
+    }
     _repeatNotifier.value = value;
   }
 

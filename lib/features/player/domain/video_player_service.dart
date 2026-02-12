@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:Self.Tube/features/player/domain/sponsorblock_service.dart';
 import 'package:Self.Tube/features/player/ui/screens/player_screen.dart';
+import 'package:media_kit/media_kit.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:Self.Tube/common/data/services/api/api_headers.dart';
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
@@ -18,7 +20,9 @@ class VideoPlayerService {
   static StreamSubscription? _reportPos;
   static StreamSubscription? _sbPos;
 
-  static void init() {} 
+  static void init() {
+    MediaKit.ensureInitialized();
+  } 
 
   static void loadVideo(String id, bool fullscreen, BuildContext context) async {
     disposeVideo();
@@ -26,23 +30,25 @@ class VideoPlayerService {
     final video = await PlayerApi.fetchVideoPlayer(id);
     currentVideo.value = video;
     if (video == null) return;
-
-    SponsorblockService.init(video);
+  
+    if (SettingsService.sponsorBlockEnabled!) {
+      SponsorblockService.init(video);
+    }
 
     if (fullscreen) {
       openPlayer(context);
     }
 
     _player = MediaPlayerFactory.create(
-      "$instanceUrl${video?.videoUrl}",
+      "$instanceUrl${video.videoUrl}",
       headers: ApiHeaders.authHeaders(),
     );
     await _player?.initialized;
 
     await _player?.seek(Duration(seconds: video.videoPosition.toInt()));
 
-    periodicActions(video.videoId); 
-    _player?.play();
+    periodicActions(video.videoId);
+    player?.play();
   }
 
   static void openPlayer(BuildContext context) {
@@ -66,12 +72,15 @@ class VideoPlayerService {
       .listen((position) {
         PlayerApi.setVideoProgress(id, _player?.position.inSeconds.toInt() ?? 0);
       });
-
-    _sbPos = player?.positionStream
-      .throttleTime(Duration(seconds: 1))
-      .listen((position) {
-        SponsorblockService.checkTimestamp(position);
-      });
+    
+    if (SettingsService.sponsorBlockEnabled!) {
+      _sbPos = player?.positionStream
+        .throttleTime(Duration(seconds: 1))
+        .listen((position) {
+          SponsorblockService.checkTimestamp(position);
+        }
+      );
+    }
   }
 
   static void disposeVideo() {
