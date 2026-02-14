@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:Self.Tube/features/player/domain/audio_service.dart';
 import 'package:Self.Tube/features/player/domain/sponsorblock_service.dart';
 import 'package:Self.Tube/features/player/ui/screens/player_screen.dart';
-import 'package:audio_service/audio_service.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:Self.Tube/common/data/services/api/api_headers.dart';
@@ -62,6 +61,7 @@ class VideoPlayerService {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
+      useSafeArea: true,
       backgroundColor: Colors.transparent,
       constraints: const BoxConstraints.expand(),
       builder: (_) {

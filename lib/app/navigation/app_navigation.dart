@@ -53,19 +53,15 @@ class AppRouter {
 
       case channelpageScreen:
         final channelId = settings.arguments as String;
-        return MaterialPageRoute(builder: (_) => MiniPlayerTile(
-          child: ChannelpageScreen(
-            channelId: channelId
-          )
+        return MaterialPageRoute(builder: (_) => ChannelpageScreen(
+          channelId: channelId
         )
       );
 
       case playlistpageScreen:
         final playlistId = settings.arguments as String;
-        return MaterialPageRoute(builder: (_) => MiniPlayerTile(
-          child: PlaylistpageScreen(
-            playlistId: playlistId
-          )
+        return MaterialPageRoute(builder: (_) => PlaylistpageScreen(
+          playlistId: playlistId
         )
       );
 

@@ -45,7 +45,17 @@ class _PlayerScreenState extends State<PlayerScreen> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: AppBar(title: Text(localizations.playerTitle)),
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_downward),
+          ),
+          title: Text(
+            localizations.playerTitle
+          )
+        ),
         body: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             SliverToBoxAdapter(

@@ -65,10 +65,10 @@ class MediaSessionHandler extends BaseAudioHandler {
   void updateMetadata(dynamic video) {
     mediaItem.add(
       MediaItem(
-        id: video.value!.videoId,
-        title: video.value!.videoTitle,
-        artist: video.value!.channelName,
-        duration: video.duration
+        id: video.videoId,
+        title: video.videoTitle,
+        artist: video.channelName,
+        duration: _player.duration
       )
     );
   }
