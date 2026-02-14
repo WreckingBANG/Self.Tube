@@ -1,5 +1,6 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/data/services/device/device_service.dart';
+import 'package:Self.Tube/common/ui/widgets/containers/expandable_text.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/selectable_text.dart';
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
@@ -75,7 +76,12 @@ class _PlayerScreenState extends State<PlayerScreen> {
                       ),
                     ),
                     const SizedBox(height: 12),
-                    Text(widget.video.videoTitle,style: const TextStyle(fontSize: 22)),
+                    ExpandableText(
+                      widget.video.videoTitle,
+                      maxLines: 1,
+                      textStyle: TextStyle(fontSize: 20),
+                      showMoreText: false,
+                    ), 
                     const SizedBox(height: 8),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,11 +103,11 @@ class _PlayerScreenState extends State<PlayerScreen> {
                           children: [
                             Row(
                               children: [
-                                const Icon(Icons.thumb_up),
+                                const Icon(Icons.thumb_up, size: 15),
                                 const SizedBox(width: 5),
                                 Text(formatNumberCompact(widget.video.videoLikeCount, context)),
                                 const Text(" • "),
-                                const Icon(Icons.thumb_down),
+                                const Icon(Icons.thumb_down, size: 15),
                                 const SizedBox(width: 5),
                                 Text(formatNumberCompact(widget.video.videoDislikeCount, context)),
                               ],
@@ -112,14 +118,17 @@ class _PlayerScreenState extends State<PlayerScreen> {
                     ),
                     const SizedBox(height: 12),
                     ListTile(
-                      title: Text(widget.video.channelName),
+                      title: Text(widget.video.channelName, style: TextStyle(fontSize: 16),),
                       subtitle: Text(formatNumberCompact(widget.video.channelSubCount, context)),
-                      leading: AspectRatio(
-                        aspectRatio: 1 / 1,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: CustomNetwokImage(imageLink: widget.video.channelThumbUrl)
-                        ),
+                      leading: SizedBox(
+                        width: 45,
+                        child: AspectRatio(
+                          aspectRatio: 1 / 1,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: CustomNetwokImage(imageLink: widget.video.channelThumbUrl)
+                          ),
+                        )
                       ),
                       trailing: widget.video.channelSubscribed
                           ? FilledButton(
@@ -149,16 +158,30 @@ class _PlayerScreenState extends State<PlayerScreen> {
                     ),
                     const SizedBox(height: 12),
                     TabBar(
+                      labelStyle: TextStyle(fontSize: 12),
+                      dividerColor: Colors.transparent,
                       tabs: [
-                        Tab(
-                            icon: const Icon(Icons.description),
-                            text: localizations.playerDescription),
-                        Tab(
-                            icon: const Icon(Icons.comment),
-                            text: localizations.playerComments),
-                        Tab(
-                            icon: const Icon(Icons.video_collection),
-                            text: localizations.playerSimilar),
+                        SizedBox(
+                          height: 45,
+                          child: Tab(
+                            icon: const Icon(Icons.description, size: 15),
+                            text: localizations.playerDescription,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 45,
+                          child: Tab(
+                            icon: const Icon(Icons.comment, size: 15),
+                            text: localizations.playerComments
+                          ),
+                        ),
+                        SizedBox(
+                          height: 45,
+                          child: Tab(
+                            icon: const Icon(Icons.video_collection, size: 15),
+                            text: localizations.playerSimilar
+                          ),
+                        )
                       ],
                     ),
                   ],
