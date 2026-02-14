@@ -1,7 +1,8 @@
 import 'dart:async';
-import 'dart:io';
+import 'package:Self.Tube/features/player/domain/audio_service.dart';
 import 'package:Self.Tube/features/player/domain/sponsorblock_service.dart';
 import 'package:Self.Tube/features/player/ui/screens/player_screen.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:Self.Tube/common/data/services/api/api_headers.dart';
@@ -19,9 +20,12 @@ class VideoPlayerService {
   static String? instanceUrl = SettingsService.instanceUrl;
   static StreamSubscription? _reportPos;
   static StreamSubscription? _sbPos;
+  static late MediaSessionHandler mediaSession;
 
-  static void init() {
+
+  static Future<void> init() async {
     MediaKit.ensureInitialized();
+    mediaSession = await MediaSessionHandler.create();
   } 
 
   static void loadVideo(String id, bool fullscreen, BuildContext context) async {
@@ -30,7 +34,7 @@ class VideoPlayerService {
     final video = await PlayerApi.fetchVideoPlayer(id);
     currentVideo.value = video;
     if (video == null) return;
-  
+   
     if (SettingsService.sponsorBlockEnabled!) {
       SponsorblockService.init(video);
     }
@@ -45,10 +49,13 @@ class VideoPlayerService {
     );
     await _player?.initialized;
 
+    mediaSession.attachPlayer(_player!);
+    mediaSession.updateMetadata(video);
+
     await _player?.seek(Duration(seconds: video.videoPosition.toInt()));
 
     periodicActions(video.videoId);
-    player?.play();
+    mediaSession.play();
   }
 
   static void openPlayer(BuildContext context) {
@@ -87,6 +94,7 @@ class VideoPlayerService {
     _player?.dispose();
     _reportPos?.cancel();
     _sbPos?.cancel();
+    mediaSession.dispose();
     SponsorblockService.dispose();
     currentVideo.value = null;
   }

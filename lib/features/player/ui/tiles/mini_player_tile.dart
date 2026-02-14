@@ -13,66 +13,66 @@ class MiniPlayerTile extends StatelessWidget {
     return Column(
       children: [
         Expanded(child: child),
-          ValueListenableBuilder<VideoPlayerModel?>(
-            valueListenable: VideoPlayerService.currentVideo,
-            builder: (context, video, _) {
-              if (video == null) 
-                return SizedBox.shrink();
-                return GestureDetector(
-                  onTap: () { 
-                    VideoPlayerService.openPlayer(context); 
-                  },
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 100,
-                        child: AspectRatio(
-                          aspectRatio: 16 / 9,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(4),
-                            child: CustomNetwokImage(imageLink: video.videoThumbnail),
+        ValueListenableBuilder<VideoPlayerModel?>(
+          valueListenable: VideoPlayerService.currentVideo,
+          builder: (context, video, _) {
+            if (video == null) 
+              return SizedBox.shrink();
+              return GestureDetector(
+                onTap: () { 
+                  VideoPlayerService.openPlayer(context); 
+                },
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 100,
+                      child: AspectRatio(
+                        aspectRatio: 16 / 9,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(4),
+                          child: CustomNetwokImage(imageLink: video.videoThumbnail),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        video.videoTitle,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.stop),
+                      onPressed: () {
+                        VideoPlayerService.disposeVideo();
+                      },
+                    ),
+                    StreamBuilder(
+                      stream: VideoPlayerService.player?.playingStream,
+                      initialData: VideoPlayerService.player?.isPlaying,
+                      builder: (context, snapshot) {
+                        final isP = snapshot.data ?? true; 
+                        return IconButton(
+                          color: Colors.white,
+                          icon: Icon(
+                            isP
+                              ? Icons.pause
+                              : Icons.play_arrow,
                           ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          video.videoTitle,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: false,
-                        ),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.stop),
-                        onPressed: () {
-                          VideoPlayerService.disposeVideo();
-                        },
-                      ),
-                      StreamBuilder(
-                        stream: VideoPlayerService.player?.playingStream,
-                        initialData: VideoPlayerService.player?.isPlaying,
-                        builder: (context, snapshot) {
-                          final isP = snapshot.data ?? true; 
-                          return IconButton(
-                            color: Colors.white,
-                            icon: Icon(
-                              isP
-                                ? Icons.pause
-                                : Icons.play_arrow,
-                            ),
-                            onPressed: () {
-                              isP
-                                ? VideoPlayerService.player?.pause()
-                                : VideoPlayerService.player?.play();
-                            },
-                          );
-                        }
-                      )
-                    ],
-                  )
-                );
-            },
-          ),
+                          onPressed: () {
+                            isP
+                              ? VideoPlayerService.player?.pause()
+                              : VideoPlayerService.player?.play();
+                          },
+                        );
+                      }
+                    )
+                  ],
+                )
+              );
+          },
+        ),
       ],
     );
   }

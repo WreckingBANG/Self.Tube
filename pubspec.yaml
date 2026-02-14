@@ -29,6 +29,8 @@ dependencies:
   flutter_secure_storage: ^10.0.0
   window_manager: ^0.5.1
   rxdart: ^0.28.0
+  audio_service: ^0.18.18
+  audio_service_mpris: ^0.2.0
 
 dependency_overrides: 
   wakelock_plus: 
