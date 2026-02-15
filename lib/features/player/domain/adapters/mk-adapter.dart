@@ -7,22 +7,19 @@ class MediaKitAdapter implements MediaPlayer {
   final Player _player;
   late final VideoController _videoController;
   late final Widget _videoView;
-
+  late final Future<void> _initialized;
   final ValueNotifier<bool> _repeatNotifier = ValueNotifier(false);
   final ValueNotifier<BorderMode> _borderModeNotifier = ValueNotifier(BorderMode.contain);
 
   MediaKitAdapter(String url, {Map<String, String>? headers})
       : _player = Player() {
-    _player.open(
-      Media(url, httpHeaders: headers),
-    );
 
-    _player.stream.completed.listen((_) {
-      if (_repeatNotifier.value) { 
-        _player.seek(Duration.zero); 
-         _player.play();
-      } 
-    });
+      _initialized = () async {
+        await _player.open(Media(url, httpHeaders: headers));
+        await for (final d in _player.stream.duration) {
+          if (d > Duration.zero) break;
+        }
+      }();
 
     _videoController = VideoController(_player);
     _videoView = ValueListenableBuilder<BorderMode>(
@@ -48,8 +45,12 @@ class MediaKitAdapter implements MediaPlayer {
     }
   }
 
+
   @override
   Widget buildView() => _videoView;
+
+  @override 
+  Future<void> get initialized => _initialized;
 
   @override
   Duration get position => _player.state.position;
@@ -88,6 +89,11 @@ class MediaKitAdapter implements MediaPlayer {
 
   @override
   Future<void> setRepeat(bool value) async {
+    if (value) {
+      _player.setPlaylistMode(PlaylistMode.single);
+    } else {
+      _player.setPlaylistMode(PlaylistMode.none);
+    }
     _repeatNotifier.value = value;
   }
 

@@ -21,6 +21,8 @@ enum PlaybackSpeed {
 }
 
 abstract class MediaPlayer {
+  Future<void> get initialized;
+
   Future<void> play();
   Future<void> pause();
   Future<void> seek(Duration position);

@@ -473,6 +473,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get playerSBUndo => 'Undo';
+
+  @override
   String get playerRepeat => 'Repeat';
 
   @override

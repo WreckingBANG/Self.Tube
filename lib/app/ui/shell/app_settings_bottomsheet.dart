@@ -1,9 +1,9 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/features/onboarding/domain/controllers/auth_controller.dart';
+import 'package:Self.Tube/features/onboarding/ui/screens/privacypolicy_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/common/ui/widgets/sheets/bottomsheet_template.dart';
-import 'package:Self.Tube/main.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
 Future<void> showAppSettingsBottomSheet({
@@ -89,9 +89,9 @@ Future<void> _handleLogout(BuildContext context) async {
   final success = await controller.logout();
 
   if (success) {
-    Navigator.pushAndRemoveUntil(
+    Navigator.pushNamedAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (_) => MyApp()),
+      AppRouter.onboarding,
       (route) => false,
     );
   } else {

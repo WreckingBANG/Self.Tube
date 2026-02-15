@@ -16,6 +16,7 @@ class VideoPlayerAdapter implements MediaPlayer {
 
   bool _disposed = false;
 
+  late final Future<void> _initialized;
   final ValueNotifier<bool> _repeatNotifier = ValueNotifier(false);
   final ValueNotifier<BorderMode> _borderModeNotifier = ValueNotifier(BorderMode.contain);
   final ValueNotifier<PlaybackSpeed> _speedNotifier = ValueNotifier(PlaybackSpeed.x1_0);
@@ -25,7 +26,7 @@ class VideoPlayerAdapter implements MediaPlayer {
           Uri.parse(url),
           httpHeaders: headers ?? const {},
         ) {
-    _controller.initialize().then((_) {
+    _initialized = _controller.initialize().then((_) {
       if (!_controller.value.isInitialized) return;
 
       final value = _controller.value;
@@ -35,11 +36,11 @@ class VideoPlayerAdapter implements MediaPlayer {
 
       _playingController.add(_lastPlaying!);
       _positionController.add(_lastPosition!);
-
+     
       _controller.play();
 
       _pollTimer = Timer.periodic(
-        const Duration(milliseconds: 200),
+        const Duration(milliseconds: 400),
         _pollController,
       );
     });
@@ -56,11 +57,6 @@ class VideoPlayerAdapter implements MediaPlayer {
       _playingController.add(value.isPlaying);
     }
 
-    if (_repeatNotifier.value && value.position >= value.duration) {
-      _controller.seekTo(Duration.zero);
-      _controller.play();
-    }
-    
     if (value.position != _lastPosition) {
       _lastPosition = value.position;
       _positionController.add(value.position);
@@ -69,26 +65,34 @@ class VideoPlayerAdapter implements MediaPlayer {
 
   @override
   Widget buildView() {
-    return ValueListenableBuilder<BorderMode>(
-      valueListenable: _borderModeNotifier,
-      builder: (context, mode, _) {
-        if (!_controller.value.isInitialized) {
-          return const SizedBox.shrink();
+    return FutureBuilder(
+      future: _initialized, 
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return CircularProgressIndicator();
         }
+        return ValueListenableBuilder<BorderMode>(
+          valueListenable: _borderModeNotifier,
+          builder: (context, mode, _) {
+            if (!_controller.value.isInitialized) {
+              return const SizedBox.shrink();
+            }
 
-        final size = _controller.value.size;
+            final size = _controller.value.size;
 
-        return SizedBox.expand(
-          child: FittedBox(
-            fit: _mapBorderMode(mode),
-            child: SizedBox(
-              width: size.width,
-              height: size.height,
-              child: VideoPlayer(_controller),
-            ),
-          ),
+            return SizedBox.expand(
+              child: FittedBox(
+                fit: _mapBorderMode(mode),
+                child: SizedBox(
+                  width: size.width,
+                  height: size.height,
+                  child: VideoPlayer(_controller),
+                ),
+              ),
+            );
+          },
         );
-      },
+      }
     );
   }
 
@@ -103,6 +107,10 @@ class VideoPlayerAdapter implements MediaPlayer {
     }
   }
 
+
+  @override 
+  Future<void> get initialized => _initialized;
+
   @override
   Duration get position => _controller.value.position;
 
@@ -116,12 +124,14 @@ class VideoPlayerAdapter implements MediaPlayer {
   Future<void> pause() => _controller.pause();
 
   @override
-  Future<void> seek(Duration position) {
-    final d = duration;
-    final clamped = position < Duration.zero
-        ? Duration.zero
-        : (position > d ? d : position);
-    return _controller.seekTo(clamped);
+  Future<void> seek(Duration position) async {
+    if (position < Duration.zero) {
+      return _controller.seekTo(Duration.zero);
+    } else if (position > duration) {
+      return _controller.seekTo(duration);
+    } else {
+      return _controller.seekTo(position);
+    }
   }
 
   @override
@@ -138,6 +148,7 @@ class VideoPlayerAdapter implements MediaPlayer {
 
   @override
   Future<void> setRepeat(bool value) async {
+    _controller.setLooping(value);
     _repeatNotifier.value = value;
   }
 

@@ -89,4 +89,19 @@ final dependencies = [
         "license": "MIT",
         "url": "https://github.com/leanflutter/window_manager/blob/main/LICENSE"
       },
+      {
+        "name": "rxdart",
+        "license": "Apache-2.0",
+        "url": "https://github.com/ReactiveX/rxdart/blob/master/LICENSE"
+      },
+      {
+        "name": "audio_service",
+        "license": "MIT",
+        "url": "https://github.com/ryanheise/audio_service/blob/minor/audio_service/LICENSE"
+      },
+      {
+        "name": "audio_service_mpris",
+        "license": "MIT",
+        "url": "https://github.com/bdrazhzhov/audio-service-mpris/blob/master/LICENSE"
+      },
     ];

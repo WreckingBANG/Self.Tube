@@ -962,6 +962,12 @@ abstract class AppLocalizations {
   /// **'Skipped {category} from {start} to {end}'**
   String playerSBSkipped(Object category, Object end, Object start);
 
+  /// No description provided for @playerSBUndo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get playerSBUndo;
+
   /// No description provided for @playerRepeat.
   ///
   /// In en, this message translates to:
