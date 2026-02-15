@@ -91,6 +91,7 @@ class VideoPlayerService {
   }
 
   static void disposeVideo() {
+    mediaSession.dispose();
     _player?.dispose();
     _reportPos?.cancel();
     _sbPos?.cancel();

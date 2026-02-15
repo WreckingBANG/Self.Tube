@@ -1,6 +1,8 @@
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
+import 'package:Self.Tube/common/ui/global_snackbar.dart';
 import 'package:Self.Tube/common/utils/duration_formatter.dart';
 import 'package:Self.Tube/features/player/domain/video_player_service.dart';
+import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class SponsorblockService  {
@@ -46,9 +48,23 @@ class SponsorblockService  {
 
       if (position.inSeconds >= start && position.inSeconds < end && !segment[3]) {
         VideoPlayerService.player?.seek(Duration(seconds: end));
-        //showSnackBar(category, start, end, i);
+        showSnackBar(category, start, end, i);
       } 
     }
+  }
+  
+  static void showSnackBar(String category, int start, int end, int i) {
+    final localizations = AppLocalizations.of(GlobalSnackbar.key.currentContext!);
+    print("test");
+    GlobalSnackbar.show(
+      localizations!.playerSBSkipped(category, formatDuration(end), formatDuration(start)),
+      actionLabel: localizations.playerSBUndo,
+      icon: Icons.money_off,
+      onAction: () {
+        _processedSegments[i][3] = true;
+        VideoPlayerService.player?.seek(Duration(seconds: start-1)); 
+      }
+    );
   }
 
   static void dispose() {

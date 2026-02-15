@@ -18,9 +18,6 @@ class MediaSessionHandler extends BaseAudioHandler {
   MediaSessionHandler() {
     playbackState.add(
       PlaybackState(
-        controls: [
-          MediaControl.play
-        ],
         processingState: AudioProcessingState.idle,
         playing: false,
       ),
@@ -77,10 +74,8 @@ class MediaSessionHandler extends BaseAudioHandler {
   void dispose() {
     playbackState.add(
       PlaybackState(
-        controls: [],
         processingState: AudioProcessingState.idle,
         playing: false,
-        updatePosition: Duration.zero
       )
     );
   } 

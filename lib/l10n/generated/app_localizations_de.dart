@@ -474,6 +474,9 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get playerSBUndo => 'Rückgängig';
+
+  @override
   String get playerRepeat => 'Wiederholen';
 
   @override

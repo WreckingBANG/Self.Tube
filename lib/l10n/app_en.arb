@@ -144,6 +144,7 @@
   "playerPlay": "Play",
   "playerVolume": "Volume",
   "playerSBSkipped": "Skipped {category} from {start} to {end}",
+  "playerSBUndo": "Undo",
   "playerRepeat": "Repeat",
   "playerBorderMode": "Border Mode",
   "playerBorderModeContain": "Contain (Black Bars)",
