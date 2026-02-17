@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:Self.Tube/common/data/services/api/api_headers.dart';
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
+import 'package:Self.Tube/common/ui/global_snackbar.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
@@ -16,6 +18,19 @@ class ApiService {
     Object? body,
     required T Function(dynamic json) parser,
   }) async {
+
+    Future<T?> retry() { 
+      return request(
+        url: url, 
+        method: method, 
+        baseUrl: baseUrl, 
+        headers: headers, 
+        decodeJson: decodeJson, 
+        body: body, 
+        parser: parser,
+      );
+    }
+
     try {
       late http.Response response;
       headers ??= ApiHeaders.authHeaders();
@@ -52,13 +67,20 @@ class ApiService {
         return parser(jsonData);
       }
 
-      if (response.statusCode >= 200 && response.statusCode < 300) { 
+      if (response.statusCode == 200) { 
         return parser(response); 
       } else { 
         throw Exception('HTTP ${response.statusCode}: ${response.body}'); 
       }
     } catch (e) {
-      print('API Error: $e');
+      GlobalSnackbar.show(
+        "$e",
+        icon: Icons.error_outline,
+        actionLabel: "Try again",
+        onAction: retry,
+        iconColor: Colors.red,
+        autoDismiss: false
+      );
       return null;
     }
   }

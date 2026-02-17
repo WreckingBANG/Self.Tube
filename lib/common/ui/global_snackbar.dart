@@ -9,8 +9,10 @@ class GlobalSnackbar {
     String message, {
     String? actionLabel,
     IconData? icon,
+    Color? iconColor,
     VoidCallback? onAction,
     Duration duration = const Duration(seconds: 3),
+    bool autoDismiss = true,
   }) {
     final messenger = key.currentState;
     if (messenger == null) return;
@@ -19,13 +21,16 @@ class GlobalSnackbar {
 
     final snackBar = SnackBar(
       duration: duration,
+      dismissDirection: DismissDirection.horizontal,
       content: Row(
         children: [
           if (icon != null) ...[
-            Icon(icon),
+            Icon(icon, color: iconColor),
             const SizedBox(width: 10),
           ],
-          Text(message),
+          Expanded(
+            child: Text(message),
+          )
         ],
       ),
       action: (actionLabel != null && onAction != null)
@@ -37,13 +42,15 @@ class GlobalSnackbar {
     );
 
     messenger.showSnackBar(snackBar);
-
-    Future.delayed(duration, () {
-      final current = key.currentState;
-      if (current != null) {
-        current.hideCurrentSnackBar();
-      }
-    });
+    
+    if (autoDismiss) {
+      Future.delayed(duration, () {
+        final current = key.currentState;
+        if (current != null) {
+          current.hideCurrentSnackBar();
+        }
+      });
+    }
   }
 }
 

@@ -127,31 +127,27 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
   }
 
   Future<void> _handleLogin(BuildContext context) async {
-  setState(() => _isLoading = true);
-
-  final controller = AuthController();
-
-  final success = await controller.login(
-    _tabController.index == 1,
-    _instanceUrlController.text,
-    _usernameController.text,
-    _passwordController.text,
-    _apiTokenController.text,
-  );
-
-  setState(() {
-    _isLoading = false;
-    _isLoggedIn = success;
-  });
-
-  if (success) {
-    widget.onLoginSuccess?.call();
-  } else {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Login failed")),
+    setState(() => _isLoading = true);
+  
+    final controller = AuthController();
+  
+    final success = await controller.login(
+      _tabController.index == 1,
+      _instanceUrlController.text,
+      _usernameController.text,
+      _passwordController.text,
+      _apiTokenController.text,
     );
+  
+    setState(() {
+      _isLoading = false;
+      _isLoggedIn = success;
+    });
+  
+    if (success) {
+      widget.onLoginSuccess?.call();
+    }
   }
-}
 
 }
 

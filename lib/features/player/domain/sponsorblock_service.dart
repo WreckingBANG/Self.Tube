@@ -55,7 +55,6 @@ class SponsorblockService  {
   
   static void showSnackBar(String category, int start, int end, int i) {
     final localizations = AppLocalizations.of(GlobalSnackbar.key.currentContext!);
-    print("test");
     GlobalSnackbar.show(
       localizations!.playerSBSkipped(category, formatDuration(end), formatDuration(start)),
       actionLabel: localizations.playerSBUndo,
