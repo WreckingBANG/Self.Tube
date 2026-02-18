@@ -19,18 +19,6 @@ class ApiService {
     required T Function(dynamic json) parser,
   }) async {
 
-    Future<T?> retry() { 
-      return request(
-        url: url, 
-        method: method, 
-        baseUrl: baseUrl, 
-        headers: headers, 
-        decodeJson: decodeJson, 
-        body: body, 
-        parser: parser,
-      );
-    }
-
     try {
       late http.Response response;
       headers ??= ApiHeaders.authHeaders();
@@ -77,7 +65,6 @@ class ApiService {
         "$e",
         icon: Icons.error_outline,
         actionLabel: "Try again",
-        onAction: retry,
         iconColor: Colors.red,
         autoDismiss: false
       );
