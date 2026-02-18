@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
-import 'package:Self.Tube/common/constants/dependencies.dart';
 import 'package:Self.Tube/common/constants/urls.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 
@@ -70,40 +69,21 @@ class AboutScreen extends StatelessWidget {
                       title: Text(localizations.aboutReleases),
                       onTap: () => launchUrl(changelogUrl),
                     ),
+                    ListTile(
+                      leading: const Icon(Icons.copyright_rounded),
+                      title: Text(localizations.aboutDependencies),
+                      onTap: () => showLicensePage(
+                        context: context,
+                        applicationName: localizations.appTitle,
+                        applicationLegalese: "AGPL-v3-or-Later"
+                      )
+                    ),
                   ],
                 ),
                 const SizedBox(height: 12),
-                Text(
-                  localizations.aboutScrollDependencies,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
               ],
             ),
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
-              child: Text(
-                "Dependencies",
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-            ),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                final dep = dependencies[index];
-                return ListTile(
-                  leading: const Icon(Icons.extension),
-                  title: Text(dep["name"]!),
-                  subtitle: Text("${localizations.aboutLicense}: ${dep["license"]}"),
-                  onTap: () => launchUrl(Uri.parse(dep["url"]!)),
-                );
-              },
-              childCount: dependencies.length,
-            ),
-          ),
-          const SliverToBoxAdapter(child: SizedBox(height: 24)),
         ],
       ),
     );

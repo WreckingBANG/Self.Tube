@@ -1,8 +1,6 @@
 import 'package:Self.Tube/app/ui/about/about_screen.dart';
 import 'package:Self.Tube/features/channel/ui/screens/channelpage_screen.dart';
 import 'package:Self.Tube/features/onboarding/ui/screens/login_screen.dart';
-import 'package:Self.Tube/features/player/ui/screens/player_screen.dart';
-import 'package:Self.Tube/features/player/ui/tiles/mini_player_tile.dart';
 import 'package:Self.Tube/features/playlist/ui/screens/playlistpage_screen.dart';
 import 'package:Self.Tube/features/settings/ui/screens/appearance_settings_screen.dart';
 import 'package:Self.Tube/features/settings/ui/screens/overview_settings_screen.dart';

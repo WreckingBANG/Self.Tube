@@ -382,9 +382,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutReleases => 'Releases';
 
   @override
-  String get aboutScrollDependencies => 'Scroll down to see dependencies';
-
-  @override
   String get aboutDependencies => 'Dependencies';
 
   @override

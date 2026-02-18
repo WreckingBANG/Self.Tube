@@ -824,12 +824,6 @@ abstract class AppLocalizations {
   /// **'Releases'**
   String get aboutReleases;
 
-  /// No description provided for @aboutScrollDependencies.
-  ///
-  /// In en, this message translates to:
-  /// **'Scroll down to see dependencies'**
-  String get aboutScrollDependencies;
-
   /// No description provided for @aboutDependencies.
   ///
   /// In en, this message translates to:

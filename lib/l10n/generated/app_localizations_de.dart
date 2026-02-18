@@ -382,10 +382,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get aboutReleases => 'Versionsarchiv';
 
   @override
-  String get aboutScrollDependencies =>
-      'Scrolle um die Abhängigkeiten zu sehen';
-
-  @override
   String get aboutDependencies => 'Abhängigkeiten';
 
   @override
