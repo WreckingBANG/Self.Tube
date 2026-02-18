@@ -1,8 +1,11 @@
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:Self.Tube/common/data/services/database/database_service.dart';
+import 'package:Self.Tube/common/data/dao/settings_dao.dart';
 
 class SettingsService {
   static const FlutterSecureStorage _secure = FlutterSecureStorage();
+  static final _db = AppDatabase();
+  static final _dao = SettingsDao(_db);
 
   static const _instanceUrlKey = 'instanceUrl';
   static const _apiTokenAuth = 'apiTokenAuth';
@@ -56,38 +59,49 @@ class SettingsService {
   static bool? vpGestureDoubleTap;
   static bool? vpUseMediaKit;
 
+
   static Future<void> load() async {
-    final prefs = await SharedPreferences.getInstance();
-    instanceUrl = prefs.getString(_instanceUrlKey);
-    apiTokenAuth = prefs.getBool(_apiTokenAuth);
+    final data = await _dao.readAll();
+  
+    bool? b(String k, [bool? defaultValue]) => 
+        data[k] == null ? defaultValue : data[k] == '1';
+  
+    instanceUrl = data[_instanceUrlKey];
+    apiTokenAuth = b(_apiTokenAuth);
+    doneSetup = b(_doneSetup);
+    
+    showCommentPics = b(_showCommentPics);
+    materialYouColors = b(_materialYouColors, true);
+  
+    sponsorBlockEnabled = b(_sponsorBlockEnabledKey, true);
+    sbSponsor = b(_sponsorKey, true);
+    sbSelfpromo = b(_selfPromoKey);
+    sbInteraction = b(_interactionKey);
+    sbIntro = b(_introKey);
+    sbOutro = b(_outroKey);
+    sbPreview = b(_previewKey);
+    sbHook = b(_hookKey);
+    sbFiller = b(_fillerKey);
+  
+    vpGestureSwipe = b(_vpGestureSwipe, true);
+    vpGestureFullscreen = b(_vpGestureFullscreen, true);
+    vpGesturePinch = b(_vpGesturePinch, true);
+    vpGestureDoubleTap = b(_vpGestureDoubleTap, true);
+    vpUseMediaKit = b(_vpUseMediaKit, false);
+  
     apiToken = await _secure.read(key: _apiTokenKey);
     sessionToken = await _secure.read(key: _sessionToken);
     csrfToken = await _secure.read(key: _csrfToken);
+  }
 
-    showCommentPics = prefs.getBool(_showCommentPics);
-    materialYouColors = prefs.getBool(_materialYouColors)?? true;
-    doneSetup = prefs.getBool(_doneSetup);
 
-    sponsorBlockEnabled = prefs.getBool(_sponsorBlockEnabledKey)?? true;
-    sbSponsor = prefs.getBool(_sponsorKey)?? true;
-    sbSelfpromo = prefs.getBool(_selfPromoKey);
-    sbInteraction = prefs.getBool(_interactionKey);
-    sbIntro = prefs.getBool(_introKey);
-    sbOutro = prefs.getBool(_outroKey);
-    sbPreview = prefs.getBool(_previewKey);
-    sbHook = prefs.getBool(_hookKey);
-    sbFiller = prefs.getBool(_fillerKey);
-
-    vpGestureSwipe = prefs.getBool(_vpGestureSwipe)?? true;
-    vpGestureFullscreen = prefs.getBool(_vpGestureFullscreen)?? true;
-    vpGesturePinch = prefs.getBool(_vpGesturePinch)?? true;
-    vpGestureDoubleTap = prefs.getBool(_vpGestureDoubleTap)?? true;
-    vpUseMediaKit = prefs.getBool(_vpUseMediaKit)?? false;
+  static Future<void> _persist(String key, dynamic value) async {
+    final String str = value is bool ? (value ? '1' : '0') : value.toString();
+    await _dao.write(key, str);
   }
 
   static Future<void> setInstanceUrl(String value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_instanceUrlKey, value);
+    await _persist(_instanceUrlKey, value);
     instanceUrl = value;
   }
 
@@ -97,8 +111,7 @@ class SettingsService {
   }
 
   static Future<void> setApiTokenAuth(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_apiTokenAuth, value);
+    await _persist(_apiTokenAuth, value);
     apiTokenAuth = value;
   }
 
@@ -113,32 +126,27 @@ class SettingsService {
   }
 
   static Future<void> setShowCommentPics(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_showCommentPics, value);
+    await _persist(_showCommentPics, value);
     showCommentPics = value;
   }
 
   static Future<void> setMaterialYouColors(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_materialYouColors, value);
+    await _persist(_materialYouColors, value);
     materialYouColors = value;
   }
 
   static Future<void> setDoneSetup(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_doneSetup, value);
+    await _persist(_doneSetup, value);
     doneSetup = value;
   }
 
   static Future<void> setSponsorBlockEnabled(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_sponsorBlockEnabledKey, value);
+    await _persist(_sponsorBlockEnabledKey, value);
     sponsorBlockEnabled = value;
   }
 
   static Future<void> setSponsorCategory(String category, bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(category, value);
+    await _persist(category, value);
 
     switch (category) {
       case _sponsorKey:
@@ -169,32 +177,28 @@ class SettingsService {
   }
 
   static Future<void> setVPGestureSwipe(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_vpGestureSwipe, value);
+    await _persist(_vpGestureSwipe, value);
     vpGestureSwipe = value;
   }
 
   static Future<void> setVPGestureFullscreen(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_vpGestureFullscreen, value);
+    await _persist(_vpGestureFullscreen, value);
     vpGestureFullscreen = value;
   }
 
   static Future<void> setVPGesturePinch(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_vpGesturePinch, value);
+    await _persist(_vpGesturePinch, value);
     vpGesturePinch = value;
   }
 
   static Future<void> setVPGestureDoubleTap(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_vpGestureDoubleTap, value);
+    await _persist(_vpGestureDoubleTap, value);
     vpGestureDoubleTap = value;
   }
 
   static Future<void> setVPUseMediaKit(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_vpUseMediaKit, value);
+    await _persist(_vpUseMediaKit, value);
     vpUseMediaKit = value;
   }
 }
+
