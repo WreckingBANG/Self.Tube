@@ -17,15 +17,16 @@ class ChannelItemModel {
     required this.description,
   });
 
+
   factory ChannelItemModel.fromJson(Map<String, dynamic> json) {
     return ChannelItemModel(
-      channelId: json['channel_id'],
-      channelName: json['channel_name'],
-      profilePic: json['channel_thumb_url'],
-      subscribers: json['channel_subs'],
-      subscribed: json['channel_subscribed'],
-      banner: json['channel_banner_url'],
-      description: json['channel_description']
+      channelId: json['channel_id'] ?? '',
+      channelName: json['channel_name'] ?? '',
+      profilePic: json['channel_thumb_url'] ?? '',
+      subscribers: json['channel_subs'] ?? 0,
+      subscribed: json['channel_subscribed'] ?? false,
+      banner: json['channel_banner_url'] ?? '',
+      description: json['channel_description'] ?? '',
     );
   }
 }

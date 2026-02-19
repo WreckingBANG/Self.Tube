@@ -46,7 +46,8 @@ class ChannelpageScreen extends StatelessWidget{
                 final channel = snapshot.data!;
                 return ListView(
                   children: [
-                    CustomNetwokImage(imageLink: channel.banner),
+                    if (channel.banner.isNotEmpty)
+                      CustomNetwokImage(imageLink: channel.banner),
                     ListTile(
                       title: Text(channel.channelName),
                       subtitle: Text(formatNumberCompact(channel.subscribers, context)),

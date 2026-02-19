@@ -15,11 +15,11 @@ class ChannelListItemModel {
 
   factory ChannelListItemModel.fromJson(Map<String, dynamic> json) {
     return ChannelListItemModel(
-      channelId: json['channel_id'],
-      channelName: json['channel_name'],
-      profilePic: json['channel_thumb_url'],
-      subscribers: json['channel_subs'],
-      subscribed: json['channel_subscribed'],
+      channelId: json['channel_id'] ?? '',
+      channelName: json['channel_name'] ?? '',
+      profilePic: json['channel_thumb_url'] ?? '',
+      subscribers: json['channel_subs'] ?? 0,
+      subscribed: json['channel_subscribed'] ?? false,
     );
   }
 
