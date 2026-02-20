@@ -46,7 +46,7 @@ jobs:
       - name: Build Flutter
         run: |
           apt update
-          apt install libsecret-1-dev libmpv-dev -y
+          apt install libsecret-1-dev libmpv-dev lld -y
           cd "$GITHUB_WORKSPACE"
           flutter pub get
           flutter build linux --release
@@ -105,7 +105,7 @@ jobs:
       - name: Build Flutter
         run: |
           apt update
-          apt install libsecret-1-dev libmpv-dev -y
+          apt install libsecret-1-dev libmpv-dev lld -y
           cd "$GITHUB_WORKSPACE"
           flutter pub get
           flutter build linux --release
