@@ -1,0 +1,264 @@
+name: Build Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+
+  build_flatpak-aarch64:
+    runs-on: codeberg-aarch64-1
+    container: 
+      image: ubuntu:24.04
+    steps:
+      - name: Setup Node
+        run: |
+          export DEBIAN_FRONTEND=noninteractive
+          ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+          apt update
+          apt install -y tzdata
+          dpkg-reconfigure --frontend noninteractive tzdata
+          apt install -y curl
+          curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+          apt install -y nodejs
+          node -v
+          npm -v
+      - uses: actions/checkout@v6
+      - name: Setup Flatpak
+        run: |
+          unshare -U true
+          apt update
+          apt install flatpak flatpak-builder -y
+          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          flatpak install -y flathub org.gnome.Platform//48
+          flatpak install -y flathub org.gnome.Sdk//48
+      - name: Setup Flutter
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          apt update
+          apt install -y cmake ninja-build clang pkg-config libgtk-3-dev build-essential unzip libmpv-dev libasound2-dev libsecret-1-dev git
+          git clone https://github.com/flutter/flutter.git -b stable
+          export PATH="$GITHUB_WORKSPACE/flutter/bin:$PATH"
+          export PATH="$GITHUB_WORKSPACE/flutter/bin/cache/dart-sdk/bin:$PATH"
+          echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
+          echo "$GITHUB_WORKSPACE/flutter/bin/cache/dart-sdk/bin" >> $GITHUB_PATH
+          flutter --version
+          flutter doctor
+      - name: Build Flutter
+        run: |
+          apt update
+          apt install libsecret-1-dev libmpv-dev lld -y
+          cd "$GITHUB_WORKSPACE"
+          flutter pub get
+          flutter build linux --release
+      - name: Build Flatpak
+        run: |
+          cd "$GITHUB_WORKSPACE/flatpak"
+          git config --global protocol.file.allow always
+          flatpak-builder --disable-rofiles-fuse build-dir com.wreckingbang.selftube.yaml --force-clean --repo=repo
+          flatpak build-bundle repo selftube.flatpak com.wreckingbang.selftube
+          mv $GITHUB_WORKSPACE/flatpak/selftube.flatpak $GITHUB_WORKSPACE/flatpak/selftube-linux-aarch64.flatpak
+      - name: Upload Flatpak
+        uses: actions/upload-artifact@v3
+        with:
+          name: selftube-linux-aarch64
+          path: |
+            flatpak/selftube-linux-aarch64.flatpak
+
+  build_flatpak-86_x64:
+    runs-on: codeberg-x86-1
+    container: 
+      image: ubuntu:24.04
+    steps:
+      - name: Setup Node
+        run: |
+          export DEBIAN_FRONTEND=noninteractive
+          ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+          apt update
+          apt install -y tzdata
+          dpkg-reconfigure --frontend noninteractive tzdata
+          apt install -y curl
+          curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+          apt install -y nodejs
+          node -v
+          npm -v
+      - uses: actions/checkout@v6
+      - name: Setup Flatpak
+        run: |
+          unshare -U true
+          apt update
+          apt install flatpak flatpak-builder -y
+          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          flatpak install -y flathub org.gnome.Platform//48
+          flatpak install -y flathub org.gnome.Sdk//48
+      - name: Setup Flutter
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          apt update
+          apt install -y cmake ninja-build clang pkg-config libgtk-3-dev build-essential unzip libmpv-dev libasound2-dev libsecret-1-dev git
+          git clone https://github.com/flutter/flutter.git -b stable
+          export PATH="$GITHUB_WORKSPACE/flutter/bin:$PATH"
+          export PATH="$GITHUB_WORKSPACE/flutter/bin/cache/dart-sdk/bin:$PATH"
+          echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
+          echo "$GITHUB_WORKSPACE/flutter/bin/cache/dart-sdk/bin" >> $GITHUB_PATH
+          flutter --version
+          flutter doctor
+      - name: Build Flutter
+        run: |
+          apt update
+          apt install libsecret-1-dev libmpv-dev lld -y
+          cd "$GITHUB_WORKSPACE"
+          flutter pub get
+          flutter build linux --release
+      - name: Build Flatpak
+        run: |
+          cd "$GITHUB_WORKSPACE/flatpak"
+          git config --global protocol.file.allow always
+          flatpak-builder --disable-rofiles-fuse build-dir com.wreckingbang.selftube.yaml --force-clean --repo=repo
+          flatpak build-bundle repo selftube.flatpak com.wreckingbang.selftube
+          mv $GITHUB_WORKSPACE/flatpak/selftube.flatpak $GITHUB_WORKSPACE/flatpak/selftube-linux-86_x64.flatpak
+      - name: Upload Flatpak
+        uses: actions/upload-artifact@v3
+        with:
+          name: selftube-linux-86_x64
+          path: |
+            flatpak/selftube-linux-86_x64.flatpak
+
+  build_apk:
+    runs-on: codeberg-x86-2
+    container: 
+      image: ubuntu:24.04
+    steps:
+      - name: Setup Node
+        run: |
+          export DEBIAN_FRONTEND=noninteractive
+          ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+          apt update
+          apt install -y tzdata
+          dpkg-reconfigure --frontend noninteractive tzdata
+          apt install -y curl
+          curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+          apt install -y nodejs
+          node -v
+          npm -v
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5 
+        with: 
+          distribution: 'temurin' 
+          java-version: '17'
+      - name: Setup Android SDK
+        run: |
+          apt-get update && apt-get install -y wget unzip
+          wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O cmdtools.zip
+          mkdir -p /usr/lib/android-sdk/cmdline-tools
+          unzip cmdtools.zip -d /usr/lib/android-sdk/cmdline-tools
+          mv /usr/lib/android-sdk/cmdline-tools/cmdline-tools /usr/lib/android-sdk/cmdline-tools/latest
+          export ANDROID_SDK_ROOT=/usr/lib/android-sdk
+          export PATH=$PATH:/usr/lib/android-sdk/cmdline-tools/latest/bin
+          export PATH=$PATH:/usr/lib/android-sdk/platform-tools
+          echo "ANDROID_SDK_ROOT=/usr/lib/android-sdk" >> $GITHUB_ENV
+          echo "/usr/lib/android-sdk/cmdline-tools/latest/bin" >> $GITHUB_PATH
+          echo "/usr/lib/android-sdk/platform-tools" >> $GITHUB_PATH
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "platform-tools" \
+           "platforms;android-36" \
+           "build-tools;36.0.0" \
+           "build-tools;28.0.3"
+      - name: Setup Flutter
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          apt update
+          apt install -y cmake ninja-build clang pkg-config libgtk-3-dev build-essential unzip libmpv-dev libasound2-dev libsecret-1-dev git
+          git clone https://github.com/flutter/flutter.git -b stable
+          export PATH="$GITHUB_WORKSPACE/flutter/bin:$PATH"
+          export PATH="$GITHUB_WORKSPACE/flutter/bin/cache/dart-sdk/bin:$PATH"
+          echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
+          echo "$GITHUB_WORKSPACE/flutter/bin/cache/dart-sdk/bin" >> $GITHUB_PATH
+          flutter --version
+          flutter doctor
+      - name: Build Apk
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          flutter pub get
+          flutter build apk --release --split-per-abi
+
+      - name: Decode signing key
+        run: |
+          echo "$SIGNING_KEY_B64" | base64 -d > release-keystore.jks
+        env:
+          SIGNING_KEY_B64: ${{ secrets.SIGNING_KEY_B64 }}
+
+      - name: Sign & rename APKs
+        run: |
+          BUILD_TOOLS="/usr/lib/android-sdk/build-tools/36.0.0"
+
+          for apk in build/app/outputs/flutter-apk/*.apk; do
+            filename=$(basename "$apk")
+            arch=$(echo "$filename" | cut -d'-' -f2)
+
+            out="build/app/outputs/flutter-apk/selftube-android-${arch}.apk"
+
+            echo "Signing $apk → $out"
+
+            $BUILD_TOOLS/apksigner sign \
+              --ks release-keystore.jks \
+              --ks-key-alias "$KEY_ALIAS" \
+              --ks-pass pass:"$KEYSTORE_PASSWORD" \
+              --key-pass pass:"$KEY_PASSWORD" \
+              --out "$out" \
+              "$apk"
+          done
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+
+      - name: Verify signatures
+        run: |
+          BUILD_TOOLS="/usr/lib/android-sdk/build-tools/36.0.0"
+          for apk in build/app/outputs/flutter-apk/selftube-android-*.apk; do
+            echo "Verifying $apk"
+            $BUILD_TOOLS/apksigner verify --verbose "$apk"
+          done
+
+      - name: Upload APKs
+        uses: actions/upload-artifact@v3
+        with:
+          name: selftube-android
+          path: build/app/outputs/flutter-apk/selftube-android-*.apk
+
+  
+  release:
+    needs: 
+      - build_apk
+      - build_flatpak-86_x64
+    runs-on: codeberg-x86
+    steps:
+      - uses: actions/checkout@v6
+        
+      - uses: actions/download-artifact@v3
+        with:
+          path: release-assets
+          
+      - name: Flatten release directory
+        run: |
+          mkdir flat
+          find release-assets -type f -exec mv {} flat/ \;
+          rm -rf release-assets
+          mv flat release-assets
+
+
+      - name: publish release
+        uses: https://code.forgejo.org/actions/forgejo-release@v2.11.2
+        with:
+          url: "https://codeberg.org"
+          repo: "WreckingBANG/Self.Tube"
+          direction: upload
+          tag: "${{ github.ref_name }}"
+          sha: "${{ github.sha }}"
+          release-dir: release-assets
+          token: ${{ secrets.TOKEN }}
+          title: "${{ github.ref_name }}"
+          hide-archive-link: true
+          release-notes-assistant: true
