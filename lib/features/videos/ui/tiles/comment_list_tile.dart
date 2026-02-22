@@ -45,7 +45,7 @@ class CommentListTile extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if(commentAuthorThumbnail!=null && SettingsService.showCommentPics!=false)
+                    if(commentAuthorThumbnail!=null && SettingsService.showCommentPics==true)
                       ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child:  Image.network(
