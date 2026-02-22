@@ -33,7 +33,6 @@
 
         buildInputs = [
           # pkgs.android-studio
-          pkgs.android-studio
           pkgs.libsecret
           pkgs.fontconfig
           pkgs.glibcLocales

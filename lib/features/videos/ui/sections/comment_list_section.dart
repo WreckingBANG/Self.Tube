@@ -79,7 +79,6 @@ class _CommentListWidgetState extends State<CommentListWidget> {
                       }).toList(),
                     ),
                   ),
-                const Divider(),
               ],
             );
           }).toList(),
