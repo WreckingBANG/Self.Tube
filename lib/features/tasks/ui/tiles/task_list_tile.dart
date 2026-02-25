@@ -1,3 +1,4 @@
+import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/features/tasks/data/api/task_api.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +41,12 @@ class TaskListTile extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    TaskApi().stopTask(task.taskId);
+                    ConfirmationDialog(
+                      context: context, 
+                      onSure: () {
+                        TaskApi().stopTask(task.taskId);
+                      }
+                    );
                   },
                   icon: const Icon(Icons.pause),
                 ),
