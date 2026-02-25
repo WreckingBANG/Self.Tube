@@ -36,6 +36,8 @@ TubeArchivist is amazing for archiving, but it’s built for use in a Web-Browse
 
 Every help is welcome. Feel free to open issues, suggest improvements, or submit pull requests.
 
+## Translations
+[![Translation status](https://translate.codeberg.org/widget/self-tube/self-tube/multi-auto.svg)](https://translate.codeberg.org/engage/self-tube/)
 
 ## License
 
