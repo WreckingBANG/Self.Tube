@@ -64,4 +64,12 @@ class UserApi {
       },
     );
   }
+
+  Future<bool?> logout() {
+    return ApiService.request(
+      url: '/api/user/logout/',
+      method: 'POST',
+      parser: (_) => true,
+    );
+  }
 }

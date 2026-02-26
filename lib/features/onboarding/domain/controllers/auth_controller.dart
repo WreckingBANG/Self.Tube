@@ -43,6 +43,10 @@ class AuthController {
 
   Future<bool> logout() async {
     try {
+      if (SettingsService.apiTokenAuth != true) {
+        await UserApi().logout();
+      }
+      
       await SettingsService.setDoneSetup(false);
       await SettingsService.setInstanceUrl("");
       await SettingsService.setApiToken("");
