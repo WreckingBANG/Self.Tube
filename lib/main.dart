@@ -54,6 +54,7 @@ class MyApp extends StatelessWidget {
           supportedLocales: const [
             Locale('en'),
             Locale('de'),
+            Locale('pl'),
           ],
           title: 'Self.Tube',
           theme: lightThemeFrom(
