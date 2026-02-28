@@ -1,6 +1,7 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/features/onboarding/domain/controllers/auth_controller.dart';
+import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:Self.Tube/features/onboarding/ui/screens/privacypolicy_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/common/ui/widgets/sheets/bottomsheet_template.dart';
@@ -57,27 +58,28 @@ Future<void> showAppSettingsBottomSheet({
           ),
         ],
       ),
-      ListSectionContainer(
-        title: localizations.settingsSheetServer,
-        children: [
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text(localizations.settingsSheetSettings),
-            subtitle: Text(localizations.settingsSheetComingSoon),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.bar_chart_rounded),
-            title: Text(localizations.settingsSheetLibraryStats),
-            subtitle: Text(localizations.settingsSheetComingSoon),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-        ],
-      )
+      if (UserSession.isPrivileged)
+        ListSectionContainer(
+          title: localizations.settingsSheetServer,
+          children: [
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text(localizations.settingsSheetSettings),
+              subtitle: Text(localizations.settingsSheetComingSoon),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.bar_chart_rounded),
+              title: Text(localizations.settingsSheetLibraryStats),
+              subtitle: Text(localizations.settingsSheetComingSoon),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        )
     ]
   );
 }

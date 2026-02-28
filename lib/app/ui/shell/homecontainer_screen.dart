@@ -1,5 +1,6 @@
 import 'package:Self.Tube/app/ui/home/home_screen.dart';
 import 'package:Self.Tube/app/ui/shell/app_settings_bottomsheet.dart';
+import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:Self.Tube/features/player/ui/tiles/mini_player_tile.dart';
 import 'package:Self.Tube/features/tasks/ui/screens/actions_screen.dart';
 import 'package:Self.Tube/features/channel/ui/screens/channels_screen.dart';
@@ -67,11 +68,12 @@ class _HomeContainerState extends State<HomeContainer> {
             icon: Icon(Icons.playlist_add),
             label: localizations.barPlaylists,
           ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.add),
-            icon: Icon(Icons.add),
-            label: localizations.barActions,
-          ),
+          if (UserSession.isPrivileged)
+            NavigationDestination(
+              selectedIcon: Icon(Icons.add),
+              icon: Icon(Icons.add),
+              label: localizations.barActions,
+            ),
         ],
       ),
       body: MiniPlayerTile(

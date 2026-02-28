@@ -1,6 +1,7 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/sheets/bottomsheet_template.dart';
+import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:Self.Tube/features/playlist/data/api/playlist_api.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
@@ -28,19 +29,20 @@ Future<void> showPlaylistListBottomSheet({
                 );
               },
             ),
-          ListTile(
-            leading: Icon(Icons.delete_forever),
-            title: Text(localizations.playlistDelete),
-            onTap: () {
-              ConfirmationDialog(
-                context: context, 
-                onSure: () {
-                  PlaylistApi.deletePlaylist(playlist.playlistId, false);
-                  Navigator.pop(context);
-                }
-              );
-            },
-          ),
+          if (UserSession.isPrivileged)
+            ListTile(
+              leading: Icon(Icons.delete_forever),
+              title: Text(localizations.playlistDelete),
+              onTap: () {
+                ConfirmationDialog(
+                  context: context, 
+                  onSure: () {
+                    PlaylistApi.deletePlaylist(playlist.playlistId, false);
+                    Navigator.pop(context);
+                  }
+                );
+              },
+            ),
         ]
       ),
     ]

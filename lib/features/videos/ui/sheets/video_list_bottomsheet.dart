@@ -1,6 +1,7 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
+import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:Self.Tube/features/playlist/ui/dialogs/add_to_playlist_dialog.dart';
 import 'package:Self.Tube/features/videos/data/api/video_api.dart';
 import 'package:flutter/material.dart';
@@ -79,30 +80,31 @@ Future<void> showVideoListBottomSheet({
           ),
         ]
       ),
-      ListSectionContainer(
-        title: localizations.sheetServerActions,
-        children: [
-          ListTile(
-            leading: Icon(Icons.cloud_download),
-            title: Text(localizations.sheetRedownloadServer),
-            subtitle: Text(localizations.sheetComingSoon),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.cloud_off_rounded),
-            title: Text(localizations.sheetDeleteVideoServer),
-            onTap: () {
-              ConfirmationDialog(
-                context: context, 
-                onSure: () {
-                  Navigator.pop(context);
-                  VideoApi.deleteVideo(video.youtubeId);  
-                }
-              );
-            },
-          ),
-        ]
-      ),
+      if (UserSession.isPrivileged)
+        ListSectionContainer(
+          title: localizations.sheetServerActions,
+          children: [
+            ListTile(
+              leading: Icon(Icons.cloud_download),
+              title: Text(localizations.sheetRedownloadServer),
+              subtitle: Text(localizations.sheetComingSoon),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.cloud_off_rounded),
+              title: Text(localizations.sheetDeleteVideoServer),
+              onTap: () {
+                ConfirmationDialog(
+                  context: context, 
+                  onSure: () {
+                    Navigator.pop(context);
+                    VideoApi.deleteVideo(video.youtubeId);  
+                  }
+                );
+              },
+            ),
+          ]
+        ),
     ]
   );
 }

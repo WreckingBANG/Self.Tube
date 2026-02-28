@@ -1,6 +1,7 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/app/ui/shell/homecontainer_screen.dart';
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
+import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:Self.Tube/features/onboarding/ui/widgets/login_section.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
@@ -35,6 +36,7 @@ class _OnBoardingLoginScreenState extends State<OnBoardingLoginScreen> {
                 icon: Icon(Icons.check),
                 onPressed: () async {
                   await SettingsService.load();
+                  await UserSession.init();
                   Navigator.pushNamedAndRemoveUntil(
                     context,
                     AppRouter.home,
