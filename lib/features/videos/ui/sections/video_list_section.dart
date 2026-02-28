@@ -59,13 +59,14 @@ class _VideoListSectionState extends State<VideoListSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 0),
-          child: Text(
-            widget.title,
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondaryContainer),
+        if (videos.isNotEmpty || !widget.hideIfEmpty)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 0),
+            child: Text(
+              widget.title,
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondaryContainer),
+            ),
           ),
-        ),
         if (widget.showSorting)
           SortChipsSection(
             sortOptions: (value) {

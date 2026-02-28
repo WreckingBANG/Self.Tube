@@ -25,7 +25,23 @@ class VideoListWrapperModel {
     required this.totalHits,
   });
 
-  factory VideoListWrapperModel.fromJson(Map<String, dynamic> json) {
+  factory VideoListWrapperModel.fromJson(dynamic json) {
+    
+    if (json is List) {
+      return VideoListWrapperModel(
+        data: [],
+        pageSize: 0,
+        pageFrom: 0,
+        prevPages: [],
+        currentPage: 0,
+        maxHits: false,
+        params: "",
+        lastPage: 0,
+        nextPages: [],
+        totalHits: 0,
+      );
+    }
+
     final paginate = json['paginate'] ?? {};
 
     return VideoListWrapperModel(
