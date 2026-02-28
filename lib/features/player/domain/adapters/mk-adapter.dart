@@ -65,6 +65,9 @@ class MediaKitAdapter implements MediaPlayer {
   Future<void> pause() => _player.pause();
 
   @override
+  Size get size => Size(_player.state.height?.toDouble() ?? 0, _player.state.width?.toDouble() ?? 0);
+
+  @override
   Future<void> seek(Duration position) async {
     if (position < Duration.zero) {
       return _player.seek(Duration.zero);

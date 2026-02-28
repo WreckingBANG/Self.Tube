@@ -26,7 +26,9 @@ abstract class MediaPlayer {
   Future<void> play();
   Future<void> pause();
   Future<void> seek(Duration position);
-
+  
+  Size get size;
+  
   bool get isPlaying;
 
   Widget buildView();

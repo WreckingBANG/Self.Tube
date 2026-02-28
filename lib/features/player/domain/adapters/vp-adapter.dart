@@ -126,6 +126,9 @@ class VideoPlayerAdapter implements MediaPlayer {
 
   @override
   Future<void> pause() => _controller.pause();
+  
+  @override
+  Size get size => _controller.value.size;
 
   @override
   Future<void> seek(Duration position) async {

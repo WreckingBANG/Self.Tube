@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:Self.Tube/common/data/services/device/device_service.dart';
 import 'package:Self.Tube/features/player/domain/video_player_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'overlays/bottom_controls_overlay.dart';
 import 'overlays/top_controls_overlay.dart';
 import 'overlays/gesture_message.dart';
@@ -51,6 +52,19 @@ class _VideoPlayerFullscreenUIState extends State<VideoPlayerFullscreenUI> {
   void initState() {
     super.initState();
     DeviceService.setFullScreen(true);
+    final size = widget.player.size;
+  
+    if (size.width > size.height) {
+      DeviceService.setOrientation([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+    } else {
+      DeviceService.setOrientation([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ]);
+    }
   }
 
   void _toggleControls() {
@@ -75,6 +89,7 @@ class _VideoPlayerFullscreenUIState extends State<VideoPlayerFullscreenUI> {
   void dispose() {
     _hideTimer?.cancel();
     DeviceService.setFullScreen(false);
+    DeviceService.setOrientation(DeviceOrientation.values);
     super.dispose();
   }
 

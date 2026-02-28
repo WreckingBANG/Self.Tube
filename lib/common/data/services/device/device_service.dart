@@ -16,18 +16,16 @@ class DeviceService {
   static Future<void> setFullScreen(bool value) async {
     if(Platform.isAndroid && value){
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ]);
     } else if (Platform.isAndroid && !value){
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ]);
     } else if (Platform.isLinux){
       windowManager.setFullScreen(value);
+    }
+  }
+
+  static Future<void> setOrientation(List<DeviceOrientation> orientations) async {
+    if (Platform.isAndroid) {
+      await SystemChrome.setPreferredOrientations(orientations);
     }
   }
 
