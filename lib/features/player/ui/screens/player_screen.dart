@@ -130,24 +130,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
                           ),
                         )
                       ),
-                      trailing: widget.video.channelSubscribed
-                          ? FilledButton(
-                              onPressed: () {
-                                ConfirmationDialog(
-                                  context: context, 
-                                  onSure: () {
-                                    ChannelApi().modifyChannel(widget.video.channelId, false);
-                                  }
-                                );
-                              },
-                              child: Text(localizations.playerUnsubscribe),
-                            )
-                          : OutlinedButton(
-                              onPressed: () {
-                                ChannelApi().modifyChannel(widget.video.channelId, true);
-                              },
-                              child: Text(localizations.playerSubscribe),
-                            ),
                       onTap: () {
                         Navigator.pushNamed(
                           context, 
