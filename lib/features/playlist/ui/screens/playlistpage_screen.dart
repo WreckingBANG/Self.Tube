@@ -2,7 +2,6 @@ import 'package:Self.Tube/common/ui/widgets/containers/refresh_container.dart';
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/features/player/ui/tiles/mini_player_tile.dart';
-import 'package:Self.Tube/features/playlist/data/api/playlist_api.dart';
 import 'package:Self.Tube/features/playlist/domain/playlistpage_provider.dart';
 import 'package:Self.Tube/features/videos/ui/sections/video_list_section.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +20,7 @@ class PlaylistpageScreen extends ConsumerWidget{
   Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context)!;
 
+    final provider = ref.read(playlistPageProvider(playlistId).notifier);
     final playlist = ref.watch(playlistPageProvider(playlistId));
 
     return Scaffold(
@@ -52,7 +52,7 @@ class PlaylistpageScreen extends ConsumerWidget{
                                 ConfirmationDialog(
                                   context: context, 
                                   onSure: () {
-                                    ref.read(playlistActionProvider).toggleSubscription(playlistId, false);
+                                    provider.subscribe(false);
                                   }
                                 ); 
                               },
@@ -60,7 +60,7 @@ class PlaylistpageScreen extends ConsumerWidget{
                             )
                           : OutlinedButton(
                               onPressed: () {
-                                ref.read(playlistActionProvider).toggleSubscription(playlistId, true);
+                                provider.subscribe(true);
                               },
                               child: Text(localizations.playerSubscribe),
                             )

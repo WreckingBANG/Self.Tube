@@ -1,22 +1,25 @@
 import 'package:Self.Tube/features/channel/data/api/channel_api.dart';
+import 'package:Self.Tube/features/channel/data/models/channel_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-final channelPageProvider = FutureProvider.family((ref, String id) async {
-  return ChannelApi().fetchChannel(id);
-});
-
-
-final channelActionsProvider = Provider((ref) {
-  return ChannelActions(ref);
-});
-
-class ChannelActions {
-  final Ref ref;
-  ChannelActions(this.ref);
-
-  Future<void> toggleSubscription(String id, bool subscribe) async {
-    await ChannelApi().modifyChannel(id, subscribe);
-    ref.invalidate(channelPageProvider(id));
+class ChannelPageNotifier extends AsyncNotifier<ChannelItemModel?> {
+  ChannelPageNotifier(this.id);
+  late final String id;
+  
+  @override
+  Future<ChannelItemModel?> build() async {
+    return ChannelApi().fetchChannel(id);
   }
+
+  Future<void> subscribe(bool val) async {
+    await AsyncValue.guard(() => ChannelApi().modifyChannel(id, val));
+    state = await AsyncValue.guard(() => ChannelApi().fetchChannel(id));
+  }
+
 }
+
+final channelPageProvider = AsyncNotifierProvider.family<ChannelPageNotifier, ChannelItemModel?, String>(
+  ChannelPageNotifier.new,
+);
+

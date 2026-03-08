@@ -11,13 +11,16 @@ class ChannelsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
+  
+    final query = "?filter=subscribed";
+
     return Scaffold(
       floatingActionButton: UserSession.isPrivileged 
         ? FloatingActionButton(
             onPressed: () {
               showDialog(
                 context: context, 
-                builder: (context) => AddChannelDialog()
+                builder: (context) => AddChannelDialog(query: query)
               );
             },
             tooltip: localizations.channelAdd,
@@ -27,7 +30,7 @@ class ChannelsScreen extends StatelessWidget {
       body: RefreshContainer(
         child: ListView(
           children: [
-            ChannelListSection(query: "?filter=subscribed")
+            ChannelListSection(query: query)
           ],
         )
       ),

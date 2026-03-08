@@ -2,17 +2,24 @@ import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.da
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/sheets/bottomsheet_template.dart';
 import 'package:Self.Tube/features/channel/data/api/channel_api.dart';
+import 'package:Self.Tube/features/channel/domain/channellist_provider.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
 Future<void> showChannelListBottomSheet({
   required BuildContext context,
   required dynamic channel,
+  required WidgetRef ref,
+  required String query,
   String? title,
 }) {
   final localizations = AppLocalizations.of(context)!;
+
+  final provider = ref.read(channelListProvider(query).notifier);
+
   return showBottomSheetTemplate(
     context: context, 
     title: channel.channelName,
@@ -36,7 +43,7 @@ Future<void> showChannelListBottomSheet({
                 ConfirmationDialog(
                   context: context, 
                   onSure: () {
-                    ChannelApi().deleteChannel(channel.channelId);
+                    provider.deleteChannel(channel.channelId);  
                     Navigator.pop(context);
                   }
                 );

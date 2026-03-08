@@ -23,7 +23,8 @@ class ChannelpageScreen extends ConsumerWidget{
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context)!;
-
+    
+    final provider = ref.read(channelPageProvider(channelId).notifier);
     final channel = ref.watch(channelPageProvider(channelId));
 
     return Scaffold(
@@ -56,7 +57,7 @@ class ChannelpageScreen extends ConsumerWidget{
                             ConfirmationDialog(
                               context: context, 
                               onSure: () {
-                                ref.read(channelActionsProvider).toggleSubscription(channel.channelId, false);
+                                provider.subscribe(false);
                               } 
                             );
                           },
@@ -64,7 +65,7 @@ class ChannelpageScreen extends ConsumerWidget{
                         )
                       : OutlinedButton(
                           onPressed: () {
-                            ref.read(channelActionsProvider).toggleSubscription(channel.channelId, true);
+                            provider.subscribe(true);
                           },
                           child: Text(localizations.playerSubscribe),
                         ),

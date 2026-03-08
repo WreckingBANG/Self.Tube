@@ -70,7 +70,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                       title: localizations.searchChannels,
                       children: [
                         ...result.channels.map(
-                          (c) => ChannelListTile(channel: c),
+                          (c) => ChannelListTile(channel: c, query: _query),
                         )
                       ],
                     ),

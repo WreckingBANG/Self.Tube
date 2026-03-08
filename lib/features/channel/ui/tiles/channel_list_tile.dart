@@ -4,14 +4,20 @@ import 'package:Self.Tube/common/utils/number_formatter.dart';
 import 'package:Self.Tube/features/channel/ui/sheets/channel_list_bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ChannelListTile extends StatelessWidget {
+class ChannelListTile extends ConsumerWidget {
   final dynamic channel;
+  final String query;
 
-  const ChannelListTile({super.key, required this.channel});
+  const ChannelListTile({
+    super.key, 
+    required this.channel,
+    required this.query,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context)!;
     return SizedBox(
       width: double.infinity,
@@ -61,7 +67,9 @@ class ChannelListTile extends StatelessWidget {
         onLongPress: () {
           showChannelListBottomSheet(
             context: context, 
-            channel: channel
+            channel: channel,
+            ref: ref,
+            query: query,
           );
         },
       ),

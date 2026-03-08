@@ -1,14 +1,27 @@
+import 'package:Self.Tube/features/channel/domain/channellist_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/features/channel/data/api/channel_api.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddChannelDialog extends StatelessWidget{
-  late TextEditingController _channelUrlController = TextEditingController();
+class AddChannelDialog extends ConsumerWidget{
+  final String query;
+
+  AddChannelDialog({
+    super.key,
+    required this.query
+  });
+
+
+  final TextEditingController _channelUrlController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context)!;
+    
+    final provider = ref.read(channelListProvider(query).notifier);
+
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16)
@@ -34,7 +47,8 @@ class AddChannelDialog extends StatelessWidget{
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                _hanleChannels(context);
+                provider.addChannel(_channelUrlController.text);
+                Navigator.pop(context);
               },
               child: Text(localizations.channelAdd)
             )
@@ -42,10 +56,5 @@ class AddChannelDialog extends StatelessWidget{
         ), 
       )
     );
-  }
-
-  Future<void> _hanleChannels(BuildContext context) async {
-    await ChannelApi().addChannel(_channelUrlController.text);
-    Navigator.pop(context);
   }
 }
