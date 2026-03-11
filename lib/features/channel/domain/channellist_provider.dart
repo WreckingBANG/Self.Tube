@@ -20,6 +20,12 @@ class ChannelListNotifier extends AsyncNotifier<List?> {
     }
     return []; 
   }
+  
+  Future<void> refresh() async {
+    hasMore = true;
+    currentPage = 1;
+    ref.invalidateSelf();
+  }
 
   Future<void> fetchNext() async {
     final current = state.value!; 

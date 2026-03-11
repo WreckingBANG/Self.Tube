@@ -1,5 +1,4 @@
 import 'package:Self.Tube/common/ui/widgets/containers/expandable_text.dart';
-import 'package:Self.Tube/common/ui/widgets/containers/refresh_container.dart';
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/features/channel/domain/channelpage_provider.dart';
@@ -32,7 +31,10 @@ class ChannelpageScreen extends ConsumerWidget{
         title: Text(localizations.channelTitle),
       ),
       body: MiniPlayerTile(
-        child: RefreshContainer(
+        child: RefreshIndicator(
+          onRefresh: () async {
+            ref.invalidate(channelPageProvider);
+          },
           child: channel.when(
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),

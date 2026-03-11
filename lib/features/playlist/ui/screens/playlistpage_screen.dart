@@ -1,4 +1,3 @@
-import 'package:Self.Tube/common/ui/widgets/containers/refresh_container.dart';
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/features/player/ui/tiles/mini_player_tile.dart';
@@ -28,7 +27,10 @@ class PlaylistpageScreen extends ConsumerWidget{
         title: Text(localizations.playlistTitle),
       ),
       body: MiniPlayerTile(
-        child:RefreshContainer(
+        child: RefreshIndicator(
+          onRefresh: () async {
+            ref.invalidate(playlistPageProvider);
+          },
           child: playlist.when(
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),

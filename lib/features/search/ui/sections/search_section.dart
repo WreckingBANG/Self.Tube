@@ -86,7 +86,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                       title: localizations.searchPlaylists,
                       children: [
                         ...result.playlists.map(
-                          (p) => PlaylistListTile(playlist: p),
+                          (p) => PlaylistListTile(playlist: p, query: _query),
                         )
                       ],
                     ),

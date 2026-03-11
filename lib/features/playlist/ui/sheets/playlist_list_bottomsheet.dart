@@ -3,16 +3,23 @@ import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/sheets/bottomsheet_template.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:Self.Tube/features/playlist/data/api/playlist_api.dart';
+import 'package:Self.Tube/features/playlist/domain/playlistlist_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
 Future<void> showPlaylistListBottomSheet({
   required BuildContext context,
   required dynamic playlist,
+  required WidgetRef ref,
+  required String query,
   String? title,
 }) {
   final localizations = AppLocalizations.of(context)!;
+
+  final provider = ref.read(playlistListProvider(query).notifier);
+
   return showBottomSheetTemplate(
     context: context, 
     title: playlist.playlistName,
@@ -37,7 +44,7 @@ Future<void> showPlaylistListBottomSheet({
                 ConfirmationDialog(
                   context: context, 
                   onSure: () {
-                    PlaylistApi.deletePlaylist(playlist.playlistId, false);
+                    provider.deletePlaylist(playlist.playlistId);
                     Navigator.pop(context);
                   }
                 );
