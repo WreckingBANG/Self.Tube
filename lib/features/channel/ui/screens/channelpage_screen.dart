@@ -36,7 +36,7 @@ class ChannelpageScreen extends ConsumerWidget{
         child: RefreshIndicator(
           onRefresh: () async {
             ref.invalidate(channelPageProvider);
-            ref.invalidate(videoListProvider(query));
+            ref.read(videoListProvider(query).notifier).refresh();
           },
           child: channel.when(
             loading: () => const Center(child: CircularProgressIndicator()),

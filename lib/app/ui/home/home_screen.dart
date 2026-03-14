@@ -16,8 +16,8 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
-          ref.invalidate(videoListProvider(queryContinue));
-          ref.invalidate(videoListProvider(queryLatest));
+          ref.read(videoListProvider(queryContinue).notifier).refresh();
+          ref.read(videoListProvider(queryLatest).notifier).refresh();
         },
         child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),

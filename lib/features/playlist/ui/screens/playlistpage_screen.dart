@@ -32,7 +32,7 @@ class PlaylistpageScreen extends ConsumerWidget{
         child: RefreshIndicator(
           onRefresh: () async {
             ref.invalidate(playlistPageProvider);
-            ref.invalidate(videoListProvider(query));
+            ref.read(videoListProvider(query).notifier).refresh();
           },
           child: playlist.when(
             loading: () => const Center(child: CircularProgressIndicator()),
