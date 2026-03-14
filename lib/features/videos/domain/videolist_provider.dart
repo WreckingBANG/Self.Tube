@@ -34,7 +34,7 @@ class VideoListNotifier extends AsyncNotifier<List?> {
 
     currentPage++;
 
-    final newPage = await VideoApi().fetchVideoList("$query&page=$currentPage");
+    final newPage = await VideoApi().fetchVideoList("$query$sortOptions&page=$currentPage");
     if (newPage != null) {
       if (currentPage >= newPage.lastPage) {
         hasMore = false;
@@ -51,6 +51,8 @@ class VideoListNotifier extends AsyncNotifier<List?> {
 
   Future<void> setSorting(String value) async {
     sortOptions = value;
+    currentPage = 1;
+    hasMore = true;
     ref.invalidateSelf();
   }
 

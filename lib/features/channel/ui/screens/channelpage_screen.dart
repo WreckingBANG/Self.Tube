@@ -26,7 +26,7 @@ class ChannelpageScreen extends ConsumerWidget{
     
     final provider = ref.read(channelPageProvider(channelId).notifier);
     final channel = ref.watch(channelPageProvider(channelId));
-    final query = "?channel=$channelId";
+    final query = "?channel=$channelId&order=desc&sort=published";
 
     return Scaffold(
       appBar: AppBar(
