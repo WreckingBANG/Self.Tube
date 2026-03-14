@@ -4,7 +4,6 @@ import 'package:Self.Tube/features/tasks/data/models/task_model.dart';
 import 'package:Self.Tube/features/tasks/ui/tiles/task_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/features/tasks/data/api/task_api.dart';
-import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
 class TaskSection extends StatefulWidget {
   final String title;
@@ -62,7 +61,6 @@ class _TaskSectionState extends State<TaskSection> {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

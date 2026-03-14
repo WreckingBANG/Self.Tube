@@ -1,5 +1,4 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
-import 'package:Self.Tube/app/ui/shell/homecontainer_screen.dart';
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:Self.Tube/features/onboarding/ui/widgets/login_section.dart';

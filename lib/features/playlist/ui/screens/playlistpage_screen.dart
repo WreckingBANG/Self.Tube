@@ -2,7 +2,7 @@ import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/features/player/ui/tiles/mini_player_tile.dart';
 import 'package:Self.Tube/features/playlist/domain/playlistpage_provider.dart';
-import 'package:Self.Tube/features/videos/domain/providers/videolist_provider.dart';
+import 'package:Self.Tube/features/videos/domain/videolist_provider.dart';
 import 'package:Self.Tube/features/videos/ui/sections/video_list_section.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';

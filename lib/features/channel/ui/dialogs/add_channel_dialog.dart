@@ -1,7 +1,6 @@
 import 'package:Self.Tube/features/channel/domain/channellist_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
-import 'package:Self.Tube/features/channel/data/api/channel_api.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
