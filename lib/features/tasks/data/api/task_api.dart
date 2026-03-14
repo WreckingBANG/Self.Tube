@@ -6,7 +6,7 @@ import 'package:Self.Tube/features/tasks/data/models/task_model.dart';
 class TaskApi {
   Future<QueueWrapperModel?> fetchQueue(String options) {
     return ApiService.request(
-      url: '/api/download/?filter=pending',
+      url: '/api/download/$options',
       method: 'GET',
       parser: (json) => QueueWrapperModel.fromJson(json),
     );

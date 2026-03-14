@@ -1,82 +1,47 @@
-import 'dart:async';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
-import 'package:Self.Tube/features/tasks/data/models/task_model.dart';
+import 'package:Self.Tube/features/tasks/domain/task_provider.dart';
 import 'package:Self.Tube/features/tasks/ui/tiles/task_list_tile.dart';
+import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:Self.Tube/features/tasks/data/api/task_api.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class TaskSection extends StatefulWidget {
+class TaskSection extends ConsumerWidget {
   final String title;
   final bool hideIfEmpty;
 
-  const TaskSection({
+  TaskSection({
     super.key,
     this.title = "",
     this.hideIfEmpty = false,
   });
-
-  @override
-  State<TaskSection> createState() => _TaskSectionState();
-}
-
-class _TaskSectionState extends State<TaskSection> {
-  List<TaskModel>? tasks = [];
-  int currentPage = 1;
-  bool isLoading = false;
-
-
-  Timer? _timer;
   
   @override
-  void initState() {
-    super.initState();
-    fetchTasks();
-  
-    _timer = Timer.periodic(const Duration(seconds: 2), (_) {
-      fetchTasks();
-    });
-  }
+  Widget build(BuildContext context, WidgetRef ref) {
+    final localizations = AppLocalizations.of(context)!;
 
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
-
-  Future<void> fetchTasks() async {
-
-    try {
-      final result = await TaskApi().fetchTasks();
-      setState(() {
-        tasks = result;
-      });
-    } catch (e) {
-      print("Error fetching playlists: $e");
-    } finally {
-      setState(() => isLoading = false);
-    }
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (tasks!.isEmpty && !widget.hideIfEmpty && !isLoading)
-          SizedBox() 
-        else
-          ListSectionContainer(
-            title: widget.title,
-            children: [
-              ...List.generate(tasks!.length, (index) {
-                final task = tasks![index];
-                return TaskListTile(task: task);
-              })
-            ]
-          ),
-      ],
+    final tasks = ref.watch(taskProvider);
+    
+    return tasks.when(
+      loading: () => Center(child: CircularProgressIndicator()),
+      error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
+      data: (tasks) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (tasks == null || tasks.isEmpty)
+              SizedBox() 
+            else
+              ListSectionContainer(
+                children: [
+                  ...List.generate(tasks.length, (index) {
+                    final task = tasks[index];
+                    return TaskListTile(task: task);
+                  })
+                ]
+              ),
+          ],
+        );
+      }
     );
   }
 }
