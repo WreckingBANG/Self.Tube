@@ -3,6 +3,7 @@ import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/features/channel/domain/channelpage_provider.dart';
 import 'package:Self.Tube/features/player/ui/tiles/mini_player_tile.dart';
+import 'package:Self.Tube/features/videos/domain/providers/videolist_provider.dart';
 import 'package:Self.Tube/features/videos/ui/sections/video_list_section.dart';
 import 'package:Self.Tube/common/utils/number_formatter.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,7 @@ class ChannelpageScreen extends ConsumerWidget{
     
     final provider = ref.read(channelPageProvider(channelId).notifier);
     final channel = ref.watch(channelPageProvider(channelId));
+    final query = "?channel=$channelId";
 
     return Scaffold(
       appBar: AppBar(
@@ -34,6 +36,7 @@ class ChannelpageScreen extends ConsumerWidget{
         child: RefreshIndicator(
           onRefresh: () async {
             ref.invalidate(channelPageProvider);
+            ref.invalidate(videoListProvider(query));
           },
           child: channel.when(
             loading: () => const Center(child: CircularProgressIndicator()),
@@ -79,7 +82,7 @@ class ChannelpageScreen extends ConsumerWidget{
                       child: ExpandableText(channel.description),
                     ),
                   ),
-                  VideoListSection(title: localizations.channelVideos, showSorting: true, hideChannel: true, query: "?channel=$channelId&order=desc&sort=published&type=videos")
+                  VideoListSection(title: localizations.channelVideos, showSorting: true, hideChannel: true, query: query) 
                  ],
               );
             }

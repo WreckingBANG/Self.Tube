@@ -1,6 +1,5 @@
 import 'package:Self.Tube/features/playlist/data/api/playlist_api.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path/path.dart';
 
 class PlaylistListNotifier extends AsyncNotifier<List?> {
   PlaylistListNotifier(this.query);
