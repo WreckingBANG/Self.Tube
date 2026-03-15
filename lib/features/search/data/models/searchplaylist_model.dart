@@ -4,6 +4,7 @@ class SearchPlaylistModel {
   final String playlistChannelName;
   final String playlistChannelId;
   final String playlistPic;
+  final String playlistType;
   final bool playlistSubscribed;
 
   SearchPlaylistModel({
@@ -12,6 +13,7 @@ class SearchPlaylistModel {
     required this.playlistChannelName,
     required this.playlistChannelId,
     required this.playlistPic,
+    required this.playlistType,
     required this.playlistSubscribed,
   });
 
@@ -22,6 +24,7 @@ class SearchPlaylistModel {
       playlistChannelName: json['playlist_channel'],
       playlistChannelId: json['playlist_channel_id'],
       playlistPic: json['playlist_thumbnail'],
+      playlistType: json['playlist_type'],
       playlistSubscribed: json['playlist_subscribed'],
     );
   }

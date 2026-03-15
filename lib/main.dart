@@ -9,6 +9,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/common/theme/theme.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +17,11 @@ Future<void> main() async {
   VideoPlayerService.init();
   await DeviceService.init();
   await UserSession.init();
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp()
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {

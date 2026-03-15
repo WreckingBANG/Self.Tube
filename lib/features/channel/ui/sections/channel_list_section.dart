@@ -1,10 +1,11 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
-import 'package:Self.Tube/features/channel/data/api/channel_api.dart';
+import 'package:Self.Tube/features/channel/domain/channellist_provider.dart';
 import 'package:Self.Tube/features/channel/ui/tiles/channel_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ChannelListSection extends StatefulWidget {
+class ChannelListSection extends ConsumerWidget {
   final String title;
   final String query;
   final bool hideIfEmpty;
@@ -17,84 +18,48 @@ class ChannelListSection extends StatefulWidget {
   });
 
   @override
-  State<ChannelListSection> createState() => _ChannelListSectionState();
-}
-
-class _ChannelListSectionState extends State<ChannelListSection> {
-  List channels = [];
-  int currentPage = 1;
-  bool isLoading = false;
-  bool hasMore = true;
-
-  @override
-  void initState() {
-    super.initState();
-    fetchChannels(); 
-  }
-
-  Future<void> fetchChannels() async {
-    if (isLoading || !hasMore) return;
-
-    setState(() => isLoading = true);
-
-    try {
-      final newChannels = await ChannelApi().fetchChannelList("${widget.query}&page=$currentPage");
-
-      if (newChannels != null) {
-        setState(() {
-          channels.addAll(newChannels.data);
-          if (currentPage >= newChannels.lastPage) {
-            hasMore = false;
-          } else {
-            currentPage++;
-          }
-        });
-      } else {
-        setState(() => hasMore = false);
-      }
-    } catch (e) {
-      print("Error fetching channels: $e");
-    } finally {
-      setState(() => isLoading = false);
-    }
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context)!;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (channels.isEmpty && !widget.hideIfEmpty && !isLoading)
-          Center(child: Text(localizations.errorNoDataFound))
-        else
-          ListSectionContainer(
-            title: widget.title,
-            children: [
-              ...List.generate(channels.length, (index) {
-                final channel = channels[index];
-                return ChannelListTile(channel: channel,);
-              })
-            ]
-          ),
-          
-        if (isLoading)
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Center(child: CircularProgressIndicator()),
-          )
-        else if (!isLoading && hasMore && channels.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: TextButton(
-                onPressed: fetchChannels,
-                child: Text(localizations.listShowMore),
+    
+    final provider = ref.read(channelListProvider(query).notifier);
+    final channels = ref.watch(channelListProvider(query));
+
+    return channels.when(
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
+      data: (channels) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (channels!.isEmpty && !hideIfEmpty)
+              Center(child: Text(localizations.errorNoDataFound))
+            else
+              ListSectionContainer(
+                title: title,
+                children: [
+                  ...List.generate(channels.length, (index) {
+                    final channel = channels[index];
+                    return ChannelListTile(
+                      channel: channel, 
+                      onDelete: () => provider.deleteChannel(channel.channelId),
+                    );
+                  })
+                ]
               ),
-            ),
-          ),
-      ],
+              
+            if (provider.hasMore && channels.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: TextButton(
+                    onPressed: provider.fetchNext,
+                    child: Text(localizations.listShowMore),
+                  ),
+                ),
+              ),
+          ],
+        );
+      }
     );
   }
 }

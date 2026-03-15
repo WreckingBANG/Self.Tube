@@ -1,27 +1,32 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
-import 'package:Self.Tube/features/playlist/data/api/playlist_api.dart';
+import 'package:Self.Tube/features/playlist/domain/playlistlist_provider.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddPlaylistDialog extends StatefulWidget {
-  @override
-  State<AddPlaylistDialog> createState() => _AddPlaylistDialogState();
-}
+class AddPlaylistDialog extends ConsumerWidget {
+  final String query;
 
-class _AddPlaylistDialogState extends State<AddPlaylistDialog> with TickerProviderStateMixin{
-  late TabController _tabController;
-  final TextEditingController _playlistUrlController = TextEditingController();
+  AddPlaylistDialog({
+    super.key,
+    required this.query
+  });
+
+    final TextEditingController _playlistUrlController = TextEditingController();
   final TextEditingController _playlistNameController = TextEditingController();
   
   @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context)!;
+
+    final provider = ref.read(playlistListProvider(query).notifier);
+
+    late TabController tabController = TabController(
+      length: 2, 
+      vsync: Navigator.of(context)
+    );
+
+
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
@@ -34,7 +39,7 @@ class _AddPlaylistDialogState extends State<AddPlaylistDialog> with TickerProvid
             Text(localizations.playlistAdd, style: const TextStyle(fontSize: 20)),
             const SizedBox(height: 16),
             TabBar(
-              controller: _tabController,
+              controller: tabController,
               tabs: [
                 Tab(
                   text: localizations.playlistRegular,
@@ -47,7 +52,7 @@ class _AddPlaylistDialogState extends State<AddPlaylistDialog> with TickerProvid
             SizedBox(
               height: 100,
               child: TabBarView(
-                controller: _tabController,
+                controller: tabController,
                 children: [
                   ListSectionContainer(
                     children: [
@@ -78,7 +83,12 @@ class _AddPlaylistDialogState extends State<AddPlaylistDialog> with TickerProvid
             ),
             ElevatedButton(
               onPressed: () {
-                _handlePlaylists(context);
+                if (tabController.index == 0) {
+                  provider.addPlaylist(_playlistUrlController.text, true);
+                } else {
+                  provider.addPlaylist(_playlistNameController.text, false);
+                }
+                Navigator.pop(context);
               },
               child: Text(localizations.playlistAdd)
             )
@@ -87,15 +97,4 @@ class _AddPlaylistDialogState extends State<AddPlaylistDialog> with TickerProvid
       ),
     );
   }
-
-
-  Future<void> _handlePlaylists(BuildContext context) async {
-    if (_tabController.index == 0) {
-      await PlaylistApi.addRegularPlaylist(_playlistUrlController.text);
-    } else {
-      await PlaylistApi.createCustomPlaylist(_playlistNameController.text);
-    }
-    Navigator.pop(context);
-  }
-
 }

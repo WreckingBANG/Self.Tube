@@ -3,14 +3,20 @@ import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/features/playlist/ui/sheets/playlist_list_bottomsheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PlaylistListTile extends StatelessWidget {
+class PlaylistListTile extends ConsumerWidget {
   final dynamic playlist;
+  final Function? onDelete;
 
-  const PlaylistListTile({super.key, required this.playlist});
+  const PlaylistListTile({
+    super.key, 
+    required this.playlist,
+    required this.onDelete
+  });
 
   @override
-  Widget build(BuildContext context) {  
+  Widget build(BuildContext context, WidgetRef ref) {  
     final localizations = AppLocalizations.of(context)!;
     return SizedBox(
       width: double.infinity,
@@ -79,7 +85,8 @@ class PlaylistListTile extends StatelessWidget {
         onLongPress: () {
           showPlaylistListBottomSheet(
             context: context, 
-            playlist: playlist
+            playlist: playlist,
+            onDelete: onDelete,
           );
         }
       ),

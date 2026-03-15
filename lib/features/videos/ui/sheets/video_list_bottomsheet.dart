@@ -3,7 +3,6 @@ import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.da
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:Self.Tube/features/playlist/ui/dialogs/add_to_playlist_dialog.dart';
-import 'package:Self.Tube/features/videos/data/api/video_api.dart';
 import 'package:flutter/material.dart';
 import '../../../../common/ui/widgets/sheets/bottomsheet_template.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
@@ -13,6 +12,8 @@ Future<void> showVideoListBottomSheet({
   required BuildContext context,
   required dynamic video,
   required bool hideChannel,
+  required Function()? onDelete,
+  required Function(bool watched)? onWatched,
 
   String? title,
 }) {
@@ -29,7 +30,7 @@ Future<void> showVideoListBottomSheet({
             title: Text(localizations.sheetMarkWatched),
             onTap: () {
               Navigator.pop(context);
-              VideoApi.setVideoWatched(video.youtubeId, true);
+              onWatched?.call(true);
             },
           ),
           ListTile(
@@ -37,7 +38,7 @@ Future<void> showVideoListBottomSheet({
             title: Text(localizations.sheetMarkUnwatched),
             onTap: () {
               Navigator.pop(context);
-              VideoApi.setVideoWatched(video.youtubeId, false);
+              onWatched?.call(false);
             },
           ),
           if (!hideChannel)
@@ -98,7 +99,7 @@ Future<void> showVideoListBottomSheet({
                   context: context, 
                   onSure: () {
                     Navigator.pop(context);
-                    VideoApi.deleteVideo(video.youtubeId);  
+                    onDelete?.call();
                   }
                 );
               },

@@ -1,18 +1,17 @@
-import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/expandable_text.dart';
-import 'package:Self.Tube/common/ui/widgets/containers/refresh_container.dart';
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
+import 'package:Self.Tube/features/channel/domain/channelpage_provider.dart';
 import 'package:Self.Tube/features/player/ui/tiles/mini_player_tile.dart';
+import 'package:Self.Tube/features/videos/domain/videolist_provider.dart';
 import 'package:Self.Tube/features/videos/ui/sections/video_list_section.dart';
 import 'package:Self.Tube/common/utils/number_formatter.dart';
-import 'package:Self.Tube/features/channel/data/api/channel_api.dart';
-import 'package:Self.Tube/features/channel/data/models/channel_model.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-class ChannelpageScreen extends StatelessWidget{
+class ChannelpageScreen extends ConsumerWidget{
   final String channelId;
 
   const ChannelpageScreen({
@@ -20,76 +19,74 @@ class ChannelpageScreen extends StatelessWidget{
     required this.channelId,
   });
 
-  static String? apiToken = SettingsService.apiToken;
-  static String? baseUrl = SettingsService.instanceUrl;
-
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context)!;
+    
+    final provider = ref.read(channelPageProvider(channelId).notifier);
+    final channel = ref.watch(channelPageProvider(channelId));
+    final query = "?channel=$channelId&order=desc&sort=published";
+
     return Scaffold(
       appBar: AppBar(
         title: Text(localizations.channelTitle),
       ),
       body: MiniPlayerTile(
-        child: RefreshContainer(
-          child: FutureBuilder<ChannelItemModel?>(
-            future: ChannelApi().fetchChannel(channelId), 
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return Center(child: Text(localizations.errorFailedToLoadData));
-              } else if (!snapshot.hasData) {
-                return Center(child: Text(localizations.errorNoDataFound));
-              } else {
-                final channel = snapshot.data!;
-                return ListView(
-                  children: [
-                    if (channel.banner.isNotEmpty)
-                      CustomNetwokImage(imageLink: channel.banner),
-                    ListTile(
-                      title: Text(channel.channelName),
-                      subtitle: Text(formatNumberCompact(channel.subscribers, context)),
-                      leading: AspectRatio(
-                        aspectRatio: 1 / 1,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: CustomNetwokImage(imageLink: channel.profilePic)
+        child: RefreshIndicator(
+          onRefresh: () async {
+            ref.invalidate(channelPageProvider);
+            ref.read(videoListProvider(query).notifier).refresh();
+          },
+          child: channel.when(
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
+            data: (channel) {
+              return ListView(
+                children: [
+                  if (channel!.banner.isNotEmpty)
+                    CustomNetwokImage(imageLink: channel.banner),
+                  ListTile(
+                    title: Text(channel.channelName),
+                    subtitle: Text(formatNumberCompact(channel.subscribers, context)),
+                    leading: AspectRatio(
+                      aspectRatio: 1 / 1,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: CustomNetwokImage(imageLink: channel.profilePic)
+                      ),
+                    ),
+                    trailing: channel.subscribed
+                      ? FilledButton(
+                          onPressed: () {
+                            ConfirmationDialog(
+                              context: context, 
+                              onSure: () {
+                                provider.subscribe(false);
+                              } 
+                            );
+                          },
+                          child: Text(localizations.playerUnsubscribe),
+                        )
+                      : OutlinedButton(
+                          onPressed: () {
+                            provider.subscribe(true);
+                          },
+                          child: Text(localizations.playerSubscribe),
                         ),
-                      ),
-                      trailing: channel.subscribed
-                        ? FilledButton(
-                            onPressed: () {
-                              ConfirmationDialog(
-                                context: context, 
-                                onSure: () {
-                                  ChannelApi().modifyChannel(channel.channelId, false);
-                                } 
-                              );
-                            },
-                            child: Text(localizations.playerUnsubscribe),
-                          )
-                        : OutlinedButton(
-                            onPressed: () {
-                              ChannelApi().modifyChannel(channel.channelId, true);
-                            },
-                            child: Text(localizations.playerSubscribe),
-                          ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: ExpandableText(channel.description),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: ExpandableText(channel.description),
-                      ),
-                    ),
-                    VideoListSection(title: localizations.channelVideos, showSorting: true, hideChannel: true, query: "?channel=$channelId&order=desc&sort=published&type=videos")
-                  ],
-                );
-              }
+                  ),
+                  VideoListSection(title: localizations.channelVideos, showSorting: true, hideChannel: true, query: query) 
+                 ],
+              );
             }
-          )  
+          ) 
         )
       )
     );

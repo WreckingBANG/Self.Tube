@@ -65,7 +65,7 @@ class PlaylistApi {
         "data": [
           {
             "playlist_id": id,
-            "playlist_subscribed": "true"
+            "playlist_subscribed": true
           }
         ]
       }),

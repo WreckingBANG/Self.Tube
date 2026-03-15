@@ -15,11 +15,15 @@ class VideoListTile extends StatelessWidget {
   final bool hideChannel;
   final String playlistId;
   final String playlistType;
+  final void Function()? onDelete;
+  final void Function(bool watched)? onWatched;
 
   const VideoListTile({
     super.key, 
     required this.video,
     required this.hideChannel,
+    required this.onDelete,
+    required this.onWatched,
     this.playlistId = "",
     this.playlistType = "",
   });
@@ -149,7 +153,9 @@ class VideoListTile extends StatelessWidget {
           showVideoListBottomSheet(
             context: context,
             video: video, 
-            hideChannel: hideChannel
+            hideChannel: hideChannel,
+            onWatched: onWatched,
+            onDelete: onDelete
           );
         },
       ),

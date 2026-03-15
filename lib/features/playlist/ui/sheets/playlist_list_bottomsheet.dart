@@ -2,7 +2,6 @@ import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.da
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/sheets/bottomsheet_template.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
-import 'package:Self.Tube/features/playlist/data/api/playlist_api.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:share_plus/share_plus.dart';
@@ -10,6 +9,7 @@ import 'package:share_plus/share_plus.dart';
 Future<void> showPlaylistListBottomSheet({
   required BuildContext context,
   required dynamic playlist,
+  required Function? onDelete,
   String? title,
 }) {
   final localizations = AppLocalizations.of(context)!;
@@ -37,7 +37,7 @@ Future<void> showPlaylistListBottomSheet({
                 ConfirmationDialog(
                   context: context, 
                   onSure: () {
-                    PlaylistApi.deletePlaylist(playlist.playlistId, false);
+                    onDelete?.call();
                     Navigator.pop(context);
                   }
                 );

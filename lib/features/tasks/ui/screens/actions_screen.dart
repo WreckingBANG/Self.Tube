@@ -23,7 +23,7 @@ class ActionsScreen extends StatelessWidget {
         child: Icon(Icons.add),
       ),
       body: RefreshContainer(
-        child: Column(
+        child: ListView(
           children: [
             TaskSection(),
             SizedBox(height: 20),
@@ -51,7 +51,8 @@ class ActionsScreen extends StatelessWidget {
                 ]
               ),
             ),
-            QueueSection(hideChannel: false, query: "")
+            SizedBox(height: 20),
+            QueueSection(query: "?filter=pending")
           ],
         )
       )

@@ -2,11 +2,9 @@ import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/data/services/device/device_service.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/expandable_text.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/selectable_text.dart';
-import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/common/utils/datetime_formatter.dart';
 import 'package:Self.Tube/common/utils/number_formatter.dart';
-import 'package:Self.Tube/features/channel/data/api/channel_api.dart';
 import 'package:Self.Tube/features/player/domain/video_player_service.dart';
 import 'package:Self.Tube/features/videos/ui/sections/comment_list_section.dart';
 import 'package:Self.Tube/features/videos/ui/sections/video_list_similar_section.dart';
@@ -130,24 +128,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
                           ),
                         )
                       ),
-                      trailing: widget.video.channelSubscribed
-                          ? FilledButton(
-                              onPressed: () {
-                                ConfirmationDialog(
-                                  context: context, 
-                                  onSure: () {
-                                    ChannelApi().modifyChannel(widget.video.channelId, false);
-                                  }
-                                );
-                              },
-                              child: Text(localizations.playerUnsubscribe),
-                            )
-                          : OutlinedButton(
-                              onPressed: () {
-                                ChannelApi().modifyChannel(widget.video.channelId, true);
-                              },
-                              child: Text(localizations.playerSubscribe),
-                            ),
                       onTap: () {
                         Navigator.pushNamed(
                           context, 
