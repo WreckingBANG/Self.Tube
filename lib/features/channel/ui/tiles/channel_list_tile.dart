@@ -8,12 +8,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ChannelListTile extends ConsumerWidget {
   final dynamic channel;
-  final String query;
-
+  final void Function()? onDelete;
+  
   const ChannelListTile({
     super.key, 
     required this.channel,
-    required this.query,
+  required this.onDelete
   });
 
   @override
@@ -69,7 +69,7 @@ class ChannelListTile extends ConsumerWidget {
             context: context, 
             channel: channel,
             ref: ref,
-            query: query,
+            onDelete: onDelete
           );
         },
       ),

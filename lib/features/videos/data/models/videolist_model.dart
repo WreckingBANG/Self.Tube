@@ -52,4 +52,38 @@ class VideoListItemModel {
     final List<dynamic> data = json['data'];
     return data.map((item) => VideoListItemModel.fromJson(item)).toList();
   }
+
+
+  VideoListItemModel copyWith({
+    String? youtubeId,
+    String? title,
+    String? channelId,
+    String? channelName,
+    String? channelThumb,
+    String? thumbnail,
+    int? duration,
+    String? durationStr,
+    int? views,
+    bool? watched,
+    double? progress,
+    double? position,
+    String? videoDate,
+  }) {
+    return VideoListItemModel(
+      youtubeId: youtubeId ?? this.youtubeId,
+      title: title ?? this.title,
+      channelId: channelId ?? this.channelId,
+      channelName: channelName ?? this.channelName,
+      channelThumb: channelThumb ?? this.channelThumb,
+      thumbnail: thumbnail ?? this.thumbnail,
+      duration: duration ?? this.duration,
+      durationStr: durationStr ?? this.durationStr,
+      views: views ?? this.views,
+      watched: watched ?? this.watched,
+      progress: progress ?? this.progress,
+      position: position ?? this.position,
+      videoDate: videoDate ?? this.videoDate,
+    );
+  }
+
 }

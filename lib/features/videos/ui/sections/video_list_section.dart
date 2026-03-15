@@ -69,7 +69,9 @@ class VideoListSection extends ConsumerWidget {
                       video: video, 
                       hideChannel: hideChannel, 
                       playlistId: playlistId, 
-                      playlistType: playlistType
+                      playlistType: playlistType,
+                      onWatched: (value) => provider.setWatched(value, video.youtubeId),
+                      onDelete: () => provider.deleteVideo(video.youtubeId)
                     );
                   })
                 ]

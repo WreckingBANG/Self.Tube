@@ -39,7 +39,10 @@ class ChannelListSection extends ConsumerWidget {
                 children: [
                   ...List.generate(channels.length, (index) {
                     final channel = channels[index];
-                    return ChannelListTile(channel: channel, query: query);
+                    return ChannelListTile(
+                      channel: channel, 
+                      onDelete: () => provider.deleteChannel(channel.channelId),
+                    );
                   })
                 ]
               ),

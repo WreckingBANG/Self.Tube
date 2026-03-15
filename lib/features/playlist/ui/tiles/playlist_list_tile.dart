@@ -7,12 +7,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PlaylistListTile extends ConsumerWidget {
   final dynamic playlist;
-  final String query;
+  final Function? onDelete;
 
   const PlaylistListTile({
     super.key, 
     required this.playlist,
-    required this.query,
+    required this.onDelete
   });
 
   @override
@@ -86,8 +86,7 @@ class PlaylistListTile extends ConsumerWidget {
           showPlaylistListBottomSheet(
             context: context, 
             playlist: playlist,
-            ref: ref,
-            query: query,
+            onDelete: onDelete,
           );
         }
       ),

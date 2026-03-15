@@ -39,7 +39,10 @@ class PlaylistListSection extends ConsumerWidget {
                 children: [
                   ...List.generate(playlists.length, (index) {
                     final playlist = playlists[index];
-                    return PlaylistListTile(playlist: playlist, query: query);
+                    return PlaylistListTile(
+                      playlist: playlist, 
+                      onDelete: () => provider.deletePlaylist(playlist.playlistId)
+                    );
                   })
                 ],
               ),

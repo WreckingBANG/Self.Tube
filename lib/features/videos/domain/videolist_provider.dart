@@ -60,7 +60,21 @@ class VideoListNotifier extends AsyncNotifier<List?> {
     final current = state.value!;
     await VideoApi.deleteVideo(id);
 
-    final modified = current.where((v) => v.videoId != id).toList();
+    final modified = current.where((v) => v.youtubeId != id).toList();
+
+    state = AsyncData(modified);
+  }
+
+  Future<void> setWatched(bool value, String id) async {
+    final current = state.value!;
+    await VideoApi.setVideoWatched(id, value);
+
+    final modified = current.map((v) {
+      if (v.youtubeId == id) {
+        return v.copyWith(watched: value);
+      }
+      return v;
+    }).toList(); 
 
     state = AsyncData(modified);
   }

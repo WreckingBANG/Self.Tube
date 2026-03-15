@@ -1,7 +1,6 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/sheets/bottomsheet_template.dart';
-import 'package:Self.Tube/features/channel/domain/channellist_provider.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
@@ -12,12 +11,10 @@ Future<void> showChannelListBottomSheet({
   required BuildContext context,
   required dynamic channel,
   required WidgetRef ref,
-  required String query,
+  required Function()? onDelete,
   String? title,
 }) {
   final localizations = AppLocalizations.of(context)!;
-
-  final provider = ref.read(channelListProvider(query).notifier);
 
   return showBottomSheetTemplate(
     context: context, 
@@ -42,7 +39,7 @@ Future<void> showChannelListBottomSheet({
                 ConfirmationDialog(
                   context: context, 
                   onSure: () {
-                    provider.deleteChannel(channel.channelId);  
+                    onDelete?.call();
                     Navigator.pop(context);
                   }
                 );
