@@ -21,13 +21,13 @@ class AppLocalizationsPl extends AppLocalizations {
   String get barPlaylists => 'Listy odtwarzania';
 
   @override
-  String get barActions => 'Actions';
+  String get barActions => 'Akcje';
 
   @override
-  String get tooltipSearch => 'Search';
+  String get tooltipSearch => 'poszukiwanie';
 
   @override
-  String get tooltipSettings => 'Settings';
+  String get tooltipSettings => 'Ustawienia';
 
   @override
   String get homeLatestVideos => 'Ostatnie Filmy';
@@ -109,86 +109,86 @@ class AppLocalizationsPl extends AppLocalizations {
   String get sheetRedownloadServer => 'Pobierz ponownie z Serwera';
 
   @override
-  String get sheetDeleteVideoServer => 'Delete video from server';
+  String get sheetDeleteVideoServer => 'Usuń wideo z serwera';
 
   @override
-  String get sheetComingSoon => 'Coming soon';
+  String get sheetComingSoon => 'Już wkrótce';
 
   @override
-  String get listShowMore => 'Show more';
+  String get listShowMore => 'Pokaż więcej';
 
   @override
-  String get settingsSaved => 'Settings saved';
+  String get settingsSaved => 'Ustawienia zapisane';
 
   @override
-  String get settingsTitle => 'Settings';
+  String get settingsTitle => 'Ustawienia';
 
   @override
-  String get settingsAccountSettings => 'Account';
+  String get settingsAccountSettings => 'Konto';
 
   @override
-  String get settingsAccountSettingsDesc => 'Instance, Api-Key, ...';
+  String get settingsAccountSettingsDesc => 'Instancja, API-Token';
 
   @override
-  String get settingsAppearanceSettings => 'Appearance';
+  String get settingsAppearanceSettings => 'Opis';
 
   @override
   String get settingsAppearanceSettingsDesc => '...';
 
   @override
-  String get settingsVideoPlayer => 'Video Player';
+  String get settingsVideoPlayer => 'Odtwarzacz wideo';
 
   @override
-  String get settingsVideoPlayerDesc => 'Gesture Settings, ...';
+  String get settingsVideoPlayerDesc => 'Ustawienia gestów';
 
   @override
-  String get settingsSponsorBlockSettings => 'SponsorBlock';
+  String get settingsSponsorBlockSettings => 'Blok sponsora';
 
   @override
-  String get settingsSponsorBlockSettingsDesc => 'Settings for SponsorBlock';
+  String get settingsSponsorBlockSettingsDesc => 'Ustawienia SponsorBlock';
 
   @override
-  String get settingsM3Colors => 'Enable Dynamic Colors';
+  String get settingsM3Colors => 'Aktywuj dynamiczne kolory';
 
   @override
-  String get settingsVPGesturesTitle => 'Gestures';
+  String get settingsVPGesturesTitle => 'Gesty';
 
   @override
-  String get settingsVPGesturesSwipeCtrl => 'Swipe controls';
+  String get settingsVPGesturesSwipeCtrl => 'Kontrola przesuwania';
 
   @override
   String get settingsVPGesturesSwipeCtrlDesc =>
-      'Swipe the left and right parts of the player to adjust volume and brightness';
+      'Przesuwaj palcem po lewej i prawej stronie odtwarzacza, aby dostosować głośność i jasność';
 
   @override
-  String get settingsVPGesturesFullscreen => 'Fullscreen gesture';
+  String get settingsVPGesturesFullscreen => 'Gest pełnoekranowy';
 
   @override
   String get settingsVPGesturesFullscreenDesc =>
-      'Swipe up/down in the center to enter/exit fullscreen';
+      'Przesuń palcem w górę/w dół na środku, aby przełączyć tryb pełnoekranowy';
 
   @override
-  String get settingsVPGesturesPinch => 'Pinch to zoom';
+  String get settingsVPGesturesPinch => 'Uszczypnij, aby powiększyć';
 
   @override
-  String get settingsVPGesturesPinchDesc => 'Coming Soon';
+  String get settingsVPGesturesPinchDesc => 'Dostępne wkrótce';
 
   @override
-  String get settingsVPGesturesDoubleTap => 'Double Tap';
+  String get settingsVPGesturesDoubleTap => 'Podwójne dotknięcie';
 
   @override
   String get settingsVPGesturesDoubleTapDesc =>
-      'Tap twice quickly on the right and left side of the player to skip/rewind and the center to play/pause';
+      'Aby przewinąć do przodu lub do tyłu, dotknij dwukrotnie prawej lub lewej strony odtwarzacza, a aby odtworzyć/wstrzymać odtwarzanie, dotknij środka';
 
   @override
-  String get settingsVPUseMediaKit => 'Use media_kit instead of video_player';
+  String get settingsVPUseMediaKit => 'Użyj media_kit zamiast video_player';
 
   @override
   String get settingsVPUseMediaKitDesc =>
-      'Dont change this unless you know what you are doing';
+      'Zmień to tylko wtedy, gdy wiesz, co robisz';
 
   @override
-  String get searchLabel => 'Search...';
+  String get searchLabel => 'Szukać';
 
   @override
   String get searchTitle => 'Szukaj';
@@ -263,40 +263,40 @@ class AppLocalizationsPl extends AppLocalizations {
   String get playerSimilar => 'Podobne filmy';
 
   @override
-  String get actionsTitle => 'Actions';
+  String get actionsTitle => 'Akcje';
 
   @override
-  String get channelTitle => 'Channel';
+  String get channelTitle => 'kanał';
 
   @override
-  String get channelUrl => 'Channel Url';
+  String get channelUrl => 'URL kanału';
 
   @override
-  String get channelVideos => 'Videos';
+  String get channelVideos => 'Filmy';
 
   @override
-  String get channelAdd => 'Add Channel';
+  String get channelAdd => 'Dodaj kanał';
 
   @override
-  String get channelDelete => 'Delete Channel';
+  String get channelDelete => 'Usuń kanał';
 
   @override
-  String get onboardingLogin => 'Login';
+  String get onboardingLogin => 'Zaloguj się';
 
   @override
   String get onboardingUrlExample => 'https://tubearchivist.example.com';
 
   @override
-  String get onboardingUsername => 'Username';
+  String get onboardingUsername => 'nazwa użytkownika';
 
   @override
-  String get onboardingPassword => 'Password';
+  String get onboardingPassword => 'hasło';
 
   @override
-  String get onboardingToken => 'Api-Token';
+  String get onboardingToken => 'Token API';
 
   @override
-  String get onboardingInstanceUrl => 'Instance URL';
+  String get onboardingInstanceUrl => 'URL Instancji';
 
   @override
   String get onboardingTokenExample =>
@@ -304,267 +304,267 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get onboardingLoginFailure =>
-      'Connection failed. Please check your token and URL.';
+      'Połączenie nieudane. Sprawdź swój token i adres URL';
 
   @override
-  String get onboardingWelcomeText => 'Welcome to Self.Tube';
+  String get onboardingWelcomeText => 'Witamy w Self.Tube';
 
   @override
   String get onboardingMarketing1 =>
-      'Browse and manage your self-hosted TubeArchivist Instance with ease.';
+      'Łatwe przeglądanie i zarządzanie samodzielnie hostowaną instancją TubeArchivist.';
 
   @override
   String get onboardingMarketing2 =>
-      'Access your entire TubeArchivist Instance';
+      'Uzyskaj dostęp do całej swojej instancji TubeArchivist';
 
   @override
-  String get onboardingMarketing3 => 'Manage your archive';
+  String get onboardingMarketing3 => 'Zarządzaj swoim archiwum';
 
   @override
   String get onboardingMarketing4 =>
-      'View your Videos in a native like experience';
+      'Oglądaj filmy w sposób natywny dla użytkownika';
 
   @override
-  String get onboardingPrivacyPolicy => 'Privacy Policy';
+  String get onboardingPrivacyPolicy => 'Polityka prywatności';
 
   @override
-  String get onboardingContinue => 'Agree & Continue';
+  String get onboardingContinue => 'Zgadzam się i kontynuuj';
 
   @override
-  String get sponsorblockEnable => 'Enable Sponsorblock';
+  String get sponsorblockEnable => 'Aktywuj SponsorBlock';
 
   @override
-  String get sponsorblockSponsor => 'Skip Sponsor';
+  String get sponsorblockSponsor => 'Pomiń sponsora';
 
   @override
-  String get sponsorblockPromo => 'Skip Self-Promotion';
+  String get sponsorblockPromo => 'Pomiń autopromocję';
 
   @override
-  String get sponsorblockInteraction => 'Skip Interaction-Reminder';
+  String get sponsorblockInteraction => 'Pomiń interaktywną przypomnienie';
 
   @override
-  String get sponsorblockIntro => 'Skip Intro';
+  String get sponsorblockIntro => 'Pomiń wstęp';
 
   @override
-  String get sponsorblockOutro => 'Skip Outro';
+  String get sponsorblockOutro => 'Pomiń zakończenie';
 
   @override
-  String get sponsorblockPreview => 'Skip Preview';
+  String get sponsorblockPreview => 'Pomiń podgląd';
 
   @override
-  String get sponsorblockHook => 'Skip Hook';
+  String get sponsorblockHook => 'Pomiń otwieranie zwiastuna i powitań';
 
   @override
-  String get sponsorblockFiller => 'Skip Filler';
+  String get sponsorblockFiller => 'Pomiń dygresje/żarty';
 
   @override
-  String get expandableTextMore => 'Show more';
+  String get expandableTextMore => 'Więcej';
 
   @override
-  String get expandableTextLess => 'Show less';
+  String get expandableTextLess => 'Mniej';
 
   @override
-  String get aboutVersion => 'Version';
+  String get aboutVersion => 'wersja';
 
   @override
-  String get aboutLicense => 'License';
+  String get aboutLicense => 'Licencja';
 
   @override
-  String get aboutDeveloper => 'Developed by WreckingBANG';
+  String get aboutDeveloper => 'Opracowane przez WreckingBANG';
 
   @override
-  String get aboutPrivacyPolicy => 'Privacy Policy';
+  String get aboutPrivacyPolicy => 'Polityka prywatności';
 
   @override
-  String get aboutSourceCode => 'Source Code';
+  String get aboutSourceCode => 'Kod źródłowy';
 
   @override
-  String get aboutReleases => 'Releases';
+  String get aboutReleases => 'Archiwum wersji';
 
   @override
-  String get aboutDependencies => 'Dependencies';
+  String get aboutDependencies => 'Zależności';
 
   @override
-  String get videoListViews => 'views';
+  String get videoListViews => 'Kliknięcia';
 
   @override
   String secondsAgo(Object count) {
-    return '$count seconds ago';
+    return '$count sekund temu';
   }
 
   @override
   String secondAgo(Object count) {
-    return '$count second ago';
+    return '$count sekund temu';
   }
 
   @override
   String minutesAgo(Object count) {
-    return '$count minutes ago';
+    return '$count minut temu';
   }
 
   @override
   String minuteAgo(Object count) {
-    return '$count minute ago';
+    return '$count minut temu';
   }
 
   @override
   String hoursAgo(Object count) {
-    return '$count hours ago';
+    return '$count godzin temu';
   }
 
   @override
   String hourAgo(Object count) {
-    return '$count hour ago';
+    return '$count godzinę temu';
   }
 
   @override
   String daysAgo(Object count) {
-    return '$count days ago';
+    return '$count dni temu';
   }
 
   @override
   String dayAgo(Object count) {
-    return '$count day ago';
+    return '$count dni temu';
   }
 
   @override
   String yearsAgo(Object count) {
-    return '$count years ago';
+    return '$count lat temu';
   }
 
   @override
   String yearAgo(Object count) {
-    return '$count year ago';
+    return '$count lat temu';
   }
 
   @override
-  String get playerBrightness => 'Brightness';
+  String get playerBrightness => 'Jasność';
 
   @override
-  String get playerForward => 'Forward';
+  String get playerForward => 'Do przodu';
 
   @override
-  String get playerRewind => 'Rewind';
+  String get playerRewind => 'Cofnij';
 
   @override
-  String get playerSeconds => 'seconds';
+  String get playerSeconds => 'Sekundy';
 
   @override
-  String get playerMinimize => 'Minimize';
+  String get playerMinimize => 'Zminimalizować';
 
   @override
-  String get playerMaximize => 'Maximize';
+  String get playerMaximize => 'Maksymalizuj';
 
   @override
-  String get playerPaused => 'Paused';
+  String get playerPaused => 'Wstrzymano';
 
   @override
-  String get playerPlay => 'Play';
+  String get playerPlay => 'ograć';
 
   @override
-  String get playerVolume => 'Volume';
+  String get playerVolume => 'głośność';
 
   @override
   String playerSBSkipped(Object category, Object end, Object start) {
-    return 'Skipped $category from $start to $end';
+    return '$category pominięto od $start do $end';
   }
 
   @override
-  String get playerSBUndo => 'Undo';
+  String get playerSBUndo => 'Anulować';
 
   @override
-  String get playerRepeat => 'Repeat';
+  String get playerRepeat => 'Powtarzać';
 
   @override
-  String get playerBorderMode => 'Border Mode';
+  String get playerBorderMode => 'Tryb wyświetlania';
 
   @override
-  String get playerBorderModeContain => 'Contain (Black Bars)';
+  String get playerBorderModeContain => 'adaptować';
 
   @override
-  String get playerBorderModeCover => 'Cover (Crop)';
+  String get playerBorderModeCover => 'Powiększać';
 
   @override
-  String get playerBorderModeStretch => 'Stretch';
+  String get playerBorderModeStretch => 'Nadąć';
 
   @override
-  String get playerPlaybackSpeed => 'Playback Speed';
+  String get playerPlaybackSpeed => 'Prędkość odtwarzania';
 
   @override
-  String get chipsOrderAsc => 'Ascending';
+  String get chipsOrderAsc => 'Rosnąco';
 
   @override
-  String get chipsOrderDes => 'Descending';
+  String get chipsOrderDes => 'Zstępujący';
 
   @override
-  String get chipsSortPub => 'Published';
+  String get chipsSortPub => 'Opublikowany';
 
   @override
-  String get chipsSortDow => 'Downloaded';
+  String get chipsSortDow => 'Pobrano';
 
   @override
-  String get chipsSortVie => 'Views';
+  String get chipsSortVie => 'Kliknięcia';
 
   @override
-  String get chipsSortLik => 'Likes';
+  String get chipsSortLik => 'Polubienia';
 
   @override
-  String get chipsSortDur => 'Duration';
+  String get chipsSortDur => 'długość';
 
   @override
-  String get chipsSortSiz => 'Media Size';
+  String get chipsSortSiz => 'Rozmiar nośnika';
 
   @override
-  String get chipsSortWid => 'Width';
+  String get chipsSortWid => 'Szerokość';
 
   @override
-  String get chipsSortHei => 'Height';
+  String get chipsSortHei => 'Wysokość';
 
   @override
-  String get chipsTypeAll => 'All';
+  String get chipsTypeAll => 'wszyscy';
 
   @override
-  String get chipsTypeVid => 'Videos';
+  String get chipsTypeVid => 'Filmy';
 
   @override
-  String get chipsTypeStr => 'Streams';
+  String get chipsTypeStr => 'Streamingi';
 
   @override
   String get chipsTypeSho => 'Shorts';
 
   @override
-  String get chipsWatchedAll => 'All';
+  String get chipsWatchedAll => 'Wszystko';
 
   @override
-  String get chipsWatchedWat => 'Watched';
+  String get chipsWatchedWat => 'Obejrzałem';
 
   @override
-  String get chipsWatchedUnw => 'Unwatched';
+  String get chipsWatchedUnw => 'Nieobejrzany';
 
   @override
-  String get chipsWatchedCon => 'Continue';
+  String get chipsWatchedCon => 'Kontynuować';
 
   @override
-  String get taskAddVideo => 'Add Video';
+  String get taskAddVideo => 'Dodaj wideo';
 
   @override
-  String get taskAddVideoLabel => 'Video Url';
+  String get taskAddVideoLabel => 'URL Filmu';
 
   @override
-  String get taskRescanSubs => 'Rescan Subs';
+  String get taskRescanSubs => 'Skanuj subskrypcje';
 
   @override
-  String get taskStartDownloads => 'Start Downloads';
+  String get taskStartDownloads => 'Rozpocznij pobieranie';
 
   @override
-  String get taskDownloadNow => 'Download Now';
+  String get taskDownloadNow => 'Nadaj priorytet pobieraniu';
 
   @override
-  String get taskIgnore => 'Ignore';
+  String get taskIgnore => 'Ignorować';
 
   @override
-  String get taskDeleteFromQueue => 'Delete from Queue';
+  String get taskDeleteFromQueue => 'Usuń z kolejki';
 
   @override
-  String get taskQueueEmpty => 'Queue Empty';
+  String get taskQueueEmpty => 'Pusta kolejka';
 }
