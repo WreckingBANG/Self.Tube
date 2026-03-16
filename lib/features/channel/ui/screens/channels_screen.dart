@@ -13,7 +13,7 @@ class ChannelsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context)!;
   
-    final query = "?filter=subscribed";
+    final query = "?";
     final provider = ref.read(channelListProvider(query).notifier);
 
     return Scaffold(
