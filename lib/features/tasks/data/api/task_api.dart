@@ -23,9 +23,9 @@ class TaskApi {
     );
   }
 
-  Future<bool?> addVideo(String id) {
+  Future<bool?> addVideo(String id, String query) {
     return ApiService.request(
-      url: '/api/download/',
+      url: '/api/download/$query',
       method: 'POST',
       body: json.encode({
         "data": [

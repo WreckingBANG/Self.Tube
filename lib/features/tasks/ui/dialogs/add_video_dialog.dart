@@ -45,7 +45,7 @@ class AddVideoDialog extends StatelessWidget{
   }
 
   Future<void> _hanleChannels(BuildContext context) async {
-    await TaskApi().addVideo(_videoUrlController.text);
+    await TaskApi().addVideo(_videoUrlController.text, "");
     Navigator.pop(context);
   }
 }

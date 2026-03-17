@@ -3,6 +3,7 @@ import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.da
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:Self.Tube/features/playlist/ui/dialogs/add_to_playlist_dialog.dart';
+import 'package:Self.Tube/features/tasks/data/api/task_api.dart';
 import 'package:flutter/material.dart';
 import '../../../../common/ui/widgets/sheets/bottomsheet_template.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
@@ -88,8 +89,13 @@ Future<void> showVideoListBottomSheet({
             ListTile(
               leading: Icon(Icons.cloud_download),
               title: Text(localizations.sheetRedownloadServer),
-              subtitle: Text(localizations.sheetComingSoon),
-              onTap: () {},
+              onTap: () async {
+                await TaskApi().addVideo(
+                  video.youtubeId,
+                  "?autostart=true&force=true"
+                );
+                Navigator.pop(context);
+              },
             ),
             ListTile(
               leading: Icon(Icons.cloud_off_rounded),
