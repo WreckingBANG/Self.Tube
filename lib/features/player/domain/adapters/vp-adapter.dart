@@ -8,11 +8,13 @@ class VideoPlayerAdapter implements MediaPlayer {
 
   final _positionController = StreamController<Duration>.broadcast();
   final _playingController = StreamController<bool>.broadcast();
+  final _bufferingController = StreamController<bool>.broadcast();
 
   Timer? _pollTimer;
 
   Duration? _lastPosition;
   bool? _lastPlaying;
+  bool? _lastBuffering;
 
   bool _disposed = false;
 
@@ -37,6 +39,7 @@ class VideoPlayerAdapter implements MediaPlayer {
 
       _lastPlaying = value.isPlaying;
       _lastPosition = value.position;
+      _lastBuffering = value.isBuffering;
 
       _playingController.add(_lastPlaying!);
       _positionController.add(_lastPosition!);
@@ -55,6 +58,11 @@ class VideoPlayerAdapter implements MediaPlayer {
 
     final value = _controller.value;
     if (!value.isInitialized) return;
+
+    if (value.isBuffering != _lastBuffering) {
+      _lastBuffering = value.isBuffering;
+      _bufferingController.add(value.isBuffering);
+    }
 
     if (value.isPlaying != _lastPlaying) {
       _lastPlaying = value.isPlaying;
@@ -126,6 +134,9 @@ class VideoPlayerAdapter implements MediaPlayer {
 
   @override
   Future<void> pause() => _controller.pause();
+
+  @override
+  Stream<bool> get isBuffering => _bufferingController.stream;
   
   @override
   Size get size => _controller.value.size;

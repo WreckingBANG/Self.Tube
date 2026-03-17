@@ -39,27 +39,42 @@ class _CenterControlsOverlayState extends State<CenterControlsOverlay> {
           ),
           Align(
             alignment: Alignment.center,
-            child: StreamBuilder(
-              stream: widget.player.playingStream,
-              initialData: widget.player.isPlaying, 
-              builder: (context, snapshot) {
-                final isP = snapshot.data ?? true;
-                return IconButton(
-                    color: Colors.white,
-                    iconSize: 64,
-                    icon: Icon(
-                      isP
-                        ? Icons.pause
-                        : Icons.play_arrow,
-                    ),
-                    onPressed: () {
-                      isP
-                        ? widget.player.pause()
-                        : widget.player.play();
-                    },
-                );
-              }
-            )
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                StreamBuilder(
+                  stream: widget.player.playingStream,
+                  initialData: widget.player.isPlaying, 
+                  builder: (context, snapshot) {
+                    final isP = snapshot.data ?? true;
+                    return IconButton(
+                        color: Colors.white,
+                        iconSize: 64,
+                        icon: Icon(
+                          isP
+                            ? Icons.pause
+                            : Icons.play_arrow,
+                        ),
+                        onPressed: () {
+                          isP
+                            ? widget.player.pause()
+                            : widget.player.play();
+                        },
+                    );
+                  }
+                ),
+                StreamBuilder(
+                  stream: widget.player.isBuffering,
+                  initialData: false,
+                  builder: (context, snapshot) {
+                    final isB = snapshot.data ?? false;
+                    return isB 
+                      ? CircularProgressIndicator()
+                      : SizedBox();
+                  }
+                )
+              ],
+            ) 
           )
         ],
       )

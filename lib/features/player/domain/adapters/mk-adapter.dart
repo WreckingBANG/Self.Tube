@@ -64,6 +64,8 @@ class MediaKitAdapter implements MediaPlayer {
   @override
   Future<void> pause() => _player.pause();
 
+  Stream<bool> get isBuffering => _player.stream.buffering;
+
   @override
   Size get size => Size(_player.state.height?.toDouble() ?? 0, _player.state.width?.toDouble() ?? 0);
 
