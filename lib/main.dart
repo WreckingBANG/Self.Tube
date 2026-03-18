@@ -60,6 +60,7 @@ class MyApp extends StatelessWidget {
             Locale('en'),
             Locale('de'),
             Locale('pl'),
+            Locale('nl'),
           ],
           title: 'Self.Tube',
           theme: lightThemeFrom(
