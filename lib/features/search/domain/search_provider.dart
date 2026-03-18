@@ -11,8 +11,7 @@ class SearchNotifier extends AsyncNotifier<SearchWrapperModel?> {
   @override
   Future<SearchWrapperModel?> build() async {
     final query = ref.watch(searchQueryProvider);
-    print("query: $query");
-    if (query.isEmpty) return null;
+    if (query.isEmpty || query.length < 2) return null;
 
     return await SearchApi().fetchSearch(query);
   }

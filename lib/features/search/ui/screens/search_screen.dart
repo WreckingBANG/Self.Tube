@@ -8,15 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SearchScreenWidget extends ConsumerStatefulWidget {
-  const SearchScreenWidget({super.key});
+class SearchScreen extends ConsumerStatefulWidget {
+  const SearchScreen({super.key});
 
   @override
-  ConsumerState<SearchScreenWidget> createState() => _SearchScreenWidgetState();
+  ConsumerState<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _SearchScreenWidgetState extends ConsumerState<SearchScreenWidget> {
-  final SearchController _searchController = SearchController();
+class _SearchScreenState extends ConsumerState<SearchScreen> {
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -30,28 +30,20 @@ class _SearchScreenWidgetState extends ConsumerState<SearchScreenWidget> {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    
-    return SearchAnchor(
-      searchController: _searchController,
-      builder: (context, controller) {
-        controller.addListener(() {
-          ref.read(searchQueryProvider.notifier).set(controller.text);
-        });
-      
-        return IconButton(
-          icon: Icon(Icons.search),
-          onPressed: () => controller.openView(),
-        );
-      },
-      suggestionsBuilder: (_, __) => [],
-      viewBuilder: (suggestions) {
-        return Consumer(
-          builder: (context, ref, _) {
-          
-            final provider = ref.read(searchProvider.notifier);
-            final search = ref.watch(searchProvider);
 
-            return SingleChildScrollView(
+    final provider = ref.read(searchProvider.notifier);
+    final search = ref.watch(searchProvider);
+
+
+    return Scaffold(
+      appBar: AppBar(title: Text(localizations.searchTitle)),
+      body: Column(
+        children: [
+          TextField(
+            controller: _searchController,
+          ),
+          Expanded(
+            child: SingleChildScrollView(
               child: search.when(
                 loading: () => Center(child: CircularProgressIndicator()),
                 error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
@@ -102,10 +94,10 @@ class _SearchScreenWidgetState extends ConsumerState<SearchScreenWidget> {
                   );
                 },
               )
-            );
-          }
-        );
-      }
-    );
+            )
+          )
+        ],
+      )
+    ); 
   }
 }

@@ -2,6 +2,7 @@ import 'package:Self.Tube/app/ui/about/about_screen.dart';
 import 'package:Self.Tube/features/channel/ui/screens/channelpage_screen.dart';
 import 'package:Self.Tube/features/onboarding/ui/screens/login_screen.dart';
 import 'package:Self.Tube/features/playlist/ui/screens/playlistpage_screen.dart';
+import 'package:Self.Tube/features/search/ui/screens/search_screen.dart';
 import 'package:Self.Tube/features/settings/ui/screens/appearance_settings_screen.dart';
 import 'package:Self.Tube/features/settings/ui/screens/overview_settings_screen.dart';
 import 'package:Self.Tube/features/settings/ui/screens/player_settings_screen.dart';
@@ -14,6 +15,7 @@ class AppRouter {
   static const home = '/';
   static const onboarding = '/onboarding';
   static const onboardingLogin = '/onboarding/login';
+  static const search = '/search';
   static const about = '/about';
   static const settingsOverview = '/settings';
   static const settingsAppearance = '/settings/appearance';
@@ -33,7 +35,10 @@ class AppRouter {
 
       case onboardingLogin:
         return MaterialPageRoute(builder: (_) => OnBoardingLoginScreen());
-        
+       
+      case search:
+        return MaterialPageRoute(builder: (_) => SearchScreen());
+
       case about:
         return MaterialPageRoute(builder: (_) => AboutScreen());
       

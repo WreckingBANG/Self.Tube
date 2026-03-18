@@ -1,3 +1,4 @@
+import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/app/ui/home/home_screen.dart';
 import 'package:Self.Tube/app/ui/shell/app_settings_bottomsheet.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
@@ -5,7 +6,6 @@ import 'package:Self.Tube/features/player/ui/tiles/mini_player_tile.dart';
 import 'package:Self.Tube/features/tasks/ui/screens/actions_screen.dart';
 import 'package:Self.Tube/features/channel/ui/screens/channels_screen.dart';
 import 'package:Self.Tube/features/playlist/ui/screens/playlists_screen.dart';
-import 'package:Self.Tube/features/search/ui/sections/search_section.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
@@ -35,7 +35,16 @@ class _HomeContainerState extends State<HomeContainer> {
       appBar: AppBar(
         title: Text(localizations.appTitle),
         actions: [
-          SearchScreenWidget(),
+          IconButton(
+            icon: const Icon(Icons.search),
+            tooltip: localizations.tooltipSearch,
+            onPressed: () {
+              Navigator.pushNamed(
+                context, 
+                AppRouter.search,
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.manage_accounts_outlined),
             tooltip: localizations.tooltipSettings,
