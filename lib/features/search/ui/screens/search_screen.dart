@@ -34,69 +34,86 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     final provider = ref.read(searchProvider.notifier);
     final search = ref.watch(searchProvider);
 
-
     return Scaffold(
-      appBar: AppBar(title: Text(localizations.searchTitle)),
-      body: Column(
-        children: [
-          TextField(
-            controller: _searchController,
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: search.when(
-                loading: () => Center(child: CircularProgressIndicator()),
-                error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
-                data: (search) {
-                  if (search == null) {
-                    return ListTile(title: Text(localizations.searchTooltip));
-                  }
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(7.5),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  Expanded(
+                    child: TextField(
+                      decoration: null,
+                      controller: _searchController,
+                    )
+                  )
+                ]
+              )
+            ),
+            Divider(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: search.when(
+                  loading: () => Center(child: CircularProgressIndicator()),
+                  error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
+                  data: (search) {
+                    if (search == null) {
+                      return ListTile(title: Text(localizations.searchTooltip));
+                    }
 
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ListSectionContainer(
-                        title: localizations.searchChannels,
-                        children: [
-                          ...search.channels.map(
-                            (c) => ChannelListTile(
-                              channel: c, 
-                              onDelete: () => provider.deleteChannel(c.channelId)
-                            ),
-                          )
-                        ],
-                      ),
-                      ListSectionContainer(
-                        title: localizations.searchVideos,
-                        children: [
-                          ...search.videos.map(
-                            (v) => VideoListTile(
-                              video: v, 
-                              hideChannel: false,
-                              onWatched: (value) => provider.setVideoWatched(value, v.youtubeId),
-                              onDelete: () => provider.deleteVideo(v.youtubeId),
-                            ),
-                          )
-                        ],
-                      ),
-                      ListSectionContainer(
-                        title: localizations.searchPlaylists,
-                        children: [
-                          ...search.playlists.map(
-                            (p) => PlaylistListTile(
-                              playlist: p, 
-                              onDelete: () => provider.deletePlaylist(p.playlistId)
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  );
-                },
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ListSectionContainer(
+                          title: localizations.searchChannels,
+                          children: [
+                            ...search.channels.map(
+                              (c) => ChannelListTile(
+                                channel: c, 
+                                onDelete: () => provider.deleteChannel(c.channelId)
+                              ),
+                            )
+                          ],
+                        ),
+                        ListSectionContainer(
+                          title: localizations.searchVideos,
+                          children: [
+                            ...search.videos.map(
+                              (v) => VideoListTile(
+                                video: v, 
+                                hideChannel: false,
+                                onWatched: (value) => provider.setVideoWatched(value, v.youtubeId),
+                                onDelete: () => provider.deleteVideo(v.youtubeId),
+                              ),
+                            )
+                          ],
+                        ),
+                        ListSectionContainer(
+                          title: localizations.searchPlaylists,
+                          children: [
+                            ...search.playlists.map(
+                              (p) => PlaylistListTile(
+                                playlist: p, 
+                                onDelete: () => provider.deletePlaylist(p.playlistId)
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    );
+                  },
+                )
               )
             )
-          )
-        ],
+          ],
+        )
       )
     ); 
   }
