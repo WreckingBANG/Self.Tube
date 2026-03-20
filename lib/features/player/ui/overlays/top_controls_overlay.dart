@@ -54,16 +54,19 @@ class _TopControlsOverlayState extends State<TopControlsOverlay> {
               children: [
                 widget.hideTitle
                   ? SizedBox(width: 1)
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          widget.videoTitle,
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                        Text(widget.videoCreator),
-                      ],
+                  : Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            widget.videoTitle,
+                            style: const TextStyle(fontSize: 18),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text(widget.videoCreator),
+                        ],
+                      ),
                     ),
                 IconButton(
                   onPressed: () {
