@@ -46,7 +46,10 @@ TubeArchivist is amazing for archiving, but it’s built for use in a Web-Browse
 
 ## Contributing
 
-Every help is welcome. Feel free to open issues, suggest improvements, or submit pull requests.
+Contributions are welcome! Feel free to open issues, suggest improvements, or submit pull requests in this repository.
+
+Please note: this project is not part of the official TubeArchivist codebase.  
+**Do not open issues related to this app in the TubeArchivist issue tracker.**
 
 ## Translations
 [![Translation status](https://translate.codeberg.org/widget/self-tube/self-tube/multi-auto.svg)](https://translate.codeberg.org/engage/self-tube/)
