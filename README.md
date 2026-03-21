@@ -18,15 +18,12 @@ With a streamlined interface and direct connection to your TubeArchivist server,
 [<img src="docs/screenshots/screenshot_playlists.png" width=19% alt="Playlists">](docs/screenshots/screenshot_playlists.png)
 [<img src="docs/screenshots/screenshot_tasks.png" width=19% alt="Tasks">](docs/screenshots/screenshot_tasks.png)
 
-<!--
 ## Download
 
 <div style="display: flex; gap: 5px;">
   <a href="https://codeberg.org/wreckingbang/self.tube/releases/latest"><img height=50 alt="Get Self.Tube on Codeberg" src="./docs/readme/download_codeberg.png"/></a>
   <a href="https://apps.obtainium.imranr.dev/redirect.html?r=obtainium://add/https://codeberg.org/wreckingbang/self.tube"><img height=50 alt="Add Self.Tube to Obtainium" src="./docs/readme/download_obtainium.png"/></a>
 </div>
--->
-
 
 ## Features
 
