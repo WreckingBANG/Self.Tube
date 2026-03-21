@@ -1,5 +1,6 @@
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
+import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:Self.Tube/features/player/ui/tiles/mini_player_tile.dart';
 import 'package:Self.Tube/features/playlist/domain/playlistpage_provider.dart';
 import 'package:Self.Tube/features/videos/domain/videolist_provider.dart';
@@ -50,7 +51,7 @@ class PlaylistpageScreen extends ConsumerWidget{
                         child: CustomNetwokImage(imageLink: playlist.playlistPic)
                       ),
                     ),
-                    trailing: playlist.playlistType == "regular"
+                    trailing: playlist.playlistType == "regular" && UserSession.isPrivileged
                       ? playlist.playlistSubscribed
                           ? FilledButton(
                               onPressed: () {

@@ -63,17 +63,18 @@ Future<void> showVideoListBottomSheet({
               );
             },
           ),
-          ListTile(
-            leading: Icon(Icons.playlist_add_check_rounded),
-            title: Text("Add to Playlist"),
-            onTap: () {
-              Navigator.pop(context);
-              showDialog(
-                context: context,
-                builder: (context) => AddToPlaylistDialog(videoId: video.youtubeId),
-              );
-            },
-          ),
+          if (UserSession.isPrivileged)
+            ListTile(
+              leading: Icon(Icons.playlist_add_check_rounded),
+              title: Text("Add to Playlist"),
+              onTap: () {
+                Navigator.pop(context);
+                showDialog(
+                  context: context,
+                  builder: (context) => AddToPlaylistDialog(videoId: video.youtubeId),
+                );
+              },
+            ),
           ListTile(
             leading: Icon(Icons.file_download_outlined),
             title: Text(localizations.sheetDownloadLocal),

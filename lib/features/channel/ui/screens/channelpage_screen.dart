@@ -2,6 +2,7 @@ import 'package:Self.Tube/common/ui/widgets/containers/expandable_text.dart';
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/features/channel/domain/channelpage_provider.dart';
+import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:Self.Tube/features/player/ui/tiles/mini_player_tile.dart';
 import 'package:Self.Tube/features/videos/domain/videolist_provider.dart';
 import 'package:Self.Tube/features/videos/ui/sections/video_list_section.dart';
@@ -56,7 +57,8 @@ class ChannelpageScreen extends ConsumerWidget{
                         child: CustomNetwokImage(imageLink: channel.profilePic)
                       ),
                     ),
-                    trailing: channel.subscribed
+                    trailing: UserSession.isPrivileged 
+                    ? channel.subscribed
                       ? FilledButton(
                           onPressed: () {
                             ConfirmationDialog(
@@ -73,7 +75,8 @@ class ChannelpageScreen extends ConsumerWidget{
                             provider.subscribe(true);
                           },
                           child: Text(localizations.playerSubscribe),
-                        ),
+                        )
+                    : SizedBox()
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16),

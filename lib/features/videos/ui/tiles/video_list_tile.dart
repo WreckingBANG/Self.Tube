@@ -1,6 +1,7 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
+import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:Self.Tube/features/player/domain/video_player_service.dart';
 import 'package:Self.Tube/features/playlist/data/api/playlist_api.dart';
 import 'package:Self.Tube/features/videos/ui/sheets/video_list_bottomsheet.dart';
@@ -127,7 +128,7 @@ class VideoListTile extends StatelessWidget {
                 ),
               )  
             ),
-            playlistId != "" && playlistType == "custom"
+            playlistId != "" && playlistType == "custom" && UserSession.isPrivileged
               ? IconButton(
                   onPressed: () {
                     ConfirmationDialog(
