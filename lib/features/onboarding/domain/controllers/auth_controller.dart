@@ -1,5 +1,6 @@
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/features/onboarding/data/api/user_api.dart';
+import 'package:flutter/services.dart';
 
 class AuthController {
   Future<bool> login(bool usesApiToken, String url, String username, String password, String apiToken) async {
@@ -50,6 +51,8 @@ class AuthController {
       await SettingsService.setDoneSetup(false);
       await SettingsService.setInstanceUrl("");
       await SettingsService.setApiToken("");
+
+      SystemNavigator.pop();
 
       return true;
     } catch (e) {
