@@ -39,6 +39,7 @@ class ListSectionContainer extends StatelessWidget {
           })
         else if (itemBuilder != null || itemCount != null) 
           ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: itemCount,
             itemBuilder: (context, index) {

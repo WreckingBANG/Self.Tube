@@ -20,25 +20,21 @@ class HomeScreen extends ConsumerWidget {
           ref.read(videoListProvider(queryLatest).notifier).refresh();
         },
         child: ListView(
-          physics: const AlwaysScrollableScrollPhysics(),
+          physics: const ClampingScrollPhysics(),
           children: [
-            Column(
-              children: [
-                VideoListSection(
-                  title: localizations.homeContinueWatching,
-                  hideChannel: false,
-                  hideIfEmpty: true,
-                  query: queryContinue 
-                ),
-                SizedBox(height: 16),
-                VideoListSection(
-                  title: localizations.homeLatestVideos,
-                  hideChannel: false,
-                  showSorting: true,
-                  query: queryLatest
-                ),
-              ],
-            )
+            VideoListSection(
+              title: localizations.homeContinueWatching,
+              hideChannel: false,
+              hideIfEmpty: true,
+              query: queryContinue 
+            ),
+            SizedBox(height: 16),
+            VideoListSection(
+              title: localizations.homeLatestVideos,
+              hideChannel: false,
+              showSorting: true,
+              query: queryLatest
+            ),
           ]
         ),
       ),
