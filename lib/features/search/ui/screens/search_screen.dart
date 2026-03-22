@@ -74,38 +74,38 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                       children: [
                         ListSectionContainer(
                           title: localizations.searchChannels,
-                          children: [
-                            ...search.channels.map(
-                              (c) => ChannelListTile(
-                                channel: c, 
-                                onDelete: () => provider.deleteChannel(c.channelId)
-                              ),
-                            )
-                          ],
+                          itemCount: search.channels.length,
+                          itemBuilder: (context, index) {
+                            final channel = search.channels[index];
+                            return ChannelListTile(
+                              channel: channel, 
+                              onDelete: () => provider.deleteChannel(channel.channelId)
+                            );
+                          },
                         ),
                         ListSectionContainer(
                           title: localizations.searchVideos,
-                          children: [
-                            ...search.videos.map(
-                              (v) => VideoListTile(
-                                video: v, 
-                                hideChannel: false,
-                                onWatched: (value) => provider.setVideoWatched(value, v.youtubeId),
-                                onDelete: () => provider.deleteVideo(v.youtubeId),
-                              ),
-                            )
-                          ],
+                          itemCount: search.videos.length,
+                          itemBuilder: (context, index) {
+                            final video = search.videos[index];
+                            return VideoListTile(
+                              video: video, 
+                              hideChannel: false,
+                              onWatched: (value) => provider.setVideoWatched(value, video.youtubeId),
+                              onDelete: () => provider.deleteVideo(video.youtubeId)
+                            );
+                          },
                         ),
                         ListSectionContainer(
                           title: localizations.searchPlaylists,
-                          children: [
-                            ...search.playlists.map(
-                              (p) => PlaylistListTile(
-                                playlist: p, 
-                                onDelete: () => provider.deletePlaylist(p.playlistId)
-                              ),
-                            )
-                          ],
+                          itemCount: search.playlists.length,
+                          itemBuilder: (context, index) {
+                            final playlist = search.playlists[index];
+                            return PlaylistListTile(
+                              playlist: playlist, 
+                              onDelete: () => provider.deletePlaylist(playlist.playlistId)
+                            );
+                          },
                         ),
                       ],
                     );

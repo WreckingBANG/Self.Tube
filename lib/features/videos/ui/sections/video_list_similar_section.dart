@@ -26,21 +26,18 @@ class VideoListSimilarSection extends ConsumerWidget {
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
       data: (videos) {
-        
         return ListSectionContainer(
-          children: [
-            ...List.generate(videos!.length, (index) {
-              final video = videos[index];
-              return VideoListTile(
-                video: video,
-                hideChannel: false,
-                onWatched: (value) => provider.setWatched(value, video.youtubeId),
-                onDelete: () => provider.deleteVideo(video.youtubeId),
-              );
-            })
-          ],
+          itemCount: videos!.length,
+          itemBuilder: (context, index) {
+            final video = videos[index];
+            return VideoListTile(
+              video: video,
+              hideChannel: false,
+              onWatched: (value) => provider.setWatched(value, video.youtubeId),
+              onDelete: () => provider.deleteVideo(video.youtubeId),
+            );
+          }
         );
-
       }
     );
   }

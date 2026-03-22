@@ -35,18 +35,15 @@ class PlaylistListSection extends ConsumerWidget {
               Center(child: Text(localizations.errorNoDataFound))
             else 
               ListSectionContainer(
-                title: title,
-                children: [
-                  ...List.generate(playlists.length, (index) {
-                    final playlist = playlists[index];
-                    return PlaylistListTile(
-                      playlist: playlist, 
-                      onDelete: () => provider.deletePlaylist(playlist.playlistId)
-                    );
-                  })
-                ],
+                itemCount: playlists.length,
+                itemBuilder: (context, index) {
+                  final playlist = playlists[index];
+                  return PlaylistListTile(
+                    playlist: playlist, 
+                    onDelete: () => provider.deletePlaylist(playlist.playlistId)
+                  );
+                },  
               ),
-
             if (provider.hasMore && playlists.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.all(8),

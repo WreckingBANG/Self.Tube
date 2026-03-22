@@ -61,22 +61,20 @@ class VideoListSection extends ConsumerWidget {
             else if (videos.isEmpty && !hideIfEmpty)
               Center(child: Text(localizations.errorNoDataFound))
             else
-              ListSectionContainer(
-                children: [
-                  ...List.generate(videos.length, (index) {
-                    final video = videos[index];
-                    return VideoListTile(
-                      video: video, 
-                      hideChannel: hideChannel, 
-                      playlistId: playlistId, 
-                      playlistType: playlistType,
-                      onWatched: (value) => provider.setWatched(value, video.youtubeId),
-                      onDelete: () => provider.deleteVideo(video.youtubeId)
-                    );
-                  })
-                ]
-              ),
-              
+            ListSectionContainer(
+              itemCount: videos.length,
+              itemBuilder: (context, index) {
+                final video = videos[index];
+                return VideoListTile(
+                  video: video, 
+                  hideChannel: hideChannel, 
+                  playlistId: playlistId, 
+                  playlistType: playlistType,
+                  onWatched: (value) => provider.setWatched(value, video.youtubeId),
+                  onDelete: () => provider.deleteVideo(video.youtubeId)
+                );
+               }
+             ),
             if (provider.hasMore && videos.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -86,8 +84,8 @@ class VideoListSection extends ConsumerWidget {
                     child: Text(localizations.listShowMore),
                   ),
                 ),
-              ),
-          ],
+              )
+          ]
         );
       }
     );

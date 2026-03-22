@@ -31,16 +31,14 @@ class QueueSection extends ConsumerWidget {
               Center(child: Text(localizations.taskQueueEmpty))
             else
               ListSectionContainer(
-                children: [
-                  ...List.generate(queue.length, (index) {
-                    final video = queue[index];
-                    return QueueListTile(
-                      video: video, 
-                    );
-                  })
-                ]
+                itemCount: queue.length,
+                itemBuilder: (context, index) {
+                  final video = queue[index];
+                  return QueueListTile(
+                    video: video
+                  );
+                },
               ),
-              
             if (provider.hasMore && queue.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.all(8.0),

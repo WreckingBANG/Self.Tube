@@ -35,18 +35,15 @@ class ChannelListSection extends ConsumerWidget {
               Center(child: Text(localizations.errorNoDataFound))
             else
               ListSectionContainer(
-                title: title,
-                children: [
-                  ...List.generate(channels.length, (index) {
-                    final channel = channels[index];
-                    return ChannelListTile(
-                      channel: channel, 
-                      onDelete: () => provider.deleteChannel(channel.channelId),
-                    );
-                  })
-                ]
+                itemCount: channels!.length,
+                itemBuilder: (context, index) {
+                  final channel = channels[index];
+                  return ChannelListTile(
+                    channel: channel,
+                    onDelete: () => provider.deleteChannel(channel.channelId),
+                  );
+                }
               ),
-              
             if (provider.hasMore && channels.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.all(8.0),

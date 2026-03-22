@@ -32,13 +32,14 @@ class TaskSection extends ConsumerWidget {
               SizedBox() 
             else
               ListSectionContainer(
-                children: [
-                  ...List.generate(tasks.length, (index) {
-                    final task = tasks[index];
-                    return TaskListTile(task: task);
-                  })
-                ]
-              ),
+                itemCount: tasks.length,
+                itemBuilder: (context, index) {
+                  final task = tasks[index];
+                  return TaskListTile(
+                    task: task
+                  );
+                },
+              )
           ],
         );
       }
