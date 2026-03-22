@@ -22,7 +22,6 @@ class SelectableLinkText extends StatelessWidget {
   Widget build(BuildContext context) {
     return SelectableLinkify(
       text: text,
-      linkStyle: const TextStyle(decoration: TextDecoration.underline),
       onOpen: _onOpen,
     );
   }

@@ -50,6 +50,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                   ),
                   Expanded(
                     child: TextField(
+                      autofocus: true,
                       decoration: null,
                       controller: _searchController,
                     )

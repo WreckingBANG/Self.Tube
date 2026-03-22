@@ -337,25 +337,57 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sponsorblockSponsor => 'Skip Sponsor';
 
   @override
+  String get sponsorblockSponsorHint =>
+      'Part of a video promoting a product or service not directly related to the creator.';
+
+  @override
   String get sponsorblockPromo => 'Skip Self-Promotion';
+
+  @override
+  String get sponsorblockPromoHint =>
+      'Promoting a product or service that is directly related to the creator themselves.';
 
   @override
   String get sponsorblockInteraction => 'Skip Interaction-Reminder';
 
   @override
+  String get sponsorblockInteractionHint =>
+      'Explicit reminders to like, subscribe or interact with them on any paid or free platforms.';
+
+  @override
   String get sponsorblockIntro => 'Skip Intro';
+
+  @override
+  String get sponsorblockIntroHint =>
+      'Segments typically found at the start of a video that include an animation, still frame or clip which are also seen in other videos by the same creator.';
 
   @override
   String get sponsorblockOutro => 'Skip Outro';
 
   @override
+  String get sponsorblockOutroHint =>
+      'Typically near or at the end of the video when the credits pop up and/or endcards are shown.';
+
+  @override
   String get sponsorblockPreview => 'Skip Preview';
+
+  @override
+  String get sponsorblockPreviewHint =>
+      'Collection of clips that show what is coming up in in this video or other videos in a series where all information is repeated later in the video.';
 
   @override
   String get sponsorblockHook => 'Skip Hook';
 
   @override
+  String get sponsorblockHookHint =>
+      'Narrated trailers for the upcoming video, greetings and goodbyes.';
+
+  @override
   String get sponsorblockFiller => 'Skip Filler';
+
+  @override
+  String get sponsorblockFillerHint =>
+      'Tangents/ Jokes is only for tangential scenes that are not required to understand the main content of the video.';
 
   @override
   String get expandableTextMore => 'Show more';

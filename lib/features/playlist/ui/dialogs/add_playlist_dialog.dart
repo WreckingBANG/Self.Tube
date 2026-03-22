@@ -40,6 +40,7 @@ class AddPlaylistDialog extends ConsumerWidget {
             const SizedBox(height: 16),
             TabBar(
               controller: tabController,
+              dividerColor: Colors.transparent,
               tabs: [
                 Tab(
                   text: localizations.playlistRegular,

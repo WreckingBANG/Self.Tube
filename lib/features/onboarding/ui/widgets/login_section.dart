@@ -45,6 +45,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
       children: [
         TabBar(
           controller: _tabController,
+          dividerColor: Colors.transparent,
           tabs: [
             Tab(
               text: localizations.onboardingPassword,

@@ -87,8 +87,10 @@ class VideoListTile extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      "${formatNumberCompact(video.views, context)} ${localizations.videoListViews} •  ${formatTimeAgo(context, video.videoDate)}",
+                      "${formatNumberCompact(video.views, context)} ${localizations.videoListViews} • ${formatTimeAgo(context, video.videoDate)}",
                       style: TextStyle(fontSize: 13),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     if (!hideChannel)
                       InkWell(

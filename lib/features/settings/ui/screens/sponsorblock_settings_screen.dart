@@ -1,5 +1,6 @@
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/common/ui/widgets/tiles/header_switch_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
@@ -56,181 +57,194 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
     final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(title: Text(localizations.settingsTitle)),
-      body: ListSectionContainer(
-        children: [
-          SwitchListTile(
-            thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.selected)) {
-                  return const Icon(Icons.check);
-                }
-                return const Icon(Icons.close);
-              },
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            HeaderSwitchTile(
+              child: SwitchListTile(
+                thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.selected)) {
+                      return const Icon(Icons.check);
+                    }
+                    return const Icon(Icons.close);
+                  },
+                ),
+                title: Text(localizations.sponsorblockEnable),
+                value: _enableSponsorblock,
+                onChanged: (bool value) {
+                  setState(() {
+                    _enableSponsorblock = value;
+                    _saveSettings();
+                  });
+                },
+              ),
             ),
-            title: Text(localizations.sponsorblockEnable),
-            value: _enableSponsorblock,
-            onChanged: (bool value) {
-              setState(() {
-                _enableSponsorblock = value;
-                _saveSettings();
-              });
-            },
-          ),
-          IgnorePointer(
-            ignoring: !_enableSponsorblock,
-            child: Opacity(
-              opacity: _enableSponsorblock ? 1.0 : 0.4,
-              child: Column(
-                children: [
-                  SwitchListTile(
-                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
-                      (Set<WidgetState> states) {
-                        if (states.contains(WidgetState.selected)) {
-                          return const Icon(Icons.check);
-                        }
-                        return const Icon(Icons.close);
+            SizedBox(height: 20),
+            IgnorePointer(
+              ignoring: !_enableSponsorblock,
+              child: Opacity(
+                opacity: _enableSponsorblock ? 1.0 : 0.4,
+                child: ListSectionContainer(
+                  children: [
+                    SwitchListTile(
+                      thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                        (Set<WidgetState> states) {
+                          if (states.contains(WidgetState.selected)) {
+                            return const Icon(Icons.check);
+                          }
+                          return const Icon(Icons.close);
+                        },
+                      ),
+                      title: Text(localizations.sponsorblockSponsor),
+                      subtitle: Text(localizations.sponsorblockSponsorHint),
+                      value: _enableSponsor,
+                      onChanged: (bool value) {
+                        setState(() {
+                          _enableSponsor = value;
+                          _saveSettings();
+                        });
                       },
                     ),
-                    title: Text(localizations.sponsorblockSponsor),
-                    value: _enableSponsor,
-                    onChanged: (bool value) {
-                      setState(() {
-                        _enableSponsor = value;
-                        _saveSettings();
-                      });
-                    },
-                  ),
-                  SwitchListTile(
-                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
-                      (Set<WidgetState> states) {
-                        if (states.contains(WidgetState.selected)) {
-                          return const Icon(Icons.check);
-                        }
-                        return const Icon(Icons.close);
+                    SwitchListTile(
+                      thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                        (Set<WidgetState> states) {
+                          if (states.contains(WidgetState.selected)) {
+                            return const Icon(Icons.check);
+                          }
+                          return const Icon(Icons.close);
+                        },
+                      ),
+                      title: Text(localizations.sponsorblockPromo),
+                      subtitle: Text(localizations.sponsorblockPromoHint),
+                      value: _enablePromo,
+                      onChanged: (bool value) {
+                        setState(() {
+                          _enablePromo = value;
+                          _saveSettings();
+                        });
                       },
                     ),
-                    title: Text(localizations.sponsorblockPromo),
-                    value: _enablePromo,
-                    onChanged: (bool value) {
-                      setState(() {
-                        _enablePromo = value;
-                        _saveSettings();
-                      });
-                    },
-                  ),
-                  SwitchListTile(
-                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
-                      (Set<WidgetState> states) {
-                        if (states.contains(WidgetState.selected)) {
-                          return const Icon(Icons.check);
-                        }
-                        return const Icon(Icons.close);
+                    SwitchListTile(
+                      thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                        (Set<WidgetState> states) {
+                          if (states.contains(WidgetState.selected)) {
+                            return const Icon(Icons.check);
+                          }
+                          return const Icon(Icons.close);
+                        },
+                      ),
+                      title: Text(localizations.sponsorblockInteraction),
+                      subtitle: Text(localizations.sponsorblockInteractionHint),
+                      value: _enableInteraction,
+                      onChanged: (bool value) {
+                        setState(() {
+                          _enableInteraction = value;
+                          _saveSettings();
+                        });
                       },
                     ),
-                    title: Text(localizations.sponsorblockInteraction),
-                    value: _enableInteraction,
-                    onChanged: (bool value) {
-                      setState(() {
-                        _enableInteraction = value;
-                        _saveSettings();
-                      });
-                    },
-                  ),
-                  SwitchListTile(
-                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
-                      (Set<WidgetState> states) {
-                        if (states.contains(WidgetState.selected)) {
-                          return const Icon(Icons.check);
-                        }
-                        return const Icon(Icons.close);
+                    SwitchListTile(
+                      thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                        (Set<WidgetState> states) {
+                          if (states.contains(WidgetState.selected)) {
+                            return const Icon(Icons.check);
+                          }
+                          return const Icon(Icons.close);
+                        },
+                      ),
+                      title: Text(localizations.sponsorblockIntro),
+                      subtitle: Text(localizations.sponsorblockIntroHint),
+                      value: _enableIntro,
+                      onChanged: (bool value) {
+                        setState(() {
+                          _enableIntro = value;
+                          _saveSettings();
+                        });
                       },
                     ),
-                    title: Text(localizations.sponsorblockIntro),
-                    value: _enableIntro,
-                    onChanged: (bool value) {
-                      setState(() {
-                        _enableIntro = value;
-                        _saveSettings();
-                      });
-                    },
-                  ),
-                  SwitchListTile(
-                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
-                      (Set<WidgetState> states) {
-                        if (states.contains(WidgetState.selected)) {
-                          return const Icon(Icons.check);
-                        }
-                        return const Icon(Icons.close);
+                    SwitchListTile(
+                      thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                        (Set<WidgetState> states) {
+                          if (states.contains(WidgetState.selected)) {
+                            return const Icon(Icons.check);
+                          }
+                          return const Icon(Icons.close);
+                        },
+                      ),
+                      title: Text(localizations.sponsorblockOutro),
+                      subtitle: Text(localizations.sponsorblockOutroHint),
+                      value: _enableOutro,
+                      onChanged: (bool value) {
+                        setState(() {
+                          _enableOutro = value;
+                          _saveSettings();
+                        });
                       },
                     ),
-                    title: Text(localizations.sponsorblockOutro),
-                    value: _enableOutro,
-                    onChanged: (bool value) {
-                      setState(() {
-                        _enableOutro = value;
-                        _saveSettings();
-                      });
-                    },
-                  ),
-                  SwitchListTile(
-                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
-                      (Set<WidgetState> states) {
-                        if (states.contains(WidgetState.selected)) {
-                          return const Icon(Icons.check);
-                        }
-                        return const Icon(Icons.close);
+                    SwitchListTile(
+                      thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                        (Set<WidgetState> states) {
+                          if (states.contains(WidgetState.selected)) {
+                            return const Icon(Icons.check);
+                          }
+                          return const Icon(Icons.close);
+                        },
+                      ),
+                      title: Text(localizations.sponsorblockPreview),
+                      subtitle: Text(localizations.sponsorblockPreviewHint),
+                      value: _enablePreview,
+                      onChanged: (bool value) {
+                        setState(() {
+                          _enablePreview = value;
+                          _saveSettings();
+                        });
                       },
                     ),
-                    title: Text(localizations.sponsorblockPreview),
-                    value: _enablePreview,
-                    onChanged: (bool value) {
-                      setState(() {
-                        _enablePreview = value;
-                        _saveSettings();
-                      });
-                    },
-                  ),
-                  SwitchListTile(
-                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
-                      (Set<WidgetState> states) {
-                        if (states.contains(WidgetState.selected)) {
-                          return const Icon(Icons.check);
-                        }
-                        return const Icon(Icons.close);
+                    SwitchListTile(
+                      thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                        (Set<WidgetState> states) {
+                          if (states.contains(WidgetState.selected)) {
+                            return const Icon(Icons.check);
+                          }
+                          return const Icon(Icons.close);
+                        },
+                      ),
+                      title: Text(localizations.sponsorblockHook),
+                      subtitle: Text(localizations.sponsorblockHookHint),
+                      value: _enableHook,
+                      onChanged: (bool value) {
+                        setState(() {
+                          _enableHook = value;
+                          _saveSettings();
+                        });
                       },
                     ),
-                    title: Text(localizations.sponsorblockHook),
-                    value: _enableHook,
-                    onChanged: (bool value) {
-                      setState(() {
-                        _enableHook = value;
-                        _saveSettings();
-                      });
-                    },
-                  ),
-                  SwitchListTile(
-                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
-                      (Set<WidgetState> states) {
-                        if (states.contains(WidgetState.selected)) {
-                          return const Icon(Icons.check);
-                        }
-                        return const Icon(Icons.close);
+                    SwitchListTile(
+                      thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                        (Set<WidgetState> states) {
+                          if (states.contains(WidgetState.selected)) {
+                            return const Icon(Icons.check);
+                          }
+                          return const Icon(Icons.close);
+                        },
+                      ),
+                      title: Text(localizations.sponsorblockFiller),
+                      subtitle: Text(localizations.sponsorblockFillerHint),
+                      value: _enableFiller,
+                      onChanged: (bool value) {
+                        setState(() {
+                          _enableFiller = value;
+                          _saveSettings();
+                        });
                       },
                     ),
-                    title: Text(localizations.sponsorblockFiller),
-                    value: _enableFiller,
-                    onChanged: (bool value) {
-                      setState(() {
-                        _enableFiller = value;
-                        _saveSettings();
-                      });
-                    },
-                  ),
-                ],
-              )
-            ),
-          )
-        ]
+                  ],
+                )
+              ),
+            )
+          ]
+        )
       ),
     );
   }

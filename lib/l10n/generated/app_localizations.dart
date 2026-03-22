@@ -738,11 +738,23 @@ abstract class AppLocalizations {
   /// **'Skip Sponsor'**
   String get sponsorblockSponsor;
 
+  /// No description provided for @sponsorblockSponsorHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Part of a video promoting a product or service not directly related to the creator.'**
+  String get sponsorblockSponsorHint;
+
   /// No description provided for @sponsorblockPromo.
   ///
   /// In en, this message translates to:
   /// **'Skip Self-Promotion'**
   String get sponsorblockPromo;
+
+  /// No description provided for @sponsorblockPromoHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Promoting a product or service that is directly related to the creator themselves.'**
+  String get sponsorblockPromoHint;
 
   /// No description provided for @sponsorblockInteraction.
   ///
@@ -750,11 +762,23 @@ abstract class AppLocalizations {
   /// **'Skip Interaction-Reminder'**
   String get sponsorblockInteraction;
 
+  /// No description provided for @sponsorblockInteractionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Explicit reminders to like, subscribe or interact with them on any paid or free platforms.'**
+  String get sponsorblockInteractionHint;
+
   /// No description provided for @sponsorblockIntro.
   ///
   /// In en, this message translates to:
   /// **'Skip Intro'**
   String get sponsorblockIntro;
+
+  /// No description provided for @sponsorblockIntroHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Segments typically found at the start of a video that include an animation, still frame or clip which are also seen in other videos by the same creator.'**
+  String get sponsorblockIntroHint;
 
   /// No description provided for @sponsorblockOutro.
   ///
@@ -762,11 +786,23 @@ abstract class AppLocalizations {
   /// **'Skip Outro'**
   String get sponsorblockOutro;
 
+  /// No description provided for @sponsorblockOutroHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Typically near or at the end of the video when the credits pop up and/or endcards are shown.'**
+  String get sponsorblockOutroHint;
+
   /// No description provided for @sponsorblockPreview.
   ///
   /// In en, this message translates to:
   /// **'Skip Preview'**
   String get sponsorblockPreview;
+
+  /// No description provided for @sponsorblockPreviewHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Collection of clips that show what is coming up in in this video or other videos in a series where all information is repeated later in the video.'**
+  String get sponsorblockPreviewHint;
 
   /// No description provided for @sponsorblockHook.
   ///
@@ -774,11 +810,23 @@ abstract class AppLocalizations {
   /// **'Skip Hook'**
   String get sponsorblockHook;
 
+  /// No description provided for @sponsorblockHookHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Narrated trailers for the upcoming video, greetings and goodbyes.'**
+  String get sponsorblockHookHint;
+
   /// No description provided for @sponsorblockFiller.
   ///
   /// In en, this message translates to:
   /// **'Skip Filler'**
   String get sponsorblockFiller;
+
+  /// No description provided for @sponsorblockFillerHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tangents/ Jokes is only for tangential scenes that are not required to understand the main content of the video.'**
+  String get sponsorblockFillerHint;
 
   /// No description provided for @expandableTextMore.
   ///
