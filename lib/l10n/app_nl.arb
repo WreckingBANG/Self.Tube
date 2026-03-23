@@ -38,7 +38,7 @@
     "settingsSaved": "De instellingen zijn opgeslagen",
     "settingsTitle": "Instellingen",
     "settingsAccountSettings": "Account",
-    "settingsAccountSettingsDesc": "Instantie, api-sleutel, etc.",
+    "settingsAccountSettingsDesc": "Instantie, api-sleutel, …",
     "settingsAppearanceSettings": "Vormgeving",
     "settingsAppearanceSettingsDesc": "…",
     "settingsVideoPlayer": "Videospeler",
@@ -174,5 +174,13 @@
     "taskDownloadNow": "Nu downloaden",
     "taskIgnore": "Negeren",
     "taskDeleteFromQueue": "Verwijderen uit wachtrij",
-    "taskQueueEmpty": "De wachtrij is leeg"
+    "taskQueueEmpty": "De wachtrij is leeg",
+    "sponsorblockSponsorHint": "Onderdeel van een video, waarin een extern product of dienst aangeprezen wordt.",
+    "sponsorblockPromoHint": "Het promoten van een product of dienst ten behoeve van de maker.",
+    "sponsorblockInteractionHint": "Uitdrukkelijke herinneringen om de video leuk te vinden, je te abonneren en reacties te plaatsen op gratis of betaalde platformen.",
+    "sponsorblockIntroHint": "Segmenten, doorgaans aan het begin van de video, waarin een animatie, foto of korte clip getoond wordt, afkomstig uit andere video's van de maker.",
+    "sponsorblockOutroHint": "Segmenten, doorgaans aan het einde van de video, waarin een dankwoord of aftiteling wordt getoond.",
+    "sponsorblockPreviewHint": "Een verzameling clips die laten zien wat er zal volgen of andere video's in de serie waarin de informatie herhaald wordt.",
+    "sponsorblockHookHint": "Aanprijzingen van volgende video's en (afscheids)groeten.",
+    "sponsorblockFillerHint": "Segmenten met grapjes die niet gerelateerd zijn aan het hoofdonderwerp van de video."
 }
