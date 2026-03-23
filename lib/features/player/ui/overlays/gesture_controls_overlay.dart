@@ -39,6 +39,10 @@ class _GestureControlsOverlayState extends State<GestureControlsOverlay> {
     super.dispose();
   }
 
+  double snapToStep(double value, double step) {
+    return (value / step).round() * step;
+  }
+
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
@@ -122,13 +126,15 @@ class _GestureControlsOverlayState extends State<GestureControlsOverlay> {
                   _dragAccumulator += details.delta.dy;
                   if (_dragAccumulator <= -10) {
                     double current = await DeviceService.getVolume() ?? 0.0;
-                    DeviceService.setVolume((current + 0.05).clamp(0.0, 1.0));
-                    widget.onShowMessage("${localizations.playerVolume} ${(current + 0.05).clamp(0.0, 1.0) * 100 ~/ 1}%", Icons.volume_up_rounded);
+                    double future = (snapToStep(current, 0.05) + 0.05).clamp(0.0, 1.0); 
+                    DeviceService.setVolume(future);
+                    widget.onShowMessage("${localizations.playerVolume} ${future * 100 ~/ 1}%", Icons.volume_down_rounded);
                     _dragAccumulator = 0;
                   } else if (_dragAccumulator >= 10) {
                     double current = await DeviceService.getVolume() ?? 0.0;
-                    DeviceService.setVolume((current - 0.05).clamp(0.0, 1.0));
-                    widget.onShowMessage("${localizations.playerVolume} ${(current + 0.05).clamp(0.0, 1.0) * 100 ~/ 1}%", Icons.volume_down_rounded);
+                    double future = (snapToStep(current, 0.05) - 0.05).clamp(0.0, 1.0); 
+                    DeviceService.setVolume(future);
+                    widget.onShowMessage("${localizations.playerVolume} ${future * 100 ~/ 1}%", Icons.volume_down_rounded);
                     _dragAccumulator = 0;
                   }
                 }
