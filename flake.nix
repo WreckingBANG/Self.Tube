@@ -38,7 +38,7 @@
           pkgs.glibcLocales
           pkgs.gtk3
           pkgs.glib
-          pkgs.xorg.libXi
+          pkgs.libxi
           pkgs.ffmpeg
           pkgs.mpv
           pkgs.openjdk17
@@ -51,10 +51,10 @@
           pkgs.libepoxy
           pkgs.libass
           pkgs.libxdmcp
-          pkgs.xorg.libX11
-          pkgs.xorg.libXext
-          pkgs.xorg.libXrender
-          pkgs.xorg.libXrandr
+          pkgs.libx11
+          pkgs.libxext
+          pkgs.libxrender
+          pkgs.libxrandr
           pkgs.wayland
           pkgs.libxkbcommon
           pkgs.libva
