@@ -57,12 +57,12 @@ class _GestureControlsOverlayState extends State<GestureControlsOverlay> {
                   _dragAccumulator += details.delta.dy;
                   double brightness = await DeviceService.getBrightness() ?? 0.0;
                   if (_dragAccumulator <= -10) {
-                    brightness = (brightness + 0.05).clamp(0.0, 1.0);
+                    brightness = (snapToStep(brightness, 0.05) + 0.05).clamp(0.0, 1.0);
                     DeviceService.setBrightness(brightness);
                     widget.onShowMessage("${localizations.playerBrightness} ${(brightness * 100).round()}%", Icons.brightness_5_rounded);
                     _dragAccumulator = 0;
                   } else if (_dragAccumulator >= 10) {
-                    brightness = (brightness - 0.05).clamp(0.0, 1.0);
+                    brightness = (snapToStep(brightness, 0.05) - 0.05).clamp(0.0, 1.0);
                     DeviceService.setBrightness(brightness);
                     widget.onShowMessage("${localizations.playerBrightness} ${(brightness * 100).round()}%", Icons.brightness_5_rounded);
                     _dragAccumulator = 0;
