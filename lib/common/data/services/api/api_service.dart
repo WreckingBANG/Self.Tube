@@ -55,11 +55,8 @@ class ApiService {
         return parser(jsonData);
       }
 
-      if (response.statusCode >= 200 && response.statusCode < 300) { 
-        return parser(response); 
-      } else { 
-        throw Exception('HTTP ${response.statusCode}: ${response.body}'); 
-      }
+      throw Exception('HTTP ${response.statusCode}: ${response.body}'); 
+
     } catch (e) {
       GlobalSnackbar.show(
         "$e",
