@@ -43,12 +43,18 @@ class VideoListTile extends StatelessWidget {
               width: 170,
               child: AspectRatio(
                 aspectRatio: 16 / 9,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(4),
+                child: Container(
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4)
+                  ),
                   child: Stack(
                     alignment: Alignment.bottomCenter,
                     children: [
-                      CustomNetwokImage(imageLink: video.thumbnail),
+                      CustomNetworkImage(
+                        imageLink: video.thumbnail,
+                        logicalWidth: 170,
+                      ),
                       video.progress != 0 || video.watched == true
                         ? LinearProgressIndicator(
                             value: video.progress != 0 ? video.progress / 100 : 1.0,
@@ -107,12 +113,18 @@ class VideoListTile extends StatelessWidget {
                               width: 22,
                               child: AspectRatio(
                                 aspectRatio: 1 / 1,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
+                                child: Container(
+                                  clipBehavior: Clip.hardEdge,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10)
+                                  ),
                                   child: Stack(
                                     alignment: Alignment.bottomCenter,
                                     children: [
-                                      CustomNetwokImage(imageLink: video.channelThumb)
+                                      CustomNetworkImage(
+                                        imageLink: video.channelThumb,
+                                        logicalWidth: 22,
+                                      )
                                     ],
                                   ),
                                 )   

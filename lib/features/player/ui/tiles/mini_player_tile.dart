@@ -32,7 +32,10 @@ class MiniPlayerTile extends StatelessWidget {
                             aspectRatio: 16 / 9,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(4),
-                              child: CustomNetwokImage(imageLink: video.videoThumbnail),
+                              child: CustomNetworkImage(
+                                imageLink: video.videoThumbnail,
+                                logicalWidth: 100,
+                              ),
                             ),
                           ),
                         ),

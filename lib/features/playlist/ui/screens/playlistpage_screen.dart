@@ -48,7 +48,7 @@ class PlaylistpageScreen extends ConsumerWidget{
                       aspectRatio: 1 / 1,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
-                        child: CustomNetwokImage(imageLink: playlist.playlistPic)
+                        child: CustomNetworkImage(imageLink: playlist.playlistPic)
                       ),
                     ),
                     trailing: playlist.playlistType == "regular" && UserSession.isPrivileged

@@ -30,7 +30,10 @@ class QueueListTile extends StatelessWidget {
                   child: Stack(
                     alignment: Alignment.bottomCenter,
                     children: [
-                      CustomNetwokImage(imageLink: video.thumbnail),
+                      CustomNetworkImage(
+                        imageLink: video.thumbnail,
+                        logicalWidth: 170,
+                      ),
                       Align(
                         alignment: Alignment.bottomRight,
                         child: Container(

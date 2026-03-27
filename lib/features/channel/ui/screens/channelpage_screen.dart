@@ -46,7 +46,7 @@ class ChannelpageScreen extends ConsumerWidget{
               return ListView(
                 children: [
                   if (channel!.banner.isNotEmpty)
-                    CustomNetwokImage(imageLink: channel.banner),
+                    CustomNetworkImage(imageLink: channel.banner),
                   ListTile(
                     title: Text(channel.channelName),
                     subtitle: Text(formatNumberCompact(channel.subscribers, context)),
@@ -54,7 +54,7 @@ class ChannelpageScreen extends ConsumerWidget{
                       aspectRatio: 1 / 1,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
-                        child: CustomNetwokImage(imageLink: channel.profilePic)
+                        child: CustomNetworkImage(imageLink: channel.profilePic)
                       ),
                     ),
                     trailing: UserSession.isPrivileged 

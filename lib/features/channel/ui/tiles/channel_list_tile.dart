@@ -32,7 +32,10 @@ class ChannelListTile extends ConsumerWidget {
                 aspectRatio: 1 / 1,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(4),
-                  child: CustomNetwokImage(imageLink: channel.profilePic)
+                  child: CustomNetworkImage(
+                    imageLink: channel.profilePic,
+                    logicalWidth: 50,
+                  )
                 )   
               ),
             ),

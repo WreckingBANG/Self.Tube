@@ -63,8 +63,11 @@ class _PlayerScreenState extends State<PlayerScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
+                    Container(
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                       borderRadius: BorderRadius.circular(12),
+                      ),
                       child: AspectRatio(
                         aspectRatio: 16 / 9,
                         child: VideoPlayerService.buildUI(
@@ -124,7 +127,10 @@ class _PlayerScreenState extends State<PlayerScreen> {
                           aspectRatio: 1 / 1,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
-                            child: CustomNetwokImage(imageLink: widget.video.channelThumbUrl)
+                            child: CustomNetworkImage(
+                              imageLink: widget.video.channelThumbUrl,
+                              logicalWidth: 45,
+                            )
                           ),
                         )
                       ),

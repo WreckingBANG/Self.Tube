@@ -31,7 +31,10 @@ class PlaylistListTile extends ConsumerWidget {
                 aspectRatio: 16 / 9,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(4),
-                  child: CustomNetwokImage(imageLink: playlist.playlistPic)
+                  child: CustomNetworkImage(
+                    imageLink: playlist.playlistPic,
+                    logicalWidth: 170,
+                  )
                 )   
               ),
             ),

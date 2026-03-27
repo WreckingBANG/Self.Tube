@@ -95,7 +95,6 @@ class VideoPlayerService {
     _player?.dispose();
     _reportPos?.cancel();
     _sbPos?.cancel();
-    mediaSession.dispose();
     SponsorblockService.dispose();
     currentVideo.value = null;
   }
