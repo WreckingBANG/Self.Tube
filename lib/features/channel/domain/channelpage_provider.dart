@@ -19,7 +19,7 @@ class ChannelPageNotifier extends AsyncNotifier<ChannelItemModel?> {
 
 }
 
-final channelPageProvider = AsyncNotifierProvider.family<ChannelPageNotifier, ChannelItemModel?, String>(
+final channelPageProvider = AsyncNotifierProvider.autoDispose.family<ChannelPageNotifier, ChannelItemModel?, String>(
   ChannelPageNotifier.new,
 );
 

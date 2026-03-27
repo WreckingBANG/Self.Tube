@@ -65,7 +65,7 @@ class ApiService {
         iconColor: Colors.red,
         autoDismiss: false
       );
-      return null;
+      throw Exception("Network error: $e");
     }
   }
 }

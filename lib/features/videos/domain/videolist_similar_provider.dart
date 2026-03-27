@@ -38,6 +38,6 @@ class VideoListSimilarNotifier extends AsyncNotifier<List?> {
   }
 }
 
-final videoListSimilarProvider = AsyncNotifierProvider.family<VideoListSimilarNotifier, List?, String> (
+final videoListSimilarProvider = AsyncNotifierProvider.autoDispose.family<VideoListSimilarNotifier, List?, String> (
   VideoListSimilarNotifier.new,
 );

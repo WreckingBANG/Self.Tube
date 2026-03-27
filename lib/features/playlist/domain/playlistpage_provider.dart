@@ -18,6 +18,6 @@ class PlaylistPageNotifier extends AsyncNotifier<PlaylistListItemModel?> {
 
 }
 
-final playlistPageProvider = AsyncNotifierProvider.family<PlaylistPageNotifier, PlaylistListItemModel?, String>(
+final playlistPageProvider = AsyncNotifierProvider.autoDispose.family<PlaylistPageNotifier, PlaylistListItemModel?, String>(
   PlaylistPageNotifier.new,
 );
