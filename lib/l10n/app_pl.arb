@@ -174,5 +174,13 @@
     "sponsorblockEnable": "Aktywuj SponsorBlock",
     "sponsorblockSponsor": "Pomiń sponsora",
     "sponsorblockPromo": "Pomiń autopromocję",
-    "sponsorblockIntro": "Pomiń wstęp"
+    "sponsorblockIntro": "Pomiń wstęp",
+    "sponsorblockSponsorHint": "Część filmu promująca produkt lub usługę która nie jest bezpośrednio związana z twórcą",
+    "sponsorblockPromoHint": "Reklama produktu lub usługi która jest ściśle powiązana z samym twórcą",
+    "sponsorblockInteractionHint": "Wskazówki dotyczące wspierania twórczości lub interakcji na bezpłatnych lub płatnych platformach",
+    "sponsorblockIntroHint": "Fragmenty na początku filmu zawierające animację, nieruchomy obraz lub klip, pojawiające się również w innych filmach tego samego twórcy",
+    "sponsorblockOutroHint": "Zwykle pod koniec filmu, gdy pojawiają się napisy końcowe i/lub wyświetlane są plansze końcowe",
+    "sponsorblockPreviewHint": "Zbiór klipów pokazujących, co dzieje się w tym filmie lub w innych filmach z serii, przy czym wszystkie informacje powracają później w filmie",
+    "sponsorblockHookHint": "Mówione zwiastuny nadchodzącego filmu, a także powitania i pożegnania",
+    "sponsorblockFillerHint": "Dygresje lub żarty odnoszące się jedynie do scen niekoniecznych do zrozumienia właściwej treści"
 }
