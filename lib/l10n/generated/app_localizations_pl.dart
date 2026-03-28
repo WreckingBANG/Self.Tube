@@ -127,7 +127,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get settingsAccountSettings => 'Konto';
 
   @override
-  String get settingsAccountSettingsDesc => 'Instancja, API-Token';
+  String get settingsAccountSettingsDesc => 'Instancja, API-Token, …';
 
   @override
   String get settingsAppearanceSettings => 'Opis';
@@ -139,7 +139,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get settingsVideoPlayer => 'Odtwarzacz wideo';
 
   @override
-  String get settingsVideoPlayerDesc => 'Ustawienia gestów';
+  String get settingsVideoPlayerDesc => 'Ustawienia gestów, ...';
 
   @override
   String get settingsSponsorBlockSettings => 'Blok sponsora';
@@ -188,7 +188,7 @@ class AppLocalizationsPl extends AppLocalizations {
       'Zmień to tylko wtedy, gdy wiesz, co robisz';
 
   @override
-  String get searchLabel => 'Szukać';
+  String get searchLabel => 'Szukać...';
 
   @override
   String get searchTitle => 'Szukaj';
@@ -230,7 +230,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get playlistName => 'Nazwa listy odtwarzania';
 
   @override
-  String get playlistNameHint => 'Obejrzyj później';
+  String get playlistNameHint => 'Obejrzyj później...';
 
   @override
   String get playlistUrl => 'Adres URL listy odtwarzania';
@@ -304,7 +304,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get onboardingLoginFailure =>
-      'Połączenie nieudane. Sprawdź swój token i adres URL';
+      'Połączenie nieudane. Sprawdź swój token i adres URL.';
 
   @override
   String get onboardingWelcomeText => 'Witamy w Self.Tube';
@@ -338,56 +338,56 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get sponsorblockSponsorHint =>
-      'Part of a video promoting a product or service not directly related to the creator.';
+      'Część filmu promująca produkt lub usługę która nie jest bezpośrednio związana z twórcą.';
 
   @override
   String get sponsorblockPromo => 'Pomiń autopromocję';
 
   @override
   String get sponsorblockPromoHint =>
-      'Promoting a product or service that is directly related to the creator themselves.';
+      'Reklama produktu lub usługi która jest ściśle powiązana z samym twórcą.';
 
   @override
   String get sponsorblockInteraction => 'Pomiń interaktywną przypomnienie';
 
   @override
   String get sponsorblockInteractionHint =>
-      'Explicit reminders to like, subscribe or interact with them on any paid or free platforms.';
+      'Wskazówki dotyczące wspierania twórczości lub interakcji na bezpłatnych lub płatnych platformach.';
 
   @override
   String get sponsorblockIntro => 'Pomiń wstęp';
 
   @override
   String get sponsorblockIntroHint =>
-      'Segments typically found at the start of a video that include an animation, still frame or clip which are also seen in other videos by the same creator.';
+      'Fragmenty na początku filmu zawierające animację, nieruchomy obraz lub klip, pojawiające się również w innych filmach tego samego twórcy.';
 
   @override
   String get sponsorblockOutro => 'Pomiń zakończenie';
 
   @override
   String get sponsorblockOutroHint =>
-      'Typically near or at the end of the video when the credits pop up and/or endcards are shown.';
+      'Zwykle pod koniec filmu, gdy pojawiają się napisy końcowe i/lub wyświetlane są plansze końcowe.';
 
   @override
   String get sponsorblockPreview => 'Pomiń podgląd';
 
   @override
   String get sponsorblockPreviewHint =>
-      'Collection of clips that show what is coming up in in this video or other videos in a series where all information is repeated later in the video.';
+      'Zbiór klipów pokazujących, co dzieje się w tym filmie lub w innych filmach z serii, przy czym wszystkie informacje powracają później w filmie.';
 
   @override
   String get sponsorblockHook => 'Pomiń otwieranie zwiastuna i powitań';
 
   @override
   String get sponsorblockHookHint =>
-      'Narrated trailers for the upcoming video, greetings and goodbyes.';
+      'Mówione zwiastuny nadchodzącego filmu, a także powitania i pożegnania.';
 
   @override
   String get sponsorblockFiller => 'Pomiń dygresje/żarty';
 
   @override
   String get sponsorblockFillerHint =>
-      'Tangents/ Jokes is only for tangential scenes that are not required to understand the main content of the video.';
+      'Dygresje lub żarty odnoszące się jedynie do scen niekoniecznych do zrozumienia właściwej treści.';
 
   @override
   String get expandableTextMore => 'Więcej';

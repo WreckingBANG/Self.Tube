@@ -61,7 +61,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsShowCommentPicsDisclaimer =>
-      'Wenn aktiviert, wird das Bild von Google bezogen, da es nicht von TubeArchivist bereitgestellt wird.';
+      'Wenn aktiviert, wird das Bild von Google bezogen, da es nicht von TubeArchivist bereitgestellt wird';
 
   @override
   String get settingsSheetComingSoon => 'Kommt bald';
@@ -127,7 +127,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsAccountSettings => 'Konto';
 
   @override
-  String get settingsAccountSettingsDesc => 'Instanz, API-Token, ...';
+  String get settingsAccountSettingsDesc => 'Instanz, Api-Token, …';
 
   @override
   String get settingsAppearanceSettings => 'Darstellung';
@@ -338,56 +338,56 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get sponsorblockSponsorHint =>
-      'Part of a video promoting a product or service not directly related to the creator.';
+      'Teil eines Videos, das ein Produkt oder eine Dienstleistung bewirbt, die nicht direkt mit dem Ersteller zusammenhängt.';
 
   @override
   String get sponsorblockPromo => 'Selbstwerbung überspringen';
 
   @override
   String get sponsorblockPromoHint =>
-      'Promoting a product or service that is directly related to the creator themselves.';
+      'Werbung für ein Produkt oder eine Dienstleistung, die in direktem Zusammenhang mit dem Ersteller selbst steht.';
 
   @override
   String get sponsorblockInteraction => 'Interaktions-Erinnerung überspringen';
 
   @override
   String get sponsorblockInteractionHint =>
-      'Explicit reminders to like, subscribe or interact with them on any paid or free platforms.';
+      'Hinweise darauf, Inhalte zu unterstützen oder auf kostenlosen bzw. kostenpflichtigen Plattformen zu interagieren.';
 
   @override
   String get sponsorblockIntro => 'Intro überspringen';
 
   @override
   String get sponsorblockIntroHint =>
-      'Segments typically found at the start of a video that include an animation, still frame or clip which are also seen in other videos by the same creator.';
+      'Abschnitte zu Beginn eines Videos, die eine Animation, ein Standbild oder einen Clip enthalten und auch in anderen Videos desselben Creators vorkommen.';
 
   @override
   String get sponsorblockOutro => 'Outro überspringen';
 
   @override
   String get sponsorblockOutroHint =>
-      'Typically near or at the end of the video when the credits pop up and/or endcards are shown.';
+      'Typischerweise gegen Ende des Videos, wenn die Abspannsequenz erscheint und/oder Endkarten eingeblendet werden.';
 
   @override
   String get sponsorblockPreview => 'Vorschau überspringen';
 
   @override
   String get sponsorblockPreviewHint =>
-      'Collection of clips that show what is coming up in in this video or other videos in a series where all information is repeated later in the video.';
+      'Eine Sammlung von Clips, die zeigen, was in diesem Video oder in anderen Videos einer Reihe vorkommt, wobei alle Informationen später im Video erneut aufgegriffen werden.';
 
   @override
   String get sponsorblockHook => 'Eröffnungsteaser & Grußformeln überspringen';
 
   @override
   String get sponsorblockHookHint =>
-      'Narrated trailers for the upcoming video, greetings and goodbyes.';
+      'Gesprochene Trailer für das kommende Video sowie Begrüßungen und Verabschiedungen.';
 
   @override
   String get sponsorblockFiller => 'Abschweifungen/Witze überspringen';
 
   @override
   String get sponsorblockFillerHint =>
-      'Tangents/ Jokes is only for tangential scenes that are not required to understand the main content of the video.';
+      'Abschweifungen oder Witze, die nur Szenen betreffen, die für das Verständnis des eigentlichen Inhalts nicht notwendig sind.';
 
   @override
   String get expandableTextMore => 'Mehr ...';
@@ -574,7 +574,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get chipsWatchedUnw => 'Unangesehen';
 
   @override
-  String get chipsWatchedCon => 'Continue';
+  String get chipsWatchedCon => 'Weiterschauen';
 
   @override
   String get taskAddVideo => 'Video hinzufügen';

@@ -339,7 +339,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsAccountSettingsDesc.
   ///
   /// In en, this message translates to:
-  /// **'Instance, Api-Key, ...'**
+  /// **'Instance, Api-Key, …'**
   String get settingsAccountSettingsDesc;
 
   /// No description provided for @settingsAppearanceSettings.

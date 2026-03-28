@@ -127,7 +127,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsAccountSettings => 'Account';
 
   @override
-  String get settingsAccountSettingsDesc => 'Instance, Api-Key, ...';
+  String get settingsAccountSettingsDesc => 'Instance, Api-Key, …';
 
   @override
   String get settingsAppearanceSettings => 'Appearance';

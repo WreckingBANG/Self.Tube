@@ -127,7 +127,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get settingsAccountSettings => 'Account';
 
   @override
-  String get settingsAccountSettingsDesc => 'Instantie, api-sleutel, etc.';
+  String get settingsAccountSettingsDesc => 'Instantie, api-sleutel, …';
 
   @override
   String get settingsAppearanceSettings => 'Vormgeving';
@@ -339,56 +339,56 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get sponsorblockSponsorHint =>
-      'Part of a video promoting a product or service not directly related to the creator.';
+      'Onderdeel van een video, waarin een extern product of dienst aangeprezen wordt.';
 
   @override
   String get sponsorblockPromo => 'Zelfpromoties overslaan';
 
   @override
   String get sponsorblockPromoHint =>
-      'Promoting a product or service that is directly related to the creator themselves.';
+      'Het promoten van een product of dienst ten behoeve van de maker.';
 
   @override
   String get sponsorblockInteraction => 'Interactieherinneringen overslaan';
 
   @override
   String get sponsorblockInteractionHint =>
-      'Explicit reminders to like, subscribe or interact with them on any paid or free platforms.';
+      'Uitdrukkelijke herinneringen om de video leuk te vinden, je te abonneren en reacties te plaatsen op gratis of betaalde platformen.';
 
   @override
   String get sponsorblockIntro => 'Inleidingen overslaan';
 
   @override
   String get sponsorblockIntroHint =>
-      'Segments typically found at the start of a video that include an animation, still frame or clip which are also seen in other videos by the same creator.';
+      'Segmenten, doorgaans aan het begin van de video, waarin een animatie, foto of korte clip getoond wordt, afkomstig uit andere video\'s van de maker.';
 
   @override
   String get sponsorblockOutro => 'Aftitelingen overslaan';
 
   @override
   String get sponsorblockOutroHint =>
-      'Typically near or at the end of the video when the credits pop up and/or endcards are shown.';
+      'Segmenten, doorgaans aan het einde van de video, waarin een dankwoord of aftiteling wordt getoond.';
 
   @override
   String get sponsorblockPreview => 'Voorvertoningen overslaan';
 
   @override
   String get sponsorblockPreviewHint =>
-      'Collection of clips that show what is coming up in in this video or other videos in a series where all information is repeated later in the video.';
+      'Een verzameling clips die laten zien wat er zal volgen of andere video\'s in de serie waarin de informatie herhaald wordt.';
 
   @override
   String get sponsorblockHook => 'Tussenstukken overslaan';
 
   @override
   String get sponsorblockHookHint =>
-      'Narrated trailers for the upcoming video, greetings and goodbyes.';
+      'Aanprijzingen van volgende video\'s en (afscheids)groeten.';
 
   @override
   String get sponsorblockFiller => 'Nutteloze opvullingen overslaan';
 
   @override
   String get sponsorblockFillerHint =>
-      'Tangents/ Jokes is only for tangential scenes that are not required to understand the main content of the video.';
+      'Segmenten met grapjes die niet gerelateerd zijn aan het hoofdonderwerp van de video.';
 
   @override
   String get expandableTextMore => 'Meer tonen';
