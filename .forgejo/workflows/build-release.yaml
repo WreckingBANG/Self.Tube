@@ -195,12 +195,13 @@ jobs:
 
           for apk in build/app/outputs/flutter-apk/*.apk; do
             filename=$(basename "$apk")
-            arch=$(echo "$filename" | cut -d'-' -f2)
-
+             
+            arch=$(echo "$filename" | sed -E 's/app-(.*)-release\.apk/\1/')
+            
             out="build/app/outputs/flutter-apk/selftube-android-${arch}.apk"
-
+            
             echo "Signing $apk → $out"
-
+            
             $BUILD_TOOLS/apksigner sign \
               --ks release-keystore.jks \
               --ks-key-alias "$KEY_ALIAS" \
