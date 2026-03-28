@@ -91,6 +91,9 @@ class VideoPlayerService {
   }
 
   static void disposeVideo() {
+    if (currentVideo.value != null && _player != null) {
+      PlayerApi.setVideoProgress(currentVideo.value!.videoId, _player!.position.inSeconds.toInt());
+    }
     mediaSession.dispose();
     _player?.dispose();
     _reportPos?.cancel();
