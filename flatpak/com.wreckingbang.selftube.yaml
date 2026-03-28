@@ -1,5 +1,5 @@
 id: com.wreckingbang.selftube
-version: "0.1.1"
+version: "0.1.2"
 runtime: org.gnome.Platform
 runtime-version: '48'
 sdk: org.gnome.Sdk
