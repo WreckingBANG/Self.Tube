@@ -24,6 +24,7 @@ class VideoPlayerService {
 
   static Future<void> init() async {
     MediaKit.ensureInitialized();
+    MediaPlayerFactory.init();
     mediaSession = await MediaSessionHandler.create();
   } 
 
@@ -44,6 +45,7 @@ class VideoPlayerService {
 
     _player = MediaPlayerFactory.create(
       "$instanceUrl${video.videoUrl}",
+      video.codec,
       headers: ApiHeaders.authHeaders(),
     );
     await _player?.initialized;

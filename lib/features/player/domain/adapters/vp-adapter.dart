@@ -136,6 +136,9 @@ class VideoPlayerAdapter implements MediaPlayer {
   Future<void> pause() => _controller.pause();
 
   @override
+  String backend() => "video_player";
+
+  @override
   Stream<bool> get isBuffering => _bufferingController.stream;
   
   @override

@@ -17,6 +17,7 @@ class VideoPlayerModel {
   final String videoDescription;
   final double videoPosition;
   final SponsorBlock? sponsorBlock;
+  final String codec;
 
   VideoPlayerModel({
     required this.videoId,
@@ -35,6 +36,7 @@ class VideoPlayerModel {
     required this.videoDescription,
     required this.videoPosition,
     required this.sponsorBlock,
+    required this.codec
   });
 
   factory VideoPlayerModel.fromJson(Map<String, dynamic> json) {
@@ -57,6 +59,7 @@ class VideoPlayerModel {
       sponsorBlock: json['sponsorblock'] != null
         ? SponsorBlock.fromJson(json['sponsorblock'])
         : null,
+      codec: (json['streams'] as List?)?.first['codec'] ?? '',
     );
   }
 }
