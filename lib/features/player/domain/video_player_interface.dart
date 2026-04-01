@@ -26,6 +26,8 @@ abstract class MediaPlayer {
   Future<void> play();
   Future<void> pause();
 
+  String backend();
+
   Stream<bool> get isBuffering;
 
   Future<void> seek(Duration position);

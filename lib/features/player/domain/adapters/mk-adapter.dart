@@ -63,11 +63,14 @@ class MediaKitAdapter implements MediaPlayer {
 
   @override
   Future<void> pause() => _player.pause();
+  
+  @override
+  String backend() => "MPV";
 
   Stream<bool> get isBuffering => _player.stream.buffering;
 
   @override
-  Size get size => Size(_player.state.height?.toDouble() ?? 0, _player.state.width?.toDouble() ?? 0);
+  Size get size => Size(_player.state.width?.toDouble() ?? 0, _player.state.height?.toDouble() ?? 0);
 
   @override
   Future<void> seek(Duration position) async {

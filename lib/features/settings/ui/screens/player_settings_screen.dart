@@ -16,7 +16,7 @@ class _PlayerSettingsScreenState extends State<PlayerSettingsScreen> {
   bool _vpGestureFullscreen = false;
   bool _vpGesturePinch = false;
   bool _vpGestureDoubleTap = false;
-  bool _vpUseMediaKit = false;
+  int _playerBackend = 0;
 
 
   @override
@@ -30,7 +30,7 @@ class _PlayerSettingsScreenState extends State<PlayerSettingsScreen> {
     _vpGestureFullscreen = SettingsService.vpGestureFullscreen ?? false;
     _vpGesturePinch = SettingsService.vpGesturePinch ?? false;
     _vpGestureDoubleTap = SettingsService.vpGestureDoubleTap ?? false;
-    _vpUseMediaKit = SettingsService.vpUseMediaKit ?? false;
+    _playerBackend = SettingsService.playerBackend ?? 0;
   }
 
   Future<void> _saveSettings() async {
@@ -38,7 +38,7 @@ class _PlayerSettingsScreenState extends State<PlayerSettingsScreen> {
     await SettingsService.setVPGestureFullscreen(_vpGestureFullscreen);
     await SettingsService.setVPGesturePinch(_vpGesturePinch);
     await SettingsService.setVPGestureDoubleTap(_vpGestureDoubleTap);
-    await SettingsService.setVPUseMediaKit(_vpUseMediaKit);
+    await SettingsService.setPlayerBackend(_playerBackend);
   }
 
   @override
@@ -136,30 +136,46 @@ class _PlayerSettingsScreenState extends State<PlayerSettingsScreen> {
             ),
             if (Platform.isAndroid)
               ListSectionContainer(
-                title: "Advanced",
+                title: localizations.settingsVPAdvanded,
                 children: [
-                  SwitchListTile(
-                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
-                      (Set<WidgetState> states) {
-                        if (states.contains(WidgetState.selected)) {
-                          return const Icon(Icons.check);
-                        }
-                        return const Icon(Icons.close);
-                      },
-                    ),
-                    title: Text(localizations.settingsVPUseMediaKit),
-                    subtitle: Text(localizations.settingsVPUseMediaKitDesc),
-                    secondary: const Icon(Icons.play_arrow_rounded),
-                    value: _vpUseMediaKit,
-                    onChanged: (bool value) {
-                      setState(() {
-                        _vpUseMediaKit = value;
-                        _saveSettings();
-                      });
-                    },
+                ListTile(
+                  title: Text(localizations.settingsVPPlayerBackend),
+                  leading: Icon(Icons.video_settings),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(localizations.settingsVPPlayerBackendDesc),
+                      SizedBox(
+                        width: double.infinity,
+                        child: SegmentedButton<int>(
+                          segments: [
+                            ButtonSegment(
+                              value: 0,
+                              label: Text(localizations.settingsVPPlayerBackendDyn)
+                            ),
+                            ButtonSegment(
+                              value: 1, 
+                              label: Text("EXO")
+                            ),
+                            ButtonSegment(
+                              value: 2,
+                              label: Text("MPV")
+                            )
+                          ], 
+                          selected: {_playerBackend},
+                          onSelectionChanged: (value) {
+                            setState(() {
+                              _playerBackend = value.first;
+                              _saveSettings();
+                            });
+                          },
+                        )
+                      ),
+                    ]
                   )
-                ],
-              )
+                )
+              ]
+            )
           ],
         ),
       )

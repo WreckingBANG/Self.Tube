@@ -55,8 +55,6 @@
     "settingsVPGesturesPinchDesc": "Volgt binnenkort",
     "settingsVPGesturesDoubleTap": "Dubbeltikken",
     "settingsVPGesturesDoubleTapDesc": "Dubbeltik op de rechter- en linkerzijde van de speler om terug- en vooruit te spoelen, of het midden om af te spelen/pauzeren",
-    "settingsVPUseMediaKit": "media_kit gebruiken in plaats van video_player",
-    "settingsVPUseMediaKitDesc": "Let op: pas dit alléén aan als je weet wat je doet",
     "searchLabel": "Zoeken…",
     "searchTitle": "Zoeken",
     "searchTooltip": "Typ om te zoeken",

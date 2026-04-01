@@ -147,8 +147,6 @@
     "settingsVPGesturesPinchDesc": "Dostępne wkrótce",
     "settingsVPGesturesDoubleTap": "Podwójne dotknięcie",
     "settingsVPGesturesDoubleTapDesc": "Aby przewinąć do przodu lub do tyłu, dotknij dwukrotnie prawej lub lewej strony odtwarzacza, a aby odtworzyć/wstrzymać odtwarzanie, dotknij środka",
-    "settingsVPUseMediaKit": "Użyj media_kit zamiast video_player",
-    "settingsVPUseMediaKitDesc": "Zmień to tylko wtedy, gdy wiesz, co robisz",
     "searchLabel": "Szukać...",
     "actionsTitle": "Akcje",
     "channelTitle": "kanał",
