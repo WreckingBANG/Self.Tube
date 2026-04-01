@@ -181,12 +181,16 @@ class AppLocalizationsNl extends AppLocalizations {
       'Dubbeltik op de rechter- en linkerzijde van de speler om terug- en vooruit te spoelen, of het midden om af te spelen/pauzeren';
 
   @override
-  String get settingsVPUseMediaKit =>
-      'media_kit gebruiken in plaats van video_player';
+  String get settingsVPAdvanded => 'Advanced';
 
   @override
-  String get settingsVPUseMediaKitDesc =>
-      'Let op: pas dit alléén aan als je weet wat je doet';
+  String get settingsVPPlayerBackend => 'Player-Backend';
+
+  @override
+  String get settingsVPPlayerBackendDesc => 'Force a specific player backend';
+
+  @override
+  String get settingsVPPlayerBackendDyn => 'Dynamic';
 
   @override
   String get searchLabel => 'Zoeken…';

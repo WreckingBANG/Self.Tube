@@ -438,17 +438,29 @@ abstract class AppLocalizations {
   /// **'Tap twice quickly on the right and left side of the player to skip/rewind and the center to play/pause'**
   String get settingsVPGesturesDoubleTapDesc;
 
-  /// No description provided for @settingsVPUseMediaKit.
+  /// No description provided for @settingsVPAdvanded.
   ///
   /// In en, this message translates to:
-  /// **'Use media_kit instead of video_player'**
-  String get settingsVPUseMediaKit;
+  /// **'Advanced'**
+  String get settingsVPAdvanded;
 
-  /// No description provided for @settingsVPUseMediaKitDesc.
+  /// No description provided for @settingsVPPlayerBackend.
   ///
   /// In en, this message translates to:
-  /// **'Dont change this unless you know what you are doing'**
-  String get settingsVPUseMediaKitDesc;
+  /// **'Player-Backend'**
+  String get settingsVPPlayerBackend;
+
+  /// No description provided for @settingsVPPlayerBackendDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Force a specific player backend'**
+  String get settingsVPPlayerBackendDesc;
+
+  /// No description provided for @settingsVPPlayerBackendDyn.
+  ///
+  /// In en, this message translates to:
+  /// **'Dynamic'**
+  String get settingsVPPlayerBackendDyn;
 
   /// No description provided for @searchLabel.
   ///

@@ -31,7 +31,7 @@ class SettingsService {
   static const _vpGestureFullscreen = 'vpGestureFullscreen';
   static const _vpGesturePinch = 'vpGesturePinch';
   static const _vpGestureDoubleTap = 'vpGestureDoubleTap';
-  static const _vpUseMediaKit = 'vpUseMediaKit';
+  static const _playerBackend = 'playerBackend';
 
   static String? instanceUrl;
   static bool? apiTokenAuth;
@@ -57,15 +57,17 @@ class SettingsService {
   static bool? vpGestureFullscreen;
   static bool? vpGesturePinch;
   static bool? vpGestureDoubleTap;
-  static bool? vpUseMediaKit;
-
+  static int? playerBackend;
 
   static Future<void> load() async {
     final data = await _dao.readAll();
   
     bool? b(String k, [bool? defaultValue]) => 
-        data[k] == null ? defaultValue : data[k] == '1';
-  
+      data[k] == null ? defaultValue : data[k] == '1';
+
+    int? i(String k, [int? defaultValue]) =>
+      data[k] == null ? defaultValue : int.tryParse(data[k]!);
+
     instanceUrl = data[_instanceUrlKey];
     apiTokenAuth = b(_apiTokenAuth);
     doneSetup = b(_doneSetup);
@@ -87,7 +89,7 @@ class SettingsService {
     vpGestureFullscreen = b(_vpGestureFullscreen, true);
     vpGesturePinch = b(_vpGesturePinch, true);
     vpGestureDoubleTap = b(_vpGestureDoubleTap, true);
-    vpUseMediaKit = b(_vpUseMediaKit, false);
+    playerBackend = i(_playerBackend, 0);
   
     apiToken = await _secure.read(key: _apiTokenKey);
     sessionToken = await _secure.read(key: _sessionToken);
@@ -196,9 +198,9 @@ class SettingsService {
     vpGestureDoubleTap = value;
   }
 
-  static Future<void> setVPUseMediaKit(bool value) async {
-    await _persist(_vpUseMediaKit, value);
-    vpUseMediaKit = value;
+  static Future<void> setPlayerBackend(int value) async {
+    await _persist(_playerBackend, value);
+    playerBackend = value;
   }
 }
 

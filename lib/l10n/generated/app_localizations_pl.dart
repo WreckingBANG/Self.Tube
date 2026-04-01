@@ -181,11 +181,16 @@ class AppLocalizationsPl extends AppLocalizations {
       'Aby przewinąć do przodu lub do tyłu, dotknij dwukrotnie prawej lub lewej strony odtwarzacza, a aby odtworzyć/wstrzymać odtwarzanie, dotknij środka';
 
   @override
-  String get settingsVPUseMediaKit => 'Użyj media_kit zamiast video_player';
+  String get settingsVPAdvanded => 'Advanced';
 
   @override
-  String get settingsVPUseMediaKitDesc =>
-      'Zmień to tylko wtedy, gdy wiesz, co robisz';
+  String get settingsVPPlayerBackend => 'Player-Backend';
+
+  @override
+  String get settingsVPPlayerBackendDesc => 'Force a specific player backend';
+
+  @override
+  String get settingsVPPlayerBackendDyn => 'Dynamic';
 
   @override
   String get searchLabel => 'Szukać...';

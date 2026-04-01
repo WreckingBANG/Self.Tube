@@ -65,7 +65,7 @@ class MediaKitAdapter implements MediaPlayer {
   Future<void> pause() => _player.pause();
   
   @override
-  String backend() => "media_kit";
+  String backend() => "MPV";
 
   Stream<bool> get isBuffering => _player.stream.buffering;
 

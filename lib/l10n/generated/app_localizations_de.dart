@@ -181,11 +181,17 @@ class AppLocalizationsDe extends AppLocalizations {
       'Tippe zweimal schnell auf die rechte oder linke Seite des Players zum Vor- bzw. Zurückspulen und in der Mitte zum Abspielen/Pausieren';
 
   @override
-  String get settingsVPUseMediaKit =>
-      'Nutze media_kit anstelle von video_player';
+  String get settingsVPAdvanded => 'Erweitert';
 
   @override
-  String get settingsVPUseMediaKitDesc => 'Nur ändern, wenn du dich auskennst';
+  String get settingsVPPlayerBackend => 'Player-Backend';
+
+  @override
+  String get settingsVPPlayerBackendDesc =>
+      'Ein spezifisches Player Backend erzwingen';
+
+  @override
+  String get settingsVPPlayerBackendDyn => 'Dynamisch';
 
   @override
   String get searchLabel => 'Suchen...';

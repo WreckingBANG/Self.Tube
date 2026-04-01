@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/features/player/domain/codec_support.dart';
 import 'adapters/vp-adapter.dart';
 import 'adapters/mk-adapter.dart';
@@ -25,13 +26,17 @@ class MediaPlayerFactory {
 
   static MediaPlayer create(String url, String codec, {Map<String, String>? headers}) {
     if (Platform.isAndroid) {
-      final supported = _codecSupport[codec.toLowerCase()] ?? false;
-      if (supported) {
-        print("usesVideoPlayer");
+      if (SettingsService.playerBackend == 1) {
         return VideoPlayerAdapter(url, headers: headers);
-      } else {
-        print("usesMediaKit");
+      } else if (SettingsService.playerBackend == 2) {
         return MediaKitAdapter(url, headers: headers);
+      } else {
+        final supported = _codecSupport[codec.toLowerCase()] ?? false;
+        if (supported) {
+          return VideoPlayerAdapter(url, headers: headers);
+        } else {
+          return MediaKitAdapter(url, headers: headers);
+        }
       }
     } else {
       return MediaKitAdapter(url, headers: headers);

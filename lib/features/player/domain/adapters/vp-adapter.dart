@@ -136,7 +136,7 @@ class VideoPlayerAdapter implements MediaPlayer {
   Future<void> pause() => _controller.pause();
 
   @override
-  String backend() => "video_player";
+  String backend() => "EXO";
 
   @override
   Stream<bool> get isBuffering => _bufferingController.stream;
