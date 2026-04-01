@@ -144,29 +144,32 @@ class _PlayerSettingsScreenState extends State<PlayerSettingsScreen> {
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(localizations.settingsVPPlayerBackendDesc), 
-                      SegmentedButton<int>(
-                        segments: [
-                          ButtonSegment(
-                            value: 0,
-                            label: Text(localizations.settingsVPPlayerBackendDyn)
-                          ),
-                          ButtonSegment(
-                            value: 1, 
-                            label: Text("EXO")
-                          ),
-                          ButtonSegment(
-                            value: 2,
-                            label: Text("MPV")
-                          )
-                        ], 
-                        selected: {_playerBackend},
-                        onSelectionChanged: (value) {
-                          setState(() {
-                            _playerBackend = value.first;
-                            _saveSettings();
-                          });
-                        },
+                      Text(localizations.settingsVPPlayerBackendDesc),
+                      SizedBox(
+                        width: double.infinity,
+                        child: SegmentedButton<int>(
+                          segments: [
+                            ButtonSegment(
+                              value: 0,
+                              label: Text(localizations.settingsVPPlayerBackendDyn)
+                            ),
+                            ButtonSegment(
+                              value: 1, 
+                              label: Text("EXO")
+                            ),
+                            ButtonSegment(
+                              value: 2,
+                              label: Text("MPV")
+                            )
+                          ], 
+                          selected: {_playerBackend},
+                          onSelectionChanged: (value) {
+                            setState(() {
+                              _playerBackend = value.first;
+                              _saveSettings();
+                            });
+                          },
+                        )
                       ),
                     ]
                   )
