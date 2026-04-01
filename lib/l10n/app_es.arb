@@ -182,5 +182,9 @@
     "taskDownloadNow": "Descargando",
     "taskIgnore": "Ignorar",
     "taskDeleteFromQueue": "Eliminar de la cola",
-    "taskQueueEmpty": "Cola vacía"
+    "taskQueueEmpty": "Cola vacía",
+    "settingsVPAdvanded": "Avanzado",
+    "settingsVPPlayerBackend": "Backend del reproductor",
+    "settingsVPPlayerBackendDesc": "Forzar un backend para un reproductor específico",
+    "settingsVPPlayerBackendDyn": "Dinámico"
 }
