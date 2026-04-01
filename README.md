@@ -61,6 +61,7 @@ Thanks to everyone who has helped improve Self.Tube!
 - [@WreckingBANG](https://codeberg.org/WreckingBANG) - Creator & maintainer
 - [@BlackZ](https://codeberg.org/BlackZ) - Polish Translations
 - [@Vistaus](https://codeberg.org/Vistaus) - Dutch Translations
+- [@gallegonovato](https://codeberg.org/gallegonovato) - Spanish Translations
 
 ## License
 
