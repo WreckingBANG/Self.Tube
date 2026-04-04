@@ -626,4 +626,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get statsTitle => 'Playback Stats';
+
+  @override
+  String get userStaff => 'Staff';
+
+  @override
+  String get userSuperUser => 'Superuser';
 }

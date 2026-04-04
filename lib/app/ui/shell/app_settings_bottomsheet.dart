@@ -1,8 +1,8 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
+import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/features/onboarding/domain/controllers/auth_controller.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
-import 'package:Self.Tube/features/onboarding/ui/screens/privacypolicy_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/common/ui/widgets/sheets/bottomsheet_template.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
@@ -19,6 +19,47 @@ Future<void> showAppSettingsBottomSheet({
       ListSectionContainer(
         title: localizations.settingsSheetApp,
         children: [
+          ListTile(
+            leading: CircleAvatar(
+              radius: 30,
+              child: Icon(Icons.person),
+            ),
+            title: Text(UserSession.user!.userName),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(SettingsService.instanceUrl ?? ""),
+                Row(
+                  children: [
+                    if (UserSession.user!.isStaff)
+                      Chip(
+                        padding: EdgeInsets.zero,
+                        label: Row(
+                          children: [
+                            Icon(Icons.shield_outlined, size: 15),
+                            SizedBox(width: 2),
+                            Text(localizations.userStaff),  
+                          ]
+                        )
+                      ),
+                    SizedBox(width: 5),
+                    if (UserSession.user!.isSuperUser)
+                      Chip(
+                        padding: EdgeInsets.zero,
+                        label: Row(
+                          children: [
+                            Icon(Icons.workspace_premium_outlined, size: 17),
+                            SizedBox(width: 2),
+                            Text(localizations.userSuperUser),
+                          ],
+                        )
+
+                      )
+                  ],
+                )
+              ],
+            )
+          ),
           ListTile(
             leading: Icon(Icons.settings),
             title: Text(localizations.settingsSheetSettings),

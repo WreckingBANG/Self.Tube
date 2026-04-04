@@ -192,5 +192,7 @@
     "statsBitrate": "Bitrate",
     "statsSize": "Size",
     "statsAudio": "Audio",
-    "statsTitle": "Playback Stats"
+    "statsTitle": "Playback Stats",
+    "userStaff": "Staff",
+    "userSuperUser": "Superuser",
 }
