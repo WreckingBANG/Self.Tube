@@ -1,3 +1,4 @@
+import 'stream_model.dart';
 import 'sponsorblock_model.dart';
 
 class VideoPlayerModel {
@@ -17,7 +18,7 @@ class VideoPlayerModel {
   final String videoDescription;
   final double videoPosition;
   final SponsorBlock? sponsorBlock;
-  final String codec;
+  final Streams streams;
 
   VideoPlayerModel({
     required this.videoId,
@@ -36,7 +37,7 @@ class VideoPlayerModel {
     required this.videoDescription,
     required this.videoPosition,
     required this.sponsorBlock,
-    required this.codec
+    required this.streams,
   });
 
   factory VideoPlayerModel.fromJson(Map<String, dynamic> json) {
@@ -59,7 +60,7 @@ class VideoPlayerModel {
       sponsorBlock: json['sponsorblock'] != null
         ? SponsorBlock.fromJson(json['sponsorblock'])
         : null,
-      codec: (json['streams'] as List?)?.first['codec'] ?? '',
+      streams: Streams.fromJson(json['streams'] ?? []),
     );
   }
 }

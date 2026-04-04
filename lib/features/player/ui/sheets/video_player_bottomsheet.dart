@@ -1,6 +1,7 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/common/ui/widgets/sheets/bottomsheet_template.dart';
 import 'package:Self.Tube/features/player/domain/video_player_interface.dart';
+import 'package:Self.Tube/features/player/ui/sheets/video_stats_bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
@@ -83,6 +84,16 @@ Future<void> showVideoPlayerBottomSheet({
               );
             },
           ),
+          ListTile(
+            title: Text(localizations.statsTitle),
+            leading: Icon(Icons.analytics),
+            onTap: () {
+              Navigator.pop(context);
+              Future.microtask(() {
+                showVideoStatsBottomSheet(context: context);
+              });
+            },
+          )
         ],
       )
     ]

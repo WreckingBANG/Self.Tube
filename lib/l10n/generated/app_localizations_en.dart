@@ -604,4 +604,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get taskQueueEmpty => 'Queue Empty';
+
+  @override
+  String get statsBackend => 'Backend';
+
+  @override
+  String get statsVideo => 'Video';
+
+  @override
+  String get statsCodec => 'Codec';
+
+  @override
+  String get statsBitrate => 'Bitrate';
+
+  @override
+  String get statsSize => 'Size';
+
+  @override
+  String get statsAudio => 'Audio';
+
+  @override
+  String get statsTitle => 'Playback Stats';
 }

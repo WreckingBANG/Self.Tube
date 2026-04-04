@@ -185,5 +185,12 @@
     "sponsorblockOutroHint": "Typischerweise gegen Ende des Videos, wenn die Abspannsequenz erscheint und/oder Endkarten eingeblendet werden.",
     "sponsorblockPreviewHint": "Eine Sammlung von Clips, die zeigen, was in diesem Video oder in anderen Videos einer Reihe vorkommt, wobei alle Informationen später im Video erneut aufgegriffen werden.",
     "sponsorblockHookHint": "Gesprochene Trailer für das kommende Video sowie Begrüßungen und Verabschiedungen.",
-    "sponsorblockFillerHint": "Abschweifungen oder Witze, die nur Szenen betreffen, die für das Verständnis des eigentlichen Inhalts nicht notwendig sind."
+    "sponsorblockFillerHint": "Abschweifungen oder Witze, die nur Szenen betreffen, die für das Verständnis des eigentlichen Inhalts nicht notwendig sind.",
+  "statsBackend": "Backend",
+  "statsVideo": "Video",
+  "statsCodec": "Codec",
+  "statsBitrate": "Bitrate",
+  "statsSize": "Größe",
+  "statsAudio": "Audio",
+  "statsTitle": "Wiedergabestatistiken"
 }

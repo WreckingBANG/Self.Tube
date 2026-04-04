@@ -185,5 +185,12 @@
     "taskDownloadNow": "Download Now",
     "taskIgnore": "Ignore",
     "taskDeleteFromQueue": "Delete from Queue",
-    "taskQueueEmpty": "Queue Empty"
+    "taskQueueEmpty": "Queue Empty",
+    "statsBackend": "Backend",
+    "statsVideo": "Video",
+    "statsCodec": "Codec",
+    "statsBitrate": "Bitrate",
+    "statsSize": "Size",
+    "statsAudio": "Audio",
+    "statsTitle": "Playback Stats"
 }
