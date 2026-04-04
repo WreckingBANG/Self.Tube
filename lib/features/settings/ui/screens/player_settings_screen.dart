@@ -151,7 +151,12 @@ class _PlayerSettingsScreenState extends State<PlayerSettingsScreen> {
                           segments: [
                             ButtonSegment(
                               value: 0,
-                              label: Text(localizations.settingsVPPlayerBackendDyn)
+                              label: Text(
+                                localizations.settingsVPPlayerBackendDyn,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                softWrap: false,
+                              )
                             ),
                             ButtonSegment(
                               value: 1, 

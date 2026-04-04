@@ -45,7 +45,7 @@ class VideoPlayerService {
 
     _player = MediaPlayerFactory.create(
       "$instanceUrl${video.videoUrl}",
-      video.codec,
+      video.streams.video!.codec,
       headers: ApiHeaders.authHeaders(),
     );
     await _player?.initialized;

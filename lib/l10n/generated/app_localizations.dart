@@ -1219,6 +1219,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Queue Empty'**
   String get taskQueueEmpty;
+
+  /// No description provided for @statsBackend.
+  ///
+  /// In en, this message translates to:
+  /// **'Backend'**
+  String get statsBackend;
+
+  /// No description provided for @statsVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Video'**
+  String get statsVideo;
+
+  /// No description provided for @statsCodec.
+  ///
+  /// In en, this message translates to:
+  /// **'Codec'**
+  String get statsCodec;
+
+  /// No description provided for @statsBitrate.
+  ///
+  /// In en, this message translates to:
+  /// **'Bitrate'**
+  String get statsBitrate;
+
+  /// No description provided for @statsSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Size'**
+  String get statsSize;
+
+  /// No description provided for @statsAudio.
+  ///
+  /// In en, this message translates to:
+  /// **'Audio'**
+  String get statsAudio;
+
+  /// No description provided for @statsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Playback Stats'**
+  String get statsTitle;
 }
 
 class _AppLocalizationsDelegate

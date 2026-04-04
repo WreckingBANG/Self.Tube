@@ -605,4 +605,25 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get taskQueueEmpty => 'Queue leer';
+
+  @override
+  String get statsBackend => 'Backend';
+
+  @override
+  String get statsVideo => 'Video';
+
+  @override
+  String get statsCodec => 'Codec';
+
+  @override
+  String get statsBitrate => 'Bitrate';
+
+  @override
+  String get statsSize => 'Größe';
+
+  @override
+  String get statsAudio => 'Audio';
+
+  @override
+  String get statsTitle => 'Wiedergabestatistiken';
 }
