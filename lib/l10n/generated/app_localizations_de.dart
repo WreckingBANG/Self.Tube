@@ -626,4 +626,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get statsTitle => 'Wiedergabestatistiken';
+
+  @override
+  String get userStaff => 'Mitarbeiter';
+
+  @override
+  String get userSuperUser => 'Superuser';
 }

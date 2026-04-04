@@ -1261,6 +1261,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Playback Stats'**
   String get statsTitle;
+
+  /// No description provided for @userStaff.
+  ///
+  /// In en, this message translates to:
+  /// **'Staff'**
+  String get userStaff;
+
+  /// No description provided for @userSuperUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Superuser'**
+  String get userSuperUser;
 }
 
 class _AppLocalizationsDelegate
