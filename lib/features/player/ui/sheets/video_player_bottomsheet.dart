@@ -89,10 +89,10 @@ Future<void> showVideoPlayerBottomSheet({
             leading: Icon(Icons.analytics),
             onTap: () {
               Navigator.pop(context);
-              Future.microtask(() {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
                 showVideoStatsBottomSheet(context: context);
               });
-            },
+            }
           )
         ],
       )
