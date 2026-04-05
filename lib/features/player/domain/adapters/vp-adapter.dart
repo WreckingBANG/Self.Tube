@@ -34,8 +34,8 @@ class VideoPlayerAdapter implements MediaPlayer {
       final value = _controller.value;
       
       //temporary fix to resolve video/audio desync
-      _controller.seekTo(duration);
-      _controller.seekTo(Duration(seconds: 0));
+      //_controller.seekTo(duration);
+      //_controller.seekTo(Duration(seconds: 0));
 
       _lastPlaying = value.isPlaying;
       _lastPosition = value.position;
