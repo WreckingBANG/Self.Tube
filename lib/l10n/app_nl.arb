@@ -184,5 +184,14 @@
     "settingsVPAdvanded": "Geavanceerd",
     "settingsVPPlayerBackend": "Backend van speler",
     "settingsVPPlayerBackendDesc": "Dwing het gebruik van een specifieke backend af",
-    "settingsVPPlayerBackendDyn": "Dynamisch"
+    "settingsVPPlayerBackendDyn": "Dynamisch",
+    "statsBackend": "Back-end",
+    "statsVideo": "Video",
+    "statsCodec": "Codec",
+    "statsBitrate": "Bitsnelheid",
+    "statsSize": "Grootte",
+    "statsAudio": "Audio",
+    "statsTitle": "Afspeelstatistieken",
+    "userStaff": "Medewerkers",
+    "userSuperUser": "Supergebruiker"
 }
