@@ -180,5 +180,18 @@
     "sponsorblockOutroHint": "Zwykle pod koniec filmu, gdy pojawiają się napisy końcowe i/lub wyświetlane są plansze końcowe.",
     "sponsorblockPreviewHint": "Zbiór klipów pokazujących, co dzieje się w tym filmie lub w innych filmach z serii, przy czym wszystkie informacje powracają później w filmie.",
     "sponsorblockHookHint": "Mówione zwiastuny nadchodzącego filmu, a także powitania i pożegnania.",
-    "sponsorblockFillerHint": "Dygresje lub żarty odnoszące się jedynie do scen niekoniecznych do zrozumienia właściwej treści."
+    "sponsorblockFillerHint": "Dygresje lub żarty odnoszące się jedynie do scen niekoniecznych do zrozumienia właściwej treści.",
+    "settingsVPAdvanded": "Rozszerzone",
+    "settingsVPPlayerBackend": "Odtwarzacz-Backend",
+    "settingsVPPlayerBackendDesc": "Wymuś konkretny Backend Odtwarzacza",
+    "settingsVPPlayerBackendDyn": "Dynamiczny",
+    "statsBackend": "Backend",
+    "statsVideo": "Wideo",
+    "statsCodec": "Codec",
+    "statsBitrate": "Bitrate",
+    "statsSize": "Rozmiar",
+    "statsAudio": "Audio",
+    "statsTitle": "Statystyki odtwarzania",
+    "userStaff": "Pracownicy",
+    "userSuperUser": "Superuser"
 }

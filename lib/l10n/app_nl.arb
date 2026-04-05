@@ -180,5 +180,18 @@
     "sponsorblockOutroHint": "Segmenten, doorgaans aan het einde van de video, waarin een dankwoord of aftiteling wordt getoond.",
     "sponsorblockPreviewHint": "Een verzameling clips die laten zien wat er zal volgen of andere video's in de serie waarin de informatie herhaald wordt.",
     "sponsorblockHookHint": "Aanprijzingen van volgende video's en (afscheids)groeten.",
-    "sponsorblockFillerHint": "Segmenten met grapjes die niet gerelateerd zijn aan het hoofdonderwerp van de video."
+    "sponsorblockFillerHint": "Segmenten met grapjes die niet gerelateerd zijn aan het hoofdonderwerp van de video.",
+    "settingsVPAdvanded": "Geavanceerd",
+    "settingsVPPlayerBackend": "Backend van speler",
+    "settingsVPPlayerBackendDesc": "Dwing het gebruik van een specifieke backend af",
+    "settingsVPPlayerBackendDyn": "Dynamisch",
+    "statsBackend": "Back-end",
+    "statsVideo": "Video",
+    "statsCodec": "Codec",
+    "statsBitrate": "Bitsnelheid",
+    "statsSize": "Grootte",
+    "statsAudio": "Audio",
+    "statsTitle": "Afspeelstatistieken",
+    "userStaff": "Medewerkers",
+    "userSuperUser": "Supergebruiker"
 }
