@@ -193,5 +193,7 @@
     "statsBitrate": "Bitrate (tasa de bits)",
     "statsSize": "Tamaño",
     "statsAudio": "Audio",
-    "statsTitle": "Estadísticas de reproducción"
+    "statsTitle": "Estadísticas de reproducción",
+    "userStaff": "Empleados",
+    "userSuperUser": "Superusuario"
 }
