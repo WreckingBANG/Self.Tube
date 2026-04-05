@@ -181,16 +181,17 @@ class AppLocalizationsNl extends AppLocalizations {
       'Dubbeltik op de rechter- en linkerzijde van de speler om terug- en vooruit te spoelen, of het midden om af te spelen/pauzeren';
 
   @override
-  String get settingsVPAdvanded => 'Advanced';
+  String get settingsVPAdvanded => 'Geavanceerd';
 
   @override
-  String get settingsVPPlayerBackend => 'Player-Backend';
+  String get settingsVPPlayerBackend => 'Backend van speler';
 
   @override
-  String get settingsVPPlayerBackendDesc => 'Force a specific player backend';
+  String get settingsVPPlayerBackendDesc =>
+      'Dwing het gebruik van een specifieke backend af';
 
   @override
-  String get settingsVPPlayerBackendDyn => 'Dynamic';
+  String get settingsVPPlayerBackendDyn => 'Dynamisch';
 
   @override
   String get searchLabel => 'Zoeken…';
@@ -606,7 +607,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get taskQueueEmpty => 'De wachtrij is leeg';
 
   @override
-  String get statsBackend => 'Backend';
+  String get statsBackend => 'Back-end';
 
   @override
   String get statsVideo => 'Video';
@@ -615,20 +616,20 @@ class AppLocalizationsNl extends AppLocalizations {
   String get statsCodec => 'Codec';
 
   @override
-  String get statsBitrate => 'Bitrate';
+  String get statsBitrate => 'Bitsnelheid';
 
   @override
-  String get statsSize => 'Size';
+  String get statsSize => 'Grootte';
 
   @override
   String get statsAudio => 'Audio';
 
   @override
-  String get statsTitle => 'Playback Stats';
+  String get statsTitle => 'Afspeelstatistieken';
 
   @override
-  String get userStaff => 'Staff';
+  String get userStaff => 'Medewerkers';
 
   @override
-  String get userSuperUser => 'Superuser';
+  String get userSuperUser => 'Supergebruiker';
 }

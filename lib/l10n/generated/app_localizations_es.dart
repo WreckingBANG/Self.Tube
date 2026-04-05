@@ -182,16 +182,17 @@ class AppLocalizationsEs extends AppLocalizations {
       'Toca dos veces rápidamente a la derecha y a la izquierda del reproductor para saltar o rebobinar, y en el centro para reproducir o pausar';
 
   @override
-  String get settingsVPAdvanded => 'Advanced';
+  String get settingsVPAdvanded => 'Avanzado';
 
   @override
-  String get settingsVPPlayerBackend => 'Player-Backend';
+  String get settingsVPPlayerBackend => 'Backend del reproductor';
 
   @override
-  String get settingsVPPlayerBackendDesc => 'Force a specific player backend';
+  String get settingsVPPlayerBackendDesc =>
+      'Forzar un backend para un reproductor específico';
 
   @override
-  String get settingsVPPlayerBackendDyn => 'Dynamic';
+  String get settingsVPPlayerBackendDyn => 'Dinámico';
 
   @override
   String get searchLabel => 'Buscando…';
@@ -432,7 +433,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String secondAgo(Object count) {
-    return 'Hace $count segundos';
+    return 'Hace $count segundo';
   }
 
   @override
@@ -442,7 +443,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String minuteAgo(Object count) {
-    return 'Hace $count minutos';
+    return 'Hace $count minuto';
   }
 
   @override
@@ -462,7 +463,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String dayAgo(Object count) {
-    return 'Hace $count días';
+    return 'Hace $count día';
   }
 
   @override
@@ -610,26 +611,26 @@ class AppLocalizationsEs extends AppLocalizations {
   String get statsBackend => 'Backend';
 
   @override
-  String get statsVideo => 'Video';
+  String get statsVideo => 'Vídeo';
 
   @override
-  String get statsCodec => 'Codec';
+  String get statsCodec => 'Códec';
 
   @override
-  String get statsBitrate => 'Bitrate';
+  String get statsBitrate => 'Bitrate (tasa de bits)';
 
   @override
-  String get statsSize => 'Size';
+  String get statsSize => 'Tamaño';
 
   @override
   String get statsAudio => 'Audio';
 
   @override
-  String get statsTitle => 'Playback Stats';
+  String get statsTitle => 'Estadísticas de reproducción';
 
   @override
-  String get userStaff => 'Staff';
+  String get userStaff => 'Empleados';
 
   @override
-  String get userSuperUser => 'Superuser';
+  String get userSuperUser => 'Superusuario';
 }

@@ -181,16 +181,17 @@ class AppLocalizationsPl extends AppLocalizations {
       'Aby przewinąć do przodu lub do tyłu, dotknij dwukrotnie prawej lub lewej strony odtwarzacza, a aby odtworzyć/wstrzymać odtwarzanie, dotknij środka';
 
   @override
-  String get settingsVPAdvanded => 'Advanced';
+  String get settingsVPAdvanded => 'Rozszerzone';
 
   @override
-  String get settingsVPPlayerBackend => 'Player-Backend';
+  String get settingsVPPlayerBackend => 'Odtwarzacz-Backend';
 
   @override
-  String get settingsVPPlayerBackendDesc => 'Force a specific player backend';
+  String get settingsVPPlayerBackendDesc =>
+      'Wymuś konkretny Backend Odtwarzacza';
 
   @override
-  String get settingsVPPlayerBackendDyn => 'Dynamic';
+  String get settingsVPPlayerBackendDyn => 'Dynamiczny';
 
   @override
   String get searchLabel => 'Szukać...';
@@ -609,7 +610,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get statsBackend => 'Backend';
 
   @override
-  String get statsVideo => 'Video';
+  String get statsVideo => 'Wideo';
 
   @override
   String get statsCodec => 'Codec';
@@ -618,16 +619,16 @@ class AppLocalizationsPl extends AppLocalizations {
   String get statsBitrate => 'Bitrate';
 
   @override
-  String get statsSize => 'Size';
+  String get statsSize => 'Rozmiar';
 
   @override
   String get statsAudio => 'Audio';
 
   @override
-  String get statsTitle => 'Playback Stats';
+  String get statsTitle => 'Statystyki odtwarzania';
 
   @override
-  String get userStaff => 'Staff';
+  String get userStaff => 'Pracownicy';
 
   @override
   String get userSuperUser => 'Superuser';
