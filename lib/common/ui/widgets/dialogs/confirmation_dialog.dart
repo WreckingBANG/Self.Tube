@@ -12,9 +12,11 @@ Future<void> ConfirmationDialog({
       return AlertDialog(
         title: Text("Are you sure?"),
         content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (delText != null)
-            Text("Are you sure you want to delete $delText"),
+              Text("*Placeholder *Are you sure you want to delete $delText"),
             if(children != null)
               ...children
           ],

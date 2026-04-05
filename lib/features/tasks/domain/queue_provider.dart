@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'package:Self.Tube/features/tasks/data/api/task_api.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class QueueNotifier extends AsyncNotifier<List?> {
+class QueueNotifier extends AsyncNotifier<List?> with WidgetsBindingObserver{
   QueueNotifier(this.query);
   Timer? _timer;
   late final query;
@@ -11,7 +12,13 @@ class QueueNotifier extends AsyncNotifier<List?> {
 
   @override
   Future<List?> build() async {
+    WidgetsBinding.instance.addObserver(this);
     _startPolling();
+
+    ref.onDispose((){
+      WidgetsBinding.instance.removeObserver(this);
+    });
+
     final videos = await TaskApi().fetchQueue("$query&page=$currentPage");
 
     if (videos != null) {
@@ -35,6 +42,15 @@ class QueueNotifier extends AsyncNotifier<List?> {
     ref.onDispose(() {
       _timer?.cancel();
     });
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
+      _timer?.cancel();
+    } else if (state == AppLifecycleState.resumed) {
+      _startPolling();
+    }
   }
 
   Future<void> refresh() async {
