@@ -1,4 +1,4 @@
-name: Build Artifacts
+name: Build Debug Artifacts
 
 on:
   workflow_dispatch:
@@ -49,7 +49,7 @@ jobs:
           apt install libsecret-1-dev libmpv-dev lld -y
           cd "$GITHUB_WORKSPACE"
           flutter pub get
-          flutter build linux --release
+          flutter build linux
       - name: Build Flatpak
         run: |
           cd "$GITHUB_WORKSPACE/flatpak"
@@ -108,7 +108,7 @@ jobs:
           apt install libsecret-1-dev libmpv-dev lld -y
           cd "$GITHUB_WORKSPACE"
           flutter pub get
-          flutter build linux --release
+          flutter build linux
       - name: Build Flatpak
         run: |
           cd "$GITHUB_WORKSPACE/flatpak"
@@ -179,7 +179,7 @@ jobs:
         run: |
           cd "$GITHUB_WORKSPACE"
           flutter pub get
-          flutter build apk --release
+          flutter build apk 
       - name: Upload APKs
         uses: actions/upload-artifact@v3
         with:

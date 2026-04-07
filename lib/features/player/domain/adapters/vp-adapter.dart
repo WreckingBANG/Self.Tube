@@ -87,7 +87,7 @@ class VideoPlayerAdapter implements MediaPlayer {
           valueListenable: _borderModeNotifier,
           builder: (context, mode, _) {
             if (!_controller.value.isInitialized) {
-              return const SizedBox.shrink();
+              return const Text("Player not initialized");
             }
 
             final size = _controller.value.size;
