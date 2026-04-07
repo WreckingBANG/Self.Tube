@@ -5,124 +5,6 @@ on:
 
 jobs:
 
-  build_flatpak-aarch64:
-    runs-on: codeberg-aarch64-1
-    container: 
-      image: ubuntu:24.04
-    steps:
-      - name: Setup Node
-        run: |
-          export DEBIAN_FRONTEND=noninteractive
-          ln -fs /usr/share/zoneinfo/UTC /etc/localtime
-          apt update
-          apt install -y tzdata
-          dpkg-reconfigure --frontend noninteractive tzdata
-          apt install -y curl
-          curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-          apt install -y nodejs
-          node -v
-          npm -v
-      - uses: actions/checkout@v6
-      - name: Setup Flatpak
-        run: |
-          unshare -U true
-          apt update
-          apt install flatpak flatpak-builder -y
-          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-          flatpak install -y flathub org.gnome.Platform//48
-          flatpak install -y flathub org.gnome.Sdk//48
-      - name: Setup Flutter
-        run: |
-          cd "$GITHUB_WORKSPACE"
-          apt update
-          apt install -y cmake ninja-build clang pkg-config libgtk-3-dev build-essential unzip libmpv-dev libasound2-dev libsecret-1-dev git
-          git clone https://github.com/flutter/flutter.git -b stable
-          export PATH="$GITHUB_WORKSPACE/flutter/bin:$PATH"
-          export PATH="$GITHUB_WORKSPACE/flutter/bin/cache/dart-sdk/bin:$PATH"
-          echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
-          echo "$GITHUB_WORKSPACE/flutter/bin/cache/dart-sdk/bin" >> $GITHUB_PATH
-          flutter --version
-          flutter doctor
-      - name: Build Flutter
-        run: |
-          apt update
-          apt install libsecret-1-dev libmpv-dev lld -y
-          cd "$GITHUB_WORKSPACE"
-          flutter pub get
-          flutter build linux
-      - name: Build Flatpak
-        run: |
-          cd "$GITHUB_WORKSPACE/flatpak"
-          git config --global protocol.file.allow always
-          flatpak-builder --disable-rofiles-fuse build-dir com.wreckingbang.selftube.yaml --force-clean --repo=repo
-          flatpak build-bundle repo selftube.flatpak com.wreckingbang.selftube
-          mv $GITHUB_WORKSPACE/flatpak/selftube.flatpak $GITHUB_WORKSPACE/flatpak/selftube-linux-aarch64.flatpak
-      - name: Upload Flatpak
-        uses: actions/upload-artifact@v3
-        with:
-          name: selftube-linux-aarch64
-          path: |
-            flatpak/selftube-linux-aarch64.flatpak
-
-  build_flatpak-86_x64:
-    runs-on: codeberg-x86-1
-    container: 
-      image: ubuntu:24.04
-    steps:
-      - name: Setup Node
-        run: |
-          export DEBIAN_FRONTEND=noninteractive
-          ln -fs /usr/share/zoneinfo/UTC /etc/localtime
-          apt update
-          apt install -y tzdata
-          dpkg-reconfigure --frontend noninteractive tzdata
-          apt install -y curl
-          curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-          apt install -y nodejs
-          node -v
-          npm -v
-      - uses: actions/checkout@v6
-      - name: Setup Flatpak
-        run: |
-          unshare -U true
-          apt update
-          apt install flatpak flatpak-builder -y
-          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-          flatpak install -y flathub org.gnome.Platform//48
-          flatpak install -y flathub org.gnome.Sdk//48
-      - name: Setup Flutter
-        run: |
-          cd "$GITHUB_WORKSPACE"
-          apt update
-          apt install -y cmake ninja-build clang pkg-config libgtk-3-dev build-essential unzip libmpv-dev libasound2-dev libsecret-1-dev git
-          git clone https://github.com/flutter/flutter.git -b stable
-          export PATH="$GITHUB_WORKSPACE/flutter/bin:$PATH"
-          export PATH="$GITHUB_WORKSPACE/flutter/bin/cache/dart-sdk/bin:$PATH"
-          echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
-          echo "$GITHUB_WORKSPACE/flutter/bin/cache/dart-sdk/bin" >> $GITHUB_PATH
-          flutter --version
-          flutter doctor
-      - name: Build Flutter
-        run: |
-          apt update
-          apt install libsecret-1-dev libmpv-dev lld -y
-          cd "$GITHUB_WORKSPACE"
-          flutter pub get
-          flutter build linux
-      - name: Build Flatpak
-        run: |
-          cd "$GITHUB_WORKSPACE/flatpak"
-          git config --global protocol.file.allow always
-          flatpak-builder --disable-rofiles-fuse build-dir com.wreckingbang.selftube.yaml --force-clean --repo=repo
-          flatpak build-bundle repo selftube.flatpak com.wreckingbang.selftube
-          mv $GITHUB_WORKSPACE/flatpak/selftube.flatpak $GITHUB_WORKSPACE/flatpak/selftube-linux-86_x64.flatpak
-      - name: Upload Flatpak
-        uses: actions/upload-artifact@v3
-        with:
-          name: selftube-linux-86_x64
-          path: |
-            flatpak/selftube-linux-86_x64.flatpak
-
   build_apk:
     runs-on: codeberg-x86-2
     container: 
@@ -179,7 +61,7 @@ jobs:
         run: |
           cd "$GITHUB_WORKSPACE"
           flutter pub get
-          flutter build apk 
+          flutter build apk --debug 
       - name: Upload APKs
         uses: actions/upload-artifact@v3
         with:
