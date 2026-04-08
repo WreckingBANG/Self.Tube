@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:Self.Tube/common/ui/global_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import '../video_player_interface.dart';
@@ -49,6 +50,13 @@ class VideoPlayerAdapter implements MediaPlayer {
       _pollTimer = Timer.periodic(
         const Duration(milliseconds: 400),
         _pollController,
+      );
+    }).catchError((e){
+      GlobalSnackbar.show(
+        e.toString(),
+        icon: Icons.error_outline,
+        iconColor: Colors.red,
+        autoDismiss: false
       );
     });
   }
