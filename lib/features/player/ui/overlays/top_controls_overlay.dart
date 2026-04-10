@@ -72,7 +72,10 @@ class _TopControlsOverlayState extends State<TopControlsOverlay> {
                   onPressed: () {
                     showVideoPlayerBottomSheet(context: context, player: widget.player);
                   },
-                  icon: Icon(Icons.settings_outlined)
+                  icon: Icon(
+                    Icons.settings_outlined, 
+                    color: Colors.white,
+                  )
                 )
               ],
             )
