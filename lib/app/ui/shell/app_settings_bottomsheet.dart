@@ -1,6 +1,7 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/features/onboarding/domain/controllers/auth_controller.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:flutter/material.dart';
@@ -83,7 +84,12 @@ Future<void> showAppSettingsBottomSheet({
             leading: Icon(Icons.logout),
             title: Text(localizations.settingsSheetLogout),
             onTap: () async {
-              _handleLogout(context);
+              ConfirmationDialog(
+                context: context, 
+                onSure: () {
+                  _handleLogout(context);
+                }
+              );
             },
           ),
           ListTile(
