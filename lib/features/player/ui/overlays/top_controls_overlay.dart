@@ -33,51 +33,55 @@ class _TopControlsOverlayState extends State<TopControlsOverlay> {
       alignment: Alignment.topLeft,
       child: Stack(
         children: [
-          Container(
-            height: 150,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.black.withValues(alpha: 0.8),
-                  Colors.transparent,
-                ],
+          Positioned(
+            child: Container(
+              height: 150,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.black.withValues(alpha: 0.8),
+                    Colors.transparent,
+                  ],
+                ),
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 12, right: 12, top: 30), 
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                widget.hideTitle
-                  ? SizedBox(width: 1)
-                  : Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            widget.videoTitle,
-                            style: const TextStyle(fontSize: 18),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          Text(widget.videoCreator),
-                        ],
+          SafeArea(
+            child: Padding(
+              padding: EdgeInsets.only(left: 12, right: 12, top: 6), 
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  widget.hideTitle
+                    ? SizedBox(width: 1)
+                    : Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              widget.videoTitle,
+                              style: const TextStyle(fontSize: 18),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(widget.videoCreator),
+                          ],
+                        ),
                       ),
-                    ),
-                IconButton(
-                  onPressed: () {
-                    showVideoPlayerBottomSheet(context: context, player: widget.player);
-                  },
-                  icon: Icon(
-                    Icons.settings_outlined, 
-                    color: Colors.white,
+                  IconButton(
+                    onPressed: () {
+                      showVideoPlayerBottomSheet(context: context, player: widget.player);
+                    },
+                    icon: Icon(
+                      Icons.settings_outlined, 
+                      color: Colors.white,
+                    )
                   )
-                )
-              ],
+                ],
+              )
             )
           )
         ],
