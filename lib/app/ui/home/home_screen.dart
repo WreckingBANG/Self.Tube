@@ -26,6 +26,7 @@ class HomeScreen extends ConsumerWidget {
               title: localizations.homeContinueWatching,
               hideChannel: false,
               hideIfEmpty: true,
+              horizontalScroll: true,
               query: queryContinue 
             ),
             SizedBox(height: 16),

@@ -1,6 +1,8 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/common/ui/widgets/sections/sort_chips_section.dart';
 import 'package:Self.Tube/features/videos/domain/videolist_provider.dart';
+import 'package:Self.Tube/features/videos/ui/containers/continue_watching_list.dart';
+import 'package:Self.Tube/features/videos/ui/tiles/video_horizontal_tile.dart';
 import 'package:Self.Tube/features/videos/ui/tiles/video_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
@@ -12,6 +14,7 @@ class VideoListSection extends ConsumerWidget {
   final bool showSorting;
   final String query;
   final bool hideIfEmpty;
+  final bool horizontalScroll;
   final String playlistId;
   final String playlistType;
 
@@ -20,6 +23,7 @@ class VideoListSection extends ConsumerWidget {
     this.title = "",
     required this.hideChannel,
     required this.query,
+    this.horizontalScroll = false,
     this.hideIfEmpty = false,
     this.playlistId = "",
     this.playlistType = "",
@@ -42,7 +46,7 @@ class VideoListSection extends ConsumerWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (videos!.isNotEmpty || !hideIfEmpty)
+            if ((videos!.isNotEmpty || !hideIfEmpty) && !horizontalScroll)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 0),
                 child: Text(
@@ -60,22 +64,38 @@ class VideoListSection extends ConsumerWidget {
               const SizedBox.shrink()
             else if (videos.isEmpty && !hideIfEmpty)
               Center(child: Text(localizations.errorNoDataFound))
+            else if (horizontalScroll)
+              ContinueWatchingList(
+                title: title,
+                itemCount: videos.length,
+                itemBuilder: (context, index) {
+                  final video = videos[index];
+                  return VideoHorizontalTile(
+                    video: video, 
+                    hideChannel: hideChannel, 
+                    playlistId: playlistId, 
+                    playlistType: playlistType,
+                    onWatched: (value) => provider.setWatched(value, video.youtubeId),
+                    onDelete: () => provider.deleteVideo(video.youtubeId)
+                  );
+                },
+              )
             else
-            ListSectionContainer(
-              itemCount: videos.length,
-              itemBuilder: (context, index) {
-                final video = videos[index];
-                return VideoListTile(
-                  video: video, 
-                  hideChannel: hideChannel, 
-                  playlistId: playlistId, 
-                  playlistType: playlistType,
-                  onWatched: (value) => provider.setWatched(value, video.youtubeId),
-                  onDelete: () => provider.deleteVideo(video.youtubeId)
-                );
-               }
-             ),
-            if (provider.hasMore && videos.isNotEmpty)
+              ListSectionContainer(
+                itemCount: videos.length,
+                itemBuilder: (context, index) {
+                  final video = videos[index];
+                  return VideoListTile(
+                    video: video, 
+                    hideChannel: hideChannel, 
+                    playlistId: playlistId, 
+                    playlistType: playlistType,
+                    onWatched: (value) => provider.setWatched(value, video.youtubeId),
+                    onDelete: () => provider.deleteVideo(video.youtubeId)
+                  );
+                 }
+               ),
+            if (provider.hasMore && videos.isNotEmpty && !horizontalScroll)
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Center(

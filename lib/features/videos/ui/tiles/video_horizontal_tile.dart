@@ -1,0 +1,185 @@
+import 'package:Self.Tube/app/navigation/app_navigation.dart';
+import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
+import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
+import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
+import 'package:Self.Tube/features/player/domain/video_player_service.dart';
+import 'package:Self.Tube/features/playlist/data/api/playlist_api.dart';
+import 'package:Self.Tube/features/videos/ui/sheets/video_list_bottomsheet.dart';
+import 'package:Self.Tube/common/utils/duration_formatter.dart';
+import 'package:Self.Tube/common/utils/number_formatter.dart';
+import 'package:Self.Tube/common/utils/timeago_formatter.dart';
+import 'package:flutter/material.dart';
+import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+
+class VideoHorizontalTile extends StatelessWidget {
+  final dynamic video;
+  final bool hideChannel;
+  final String playlistId;
+  final String playlistType;
+  final void Function()? onDelete;
+  final void Function(bool watched)? onWatched;
+
+  const VideoHorizontalTile({
+    super.key, 
+    required this.video,
+    required this.hideChannel,
+    required this.onDelete,
+    required this.onWatched,
+    this.playlistId = "",
+    this.playlistType = "",
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    return SizedBox(
+      width: 170,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),  
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 170,
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: Container(
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4)
+                  ),
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      CustomNetworkImage(
+                        imageLink: video.thumbnail,
+                        logicalWidth: 170,
+                      ),
+                      video.progress != 0 || video.watched == true
+                        ? LinearProgressIndicator(
+                            value: video.progress != 0 ? video.progress / 100 : 1.0,
+                            minHeight: 4,
+                          )
+                        : SizedBox.shrink(),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Container(
+                          margin: const EdgeInsets.all(4),
+                          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.7),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            formatDuration(video.duration),
+                            style: const TextStyle(fontSize: 10, color: Colors.white),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                )   
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(4),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      video.title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      "${formatNumberCompact(video.views, context)} ${localizations.videoListViews} • ${formatTimeAgo(context, video.videoDate)}",
+                      style: TextStyle(fontSize: 13),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: 5),
+                    if (!hideChannel)
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context, 
+                            AppRouter.channelpageScreen,
+                            arguments: video.channelId
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 22,
+                              child: AspectRatio(
+                                aspectRatio: 1 / 1,
+                                child: Container(
+                                  clipBehavior: Clip.hardEdge,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10)
+                                  ),
+                                  child: Stack(
+                                    alignment: Alignment.bottomCenter,
+                                    children: [
+                                      CustomNetworkImage(
+                                        imageLink: video.channelThumb,
+                                        logicalWidth: 22,
+                                      )
+                                    ],
+                                  ),
+                                )   
+                              ),
+                            ),
+                            SizedBox(width: 5),
+                            Expanded(
+                              child: Text(
+                                video.channelName,
+                                style: TextStyle(fontSize: 13),
+                                overflow: TextOverflow.ellipsis,
+                              )
+                            )
+                          ],
+                        )
+                      )
+                  ],
+                ),
+              )  
+            ),
+            playlistId != "" && playlistType == "custom" && UserSession.isPrivileged
+              ? IconButton(
+                  onPressed: () {
+                    ConfirmationDialog(
+                      context: context, 
+                      onSure: () {
+                        PlaylistApi.modifyCustomPlaylistItems(
+                          playlistId, 
+                          video.youtubeId, 
+                          "remove"
+                        );
+                      }
+                    );
+                  },
+                  icon: Icon(Icons.playlist_remove),
+                )
+              : SizedBox()
+          ],
+        ),
+        onTap: () {
+          VideoPlayerService.loadVideo(video.youtubeId, true, context);
+        },
+        onLongPress: () {
+          showVideoListBottomSheet(
+            context: context,
+            video: video, 
+            hideChannel: hideChannel,
+            onWatched: onWatched,
+            onDelete: onDelete
+          );
+        },
+      ),
+    );
+  }
+}
+
