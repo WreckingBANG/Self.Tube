@@ -20,6 +20,7 @@ class OnBoardingPrivacyPolicyScreen extends StatelessWidget {
             title: Text(localizations.onboardingWelcomeText),
             expandedHeight: 200,
             pinned: true,
+            automaticallyImplyLeading: false,
           ),
           SliverFillRemaining(
             child: Padding(
