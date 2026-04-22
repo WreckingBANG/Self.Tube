@@ -56,12 +56,7 @@ class MyApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          supportedLocales: const [
-            Locale('en'),
-            Locale('de'),
-            Locale('pl'),
-            Locale('nl'),
-          ],
+          supportedLocales: AppLocalizations.supportedLocales,
           title: 'Self.Tube',
           theme: lightThemeFrom(
             _resolveColorScheme(isDark: false, dynamicScheme: lightDynamic),
