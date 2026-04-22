@@ -6,18 +6,16 @@ ThemeData lightThemeFrom(ColorScheme colorScheme) {
   return ThemeData(
     useMaterial3: true,
     colorScheme: colorScheme,
-    scaffoldBackgroundColor: colorScheme.surface,
-    cardTheme: CardThemeData(
-      color: colorScheme.primary.withValues(alpha: 0.1),
-      elevation: 0,
-      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+    fontFamily: 'Figtree',
+    textTheme: ThemeData.light().textTheme.apply(
+      fontFamily: 'Figtree-Medium'
     ),
-    listTileTheme: ListTileThemeData(
-      iconColor: colorScheme.onPrimaryContainer,
-      textColor: colorScheme.onPrimaryContainer,
+    cardTheme: CardThemeData(
+      color: Color.alphaBlend(
+        colorScheme.primary.withValues(alpha: 0.1),
+        colorScheme.surface
+      ),
+      elevation: 0,
     ),
     snackBarTheme: SnackBarThemeData(
       backgroundColor: colorScheme.surface,
@@ -26,10 +24,6 @@ ThemeData lightThemeFrom(ColorScheme colorScheme) {
         borderRadius: BorderRadius.circular(12),
       ),
       behavior: SnackBarBehavior.floating,
-    ),
-    textTheme: const TextTheme(
-      displayLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-      bodyLarge: TextStyle(fontSize: 18),
     ),
   );
 }
@@ -38,19 +32,14 @@ ThemeData darkThemeFrom(ColorScheme colorScheme) {
   return ThemeData(
     useMaterial3: true,
     colorScheme: colorScheme,
-    scaffoldBackgroundColor: colorScheme.surface,
+    fontFamily: 'Figtree',
+    textTheme: ThemeData.dark().textTheme.apply(fontFamily: 'Figtree-Medium'),
     cardTheme: CardThemeData(
-      color: colorScheme.primary.withValues(alpha: 0.08),
-      surfaceTintColor: null,
-      elevation: 0,
-      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+      color: Color.alphaBlend(
+        colorScheme.primary.withValues(alpha: 0.08),
+        colorScheme.surface
       ),
-    ),
-    listTileTheme: ListTileThemeData(
-      iconColor: colorScheme.onPrimaryContainer,
-      textColor: colorScheme.onPrimaryContainer,
+      elevation: 0,
     ),
     snackBarTheme: SnackBarThemeData(
       backgroundColor: colorScheme.surface,
@@ -59,10 +48,6 @@ ThemeData darkThemeFrom(ColorScheme colorScheme) {
         borderRadius: BorderRadius.circular(12),
       ),
       behavior: SnackBarBehavior.floating,
-    ),
-    textTheme: const TextTheme(
-      displayLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-      bodyLarge: TextStyle(fontSize: 18),
     ),
   );
 }

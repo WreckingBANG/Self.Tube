@@ -24,7 +24,8 @@ class ListSectionContainer extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             child: Text(
               title!,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondaryContainer),
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, 
+              color: Theme.of(context).colorScheme.onSecondaryContainer),
             ),
           ),
         if (children != null)

@@ -49,3 +49,8 @@ flutter:
   assets:
     - assets/appicon.png
     - assets/appicon_filled.png
+
+  fonts:
+    - family: Figtree-Medium
+      fonts:
+        - asset: assets/fonts/Figtree-Medium.ttf

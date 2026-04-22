@@ -33,9 +33,7 @@ class CommentListTile extends StatelessWidget {
       onTap: onPressed,
       child: 
         Card(
-        elevation: 4,
-        child: 
-        Padding(
+        child: Padding(
           padding: EdgeInsets.all(8),
           child: 
             Row(
