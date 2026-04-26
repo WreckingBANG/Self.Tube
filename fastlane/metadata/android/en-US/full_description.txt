@@ -1,0 +1,12 @@
+Self.Tube is a sleek, lightweight client for TubeArchivist, designed to bring your personal YouTube archive right to your Android or Linux phone.
+
+With a streamlined interface and direct connection to your TubeArchivist server, Self.Tube makes it easy to browse, search, and stream your archived content from anywhere.
+
+- Browse TubeArchivist library
+- Search archived videos
+- Stream directly from your server
+- Android phone support
+- Linux phone support (tested with PostmarketOS)
+- Sponsorblock support
+- Basic Library management
+- Basic Playlist management

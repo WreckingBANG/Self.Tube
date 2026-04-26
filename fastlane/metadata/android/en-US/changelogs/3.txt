@@ -1,0 +1,7 @@
+Bug-Fixes:
+
+- App crash on first setup
+
+Thanks to:
+
+- @JaguarProJoe – reported the bug

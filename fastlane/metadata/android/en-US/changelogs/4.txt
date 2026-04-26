@@ -1,0 +1,20 @@
+Features:
+- added dynamic player‑backend selection based on device codec support  
+- added setting for backend selection (Android)  
+- added video‑stats bottomsheet in video player  
+- added basic error handling for video player initialization  
+- added userinfo section to settings bottomsheet  
+- added bug‑report template  
+
+Bug‑Fixes:
+- allow video_player to use HTTP  
+- fixed oversized splashscreen app icon on devices below Android 13  
+- stop task polling when app is minimized  
+
+Other:
+- updated translations (Dutch, Spanish, Polish, English, German)  
+
+Thanks to:
+- @BlackZ – Polish translations  
+- @gallegonovato – Spanish translations  
+- @Vistaus – Dutch translations  

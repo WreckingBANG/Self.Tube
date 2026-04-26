@@ -1,0 +1,18 @@
+This is the first release of Self.Tube
+
+Features:
+
+- Android and Linux (Phone) releases
+- Browse TubeArchivist library
+- Search TubeArchivist library
+- Stream videos from server
+- Gestures in video player
+- Add/Delete/Modify your TubeArchivist library content
+- Basic SponsorBlock support
+- Browse video comments
+- Material You design
+
+Thanks to:
+
+- @BlackZ - Polish Translations
+- @Vistaus - Dutch Translations

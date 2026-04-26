@@ -1,0 +1,21 @@
+Features:
+- added explanations to SponsorBlock segments
+
+Bug-Fixes:
+- submit position report on video player disposal
+- changed APK naming scheme to work better with Obtainium
+- removed duplicate code in the API service
+- corrected brightness and volume snapping in the player
+- several design improvements for smaller screens
+- hid several items for unprivileged users
+
+Performance Improvements:
+- improved ListView performance
+- auto-dispose providers on certain screens
+
+Other:
+- bumped flake and pubspec
+
+Thanks to:
+- @BlackZ – Polish translations
+- @Vistaus – Dutch translations
