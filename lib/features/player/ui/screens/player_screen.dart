@@ -114,6 +114,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                       )
                     ),
                     onTap: () {
+                      Navigator.pop(context);
                       Navigator.pushNamed(
                         context, 
                         AppRouter.channelpageScreen,
