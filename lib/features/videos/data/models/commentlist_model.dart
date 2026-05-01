@@ -31,7 +31,7 @@ class CommentListItemModel {
     return CommentListItemModel(
       commentId: json['comment_id'] ?? '',
       commentText: json['comment_text'] ?? '',
-      commentTimestamp: json['comment_timestamp'] ?? 0,
+commentTimestamp: json['comment_timestamp'] ?? 0,
       commentTimeText: json['comment_time_text'] ?? '',
       commentLikeCount: json['comment_likecount'] ?? 0,
       commentIsFavorited: json['comment_is_favorited'] ?? false,
@@ -47,7 +47,39 @@ class CommentListItemModel {
     );
   }
 
-  static List<CommentListItemModel> fromJsonList(List<dynamic> jsonList) {
-    return jsonList.map((item) => CommentListItemModel.fromJson(item)).toList();
+  //static List<CommentListItemModel> fromJsonList(List<dynamic> jsonList) {
+  //  return jsonList.map((item) => CommentListItemModel.fromJson(item)).toList();
+  //}
+}
+
+class CommentListModel {
+  final List<CommentListItemModel>? data;
+  final String? error;
+
+  CommentListModel({
+    this.data,
+    this.error
+  });
+
+  factory CommentListModel.fromJson(dynamic json) {
+    
+    if (json is List) {
+      return CommentListModel(
+        data: json 
+          .map((item) => CommentListItemModel.fromJson(item))
+          .toList(),
+        error: null
+      );
+    } else if (json.containsKey('error')) {
+      return CommentListModel(
+        data: null,
+        error: json['error']
+      );
+    } else {
+      return CommentListModel(
+        data: null,
+        error: "unknown data format"
+      ); 
+    } 
   }
 }

@@ -12,6 +12,7 @@ class ApiService {
   static Future<T?> request<T>({
     required String url,
     required String method,
+    bool showError = true,
     String? baseUrl,
     Map<String, String>? headers,
     bool decodeJson = true,
@@ -44,7 +45,7 @@ class ApiService {
           throw UnsupportedError('HTTP method not supported: $method');
       }
 
-      if (response.statusCode >= 200 && response.statusCode < 300) { 
+      if (response.statusCode >= 200 && response.statusCode < 500) { 
         if (!decodeJson) {
            return parser(response);
         } 
@@ -58,13 +59,14 @@ class ApiService {
       throw Exception('HTTP ${response.statusCode}: ${response.body}'); 
 
     } catch (e) {
-      GlobalSnackbar.show(
-        "$e",
-        icon: Icons.error_outline,
-        actionLabel: "Try again",
-        iconColor: Colors.red,
-        autoDismiss: false
-      );
+      if (showError) {
+        GlobalSnackbar.show(
+          "$e",
+          icon: Icons.error_outline,
+          iconColor: Colors.red,
+          autoDismiss: false
+        );
+      }
       throw Exception("Network error: $e");
     }
   }

@@ -15,7 +15,7 @@ class CommentListWidget extends StatefulWidget {
 }
 
 class _CommentListWidgetState extends State<CommentListWidget> {
-  late Future<List<CommentListItemModel>?> _commentsFuture;
+  late Future<CommentListModel?> _commentsFuture;
   final Map<String, bool> _expandedMap = {};
 
   @override
@@ -27,15 +27,22 @@ class _CommentListWidgetState extends State<CommentListWidget> {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    return FutureBuilder<List<CommentListItemModel>?>(
+    return FutureBuilder<CommentListModel?>(
       future: _commentsFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError || snapshot.data == null) {
+        } else if (snapshot.hasError) {
           return Center(child: Text(localizations.errorFailedToLoadData));
         }
-        final comments = snapshot.data!;
+        
+        final data = snapshot.data!;
+        final comments = snapshot.data!.data;
+        
+        if (data.error != null || comments == null || comments.isEmpty) {
+          return Center(child: Text(localizations.errorNoDataFound));
+        }
+        
         return ListView(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
