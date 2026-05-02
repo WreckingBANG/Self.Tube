@@ -12,13 +12,13 @@ class ThemeHelper {
       return ColorScheme.fromSeed(
         seedColor: fallbackSeedColor,
         brightness: isDark ? Brightness.dark : Brightness.light,
-        dynamicSchemeVariant: DynamicSchemeVariant.vibrant
+        dynamicSchemeVariant: DynamicSchemeVariant.tonalSpot
       );
     }
     return ColorScheme.fromSeed(
       seedColor: dynamicScheme.primary,
       brightness: isDark ? Brightness.dark : Brightness.light,
-      dynamicSchemeVariant: DynamicSchemeVariant.vibrant
+      dynamicSchemeVariant: DynamicSchemeVariant.tonalSpot
     );
   }
 

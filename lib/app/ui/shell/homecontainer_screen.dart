@@ -33,6 +33,13 @@ class _HomeContainerState extends State<HomeContainer> {
     final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
+        leadingWidth: 60,
+        leading: Image.asset(
+          'assets/appicon.png',
+          width: 60,
+          color: Theme.of(context).colorScheme.primary,
+        ),
         title: Text(localizations.appTitle),
         actions: [
           IconButton(

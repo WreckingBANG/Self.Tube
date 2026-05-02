@@ -13,7 +13,6 @@ class OnBoardingPrivacyPolicyScreen extends StatelessWidget {
     final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(
-
       body: CustomScrollView(
         slivers: [
           SliverAppBar.large(
@@ -47,9 +46,10 @@ class OnBoardingPrivacyPolicyScreen extends StatelessWidget {
                     title: Text(localizations.onboardingMarketing4),
                   ),
                   const SizedBox(height: 16),
-                  TextButton(
+                  TextButton.icon(
+                    icon: Icon(Icons.privacy_tip_outlined),
                     onPressed: () {_launchUrl();},
-                    child: Text(localizations.onboardingPrivacyPolicy),
+                    label: Text(localizations.onboardingPrivacyPolicy),
                   ),
                 ],
               ),

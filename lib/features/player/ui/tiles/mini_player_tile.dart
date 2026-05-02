@@ -19,6 +19,7 @@ class MiniPlayerTile extends StatelessWidget {
             if (video == null) 
               return SizedBox.shrink();
               return GestureDetector(
+                behavior: HitTestBehavior.opaque, 
                 onTap: () { 
                   VideoPlayerService.openPlayer(context); 
                 },

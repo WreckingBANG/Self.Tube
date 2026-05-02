@@ -48,11 +48,17 @@ class _PlayerScreenState extends State<PlayerScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: VideoPlayerService.buildUI(
-                      creator: widget.video.channelName,
-                      title: widget.video.videoTitle
+                  Container(
+                    clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                     borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: VideoPlayerService.buildUI(
+                        creator: widget.video.channelName,
+                        title: widget.video.videoTitle,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 12),

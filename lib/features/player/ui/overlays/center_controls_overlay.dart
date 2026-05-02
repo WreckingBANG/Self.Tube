@@ -48,6 +48,9 @@ class _CenterControlsOverlayState extends State<CenterControlsOverlay> {
                   builder: (context, snapshot) {
                     final isP = snapshot.data ?? true;
                     return IconButton(
+                        style: IconButton.styleFrom(
+                          backgroundColor: Colors.transparent
+                        ), 
                         color: Colors.white,
                         iconSize: 64,
                         icon: Icon(

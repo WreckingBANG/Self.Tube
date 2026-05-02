@@ -80,12 +80,18 @@ class _BottomControlsOverlayState extends State<BottomControlsOverlay> {
                           ),
                           widget.fullscreen
                             ? IconButton(
+                                style: IconButton.styleFrom(
+                                  backgroundColor: Colors.transparent
+                                ), 
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
                                 icon: const Icon(Icons.fullscreen_exit, color: Colors.white),
                               )
                             : IconButton(
+                                style: IconButton.styleFrom(
+                                  backgroundColor: Colors.transparent
+                                ), 
                                 onPressed: widget.onOpenFullscreen,
                                 icon: const Icon(Icons.fullscreen, color: Colors.white),
                               ),

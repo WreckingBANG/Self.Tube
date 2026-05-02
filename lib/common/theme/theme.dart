@@ -34,6 +34,14 @@ ThemeData darkThemeFrom(ColorScheme colorScheme) {
     colorScheme: colorScheme,
     fontFamily: 'Figtree',
     textTheme: ThemeData.dark().textTheme.apply(fontFamily: 'Figtree-Medium'),
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        backgroundColor: Color.alphaBlend(
+          colorScheme.primary.withValues(alpha: 0.08),
+          colorScheme.surface
+        ) 
+      )
+    ),
     cardTheme: CardThemeData(
       color: Color.alphaBlend(
         colorScheme.primary.withValues(alpha: 0.08),
