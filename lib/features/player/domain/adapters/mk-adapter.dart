@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 import '../video_player_interface.dart';
+import 'package:Self.Tube/app/logging/talker.dart';
 
 class MediaKitAdapter implements MediaPlayer {
   final Player _player;
@@ -20,6 +21,16 @@ class MediaKitAdapter implements MediaPlayer {
           if (d > Duration.zero) break;
         }
       }();
+
+      _player.stream.log.listen((event) {
+        if (event.level == "debug") {
+          talker.info("MPV: ${event.prefix} | ${event.text}");
+        } else if (event.level == "warn") {
+          talker.warning("MPV: ${event.prefix} | ${event.text}");
+        } else if (event.level == "error" || event.level == "fatal") {
+          talker.error("MPV: ${event.prefix} | ${event.text}");
+        }
+      });
 
     _videoController = VideoController(_player);
     _videoView = ValueListenableBuilder<BorderMode>(

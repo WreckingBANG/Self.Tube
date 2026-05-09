@@ -131,6 +131,7 @@
     "aboutPrivacyPolicy": "Privacy Policy",
     "aboutSourceCode": "Source Code",
     "aboutReleases": "Releases",
+    "aboutLog": "System Logs",
     "aboutDependencies": "Dependencies",
     "videoListViews": "views",
     "secondsAgo": "{count} seconds ago",

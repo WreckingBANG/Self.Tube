@@ -419,6 +419,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutReleases => 'Releases';
 
   @override
+  String get aboutLog => 'System Logs';
+
+  @override
   String get aboutDependencies => 'Dependencies';
 
   @override

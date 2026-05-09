@@ -4,6 +4,7 @@ import 'package:Self.Tube/features/player/domain/codec_support.dart';
 import 'adapters/vp-adapter.dart';
 import 'adapters/mk-adapter.dart';
 import 'video_player_interface.dart';
+import 'package:Self.Tube/app/logging/talker.dart';
 
 class MediaPlayerFactory {
   static late final Map<String, bool> _codecSupport;
@@ -21,6 +22,7 @@ class MediaPlayerFactory {
         'hev1': await CodecSupport.supports('video/hevc'),
         'hvc1': await CodecSupport.supports('video/hevc'),
       };
+      talker.log("Codec-Support: $_codecSupport");
     } 
   }
 

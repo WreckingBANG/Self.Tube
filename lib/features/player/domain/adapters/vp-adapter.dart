@@ -3,6 +3,7 @@ import 'package:Self.Tube/common/ui/global_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import '../video_player_interface.dart';
+import 'package:Self.Tube/app/logging/talker.dart';
 
 class VideoPlayerAdapter implements MediaPlayer {
   final VideoPlayerController _controller;
@@ -52,6 +53,7 @@ class VideoPlayerAdapter implements MediaPlayer {
         _pollController,
       );
     }).catchError((e){
+      talker.error("ExoPlayer Error: $e");
       GlobalSnackbar.show(
         e.toString(),
         icon: Icons.error_outline,

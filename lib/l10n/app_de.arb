@@ -123,6 +123,7 @@
     "aboutPrivacyPolicy": "Datenschutzerklärung",
     "aboutSourceCode": "Quellcode",
     "aboutReleases": "Versionsarchiv",
+    "aboutLog": "System-Logs",
     "aboutDependencies": "Abhängigkeiten",
     "videoListViews": "klicks",
     "secondsAgo": "vor {count} Sekunden",

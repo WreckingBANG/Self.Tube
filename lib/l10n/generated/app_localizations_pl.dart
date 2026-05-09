@@ -420,6 +420,9 @@ class AppLocalizationsPl extends AppLocalizations {
   String get aboutReleases => 'Archiwum wersji';
 
   @override
+  String get aboutLog => 'System Logs';
+
+  @override
   String get aboutDependencies => 'Zależności';
 
   @override

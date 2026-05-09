@@ -420,6 +420,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get aboutReleases => 'Versionsarchiv';
 
   @override
+  String get aboutLog => 'System-Logs';
+
+  @override
   String get aboutDependencies => 'Abhängigkeiten';
 
   @override

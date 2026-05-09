@@ -890,6 +890,12 @@ abstract class AppLocalizations {
   /// **'Releases'**
   String get aboutReleases;
 
+  /// No description provided for @aboutLog.
+  ///
+  /// In en, this message translates to:
+  /// **'System Logs'**
+  String get aboutLog;
+
   /// No description provided for @aboutDependencies.
   ///
   /// In en, this message translates to:

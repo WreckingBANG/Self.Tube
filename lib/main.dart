@@ -10,18 +10,25 @@ import 'package:flutter/material.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:Self.Tube/app/logging/talker.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SettingsService.load();
-  VideoPlayerService.init();
-  await DeviceService.init();
-  await UserSession.init();
-  runApp(
-    const ProviderScope(
-      child: MyApp()
-    )
-  );
+  talker.info("Starting App");
+  try {
+    await SettingsService.load();
+    VideoPlayerService.init();
+    await DeviceService.init();
+    await UserSession.init();
+    runApp(
+      const ProviderScope(
+        child: MyApp()
+      )
+    );
+    talker.info("App Started");
+  } catch (e, st){
+    talker.handle(e, st, "App failed to start");
+  }
 }
 
 class MyApp extends StatelessWidget {

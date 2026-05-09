@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:Self.Tube/common/data/services/api/api_headers.dart';
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/common/ui/global_snackbar.dart';
+import 'package:Self.Tube/app/logging/talker.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
@@ -19,6 +20,8 @@ class ApiService {
     Object? body,
     required T Function(dynamic json) parser,
   }) async {
+    
+    talker.info("API Request: $method $url");
 
     try {
       late http.Response response;
@@ -45,7 +48,15 @@ class ApiService {
           throw UnsupportedError('HTTP method not supported: $method');
       }
 
-      if (response.statusCode >= 200 && response.statusCode < 500) { 
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        talker.log("API Response: $method | $url | ${response.statusCode}");
+      } else if (response.statusCode >= 300 && response.statusCode < 400) {
+        talker.warning("API Redirecting");
+      } else { 
+        talker.error("API Response: $method | $url | ${response.statusCode} \nBody: ${response.body}");
+      }
+
+      if (response.statusCode >= 200 && response.statusCode < 500) {
         if (!decodeJson) {
            return parser(response);
         } 

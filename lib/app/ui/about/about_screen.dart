@@ -3,6 +3,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:Self.Tube/common/constants/urls.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/app/logging/talker.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -68,6 +70,19 @@ class AboutScreen extends StatelessWidget {
                       leading: const Icon(Icons.update),
                       title: Text(localizations.aboutReleases),
                       onTap: () => launchUrl(changelogUrl),
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.bug_report),
+                      title: Text(localizations.aboutLog),
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => TalkerScreen(
+                            talker: talker,
+                            theme: getTalkerTheme(context),
+                            appBarTitle: localizations.aboutLog,
+                          ),
+                       )
+                      )
                     ),
                     ListTile(
                       leading: const Icon(Icons.copyright_rounded),

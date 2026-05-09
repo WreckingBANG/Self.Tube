@@ -421,6 +421,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get aboutReleases => 'Lanzamientos';
 
   @override
+  String get aboutLog => 'System Logs';
+
+  @override
   String get aboutDependencies => 'Dependencias';
 
   @override
