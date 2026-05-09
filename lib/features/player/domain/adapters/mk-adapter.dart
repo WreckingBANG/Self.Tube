@@ -14,7 +14,13 @@ class MediaKitAdapter implements MediaPlayer {
 
   MediaKitAdapter(String url, {Map<String, String>? headers})
       : _player = Player() {
-
+      
+      final p = _player.platform as dynamic;
+      
+      p.setProperty('cache-on-disk', 'no');
+      p.setProperty('cache', 'yes');
+      p.setProperty('demuxer-max-bytes', '64000000');
+      
       _initialized = () async {
         await _player.open(Media(url, httpHeaders: headers));
         await for (final d in _player.stream.duration) {
