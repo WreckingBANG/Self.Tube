@@ -193,5 +193,6 @@
     "statsAudio": "Audio",
     "statsTitle": "Afspeelstatistieken",
     "userStaff": "Medewerkers",
-    "userSuperUser": "Supergebruiker"
+    "userSuperUser": "Supergebruiker",
+    "aboutLog": "Systeemlogboek"
 }

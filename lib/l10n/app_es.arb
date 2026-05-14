@@ -195,5 +195,6 @@
     "statsAudio": "Audio",
     "statsTitle": "Estadísticas de reproducción",
     "userStaff": "Empleados",
-    "userSuperUser": "Superusuario"
+    "userSuperUser": "Superusuario",
+    "aboutLog": "Registros del sistema"
 }

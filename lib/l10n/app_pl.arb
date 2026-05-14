@@ -114,7 +114,7 @@
     "chipsWatchedUnw": "Nieobejrzany",
     "chipsWatchedCon": "Kontynuować",
     "taskAddVideo": "Dodaj wideo",
-    "taskAddVideoLabel": "URL Filmu",
+    "taskAddVideoLabel": "Adres URL filmu",
     "taskRescanSubs": "Skanuj subskrypcje",
     "taskStartDownloads": "Rozpocznij pobieranie",
     "taskDownloadNow": "Nadaj priorytet pobieraniu",
@@ -150,7 +150,7 @@
     "searchLabel": "Szukać...",
     "actionsTitle": "Akcje",
     "channelTitle": "kanał",
-    "channelUrl": "URL kanału",
+    "channelUrl": "Adres kanału",
     "channelVideos": "Filmy",
     "channelAdd": "Dodaj kanał",
     "channelDelete": "Usuń kanał",
@@ -193,5 +193,6 @@
     "statsAudio": "Audio",
     "statsTitle": "Statystyki odtwarzania",
     "userStaff": "Pracownicy",
-    "userSuperUser": "Superuser"
+    "userSuperUser": "Superuser",
+    "aboutLog": "Dzienniki Systemowe"
 }
