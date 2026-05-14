@@ -1,0 +1,25 @@
+Features:
+- Added confirmation dialog before logout
+- Redesigned "Continue Watching" section
+- Optimized player screen design
+- Improved Material 3 Expressive compliance
+- Updated theme colors
+- Added logging screen for better troubleshooting
+
+Bug Fixes:
+- Fixed player settings button color to stay white
+- Resolved player UI overlap with system UI
+- Fixed Spanish language support
+- Blocked onboarding bypass via back button on first screen
+- Fixed issue where previous player screen remained in navigation stack
+- Fixed error responses on comments
+- Resolved errors caused by redirection status codes
+- Fixed MediaKit cache file creation issue
+
+Other:
+- updated translations (Dutch, Spanish, Polish, English, German)  
+
+Thanks to:
+- @BlackZ – Polish translations  
+- @gallegonovato – Spanish translations  
+- @Vistaus – Dutch translations  
