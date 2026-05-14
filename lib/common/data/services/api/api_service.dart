@@ -56,7 +56,7 @@ class ApiService {
         talker.error("API Response: $method | $url | ${response.statusCode} \nBody: ${response.body}");
       }
 
-      if (response.statusCode >= 200 && response.statusCode < 500) {
+      if (response.statusCode >= 200 && response.statusCode < 400) {
         if (!decodeJson) {
            return parser(response);
         } 
