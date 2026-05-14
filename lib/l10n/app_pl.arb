@@ -193,5 +193,6 @@
     "statsAudio": "Audio",
     "statsTitle": "Statystyki odtwarzania",
     "userStaff": "Pracownicy",
-    "userSuperUser": "Superuser"
+    "userSuperUser": "Superuser",
+    "aboutLog": "Dzienniki Systemowe"
 }
