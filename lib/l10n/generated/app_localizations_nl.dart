@@ -420,7 +420,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get aboutReleases => 'Uitgaven';
 
   @override
-  String get aboutLog => 'System Logs';
+  String get aboutLog => 'Systeemlogboek';
 
   @override
   String get aboutDependencies => 'Afhankelijkheden';

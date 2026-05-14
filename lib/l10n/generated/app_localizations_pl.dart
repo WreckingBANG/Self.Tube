@@ -275,7 +275,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get channelTitle => 'kanał';
 
   @override
-  String get channelUrl => 'URL kanału';
+  String get channelUrl => 'Adres kanału';
 
   @override
   String get channelVideos => 'Filmy';
@@ -420,7 +420,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get aboutReleases => 'Archiwum wersji';
 
   @override
-  String get aboutLog => 'System Logs';
+  String get aboutLog => 'Dzienniki Systemowe';
 
   @override
   String get aboutDependencies => 'Zależności';
@@ -589,7 +589,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get taskAddVideo => 'Dodaj wideo';
 
   @override
-  String get taskAddVideoLabel => 'URL Filmu';
+  String get taskAddVideoLabel => 'Adres URL filmu';
 
   @override
   String get taskRescanSubs => 'Skanuj subskrypcje';
