@@ -74,6 +74,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get errorFailedToLoadData => 'Error: Falló al cargar';
 
   @override
+  String get errorConnectionFailed => 'Failed to connect to Server.';
+
+  @override
+  String get errorTryAgain => 'Try Again';
+
+  @override
   String get numberformatThousand => 'K';
 
   @override

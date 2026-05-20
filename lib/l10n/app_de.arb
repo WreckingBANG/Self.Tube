@@ -21,6 +21,8 @@
     "settingsSheetComingSoon": "Kommt bald",
     "errorNoDataFound": "Fehler: Keine Daten gefunden",
     "errorFailedToLoadData": "Fehler: Laden fehlgeschlagen",
+    "errorConnectionFailed": "Verbindung zum Server fehlgeschlagen.",
+    "errorTryAgain": "Erneut versuchen",
     "numberformatThousand": "Tsd.",
     "numberformatMillion": "Mio.",
     "numberformatBillion": "Mrd.",

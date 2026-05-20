@@ -73,6 +73,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get errorFailedToLoadData => 'Fehler: Laden fehlgeschlagen';
 
   @override
+  String get errorConnectionFailed => 'Verbindung zum Server fehlgeschlagen.';
+
+  @override
+  String get errorTryAgain => 'Erneut versuchen';
+
+  @override
   String get numberformatThousand => 'Tsd.';
 
   @override

@@ -73,6 +73,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorFailedToLoadData => 'Error: Failed to load';
 
   @override
+  String get errorConnectionFailed => 'Failed to connect to Server.';
+
+  @override
+  String get errorTryAgain => 'Try Again';
+
+  @override
   String get numberformatThousand => 'K';
 
   @override

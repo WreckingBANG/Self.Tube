@@ -230,6 +230,18 @@ abstract class AppLocalizations {
   /// **'Error: Failed to load'**
   String get errorFailedToLoadData;
 
+  /// No description provided for @errorConnectionFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to connect to Server.'**
+  String get errorConnectionFailed;
+
+  /// No description provided for @errorTryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Again'**
+  String get errorTryAgain;
+
   /// No description provided for @numberformatThousand.
   ///
   /// In en, this message translates to:

@@ -73,6 +73,12 @@ class AppLocalizationsNl extends AppLocalizations {
   String get errorFailedToLoadData => 'Foutmelding: laden mislukt';
 
   @override
+  String get errorConnectionFailed => 'Failed to connect to Server.';
+
+  @override
+  String get errorTryAgain => 'Try Again';
+
+  @override
   String get numberformatThousand => 'K';
 
   @override

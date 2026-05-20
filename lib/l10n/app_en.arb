@@ -21,6 +21,8 @@
     "settingsSheetComingSoon": "Coming Soon",
     "errorNoDataFound": "Error: No data found",
     "errorFailedToLoadData": "Error: Failed to load",
+    "errorConnectionFailed": "Failed to connect to Server.",
+    "errorTryAgain": "Try Again",
     "numberformatThousand": "K",
     "numberformatMillion": "M",
     "numberformatBillion": "B",

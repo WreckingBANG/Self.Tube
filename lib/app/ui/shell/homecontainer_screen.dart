@@ -1,20 +1,44 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/app/ui/home/home_screen.dart';
 import 'package:Self.Tube/app/ui/shell/app_settings_bottomsheet.dart';
+import 'package:Self.Tube/common/ui/widgets/sections/error_section.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
+import 'package:Self.Tube/features/onboarding/domain/user_session_provider.dart';
 import 'package:Self.Tube/features/player/ui/tiles/mini_player_tile.dart';
 import 'package:Self.Tube/features/tasks/ui/screens/actions_screen.dart';
 import 'package:Self.Tube/features/channel/ui/screens/channels_screen.dart';
 import 'package:Self.Tube/features/playlist/ui/screens/playlists_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeContainerScreen extends StatelessWidget {
+class HomeContainerScreen extends ConsumerWidget {
   const HomeContainerScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(home: HomeContainer());
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    final user = ref.watch(userSessionProvider);
+
+    return user.when(
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stack) => Center(child: Text("$error")),
+      data: (isSuccess) {
+        
+        if (isSuccess) {
+          return HomeContainer();
+        } else {
+          return Scaffold(
+            body: Center(
+              child: ErrorSection(
+                provider: userSessionProvider,
+                ref: ref
+              )
+            ),
+          );
+        }
+      } 
+    );
   }
 }
 

@@ -28,7 +28,7 @@ class AppRouter {
     switch (settings.name) {
 
       case home:
-        return MaterialPageRoute(builder: (_) => const HomeContainer());
+        return MaterialPageRoute(builder: (_) => const HomeContainerScreen());
 
       case onboarding:
         return MaterialPageRoute(builder: (_) => OnBoardingPrivacyPolicyScreen());

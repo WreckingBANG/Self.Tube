@@ -4,7 +4,6 @@ import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/common/theme/theme.dart';
 import 'package:Self.Tube/common/theme/theme_helper.dart';
 import 'package:Self.Tube/common/ui/global_snackbar.dart';
-import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:Self.Tube/features/player/domain/video_player_service.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_color/dynamic_color.dart';
@@ -19,7 +18,6 @@ Future<void> main() async {
     await SettingsService.load();
     VideoPlayerService.init();
     await DeviceService.init();
-    await UserSession.init();
     runApp(
       const ProviderScope(
         child: MyApp()
