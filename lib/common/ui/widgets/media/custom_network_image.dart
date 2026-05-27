@@ -13,10 +13,10 @@ class CustomNetworkImage extends StatelessWidget {
     this.logicalWidth
   });
 
-  static String? baseUrl = SettingsService.instanceUrl;
-
   @override
   Widget build(BuildContext context) {
+    
+    final String? baseUrl = SettingsService.instanceUrl;
     final ratio = MediaQuery.of(context).devicePixelRatio;
 
     final memCacheWidth = logicalWidth != null

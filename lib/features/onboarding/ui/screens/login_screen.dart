@@ -1,18 +1,19 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
-import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
+import 'package:Self.Tube/features/onboarding/domain/user_session_provider.dart';
 import 'package:Self.Tube/features/onboarding/ui/widgets/login_section.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class OnBoardingLoginScreen extends StatefulWidget {
+class OnBoardingLoginScreen extends ConsumerStatefulWidget {
   const OnBoardingLoginScreen({super.key});
 
   @override
-  _OnBoardingLoginScreenState createState() => _OnBoardingLoginScreenState();
+  ConsumerState<OnBoardingLoginScreen> createState() => _OnBoardingLoginScreenState();
 }
 
-class _OnBoardingLoginScreenState extends State<OnBoardingLoginScreen> {
+class _OnBoardingLoginScreenState extends ConsumerState<OnBoardingLoginScreen> {
   bool loginSuccessful = false;
 
   @override
@@ -35,7 +36,7 @@ class _OnBoardingLoginScreenState extends State<OnBoardingLoginScreen> {
                 icon: Icon(Icons.check),
                 onPressed: () async {
                   await SettingsService.load();
-                  await UserSession.init();
+                  await ref.read(userSessionProvider.notifier).refresh();
                   Navigator.pushNamedAndRemoveUntil(
                     context,
                     AppRouter.home,

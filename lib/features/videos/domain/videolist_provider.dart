@@ -1,3 +1,4 @@
+import 'package:Self.Tube/features/onboarding/domain/user_session_provider.dart';
 import 'package:Self.Tube/features/videos/data/api/video_api.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,6 +11,15 @@ class VideoListNotifier extends AsyncNotifier<List?> {
 
   @override
   Future<List?> build() async {
+    final isLoggedIn = ref.watch(userSessionProvider).value ?? false;
+    
+    if (!isLoggedIn) {
+      currentPage = 1;
+      hasMore = true;
+      sortOptions = "";
+      return [];
+    }
+
     final videos = await VideoApi().fetchVideoList("$query$sortOptions&page=$currentPage");
 
     if (videos != null) {

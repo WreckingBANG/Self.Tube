@@ -1,4 +1,5 @@
 import 'package:Self.Tube/features/channel/data/api/channel_api.dart';
+import 'package:Self.Tube/features/onboarding/domain/user_session_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ChannelListNotifier extends AsyncNotifier<List?> {
@@ -9,6 +10,14 @@ class ChannelListNotifier extends AsyncNotifier<List?> {
   
   @override
   Future<List?> build() async {
+    final isLoggedIn = ref.watch(userSessionProvider).value ?? false;
+
+    if (!isLoggedIn) {
+      currentPage = 1;
+      hasMore = true;
+      return [];
+    }
+
     final channels = await ChannelApi().fetchChannelList("$query&page=$currentPage");
     
     if (channels != null) {

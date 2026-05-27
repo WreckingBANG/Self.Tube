@@ -1,3 +1,4 @@
+import 'package:Self.Tube/features/onboarding/domain/user_session_provider.dart';
 import 'package:Self.Tube/features/playlist/data/api/playlist_api.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,6 +10,14 @@ class PlaylistListNotifier extends AsyncNotifier<List?> {
 
   @override
   Future<List?> build() async {
+    final isLoggedIn = ref.watch(userSessionProvider).value ?? false;
+
+    if (!isLoggedIn) {
+      currentPage = 1;
+      hasMore = true;
+      return [];
+    }
+
     final playlists = await PlaylistApi().fetchPlaylistList("?page=$currentPage");
 
     if (playlists != null) {
