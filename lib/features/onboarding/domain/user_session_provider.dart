@@ -26,7 +26,7 @@ class UserSessionNotifier extends AsyncNotifier<bool> {
   } 
 
   Future<void> logout() async {
-    AuthController().logout; 
+    AuthController().logout();
     state = AsyncData(false); 
   }
 

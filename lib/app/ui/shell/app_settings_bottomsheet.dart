@@ -144,7 +144,7 @@ Future<void> _handleLogout(BuildContext context, WidgetRef ref) async {
   Navigator.pop(context);
 
   try {
-    ref.read(userSessionProvider.notifier).logout();
+    await ref.read(userSessionProvider.notifier).logout();
 
     Navigator.pushNamedAndRemoveUntil(
       context,

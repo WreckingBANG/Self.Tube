@@ -1,3 +1,4 @@
+import 'package:Self.Tube/app/logging/talker.dart';
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/features/onboarding/data/api/user_api.dart';
 import 'package:flutter/services.dart';
@@ -42,21 +43,17 @@ class AuthController {
     return false;
   }
 
-  Future<bool> logout() async {
+  Future<void> logout() async {
     try {
-      if (SettingsService.apiTokenAuth != true) {
+      if (SettingsService.apiTokenAuth == false) {
         await UserApi().logout();
       }
-      
+
       await SettingsService.setDoneSetup(false);
       await SettingsService.setInstanceUrl("");
       await SettingsService.setApiToken("");
-
-      SystemNavigator.pop();
-
-      return true;
     } catch (e) {
-      return false;
+      talker.error("Logout failed: $e");
     }
   }
 }
