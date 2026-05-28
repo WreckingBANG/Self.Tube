@@ -25,7 +25,7 @@ class QueueItemModel {
       channelName: json['channel_name'] ?? '',
       thumbnail: json['vid_thumb_url'] ?? '',
       durationStr: json['duration'] ?? '',
-      videoDate: json['published'],
+      videoDate: json['published'] ?? '',
     );
   }
 
