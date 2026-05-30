@@ -65,10 +65,11 @@ class QueueListTile extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    Text(
-                      "${formatTimeAgo(context, video.videoDate)}",
-                      style: TextStyle(fontSize: 13),
-                    ),
+                    if (video.videoDate.isNotEmpty)
+                      Text(
+                        "${formatTimeAgo(context, video.videoDate)}",
+                        style: TextStyle(fontSize: 13),
+                      ),
                     InkWell(
                       onTap: () {
                         Navigator.pushNamed(

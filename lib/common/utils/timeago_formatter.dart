@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 
 String formatTimeAgo(BuildContext context, String isoDateStr) {
+
+  if (isoDateStr.isEmpty) return "";
+
   final localizations = AppLocalizations.of(context)!;
   DateTime past = DateTime.parse(isoDateStr).toUtc();
   DateTime now = DateTime.now().toUtc();
