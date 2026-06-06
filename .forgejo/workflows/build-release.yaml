@@ -66,7 +66,7 @@ jobs:
           path: |
             flatpak/selftube-linux-aarch64.flatpak
 
-  build_flatpak-86_x64:
+  build_flatpak-x86_64:
     runs-on: codeberg-x86-1
     container: 
       image: ubuntu:24.04
@@ -117,13 +117,13 @@ jobs:
           git config --global protocol.file.allow always
           flatpak-builder --disable-rofiles-fuse build-dir com.wreckingbang.selftube.yaml --force-clean --repo=repo
           flatpak build-bundle repo selftube.flatpak com.wreckingbang.selftube
-          mv $GITHUB_WORKSPACE/flatpak/selftube.flatpak $GITHUB_WORKSPACE/flatpak/selftube-linux-86_x64.flatpak
+          mv $GITHUB_WORKSPACE/flatpak/selftube.flatpak $GITHUB_WORKSPACE/flatpak/selftube-linux-x86_64.flatpak
       - name: Upload Flatpak
         uses: actions/upload-artifact@v3
         with:
-          name: selftube-linux-86_x64
+          name: selftube-linux-x86_64
           path: |
-            flatpak/selftube-linux-86_x64.flatpak
+            flatpak/selftube-linux-x86_64.flatpak
 
   build_apk:
     runs-on: codeberg-x86-2
@@ -233,7 +233,7 @@ jobs:
   release:
     needs: 
       - build_apk
-      - build_flatpak-86_x64
+      - build_flatpak-x86_64
       - build_flatpak-aarch64
     runs-on: codeberg-x86
     steps:
