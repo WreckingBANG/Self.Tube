@@ -1,7 +1,6 @@
 import 'package:Self.Tube/app/logging/talker.dart';
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/features/onboarding/data/api/user_api.dart';
-import 'package:flutter/services.dart';
 
 class AuthController {
   Future<bool> login(bool usesApiToken, String url, String username, String password, String apiToken) async {
@@ -48,12 +47,17 @@ class AuthController {
       if (SettingsService.apiTokenAuth == false) {
         await UserApi().logout();
       }
+      
+      await resetLoginSettings();
 
-      await SettingsService.setDoneSetup(false);
-      await SettingsService.setInstanceUrl("");
-      await SettingsService.setApiToken("");
     } catch (e) {
       talker.error("Logout failed: $e");
     }
+  }
+
+  Future<void> resetLoginSettings() async {
+    await SettingsService.setDoneSetup(false);
+    await SettingsService.setInstanceUrl("");
+    await SettingsService.setApiToken("");
   }
 }

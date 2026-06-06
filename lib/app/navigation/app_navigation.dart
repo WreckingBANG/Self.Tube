@@ -12,6 +12,7 @@ import 'package:Self.Tube/app/ui/shell/homecontainer_screen.dart';
 import 'package:Self.Tube/features/onboarding/ui/screens/privacypolicy_screen.dart';
 
 class AppRouter {
+  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   static const home = '/';
   static const onboarding = '/onboarding';
   static const onboardingLogin = '/onboarding/login';

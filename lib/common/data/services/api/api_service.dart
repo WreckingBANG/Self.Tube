@@ -10,6 +10,8 @@ class ApiService {
 
   static String? baseUrl = SettingsService.instanceUrl;
 
+  static void Function()? onSessionExpired;
+
   static Future<T?> request<T>({
     required String url,
     required String method,
@@ -52,6 +54,15 @@ class ApiService {
         talker.log("API Response: $method | $url | ${response.statusCode}");
       } else if (response.statusCode >= 300 && response.statusCode < 400) {
         talker.warning("API Redirecting");
+      } else if ((response.statusCode == 401 || response.statusCode == 403) && response.body.contains("Authentication credentials were not provided")) {
+        talker.warning("Session expired, redirecting to login");
+        GlobalSnackbar.show(
+          "Session expired",
+          icon: Icons.error_outline,
+          iconColor: Colors.red,
+          autoDismiss: false
+        );
+        onSessionExpired?.call(); 
       } else { 
         talker.error("API Response: $method | $url | ${response.statusCode} \nBody: ${response.body}");
       }

@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
         return MaterialApp(
+          navigatorKey: AppRouter.navigatorKey, 
           scaffoldMessengerKey: GlobalSnackbar.key,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
