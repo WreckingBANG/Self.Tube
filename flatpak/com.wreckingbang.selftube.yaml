@@ -12,9 +12,6 @@ add-extensions:
     version: '24.08'
     add-ld-path: .
 
-cleanup-commands:
-  - mkdir -p /app/lib/ffmpeg
-
 finish-args:
   - --share=ipc
   - --socket=fallback-x11
@@ -23,12 +20,17 @@ finish-args:
   - --share=network
   - --filesystem=xdg-run/pipewire-0:ro
   - --device=dri
+  - --device=shm
   - --filesystem=xdg-data/icons:ro
   - --filesystem=/usr/share/icons:ro
   - --talk-name=org.freedesktop.secrets
   - --env=FLUTTER_ASSETS=/app/bin/data/flutter_assets
   - --env=FLUTTER_ICU_DATA_FILE=/app/bin/icudtl.dat
-  - --env=LD_LIBRARY_PATH=/app/lib
+  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib/ffmpeg
+  - --filesystem=xdg-config/gtk-3.0:ro
+  - --filesystem=xdg-config/gtk-4.0:ro
+  - --talk-name=org.freedesktop.portal.Desktop
+  - --filesystem=~/.config/dconf:ro
 
 modules:
   - name: mpv
@@ -42,6 +44,8 @@ modules:
       - -Dpulse=enabled
       - -Dalsa=enabled
       - --libdir=/app/lib
+    build-options:
+      pkg-config-path: /usr/lib/extensions/ffmpeg-full/lib/pkgconfig
     cleanup:
       - /lib/pkgconfig
       - /share
@@ -83,6 +87,7 @@ modules:
   - name: selftube
     buildsystem: simple
     build-commands:
+      - mkdir -p /app/lib/ffmpeg 
       - mkdir -p /app/bin
       - cp -r build/linux/*/release/bundle/* /app/bin/
       - chmod +x /app/bin/Self.Tube
