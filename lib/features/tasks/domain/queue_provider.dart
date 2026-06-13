@@ -8,6 +8,8 @@ class QueueNotifier extends AsyncNotifier<List?> with WidgetsBindingObserver{
   Timer? _timer;
   late final query;
   int currentPage = 1;
+  bool showHidden = false;
+  String filter = "pending";
   bool hasMore = true;
 
   @override
@@ -19,7 +21,7 @@ class QueueNotifier extends AsyncNotifier<List?> with WidgetsBindingObserver{
       WidgetsBinding.instance.removeObserver(this);
     });
 
-    final videos = await TaskApi().fetchQueue("$query&page=$currentPage");
+    final videos = await TaskApi().fetchQueue("${query}filter=${filter}&page=$currentPage");
 
     if (videos != null) {
       if (currentPage >= videos.lastPage) {
@@ -57,6 +59,16 @@ class QueueNotifier extends AsyncNotifier<List?> with WidgetsBindingObserver{
     hasMore = true;
     currentPage = 1;
     ref.invalidateSelf();
+  }
+
+  Future<void> changeHidden(bool value) async {
+    if (value) {
+      filter = "ignore";
+    } else {
+      filter = "pending";
+    }
+    showHidden = value;
+    refresh();
   }
 
   Future<void> fetchNext() async {

@@ -189,6 +189,8 @@
     "taskStartDownloads": "Start Downloads",
     "taskDownloadNow": "Download Now",
     "taskIgnore": "Ignore",
+    "taskQueue": "Queue",
+    "taskShowIgnored": "Show only ignored videos",
     "taskDeleteFromQueue": "Delete from Queue",
     "taskQueueEmpty": "Queue Empty",
     "statsBackend": "Backend",

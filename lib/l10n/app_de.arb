@@ -181,6 +181,8 @@
     "taskStartDownloads": "Downloads starten",
     "taskDownloadNow": "Download priorisieren",
     "taskIgnore": "Ignorieren",
+    "taskQueue": "Queue",
+    "taskShowIgnored": "Zeige nur ignorierte Videos",
     "taskDeleteFromQueue": "Aus Queue löschen",
     "taskQueueEmpty": "Queue leer",
     "sponsorblockSponsorHint": "Teil eines Videos, das ein Produkt oder eine Dienstleistung bewirbt, die nicht direkt mit dem Ersteller zusammenhängt.",

@@ -52,7 +52,7 @@ class ActionsScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            QueueSection(query: "?filter=pending")
+            QueueSection(query: "?")
           ],
         )
       )

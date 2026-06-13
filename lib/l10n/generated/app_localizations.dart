@@ -1238,6 +1238,18 @@ abstract class AppLocalizations {
   /// **'Ignore'**
   String get taskIgnore;
 
+  /// No description provided for @taskQueue.
+  ///
+  /// In en, this message translates to:
+  /// **'Queue'**
+  String get taskQueue;
+
+  /// No description provided for @taskShowIgnored.
+  ///
+  /// In en, this message translates to:
+  /// **'Show only ignored videos'**
+  String get taskShowIgnored;
+
   /// No description provided for @taskDeleteFromQueue.
   ///
   /// In en, this message translates to:

@@ -27,6 +27,30 @@ class QueueSection extends ConsumerWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 8, left: 14, right: 14),
+              child: Text(
+                localizations.taskQueue,
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, 
+                color: Theme.of(context).colorScheme.onSecondaryContainer),
+              ),
+            ),
+            SwitchListTile(
+              thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.selected)) {
+                    return const Icon(Icons.check);
+                  }
+                  return const Icon(Icons.close);
+                },
+              ),
+              title: Text(localizations.taskShowIgnored),
+              value: provider.showHidden,
+              onChanged: (bool value) {
+                provider.changeHidden(value);
+              },
+            ),
+
             if (queue!.isEmpty)
               Center(child: Text(localizations.taskQueueEmpty))
             else

@@ -616,6 +616,12 @@ class AppLocalizationsPl extends AppLocalizations {
   String get taskIgnore => 'Ignorować';
 
   @override
+  String get taskQueue => 'Queue';
+
+  @override
+  String get taskShowIgnored => 'Show only ignored videos';
+
+  @override
   String get taskDeleteFromQueue => 'Usuń z kolejki';
 
   @override
