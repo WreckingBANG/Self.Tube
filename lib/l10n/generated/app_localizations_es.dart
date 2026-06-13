@@ -80,6 +80,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get errorTryAgain => 'Try Again';
 
   @override
+  String get errorNothingHere => 'Nothing here...';
+
+  @override
+  String get errorCrickets => '...but crickets';
+
+  @override
   String get numberformatThousand => 'K';
 
   @override

@@ -79,6 +79,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get errorTryAgain => 'Erneut versuchen';
 
   @override
+  String get errorNothingHere => 'Nichts hier...';
+
+  @override
+  String get errorCrickets => '...außer das Zirpen der Grillen';
+
+  @override
   String get numberformatThousand => 'Tsd.';
 
   @override

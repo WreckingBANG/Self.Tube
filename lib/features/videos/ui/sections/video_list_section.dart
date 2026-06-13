@@ -1,4 +1,5 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/common/ui/widgets/sections/empty_error_section.dart';
 import 'package:Self.Tube/common/ui/widgets/sections/sort_chips_section.dart';
 import 'package:Self.Tube/features/videos/domain/videolist_provider.dart';
 import 'package:Self.Tube/features/videos/ui/containers/continue_watching_list.dart';
@@ -63,7 +64,10 @@ class VideoListSection extends ConsumerWidget {
             if (videos.isEmpty && hideIfEmpty)
               const SizedBox.shrink()
             else if (videos.isEmpty && !hideIfEmpty)
-              Center(child: Text(localizations.errorNoDataFound))
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: EmptyErrorSection()
+              )
             else if (horizontalScroll)
               ContinueWatchingList(
                 title: title,

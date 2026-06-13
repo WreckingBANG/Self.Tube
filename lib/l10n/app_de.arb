@@ -23,6 +23,8 @@
     "errorFailedToLoadData": "Fehler: Laden fehlgeschlagen",
     "errorConnectionFailed": "Verbindung zum Server fehlgeschlagen.",
     "errorTryAgain": "Erneut versuchen",
+    "errorNothingHere": "Nichts hier...",
+    "errorCrickets": "...außer das Zirpen der Grillen",
     "numberformatThousand": "Tsd.",
     "numberformatMillion": "Mio.",
     "numberformatBillion": "Mrd.",

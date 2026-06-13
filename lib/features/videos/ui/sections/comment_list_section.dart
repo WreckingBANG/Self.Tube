@@ -1,3 +1,4 @@
+import 'package:Self.Tube/common/ui/widgets/sections/empty_error_section.dart';
 import 'package:Self.Tube/features/videos/data/api/comment_api.dart';
 import 'package:Self.Tube/features/videos/data/models/commentlist_model.dart';
 import 'package:Self.Tube/features/videos/ui/tiles/comment_list_tile.dart';
@@ -33,7 +34,7 @@ class _CommentListWidgetState extends State<CommentListWidget> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
-          return Center(child: Text(localizations.errorFailedToLoadData));
+          return EmptyErrorSection();
         }
         
         final data = snapshot.data!;

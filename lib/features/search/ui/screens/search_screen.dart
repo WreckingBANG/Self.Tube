@@ -6,7 +6,9 @@ import 'package:Self.Tube/features/channel/ui/tiles/channel_list_tile.dart';
 import 'package:Self.Tube/features/playlist/ui/tiles/playlist_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'package:flutter_m3shapes_extended/flutter_m3shapes_extended.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class SearchScreen extends ConsumerStatefulWidget {
   const SearchScreen({super.key});
@@ -60,16 +62,34 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             ),
             Divider(),
             Expanded(
-              child: SingleChildScrollView(
-                child: search.when(
-                  loading: () => Center(child: CircularProgressIndicator()),
-                  error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
-                  data: (search) {
-                    if (search == null) {
-                      return ListTile(title: Text(localizations.searchTooltip));
-                    }
+              child: search.when(
+                loading: () => Center(child: CircularProgressIndicator()),
+                error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
+                data: (search) {
 
-                    return Column(
+                if (search == null) {
+                  return Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        M3EContainer.gem(
+                          width: 100,
+                          height: 100,
+                          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
+                          child: Icon(
+                            Symbols.database_search_rounded,
+                            size: 50,
+                          )
+                        ),
+                        SizedBox(height: 10),
+                        Text(localizations.searchTooltip)
+                      ],
+                    ),
+                  );
+                }
+
+                return SingleChildScrollView(
+                  child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ListSectionContainer(
@@ -108,9 +128,9 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                           },
                         ),
                       ],
-                    );
-                  },
-                )
+                    )
+                  );
+                }
               )
             )
           ],

@@ -1,7 +1,7 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/app/ui/home/home_screen.dart';
 import 'package:Self.Tube/app/ui/shell/app_settings_bottomsheet.dart';
-import 'package:Self.Tube/common/ui/widgets/sections/error_section.dart';
+import 'package:Self.Tube/common/ui/widgets/sections/connection_error_section.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session_provider.dart';
 import 'package:Self.Tube/features/player/ui/tiles/mini_player_tile.dart';
@@ -30,7 +30,7 @@ class HomeContainerScreen extends ConsumerWidget {
         } else {
           return Scaffold(
             body: Center(
-              child: ErrorSection(
+              child: ConnectionErrorSection(
                 provider: userSessionProvider,
                 ref: ref
               )

@@ -23,6 +23,8 @@
     "errorFailedToLoadData": "Error: Failed to load",
     "errorConnectionFailed": "Failed to connect to Server.",
     "errorTryAgain": "Try Again",
+    "errorNothingHere": "Nothing here...",
+    "errorCrickets": "...but crickets",
     "numberformatThousand": "K",
     "numberformatMillion": "M",
     "numberformatBillion": "B",

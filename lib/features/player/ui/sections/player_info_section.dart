@@ -1,8 +1,6 @@
-import 'package:Self.Tube/common/ui/widgets/buttons/button_row.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/selectable_text.dart';
 import 'package:Self.Tube/features/videos/ui/sections/comment_list_section.dart';
 import 'package:Self.Tube/features/videos/ui/sections/video_list_similar_section.dart';
-import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class PlayerInfoSection extends StatefulWidget {
@@ -69,13 +67,11 @@ class _PlayerInfoSectionState extends State<PlayerInfoSection> with SingleTicker
               
               Padding(
                 padding: EdgeInsets.only(top: 12),
-                child: SingleChildScrollView(
                 child: VideoListSimilarSection(
                   videoId: widget.video.videoId, 
                   query: ""
-                  )
                 )
-              ) 
+              )
             ],
           ),
         )

@@ -1,4 +1,5 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/common/ui/widgets/sections/empty_error_section.dart';
 import 'package:Self.Tube/features/playlist/domain/playlistlist_provider.dart';
 import 'package:Self.Tube/features/playlist/ui/tiles/playlist_list_tile.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,10 @@ class PlaylistListSection extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (playlists!.isEmpty && !hideIfEmpty)
-              Center(child: Text(localizations.errorNoDataFound))
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: EmptyErrorSection()
+              )
             else 
               ListSectionContainer(
                 itemCount: playlists.length,

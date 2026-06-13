@@ -387,6 +387,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_m3shapes_extended:
+    dependency: "direct main"
+    description:
+      name: flutter_m3shapes_extended
+      sha256: "93258d82efcc72c249f69b0fd991b535d5a2da99a5dd1aa77af07a6b4f86600f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   flutter_riverpod:
     dependency: "direct main"
     description:
@@ -645,6 +653,17 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.13.0"
+<<<<<<< HEAD
+=======
+  material_symbols_icons:
+    dependency: "direct main"
+    description:
+      name: material_symbols_icons
+      sha256: "10a74aaa9e566c92f8aa14809d2dd78156fb93743348ebffec0345c38eb35706"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2928.1"
+>>>>>>> aedb330 (feat: improved error and tooltip messages)
   media_kit:
     dependency: "direct main"
     description:
@@ -781,6 +800,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  path_drawing:
+    dependency: transitive
+    description:
+      name: path_drawing
+      sha256: bbb1934c0cbb03091af082a6389ca2080345291ef07a5fa6d6e078ba8682f977
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
+  path_parsing:
+    dependency: transitive
+    description:
+      name: path_parsing
+      sha256: "883402936929eac138ee0a45da5b0f2c80f89913e6dc3bf77eb65b84b409c6ca"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   path_provider:
     dependency: "direct main"
     description:
