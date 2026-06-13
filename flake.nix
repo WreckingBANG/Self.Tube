@@ -68,6 +68,7 @@
             export LC_ALL=en_US.UTF-8
             export FONTCONFIG_FILE=${pkgs.fontconfig.out}/etc/fonts/fonts.conf
             export GDK_BACKEND=x11
+            export JAVA_HOME="${pkgs.openjdk17}"
 
             export LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath buildInputs}:$LD_LIBRARY_PATH
 
