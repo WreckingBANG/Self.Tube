@@ -2,6 +2,7 @@ import 'package:Self.Tube/common/ui/widgets/containers/expandable_text.dart';
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/features/channel/domain/channelpage_provider.dart';
+import 'package:Self.Tube/features/channel/ui/sheets/channel_list_bottomsheet.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:Self.Tube/features/player/ui/tiles/mini_player_tile.dart';
 import 'package:Self.Tube/features/videos/domain/videolist_provider.dart';
@@ -28,71 +29,88 @@ class ChannelpageScreen extends ConsumerWidget{
     final provider = ref.read(channelPageProvider(channelId).notifier);
     final channel = ref.watch(channelPageProvider(channelId));
     final query = "?channel=$channelId&order=desc&sort=published";
+    
+    return channel.when(
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
+      data: (channel) {
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(localizations.channelTitle),
-      ),
-      body: MiniPlayerTile(
-        child: RefreshIndicator(
-          onRefresh: () async {
-            ref.invalidate(channelPageProvider);
-            ref.read(videoListProvider(query).notifier).refresh();
-          },
-          child: channel.when(
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
-            data: (channel) {
-              return ListView(
-                children: [
-                  if (channel!.banner.isNotEmpty)
-                    CustomNetworkImage(imageLink: channel.banner),
-                  ListTile(
-                    title: Text(channel.channelName),
-                    subtitle: Text(formatNumberCompact(channel.subscribers, context)),
-                    leading: AspectRatio(
-                      aspectRatio: 1 / 1,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: CustomNetworkImage(imageLink: channel.profilePic)
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(localizations.channelTitle),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  showChannelListBottomSheet(
+                    context: context, 
+                    channel: channel,
+                    ref: ref,
+                    onDelete: () {
+                      provider.deleteChannel(channelId);
+                      Navigator.pop(context);
+                    }
+                  );
+                }, 
+                icon: Icon(Icons.more_vert)
+              )
+            ], 
+          ),
+          body: MiniPlayerTile(
+            child: RefreshIndicator(
+              onRefresh: () async {
+                ref.invalidate(channelPageProvider);
+                ref.read(videoListProvider(query).notifier).refresh();
+              },
+              child: ListView(
+                    children: [
+                      if (channel!.banner.isNotEmpty)
+                        CustomNetworkImage(imageLink: channel.banner),
+                      ListTile(
+                        title: Text(channel.channelName),
+                        subtitle: Text(formatNumberCompact(channel.subscribers, context)),
+                        leading: AspectRatio(
+                          aspectRatio: 1 / 1,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: CustomNetworkImage(imageLink: channel.profilePic)
+                          ),
+                        ),
+                        trailing: UserSession.isPrivileged 
+                        ? channel.subscribed
+                          ? FilledButton(
+                              onPressed: () {
+                                ConfirmationDialog(
+                                  context: context, 
+                                  onSure: () {
+                                    provider.subscribe(false);
+                                  } 
+                                );
+                              },
+                              child: Text(localizations.playerUnsubscribe),
+                            )
+                          : OutlinedButton(
+                              onPressed: () {
+                                provider.subscribe(true);
+                              },
+                              child: Text(localizations.playerSubscribe),
+                            )
+                        : SizedBox()
                       ),
-                    ),
-                    trailing: UserSession.isPrivileged 
-                    ? channel.subscribed
-                      ? FilledButton(
-                          onPressed: () {
-                            ConfirmationDialog(
-                              context: context, 
-                              onSure: () {
-                                provider.subscribe(false);
-                              } 
-                            );
-                          },
-                          child: Text(localizations.playerUnsubscribe),
-                        )
-                      : OutlinedButton(
-                          onPressed: () {
-                            provider.subscribe(true);
-                          },
-                          child: Text(localizations.playerSubscribe),
-                        )
-                    : SizedBox()
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: ExpandableText(channel.description),
-                    ),
-                  ),
-                  VideoListSection(title: localizations.channelVideos, showSorting: true, hideChannel: true, query: query) 
-                 ],
-              );
-            }
-          ) 
-        )
-      )
-    );
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: ExpandableText(channel.description),
+                        ),
+                      ),
+                      VideoListSection(title: localizations.channelVideos, showSorting: true, hideChannel: true, query: query) 
+                     ],
+                  )
+                )
+              ) 
+            );
+          }
+        );
   }
 }
 

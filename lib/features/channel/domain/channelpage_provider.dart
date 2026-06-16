@@ -16,6 +16,10 @@ class ChannelPageNotifier extends AsyncNotifier<ChannelItemModel?> {
     await AsyncValue.guard(() => ChannelApi().modifyChannel(id, val));
     state = await AsyncValue.guard(() => ChannelApi().fetchChannel(id));
   }
+  
+  Future<void> deleteChannel(String id) async {
+    await ChannelApi().deleteChannel(id);
+  }
 
 }
 
