@@ -52,6 +52,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
               );
             },
           ),
+          ListTile(
+            title: Text("Distractions"),
+            subtitle: Text("Hide Elements to not get Distracted"),
+            leading: Icon(Icons.self_improvement),
+            onTap: () {
+              Navigator.pushNamed(
+                context, 
+                AppRouter.settingsDistractions,
+              );
+            },
+          ),
         ]
       ),
     );

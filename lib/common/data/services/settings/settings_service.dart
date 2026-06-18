@@ -33,6 +33,10 @@ class SettingsService {
   static const _vpGestureDoubleTap = 'vpGestureDoubleTap';
   static const _playerBackend = 'playerBackend';
 
+  static const _disableRecommendations = 'disableRecommendations';
+  static const _disableComments = 'disableComments';
+  static const _disableHome = 'disableHome';
+
   static String? instanceUrl;
   static bool? apiTokenAuth;
   static String? apiToken;
@@ -58,6 +62,10 @@ class SettingsService {
   static bool? vpGesturePinch;
   static bool? vpGestureDoubleTap;
   static int? playerBackend;
+
+  static bool? disableRecommendations;
+  static bool? disableComments;
+  static bool? disableHome;
 
   static Future<void> load() async {
     final data = await _dao.readAll();
@@ -90,6 +98,10 @@ class SettingsService {
     vpGesturePinch = b(_vpGesturePinch, true);
     vpGestureDoubleTap = b(_vpGestureDoubleTap, true);
     playerBackend = i(_playerBackend, 0);
+
+    disableRecommendations = b(_disableRecommendations);
+    disableComments = b(_disableComments);
+    disableHome = b(_disableHome);
   
     apiToken = await _secure.read(key: _apiTokenKey);
     sessionToken = await _secure.read(key: _sessionToken);
@@ -201,6 +213,21 @@ class SettingsService {
   static Future<void> setPlayerBackend(int value) async {
     await _persist(_playerBackend, value);
     playerBackend = value;
+  }
+
+  static Future<void> setDisableRecommendations(bool value) async {
+    await _persist(_disableRecommendations, value);
+    disableRecommendations = value;
+  }
+
+  static Future<void> setDisableComments(bool value) async {
+    await _persist(_disableComments, value);
+    disableComments = value;
+  }
+
+  static Future<void> setDisableHome(bool value) async {
+    await _persist(_disableHome, value);
+    disableHome = value;
   }
 }
 

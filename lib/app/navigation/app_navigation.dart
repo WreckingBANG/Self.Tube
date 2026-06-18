@@ -4,6 +4,7 @@ import 'package:Self.Tube/features/onboarding/ui/screens/login_screen.dart';
 import 'package:Self.Tube/features/playlist/ui/screens/playlistpage_screen.dart';
 import 'package:Self.Tube/features/search/ui/screens/search_screen.dart';
 import 'package:Self.Tube/features/settings/ui/screens/appearance_settings_screen.dart';
+import 'package:Self.Tube/features/settings/ui/screens/distraction_settings.dart';
 import 'package:Self.Tube/features/settings/ui/screens/overview_settings_screen.dart';
 import 'package:Self.Tube/features/settings/ui/screens/player_settings_screen.dart';
 import 'package:Self.Tube/features/settings/ui/screens/sponsorblock_settings_screen.dart';
@@ -22,6 +23,7 @@ class AppRouter {
   static const settingsAppearance = '/settings/appearance';
   static const settingsPlayer = '/settings/player';
   static const settingsSponsorblock = '/settings/sponsorblock';
+  static const settingsDistractions = '/settings/distractions';
   static const channelpageScreen = '/channel';
   static const playlistpageScreen = '/playlist';
 
@@ -54,6 +56,9 @@ class AppRouter {
 
       case settingsSponsorblock:
         return MaterialPageRoute(builder: (_) => SponsorblockSettingsScreen());
+
+      case settingsDistractions:
+        return MaterialPageRoute(builder: (_) => DistractionsSettingsScreen());
 
       case channelpageScreen:
         final channelId = settings.arguments as String;
