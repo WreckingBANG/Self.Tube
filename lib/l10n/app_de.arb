@@ -183,7 +183,7 @@
     "taskStartDownloads": "Downloads starten",
     "taskDownloadNow": "Download priorisieren",
     "taskIgnore": "Ignorieren",
-    "taskQueue": "Queue",
+    "taskQueue": "Warteschlange",
     "taskShowIgnored": "Zeige nur ignorierte Videos",
     "taskDeleteFromQueue": "Aus Queue löschen",
     "taskQueueEmpty": "Queue leer",
