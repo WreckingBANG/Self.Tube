@@ -1,0 +1,24 @@
+Features:
+- add option to show ignored videos in download queue
+- support app logout without closing the app
+- improved error handling and tooltip messages
+- channel actions can be opened in channel screen
+
+Bug Fixes:
+- added network error screen on launch
+- removed network on main
+- session not being invalidated correctly after logout
+- handle video published date when null
+- app-bar in lightmode on flatpak builds
+
+
+Other:
+- updated dependencies
+- updated kotlin version
+- updated translations (Dutch, Spanish, Polish, English, German)  
+
+Thanks to:
+- @Nioduro - fix: handle video published date of null 
+- @BlackZ – Polish translations  
+- @gallegonovato – Spanish translations  
+- @Vistaus – Dutch translations  

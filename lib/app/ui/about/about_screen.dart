@@ -35,7 +35,7 @@ class AboutScreen extends StatelessWidget {
                           localizations.appTitle,
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
-                        Text("${localizations.aboutVersion}: 0.1.4"),
+                        Text("${localizations.aboutVersion}: 0.1.5"),
                         Text("${localizations.aboutLicense}: AGPL-v3-or-Later"),
                         const SizedBox(height: 8),
                         GestureDetector(
