@@ -764,6 +764,18 @@ abstract class AppLocalizations {
   /// **'Agree & Continue'**
   String get onboardingContinue;
 
+  /// No description provided for @onboardingAllowSelfSigned.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow Self-Signed Certificates'**
+  String get onboardingAllowSelfSigned;
+
+  /// No description provided for @onboardingAllowSelfSignedDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'On Android the Certificate must be in the Device Certificate-Store'**
+  String get onboardingAllowSelfSignedDesc;
+
   /// No description provided for @sponsorblockEnable.
   ///
   /// In en, this message translates to:

@@ -349,6 +349,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get onboardingContinue => 'Accepteren en doorgaan';
 
   @override
+  String get onboardingAllowSelfSigned => 'Allow Self-Signed Certificates';
+
+  @override
+  String get onboardingAllowSelfSignedDesc =>
+      'On Android the Certificate must be in the Device Certificate-Store';
+
+  @override
   String get sponsorblockEnable => 'SponsorBlock inschakelen';
 
   @override

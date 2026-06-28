@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
+import 'package:Self.Tube/common/data/services/api/http_overries.dart';
 import 'package:Self.Tube/common/data/services/device/device_service.dart';
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/common/theme/theme.dart';
@@ -16,6 +18,7 @@ Future<void> main() async {
   talker.info("Starting App");
   try {
     await SettingsService.load();
+    HttpOverrides.global = AppHttpOverrides();
     VideoPlayerService.init();
     await DeviceService.init();
     runApp(

@@ -349,6 +349,14 @@ class AppLocalizationsDe extends AppLocalizations {
   String get onboardingContinue => 'Zustimmen & Fortfahren';
 
   @override
+  String get onboardingAllowSelfSigned =>
+      'Erlaube Selbst-Signierte Zertifikate';
+
+  @override
+  String get onboardingAllowSelfSignedDesc =>
+      'Auf Android muss das Zertifikat im Zertifikats-Store sein';
+
+  @override
   String get sponsorblockEnable => 'SponsorBlock aktivieren';
 
   @override

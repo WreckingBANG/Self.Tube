@@ -12,6 +12,7 @@ class SettingsService {
   static const _apiTokenKey = 'apiToken';
   static const _sessionToken = 'sessionToken';
   static const _csrfToken = 'csrfToken';
+  static const _allowSelfSigned = 'allowSelfSigned';
 
   static const _showCommentPics = 'showCommentPics';
   static const _materialYouColors = 'materialYouColors';
@@ -38,6 +39,7 @@ class SettingsService {
   static String? apiToken;
   static String? sessionToken;
   static String? csrfToken;
+  static bool? allowSelfSigned;
 
   static bool? showCommentPics;
   static bool? materialYouColors;
@@ -71,6 +73,7 @@ class SettingsService {
     instanceUrl = data[_instanceUrlKey];
     apiTokenAuth = b(_apiTokenAuth);
     doneSetup = b(_doneSetup);
+    allowSelfSigned = b(_allowSelfSigned);
     
     showCommentPics = b(_showCommentPics);
     materialYouColors = b(_materialYouColors, true);
@@ -125,6 +128,11 @@ class SettingsService {
   static Future<void> setCSRFToken(String value) async {
     await _secure.write(key: _csrfToken, value: value);
     csrfToken = value;
+  }
+
+  static Future<void> setAllowSelfSigned(bool value) async {
+    await _persist(_allowSelfSigned, value);
+    allowSelfSigned = value;
   }
 
   static Future<void> setShowCommentPics(bool value) async {

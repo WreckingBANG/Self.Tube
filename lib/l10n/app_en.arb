@@ -110,6 +110,8 @@
     "onboardingMarketing4": "View your Videos in a native like experience",
     "onboardingPrivacyPolicy": "Privacy Policy",
     "onboardingContinue": "Agree & Continue",
+    "onboardingAllowSelfSigned": "Allow Self-Signed Certificates",
+    "onboardingAllowSelfSignedDesc": "On Android the Certificate must be in the Device Certificate-Store",
     "sponsorblockEnable": "Enable Sponsorblock",
     "sponsorblockSponsor": "Skip Sponsor",
     "sponsorblockSponsorHint": "Part of a video promoting a product or service not directly related to the creator.",

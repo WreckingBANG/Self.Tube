@@ -110,6 +110,8 @@
     "onboardingMarketing4": "Sieh dir deine Videos in einer nativen Benutzererfahrung an",
     "onboardingPrivacyPolicy": "Datenschutzerklärung",
     "onboardingContinue": "Zustimmen & Fortfahren",
+    "onboardingAllowSelfSigned": "Erlaube Selbst-Signierte Zertifikate",
+    "onboardingAllowSelfSignedDesc": "Auf Android muss das Zertifikat im Zertifikats-Store sein",
     "sponsorblockEnable": "SponsorBlock aktivieren",
     "sponsorblockSponsor": "Sponsor überspringen",
     "sponsorblockPromo": "Selbstwerbung überspringen",

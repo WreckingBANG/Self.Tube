@@ -1,3 +1,4 @@
+import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/features/onboarding/domain/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
@@ -24,11 +25,13 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
   late TabController _tabController;
   bool _isLoading = false; 
   bool _isLoggedIn = false;
+  bool _allowSelfSigned = false;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    _allowSelfSigned = SettingsService.allowSelfSigned ?? false;
   }
 
   @override
@@ -110,6 +113,25 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
               )
             ]
           )
+        ),
+        SwitchListTile(
+          thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.selected)) {
+                return const Icon(Icons.check);
+              }
+              return const Icon(Icons.close);
+            },
+          ),
+          title: Text(localizations.onboardingAllowSelfSigned),
+          subtitle: Text(localizations.onboardingAllowSelfSignedDesc),
+          value: _allowSelfSigned, 
+          onChanged: (bool value) {
+            setState( () {
+              _allowSelfSigned = value;
+              SettingsService.setAllowSelfSigned(value);
+            });
+          }
         ),
         ElevatedButton(
           onPressed: _isLoading || _isLoggedIn
