@@ -194,5 +194,13 @@
     "statsTitle": "Statystyki odtwarzania",
     "userStaff": "Pracownicy",
     "userSuperUser": "Superuser",
-    "aboutLog": "Dzienniki Systemowe"
+    "aboutLog": "Dzienniki Systemowe",
+    "errorConnectionFailed": "Połączenie z serwerem nie powiodło się.",
+    "errorTryAgain": "Spróbuj ponownie",
+    "errorNothingHere": "Nic tu nie ma…",
+    "errorCrickets": "…poza cykaniem świerszczy",
+    "onboardingAllowSelfSigned": "Zezwalaj na certyfikaty podpisane samodzielnie",
+    "onboardingAllowSelfSignedDesc": "W systemie Android certyfikat musi znajdować się w magazynie certyfikatów",
+    "taskQueue": "Kolejka",
+    "taskShowIgnored": "Pokaż tylko zignorowane filmy"
 }

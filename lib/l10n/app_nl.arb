@@ -194,5 +194,13 @@
     "statsTitle": "Afspeelstatistieken",
     "userStaff": "Medewerkers",
     "userSuperUser": "Supergebruiker",
-    "aboutLog": "Systeemlogboek"
+    "aboutLog": "Systeemlogboek",
+    "errorConnectionFailed": "Er kan geen verbinding worden gemaakt met de server.",
+    "errorTryAgain": "Opnieuw proberen",
+    "errorNothingHere": "Er valt hier niets te zien…",
+    "errorCrickets": "…behalve krekels",
+    "onboardingAllowSelfSigned": "Zelf-ondertekende certificaten toestaan",
+    "onboardingAllowSelfSignedDesc": "Op Android moet het certificaat zich in de certificaatopslag van het apparaat bevinden",
+    "taskQueue": "Wachtrij",
+    "taskShowIgnored": "Alleen genegeerde video's tonen"
 }
