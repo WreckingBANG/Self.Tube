@@ -73,16 +73,17 @@ class AppLocalizationsNl extends AppLocalizations {
   String get errorFailedToLoadData => 'Foutmelding: laden mislukt';
 
   @override
-  String get errorConnectionFailed => 'Failed to connect to Server.';
+  String get errorConnectionFailed =>
+      'Er kan geen verbinding worden gemaakt met de server.';
 
   @override
-  String get errorTryAgain => 'Try Again';
+  String get errorTryAgain => 'Opnieuw proberen';
 
   @override
-  String get errorNothingHere => 'Nothing here...';
+  String get errorNothingHere => 'Er valt hier niets te zien…';
 
   @override
-  String get errorCrickets => '...but crickets';
+  String get errorCrickets => '…behalve krekels';
 
   @override
   String get numberformatThousand => 'K';
@@ -349,11 +350,12 @@ class AppLocalizationsNl extends AppLocalizations {
   String get onboardingContinue => 'Accepteren en doorgaan';
 
   @override
-  String get onboardingAllowSelfSigned => 'Allow Self-Signed Certificates';
+  String get onboardingAllowSelfSigned =>
+      'Zelf-ondertekende certificaten toestaan';
 
   @override
   String get onboardingAllowSelfSignedDesc =>
-      'On Android the Certificate must be in the Device Certificate-Store';
+      'Op Android moet het certificaat zich in de certificaatopslag van het apparaat bevinden';
 
   @override
   String get sponsorblockEnable => 'SponsorBlock inschakelen';
@@ -623,10 +625,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get taskIgnore => 'Negeren';
 
   @override
-  String get taskQueue => 'Queue';
+  String get taskQueue => 'Wachtrij';
 
   @override
-  String get taskShowIgnored => 'Show only ignored videos';
+  String get taskShowIgnored => 'Alleen genegeerde video\'s tonen';
 
   @override
   String get taskDeleteFromQueue => 'Verwijderen uit wachtrij';

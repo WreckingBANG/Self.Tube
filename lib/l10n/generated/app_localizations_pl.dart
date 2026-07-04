@@ -73,16 +73,16 @@ class AppLocalizationsPl extends AppLocalizations {
   String get errorFailedToLoadData => 'Błąd: Ładowanie nie powiodło się';
 
   @override
-  String get errorConnectionFailed => 'Failed to connect to Server.';
+  String get errorConnectionFailed => 'Połączenie z serwerem nie powiodło się.';
 
   @override
-  String get errorTryAgain => 'Try Again';
+  String get errorTryAgain => 'Spróbuj ponownie';
 
   @override
-  String get errorNothingHere => 'Nothing here...';
+  String get errorNothingHere => 'Nic tu nie ma…';
 
   @override
-  String get errorCrickets => '...but crickets';
+  String get errorCrickets => '…poza cykaniem świerszczy';
 
   @override
   String get numberformatThousand => 'Tysiące';
@@ -349,11 +349,12 @@ class AppLocalizationsPl extends AppLocalizations {
   String get onboardingContinue => 'Zgadzam się i kontynuuj';
 
   @override
-  String get onboardingAllowSelfSigned => 'Allow Self-Signed Certificates';
+  String get onboardingAllowSelfSigned =>
+      'Zezwalaj na certyfikaty podpisane samodzielnie';
 
   @override
   String get onboardingAllowSelfSignedDesc =>
-      'On Android the Certificate must be in the Device Certificate-Store';
+      'W systemie Android certyfikat musi znajdować się w magazynie certyfikatów';
 
   @override
   String get sponsorblockEnable => 'Aktywuj SponsorBlock';
@@ -623,10 +624,10 @@ class AppLocalizationsPl extends AppLocalizations {
   String get taskIgnore => 'Ignorować';
 
   @override
-  String get taskQueue => 'Queue';
+  String get taskQueue => 'Kolejka';
 
   @override
-  String get taskShowIgnored => 'Show only ignored videos';
+  String get taskShowIgnored => 'Pokaż tylko zignorowane filmy';
 
   @override
   String get taskDeleteFromQueue => 'Usuń z kolejki';

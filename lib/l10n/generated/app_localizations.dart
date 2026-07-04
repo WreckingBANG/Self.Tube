@@ -245,13 +245,13 @@ abstract class AppLocalizations {
   /// No description provided for @errorNothingHere.
   ///
   /// In en, this message translates to:
-  /// **'Nothing here...'**
+  /// **'Nothing here…'**
   String get errorNothingHere;
 
   /// No description provided for @errorCrickets.
   ///
   /// In en, this message translates to:
-  /// **'...but crickets'**
+  /// **'…but crickets'**
   String get errorCrickets;
 
   /// No description provided for @numberformatThousand.

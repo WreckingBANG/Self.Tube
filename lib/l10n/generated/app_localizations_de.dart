@@ -79,10 +79,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get errorTryAgain => 'Erneut versuchen';
 
   @override
-  String get errorNothingHere => 'Nichts hier...';
+  String get errorNothingHere => 'Nichts hier…';
 
   @override
-  String get errorCrickets => '...außer das Zirpen der Grillen';
+  String get errorCrickets => '…außer das Zirpen der Grillen';
 
   @override
   String get numberformatThousand => 'Tsd.';
@@ -624,7 +624,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get taskIgnore => 'Ignorieren';
 
   @override
-  String get taskQueue => 'Queue';
+  String get taskQueue => 'Warteschlange';
 
   @override
   String get taskShowIgnored => 'Zeige nur ignorierte Videos';

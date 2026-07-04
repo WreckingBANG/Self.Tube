@@ -79,10 +79,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorTryAgain => 'Try Again';
 
   @override
-  String get errorNothingHere => 'Nothing here...';
+  String get errorNothingHere => 'Nothing here…';
 
   @override
-  String get errorCrickets => '...but crickets';
+  String get errorCrickets => '…but crickets';
 
   @override
   String get numberformatThousand => 'K';
