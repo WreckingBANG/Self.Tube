@@ -38,7 +38,7 @@ dependencies:
   talker: ^5.1.17
   talker_flutter: ^5.1.16
   material_symbols_icons: ^4.2928.1
-  flutter_m3shapes_extended: ^1.1.0
+  flutter_m3shapes_extended: 1.1.0
 
 dev_dependencies:
   flutter_test:
