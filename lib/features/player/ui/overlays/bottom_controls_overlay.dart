@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:Self.Tube/common/utils/duration_formatter.dart';
 import 'package:Self.Tube/features/player/domain/sponsorblock_service.dart';
 import 'package:Self.Tube/features/player/domain/video_player_interface.dart';
-import 'package:Self.Tube/features/player/domain/video_player_service.dart';
 import 'package:flutter/material.dart';
 
 class BottomControlsOverlay extends StatefulWidget {
@@ -163,6 +162,7 @@ class SliderPainter extends CustomPainter{
   void paint(Canvas canvas, Size size) {
     final videoLength = player.duration.inSeconds.toDouble();
     final videoPos = player.position.inSeconds.toDouble();
+    final bufferingPos = player.buffered.inSeconds.toDouble();
     final segments = SponsorblockService.processedSegments;
         
     canvas.drawRRect(
@@ -171,6 +171,14 @@ class SliderPainter extends CustomPainter{
         Radius.circular(20)
       ),
       Paint()..color = Theme.of(context).colorScheme.surface
+    );
+
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(0,0,size.width/videoLength*bufferingPos,10),
+        Radius.circular(20)
+      ),
+      Paint()..color = Theme.of(context).colorScheme.surfaceContainerHighest
     );
 
     canvas.drawRRect(
