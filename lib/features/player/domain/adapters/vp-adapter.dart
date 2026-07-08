@@ -150,6 +150,9 @@ class VideoPlayerAdapter implements MediaPlayer {
 
   @override
   Stream<bool> get isBuffering => _bufferingController.stream;
+
+  @override
+  Duration get buffered => _controller.value.buffered.last.end;
   
   @override
   Size get size => _controller.value.size;

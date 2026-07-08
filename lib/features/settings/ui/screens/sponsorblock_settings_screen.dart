@@ -3,6 +3,7 @@ import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.da
 import 'package:Self.Tube/common/ui/widgets/tiles/header_switch_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'package:flutter_m3shapes_extended/flutter_m3shapes_extended.dart';
 
 class SponsorblockSettingsScreen extends StatefulWidget {
   const SponsorblockSettingsScreen({super.key});
@@ -96,6 +97,12 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
                           return const Icon(Icons.close);
                         },
                       ),
+                      secondary: M3EContainer.c4SidedCookie(
+                        width: 30,
+                        height: 30,
+                        child: SizedBox(),
+                        color: Colors.green,
+                      ),
                       title: Text(localizations.sponsorblockSponsor),
                       subtitle: Text(localizations.sponsorblockSponsorHint),
                       value: _enableSponsor,
@@ -114,6 +121,12 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
                           }
                           return const Icon(Icons.close);
                         },
+                      ),
+                      secondary: M3EContainer.c4SidedCookie(
+                        width: 30,
+                        height: 30,
+                        child: SizedBox(),
+                        color: Colors.yellow,
                       ),
                       title: Text(localizations.sponsorblockPromo),
                       subtitle: Text(localizations.sponsorblockPromoHint),
@@ -134,6 +147,12 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
                           return const Icon(Icons.close);
                         },
                       ),
+                      secondary: M3EContainer.c4SidedCookie(
+                        width: 30,
+                        height: 30,
+                        child: SizedBox(),
+                        color: Colors.pink,
+                      ),
                       title: Text(localizations.sponsorblockInteraction),
                       subtitle: Text(localizations.sponsorblockInteractionHint),
                       value: _enableInteraction,
@@ -152,6 +171,12 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
                           }
                           return const Icon(Icons.close);
                         },
+                      ),
+                      secondary: M3EContainer.c4SidedCookie(
+                        width: 30,
+                        height: 30,
+                        child: SizedBox(),
+                        color: Colors.teal,
                       ),
                       title: Text(localizations.sponsorblockIntro),
                       subtitle: Text(localizations.sponsorblockIntroHint),
@@ -172,6 +197,12 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
                           return const Icon(Icons.close);
                         },
                       ),
+                      secondary: M3EContainer.c4SidedCookie(
+                        width: 30,
+                        height: 30,
+                        child: SizedBox(),
+                        color: Colors.blue,
+                      ),
                       title: Text(localizations.sponsorblockOutro),
                       subtitle: Text(localizations.sponsorblockOutroHint),
                       value: _enableOutro,
@@ -190,6 +221,12 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
                           }
                           return const Icon(Icons.close);
                         },
+                      ),
+                      secondary: M3EContainer.c4SidedCookie(
+                        width: 30,
+                        height: 30,
+                        child: SizedBox(),
+                        color: Colors.lightBlue,
                       ),
                       title: Text(localizations.sponsorblockPreview),
                       subtitle: Text(localizations.sponsorblockPreviewHint),
@@ -210,6 +247,12 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
                           return const Icon(Icons.close);
                         },
                       ),
+                      secondary: M3EContainer.c4SidedCookie(
+                        width: 30,
+                        height: 30,
+                        child: SizedBox(),
+                        color: Colors.blueAccent,
+                      ),
                       title: Text(localizations.sponsorblockHook),
                       subtitle: Text(localizations.sponsorblockHookHint),
                       value: _enableHook,
@@ -228,6 +271,12 @@ class _SponsorblockSettingsScreenState extends State<SponsorblockSettingsScreen>
                           }
                           return const Icon(Icons.close);
                         },
+                      ),
+                      secondary: M3EContainer.c4SidedCookie(
+                        width: 30,
+                        height: 30,
+                        child: SizedBox(),
+                        color: Colors.purple,
                       ),
                       title: Text(localizations.sponsorblockFiller),
                       subtitle: Text(localizations.sponsorblockFillerHint),

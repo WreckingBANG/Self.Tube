@@ -85,6 +85,7 @@ class MediaKitAdapter implements MediaPlayer {
   String backend() => "MPV";
 
   Stream<bool> get isBuffering => _player.stream.buffering;
+  Duration get buffered => _player.state.buffer;
 
   @override
   Size get size => Size(_player.state.width?.toDouble() ?? 0, _player.state.height?.toDouble() ?? 0);

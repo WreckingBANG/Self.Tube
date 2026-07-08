@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
 enum BorderMode { 
   contain,
@@ -29,6 +30,7 @@ abstract class MediaPlayer {
   String backend();
 
   Stream<bool> get isBuffering;
+  Duration get buffered;
 
   Future<void> seek(Duration position);
   

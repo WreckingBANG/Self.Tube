@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class SponsorblockService  {
   static dynamic _video;
-  static final _processedSegments = [];
+  static final processedSegments = [];
   
   static void init(final video) {
     _video = video; 
@@ -28,7 +28,7 @@ class SponsorblockService  {
         final isEnabled = entry.value;
         
         if (isEnabled && segment.category.toLowerCase() == categoryName) {
-          _processedSegments.add([
+          processedSegments.add([
             categoryName,
             segment.segment[0].round(),
             segment.segment[1].round(),
@@ -40,8 +40,8 @@ class SponsorblockService  {
   }
 
   static void checkTimestamp(Duration position) {
-    for (var i = 0; i < (_processedSegments).length; i++) {
-      final segment = _processedSegments[i];
+    for (var i = 0; i < (processedSegments).length; i++) {
+      final segment = processedSegments[i];
       final start = segment[1].round();
       final end = segment[2].round();
       final category = segment[0].toLowerCase();
@@ -60,7 +60,7 @@ class SponsorblockService  {
       actionLabel: localizations.playerSBUndo,
       icon: Icons.money_off,
       onAction: () {
-        _processedSegments[i][3] = true;
+        processedSegments[i][3] = true;
         VideoPlayerService.player?.seek(Duration(seconds: start-1)); 
       }
     );
@@ -68,7 +68,7 @@ class SponsorblockService  {
 
   static void dispose() {
     _video = null;
-    _processedSegments.clear();
+    processedSegments.clear();
   }
 
 }
