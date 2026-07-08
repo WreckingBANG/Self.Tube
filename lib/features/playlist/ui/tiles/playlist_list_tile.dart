@@ -55,7 +55,7 @@ class PlaylistListTile extends ConsumerWidget {
                           Navigator.pushNamed(
                             context, 
                             AppRouter.channelpageScreen,
-                            arguments: playlist.channelId
+                            arguments: playlist.playlistChannelId
                           );
                         },
                         child: Row(
