@@ -3,6 +3,7 @@ import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:Self.Tube/features/player/ui/tiles/mini_player_tile.dart';
 import 'package:Self.Tube/features/playlist/domain/playlistpage_provider.dart';
+import 'package:Self.Tube/features/playlist/ui/sheets/playlist_list_bottomsheet.dart';
 import 'package:Self.Tube/features/videos/domain/videolist_provider.dart';
 import 'package:Self.Tube/features/videos/ui/sections/video_list_section.dart';
 import 'package:flutter/material.dart';
@@ -24,22 +25,38 @@ class PlaylistpageScreen extends ConsumerWidget{
     final provider = ref.read(playlistPageProvider(playlistId).notifier);
     final playlist = ref.watch(playlistPageProvider(playlistId));
     final query = "?playlist=$playlistId";
+  
+    return playlist.when(
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
+      data: (playlist) {
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(localizations.playlistTitle),
-      ),
-      body: MiniPlayerTile(
-        child: RefreshIndicator(
-          onRefresh: () async {
-            ref.invalidate(playlistPageProvider);
-            ref.read(videoListProvider(query).notifier).refresh();
-          },
-          child: playlist.when(
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
-            data: (playlist) {
-              return ListView(
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(localizations.playlistTitle),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  showPlaylistListBottomSheet(
+                    context: context, 
+                    playlist: playlist, 
+                    onDelete: () {
+                      provider.deletePlaylist(playlistId);
+                      Navigator.pop(context);
+                    }
+                  );
+                },
+                icon: Icon(Icons.more_vert)
+              ),
+            ],
+          ),
+          body: MiniPlayerTile(
+            child: RefreshIndicator(
+              onRefresh: () async {
+                ref.invalidate(playlistPageProvider);
+                ref.read(videoListProvider(query).notifier).refresh();
+              },
+              child: ListView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 children: [
                   ListTile(
@@ -82,11 +99,11 @@ class PlaylistpageScreen extends ConsumerWidget{
                     playlistType: playlist.playlistType,
                   ),
                 ] 
-              );
-            }
+              )
+            )
           )
-        )
-      )
+        );
+      }
     );
   }
 }

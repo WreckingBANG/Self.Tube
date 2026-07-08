@@ -16,6 +16,10 @@ class PlaylistPageNotifier extends AsyncNotifier<PlaylistListItemModel?> {
     state = await AsyncValue.guard(() => PlaylistApi().fetchPlaylist(id));
   }
 
+  Future<void> deletePlaylist(String id) async {
+    await PlaylistApi.deletePlaylist(id, false);
+  }
+
 }
 
 final playlistPageProvider = AsyncNotifierProvider.autoDispose.family<PlaylistPageNotifier, PlaylistListItemModel?, String>(
