@@ -13,7 +13,11 @@ class MediaKitAdapter implements MediaPlayer {
   final ValueNotifier<BorderMode> _borderModeNotifier = ValueNotifier(BorderMode.contain);
 
   MediaKitAdapter(String url, {Map<String, String>? headers})
-      : _player = Player() {
+      : _player = Player(
+        configuration: PlayerConfiguration(
+          bufferSize: 32 * 1024 * 1024
+        )
+      ) {
       
       final p = _player.platform as dynamic;
       
