@@ -29,7 +29,6 @@ class VideoPlayerAdapter implements MediaPlayer {
       : _controller = VideoPlayerController.networkUrl(
           Uri.parse(url),
           httpHeaders: headers ?? const {},
-          viewType: VideoViewType.platformView
         ) {
     _initialized = _controller.initialize().then((_) {
       if (!_controller.value.isInitialized) return;
