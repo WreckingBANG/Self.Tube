@@ -1,6 +1,7 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/features/search/domain/search_provider.dart';
 import 'package:Self.Tube/features/search/domain/search_query_provider.dart';
+import 'package:Self.Tube/features/videos/ui/sheets/video_list_bottomsheet.dart';
 import 'package:Self.Tube/features/videos/ui/tiles/video_list_tile.dart';
 import 'package:Self.Tube/features/channel/ui/tiles/channel_list_tile.dart';
 import 'package:Self.Tube/features/playlist/ui/tiles/playlist_list_tile.dart';
@@ -109,10 +110,18 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                           itemBuilder: (context, index) {
                             final video = search.videos[index];
                             return VideoListTile(
-                              video: video, 
+                              video: video,
+                              query: "search",
                               hideChannel: false,
-                              onWatched: (value) => provider.setVideoWatched(value, video.youtubeId),
-                              onDelete: () => provider.deleteVideo(video.youtubeId)
+                              onLongPress: () {
+                                showVideoListBottomSheet(
+                                  context: context,
+                                  video: video, 
+                                  hideChannel: false,
+                                  onWatched: (value) => provider.setVideoWatched(value, video.youtubeId),
+                                  onDelete: () => provider.deleteVideo(video.youtubeId)
+                                );
+                              }
                             );
                           },
                         ),

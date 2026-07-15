@@ -4,34 +4,38 @@ import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:Self.Tube/features/player/domain/video_player_service.dart';
 import 'package:Self.Tube/features/playlist/data/api/playlist_api.dart';
-import 'package:Self.Tube/features/videos/ui/sheets/video_list_bottomsheet.dart';
 import 'package:Self.Tube/common/utils/duration_formatter.dart';
 import 'package:Self.Tube/common/utils/number_formatter.dart';
 import 'package:Self.Tube/common/utils/timeago_formatter.dart';
+import 'package:Self.Tube/features/videos/domain/selection_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class VideoListTile extends StatelessWidget {
+class VideoListTile extends ConsumerWidget {
   final dynamic video;
+  final String query;
   final bool hideChannel;
   final String playlistId;
   final String playlistType;
-  final void Function()? onDelete;
-  final void Function(bool watched)? onWatched;
+  final void Function()? onLongPress;
 
   const VideoListTile({
     super.key, 
     required this.video,
+    required this.query,
     required this.hideChannel,
-    required this.onDelete,
-    required this.onWatched,
+    required this.onLongPress,
     this.playlistId = "",
     this.playlistType = "",
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context)!;
+
+    final selection = ref.watch(selectionProvider(query));
+
     return SizedBox(
       width: double.infinity,
       child: InkWell(
@@ -75,7 +79,10 @@ class VideoListTile extends StatelessWidget {
                             style: const TextStyle(fontSize: 10, color: Colors.white),
                           ),
                         ),
-                      )
+                      ),
+                      if (selection.contains(video.youtubeId))
+                        Text("isSelected"),
+
                     ],
                   ),
                 )   
@@ -164,15 +171,7 @@ class VideoListTile extends StatelessWidget {
         onTap: () {
           VideoPlayerService.loadVideo(video.youtubeId, true, context);
         },
-        onLongPress: () {
-          showVideoListBottomSheet(
-            context: context,
-            video: video, 
-            hideChannel: hideChannel,
-            onWatched: onWatched,
-            onDelete: onDelete
-          );
-        },
+        onLongPress: () => onLongPress?.call()
       ),
     );
   }
