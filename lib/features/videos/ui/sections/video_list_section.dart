@@ -1,6 +1,8 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/common/ui/widgets/sections/empty_error_section.dart';
 import 'package:Self.Tube/common/ui/widgets/sections/sort_chips_section.dart';
+import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
+import 'package:Self.Tube/features/player/domain/video_player_service.dart';
 import 'package:Self.Tube/features/videos/domain/selection_provider.dart';
 import 'package:Self.Tube/features/videos/domain/videolist_provider.dart';
 import 'package:Self.Tube/features/videos/ui/containers/continue_watching_list.dart';
@@ -60,14 +62,86 @@ class VideoListSection extends ConsumerWidget {
               return const SizedBox.shrink();
             } 
             
-            return Positioned(
-              bottom: 16,
-              right: 16,
-              child: FloatingActionButton.extended(
-                onPressed: () {},
-                icon: Icon(Icons.more_vert),
-                label: Text("Actions")
-              )
+            return DraggableScrollableSheet(
+                snap: true,
+                maxChildSize: 0.6,
+                initialChildSize: 0.2,
+                minChildSize: 0.2,
+                builder: (context, scrollController) {
+                  return Material(
+                    child: SingleChildScrollView(
+                      controller: scrollController,
+                      child: Column(
+                        children: [
+                          SizedBox(height: 15),
+                          ListSectionContainer(
+                            title: localizations.sheetLocalActions,
+                            children: [
+                              ListTile(
+                                leading: Icon(Icons.timer_outlined),
+                                title: Text(localizations.sheetMarkWatched),
+                                onTap: () {
+                                },
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.timer_off_outlined),
+                                title: Text(localizations.sheetMarkUnwatched),
+                                onTap: () {
+                                },
+                              ),
+                              if (!hideChannel)
+                                ListTile(
+                                  leading: Icon(Icons.person_2_rounded),
+                                  title: Text(localizations.sheetOpenChannel),
+                                  onTap: () {
+                                  },
+                                ),
+                              ListTile(
+                                leading: Icon(Icons.share),
+                                title: Text(localizations.sheetShare),
+                                onTap: () {
+                                },
+                              ),
+                              if (UserSession.isPrivileged)
+                                ListTile(
+                                  leading: Icon(Icons.playlist_add_check_rounded),
+                                  title: Text("Add to Playlist"),
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ListTile(
+                                leading: Icon(Icons.file_download_outlined),
+                                title: Text(localizations.sheetDownloadLocal),
+                                subtitle: Text(localizations.sheetComingSoon),
+                                onTap: () {},
+                              ),
+                            ]
+                          ),
+                          if (UserSession.isPrivileged)
+                            ListSectionContainer(
+                              title: localizations.sheetServerActions,
+                              children: [
+                                ListTile(
+                                  leading: Icon(Icons.cloud_download),
+                                  title: Text(localizations.sheetRedownloadServer),
+                                  onTap: () async {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                                ListTile(
+                                  leading: Icon(Icons.cloud_off_rounded),
+                                  title: Text(localizations.sheetDeleteVideoServer),
+                                  onTap: () {
+                                  },
+                                ),
+                              ]
+                            ),
+                        ],
+                      )
+                    )
+                  );
+                },
             );
 
           },
@@ -122,6 +196,13 @@ class VideoListSection extends ConsumerWidget {
                       hideChannel: hideChannel, 
                       playlistId: playlistId, 
                       playlistType: playlistType,
+                      onPress: () {
+                        if (selection.isNotEmpty) {
+                          select.toggle(video.youtubeId);
+                        } else {
+                          VideoPlayerService.loadVideo(video.youtubeId, true, context);
+                        }
+                      },
                       onLongPress:() {
                         select.toggle(video.youtubeId);
                         //showVideoListBottomSheet(

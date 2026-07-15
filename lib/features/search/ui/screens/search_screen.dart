@@ -1,4 +1,5 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/features/player/domain/video_player_service.dart';
 import 'package:Self.Tube/features/search/domain/search_provider.dart';
 import 'package:Self.Tube/features/search/domain/search_query_provider.dart';
 import 'package:Self.Tube/features/videos/ui/sheets/video_list_bottomsheet.dart';
@@ -113,6 +114,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                               video: video,
                               query: "search",
                               hideChannel: false,
+                              onPress: () => VideoPlayerService.loadVideo(video.youtubeId, true, context),
                               onLongPress: () {
                                 showVideoListBottomSheet(
                                   context: context,

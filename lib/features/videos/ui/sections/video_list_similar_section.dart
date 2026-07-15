@@ -1,5 +1,6 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/common/ui/widgets/sections/empty_error_section.dart';
+import 'package:Self.Tube/features/player/domain/video_player_service.dart';
 import 'package:Self.Tube/features/videos/domain/videolist_similar_provider.dart';
 import 'package:Self.Tube/features/videos/ui/sheets/video_list_bottomsheet.dart';
 import 'package:Self.Tube/features/videos/ui/tiles/video_list_tile.dart';
@@ -39,6 +40,7 @@ class VideoListSimilarSection extends ConsumerWidget {
                 video: video,
                 query: query,
                 hideChannel: false,
+                onPress: () => VideoPlayerService.openPlayer(video.youtubeId),
                 onLongPress: () {
                   showVideoListBottomSheet(
                     context: context,

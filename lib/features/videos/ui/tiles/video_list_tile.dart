@@ -2,7 +2,6 @@ import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/media/custom_network_image.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
-import 'package:Self.Tube/features/player/domain/video_player_service.dart';
 import 'package:Self.Tube/features/playlist/data/api/playlist_api.dart';
 import 'package:Self.Tube/common/utils/duration_formatter.dart';
 import 'package:Self.Tube/common/utils/number_formatter.dart';
@@ -18,6 +17,7 @@ class VideoListTile extends ConsumerWidget {
   final bool hideChannel;
   final String playlistId;
   final String playlistType;
+  final void Function()? onPress;
   final void Function()? onLongPress;
 
   const VideoListTile({
@@ -25,6 +25,7 @@ class VideoListTile extends ConsumerWidget {
     required this.video,
     required this.query,
     required this.hideChannel,
+    required this.onPress,
     required this.onLongPress,
     this.playlistId = "",
     this.playlistType = "",
@@ -168,9 +169,7 @@ class VideoListTile extends ConsumerWidget {
               : SizedBox()
           ],
         ),
-        onTap: () {
-          VideoPlayerService.loadVideo(video.youtubeId, true, context);
-        },
+        onTap: () => onPress?.call(),
         onLongPress: () => onLongPress?.call()
       ),
     );
