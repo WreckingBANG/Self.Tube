@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://codeberg.org/WreckingBANG/Self.Tube/raw/branch/main/assets/branding/selftube_banner.png" alt="Logo">
+  <img src="assets/branding/selftube_banner.png" alt="Logo">
 </p>
 
 ---
@@ -21,8 +21,8 @@ With a streamlined interface and direct connection to your TubeArchivist server,
 ## Download
 
 <div style="display: flex; gap: 5px;">
-  <a href="https://codeberg.org/wreckingbang/self.tube/releases/latest"><img height=50 alt="Get Self.Tube on Codeberg" src="./docs/readme/download_codeberg.png"/></a>
-  <a href="https://apps.obtainium.imranr.dev/redirect.html?r=obtainium://add/https://codeberg.org/wreckingbang/self.tube"><img height=50 alt="Add Self.Tube to Obtainium" src="./docs/readme/download_obtainium.png"/></a>
+  <a href="https://codeberg.org/wreckingbang/self.tube/releases/latest"><img height=50 alt="Get Self.Tube on Codeberg" src="docs/readme/download_codeberg.png"/></a>
+  <a href="https://apps.obtainium.imranr.dev/redirect.html?r=obtainium://add/https://codeberg.org/wreckingbang/self.tube"><img height=50 alt="Add Self.Tube to Obtainium" src="docs/readme/download_obtainium.png"/></a>
 </div>
 
 ## Features
