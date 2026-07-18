@@ -58,11 +58,18 @@ class _HomeContainerState extends State<HomeContainer> {
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
-        leadingWidth: 60,
-        leading: Image.asset(
-          'assets/appicon.png',
-          width: 60,
-          color: Theme.of(context).colorScheme.primary,
+        leadingWidth: 55,
+        leading: Row(
+          children: [
+            SizedBox(width: 15),
+            Image.asset(
+              'assets/branding/selftube_icon_transparent.png',
+              height: 30,
+              width: 30,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            SizedBox(width: 10),
+          ]
         ),
         title: Text(localizations.appTitle),
         actions: [

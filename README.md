@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="https://codeberg.org/WreckingBANG/Self.Tube/raw/branch/main/assets/appicon_filled.png" alt="Logo" width="220">
+  <img src="https://codeberg.org/WreckingBANG/Self.Tube/raw/branch/main/assets/branding/selftube_banner.png" alt="Logo">
 </p>
 
-# Self.Tube
+---
 
 **Self.Tube** will be a sleek, lightweight client for [TubeArchivist](https://github.com/tubearchivist/tubearchivist), designed to bring your personal YouTube archive right to your Android or Linux phone.
 
