@@ -26,7 +26,7 @@ class AboutScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Image.asset(
-                          'assets/appicon_filled.png',
+                          'assets/branding/selftube_icon_filled.png',
                           width: 100,
                           height: 100,
                         ),

@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="https://codeberg.org/WreckingBANG/Self.Tube/raw/branch/main/assets/appicon_filled.png" alt="Logo" width="220">
+  <img src="assets/branding/selftube_banner.png" alt="Logo">
 </p>
 
-# Self.Tube
+---
 
 **Self.Tube** will be a sleek, lightweight client for [TubeArchivist](https://github.com/tubearchivist/tubearchivist), designed to bring your personal YouTube archive right to your Android or Linux phone.
 
@@ -21,8 +21,8 @@ With a streamlined interface and direct connection to your TubeArchivist server,
 ## Download
 
 <div style="display: flex; gap: 5px;">
-  <a href="https://codeberg.org/wreckingbang/self.tube/releases/latest"><img height=50 alt="Get Self.Tube on Codeberg" src="./docs/readme/download_codeberg.png"/></a>
-  <a href="https://apps.obtainium.imranr.dev/redirect.html?r=obtainium://add/https://codeberg.org/wreckingbang/self.tube"><img height=50 alt="Add Self.Tube to Obtainium" src="./docs/readme/download_obtainium.png"/></a>
+  <a href="https://codeberg.org/wreckingbang/self.tube/releases/latest"><img height=50 alt="Get Self.Tube on Codeberg" src="docs/readme/download_codeberg.png"/></a>
+  <a href="https://apps.obtainium.imranr.dev/redirect.html?r=obtainium://add/https://codeberg.org/wreckingbang/self.tube"><img height=50 alt="Add Self.Tube to Obtainium" src="docs/readme/download_obtainium.png"/></a>
 </div>
 
 ## Features
