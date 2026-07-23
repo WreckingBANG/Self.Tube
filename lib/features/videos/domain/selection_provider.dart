@@ -1,3 +1,4 @@
+import 'package:Self.Tube/features/videos/domain/videolist_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SelectionNotifier extends Notifier<List<String>> {
@@ -19,9 +20,28 @@ class SelectionNotifier extends Notifier<List<String>> {
     } else {
       state = [...state, videoId]; 
     }
-    print("triggered");
     print(state);
   }
+  
+  void clear() {
+    state = [];
+  }
+
+  void setWatched(bool value) async {
+    final p = ref.read(videoListProvider(query).notifier);
+    for (final video in state) {
+      await p.setWatched(value, video);
+      toggle(video);
+    }  
+  }
+
+  void deleteVideos() async {
+    final p = ref.read(videoListProvider(query).notifier);
+    for (final video in state) {
+      await p.deleteVideo(video);
+      toggle(video);
+    }  
+  } 
 
 
 }

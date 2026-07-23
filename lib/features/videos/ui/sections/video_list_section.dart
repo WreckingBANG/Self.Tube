@@ -1,4 +1,5 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/common/ui/widgets/sections/empty_error_section.dart';
 import 'package:Self.Tube/common/ui/widgets/sections/sort_chips_section.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
@@ -73,6 +74,13 @@ class VideoListSection extends ConsumerWidget {
                       controller: scrollController,
                       child: Column(
                         children: [
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: IconButton(
+                              onPressed: () => select.clear(), 
+                              icon: Icon(Icons.close)
+                            ),
+                          ),
                           SizedBox(height: 15),
                           ListSectionContainer(
                             title: localizations.sheetLocalActions,
@@ -81,27 +89,30 @@ class VideoListSection extends ConsumerWidget {
                                 leading: Icon(Icons.timer_outlined),
                                 title: Text(localizations.sheetMarkWatched),
                                 onTap: () {
+                                  select.setWatched(true);
                                 },
                               ),
                               ListTile(
                                 leading: Icon(Icons.timer_off_outlined),
                                 title: Text(localizations.sheetMarkUnwatched),
                                 onTap: () {
+                                  select.setWatched(false);
                                 },
                               ),
-                              if (!hideChannel)
+                              if (!hideChannel && selection.length == 1)
                                 ListTile(
                                   leading: Icon(Icons.person_2_rounded),
                                   title: Text(localizations.sheetOpenChannel),
                                   onTap: () {
                                   },
                                 ),
-                              ListTile(
-                                leading: Icon(Icons.share),
-                                title: Text(localizations.sheetShare),
-                                onTap: () {
-                                },
-                              ),
+                              if (selection.length == 1)
+                                ListTile(
+                                  leading: Icon(Icons.share),
+                                  title: Text(localizations.sheetShare),
+                                  onTap: () {
+                                  },
+                                ),
                               if (UserSession.isPrivileged)
                                 ListTile(
                                   leading: Icon(Icons.playlist_add_check_rounded),
@@ -133,6 +144,10 @@ class VideoListSection extends ConsumerWidget {
                                   leading: Icon(Icons.cloud_off_rounded),
                                   title: Text(localizations.sheetDeleteVideoServer),
                                   onTap: () {
+                                    ConfirmationDialog(
+                                      context: context,
+                                      onSure: select.deleteVideos
+                                    ); 
                                   },
                                 ),
                               ]
@@ -205,13 +220,6 @@ class VideoListSection extends ConsumerWidget {
                       },
                       onLongPress:() {
                         select.toggle(video.youtubeId);
-                        //showVideoListBottomSheet(
-                        //  context: context,
-                        //  video: video, 
-                        //  hideChannel: hideChannel,
-                        //  onWatched: (value) => provider.setWatched(value, video.youtubeId),
-                        //  onDelete: () => provider.deleteVideo(video.youtubeId)
-                        //);
                       },
                     );
                    }
