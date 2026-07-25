@@ -54,36 +54,74 @@ class VideoListTile extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(4)
                   ),
                   child: Stack(
-                    alignment: Alignment.bottomCenter,
+                    alignment: Alignment.center,
                     children: [
-                      CustomNetworkImage(
-                        imageLink: video.thumbnail,
-                        logicalWidth: 170,
-                      ),
-                      video.progress != 0 || video.watched == true
-                        ? LinearProgressIndicator(
-                            value: video.progress != 0 ? video.progress / 100 : 1.0,
-                            minHeight: 4,
-                          )
-                        : SizedBox.shrink(),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Container(
-                          margin: const EdgeInsets.all(4),
-                          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-                          decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.7),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Text(
-                            formatDuration(video.duration),
-                            style: const TextStyle(fontSize: 10, color: Colors.white),
-                          ),
-                        ),
-                      ),
                       if (selection.contains(video.youtubeId))
-                        Text("isSelected"),
-
+                        Container(
+                          width: 170, 
+                          color: Theme.of(context).colorScheme.primary 
+                        ),
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        curve: Curves.easeInOut,                         
+                        width: selection.contains(video.youtubeId) ? 150.0 : 170.0,
+                        clipBehavior: Clip.antiAlias,                         
+                        decoration: BoxDecoration(
+                          borderRadius: selection.contains(video.youtubeId)
+                              ? BorderRadius.circular(15)
+                              : BorderRadius.zero,
+                        ),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            ColorFiltered(
+                              colorFilter: ColorFilter.mode(
+                                selection.contains(video.youtubeId)
+                                  ? Colors.black.withOpacity(0.25)
+                                  : Colors.transparent,
+                                BlendMode.srcATop,
+                              ),
+                              child: CustomNetworkImage(
+                                imageLink: video.thumbnail,
+                                logicalWidth: 170, 
+                              ),
+                            ),
+                            if (selection.contains(video.youtubeId))
+                              Positioned(
+                                top: 2,
+                                left: 2,
+                                child: Icon(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  Icons.check_circle)
+                              ),
+                            (video.progress != 0 || video.watched == true) && !selection.contains(video.youtubeId)
+                              ? Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: LinearProgressIndicator(
+                                    value: video.progress != 0 ? video.progress / 100 : 1.0,
+                                    minHeight: 4,
+                                  )
+                                )
+                              : SizedBox.shrink(),
+                            Positioned(
+                              bottom: 2,
+                              right: 2,
+                              child: Container(
+                                margin: const EdgeInsets.all(4),
+                                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Text(
+                                  formatDuration(video.duration),
+                                  style: const TextStyle(fontSize: 10, color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      ),
                     ],
                   ),
                 )   
