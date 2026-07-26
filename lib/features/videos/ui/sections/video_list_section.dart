@@ -39,6 +39,8 @@ class VideoListSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context)!;
+    final mediaQuery =  MediaQuery.of(context);
+    final usableSpace = (mediaQuery.size.height - mediaQuery.padding.top - mediaQuery.padding.bottom)-56;
 
     final provider = ref.read(videoListProvider(query).notifier);
     final videos = ref.watch(videoListProvider(query));
@@ -140,7 +142,9 @@ class VideoListSection extends ConsumerWidget {
                       child: Text(localizations.listShowMore),
                     ),
                   ),
-                )
+                ),
+              if (selection.isNotEmpty)
+                SizedBox(height: usableSpace*20/100)
             ]
           )
         );
