@@ -1,6 +1,8 @@
+import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
+import 'package:Self.Tube/features/playlist/ui/dialogs/add_to_playlist_dialog.dart';
 import 'package:Self.Tube/features/videos/domain/selection_provider.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -93,6 +95,11 @@ class VideoListMultiselectSheet extends ConsumerWidget {
                           leading: Icon(Icons.person_2_rounded),
                           title: Text(localizations.sheetOpenChannel),
                           onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              AppRouter.channelpageScreen,
+                              arguments: select.getChannelId(selection[0])  
+                            ); 
                           },
                         ),
                       if (selection.length == 1)
@@ -109,17 +116,19 @@ class VideoListMultiselectSheet extends ConsumerWidget {
                         ListTile(
                           leading: Icon(Icons.playlist_add_check_rounded),
                           title: Text("Add to Playlist"),
-                          onTap: () {
-                            Navigator.pop(context);
+                          onTap: () async {
+                            final playlistId = await showDialog(
+                              context: context,
+                              builder: (context) => AddToPlaylistDialog(returnOnly: true)
+                            );
+                            select.addToPlaylist(playlistId);
                           },
                         ),
                       ListTile(
                         leading: Icon(Icons.file_download_outlined),
                         title: Text(localizations.sheetDownloadLocal),
                         subtitle: Text(localizations.sheetComingSoon),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
+                        onTap: () {},
                       ),
                     ]
                   ),

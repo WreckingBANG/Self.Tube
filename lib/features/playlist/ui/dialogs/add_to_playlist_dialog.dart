@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 class AddToPlaylistDialog extends StatefulWidget {
   final String videoId;
+  final bool returnOnly;
 
   const AddToPlaylistDialog({
     super.key,
-    required this.videoId
+    this.videoId = "",
+    this.returnOnly = false
   });
 
   @override
@@ -88,9 +90,9 @@ class _AddToPlaylistDialogState extends State<AddToPlaylistDialog> {
 
             ElevatedButton(
               onPressed: () {
-                print(selectedPlaylist);
-                print(widget.videoId);
-                PlaylistApi.modifyCustomPlaylistItems(selectedPlaylist!, widget.videoId, "create");
+                if (!widget.returnOnly) {
+                  PlaylistApi.modifyCustomPlaylistItems(selectedPlaylist!, widget.videoId, "create");
+                }
                 Navigator.pop(context, selectedPlaylist);
               },
               child: const Text('Add'),
