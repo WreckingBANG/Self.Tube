@@ -31,103 +31,130 @@ class VideoListMultiselectSheet extends ConsumerWidget {
       minChildSize: 0.2,
       builder: (context, scrollController) {
         return Material(
-          child: SingleChildScrollView(
-            controller: scrollController,
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.topRight,
-                  child: IconButton(
-                    onPressed: () => select.clear(), 
-                    icon: Icon(Icons.close)
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            )
+          ),
+          elevation: 10,
+          //color: Theme.of(context).colorScheme.surfaceContainerLow,
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: 15,
+              left: 5,
+              right: 5
+            ),
+            child: SingleChildScrollView(
+              controller: scrollController,
+              child: Column(
+                children: [
+                  SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 10
+                        ),
+                        child: Text(selection.length.toString())                   
+                      ),
+                      const Spacer(),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          right: 10
+                        ),
+                        child: IconButton(
+                          onPressed: () => select.clear(), 
+                          icon: Icon(Icons.close)
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                SizedBox(height: 15),
-                ListSectionContainer(
-                  title: localizations.sheetLocalActions,
-                  children: [
-                    ListTile(
-                      leading: Icon(Icons.timer_outlined),
-                      title: Text(localizations.sheetMarkWatched),
-                      onTap: () {
-                        select.setWatched(true);
-                      },
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.timer_off_outlined),
-                      title: Text(localizations.sheetMarkUnwatched),
-                      onTap: () {
-                        select.setWatched(false);
-                      },
-                    ),
-                    if (!hideChannel && selection.length == 1)
+                  SizedBox(height: 10),
+                  ListSectionContainer(
+                    title: localizations.sheetLocalActions,
+                    children: [
                       ListTile(
-                        leading: Icon(Icons.person_2_rounded),
-                        title: Text(localizations.sheetOpenChannel),
+                        leading: Icon(Icons.timer_outlined),
+                        title: Text(localizations.sheetMarkWatched),
                         onTap: () {
+                          select.setWatched(true);
                         },
                       ),
-                    if (selection.length == 1)
                       ListTile(
-                        leading: Icon(Icons.share),
-                        title: Text(localizations.sheetShare),
+                        leading: Icon(Icons.timer_off_outlined),
+                        title: Text(localizations.sheetMarkUnwatched),
                         onTap: () {
-                          SharePlus.instance.share(
-                            ShareParams(uri: Uri.parse("https://www.youtube.com/watch?v=${selection[0]}"))
-                          );
+                          select.setWatched(false);
                         },
                       ),
-                    if (UserSession.isPrivileged)
+                      if (!hideChannel && selection.length == 1)
+                        ListTile(
+                          leading: Icon(Icons.person_2_rounded),
+                          title: Text(localizations.sheetOpenChannel),
+                          onTap: () {
+                          },
+                        ),
+                      if (selection.length == 1)
+                        ListTile(
+                          leading: Icon(Icons.share),
+                          title: Text(localizations.sheetShare),
+                          onTap: () {
+                            SharePlus.instance.share(
+                              ShareParams(uri: Uri.parse("https://www.youtube.com/watch?v=${selection[0]}"))
+                            );
+                          },
+                        ),
+                      if (UserSession.isPrivileged)
+                        ListTile(
+                          leading: Icon(Icons.playlist_add_check_rounded),
+                          title: Text("Add to Playlist"),
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                        ),
                       ListTile(
-                        leading: Icon(Icons.playlist_add_check_rounded),
-                        title: Text("Add to Playlist"),
+                        leading: Icon(Icons.file_download_outlined),
+                        title: Text(localizations.sheetDownloadLocal),
+                        subtitle: Text(localizations.sheetComingSoon),
                         onTap: () {
                           Navigator.pop(context);
                         },
                       ),
-                    ListTile(
-                      leading: Icon(Icons.file_download_outlined),
-                      title: Text(localizations.sheetDownloadLocal),
-                      subtitle: Text(localizations.sheetComingSoon),
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ]
-                ),
-                if (UserSession.isPrivileged)
-                  ListSectionContainer(
-                    title: localizations.sheetServerActions,
-                    children: [
-                      ListTile(
-                        leading: Icon(Icons.cloud_download),
-                        title: Text(localizations.sheetRedownloadServer),
-                        onTap: () {
-                          ConfirmationDialog(
-                            context: context, 
-                            onSure: select.redownloadVideos 
-                          );
-                        },
-                      ),
-                      ListTile(
-                        leading: Icon(Icons.cloud_off_rounded),
-                        title: Text(localizations.sheetDeleteVideoServer),
-                        onTap: () {
-                          ConfirmationDialog(
-                            context: context,
-                            onSure: select.deleteVideos
-                          ); 
-                        },
-                      ),
                     ]
                   ),
-              ],
+                  if (UserSession.isPrivileged)
+                    ListSectionContainer(
+                      title: localizations.sheetServerActions,
+                      children: [
+                        ListTile(
+                          leading: Icon(Icons.cloud_download),
+                          title: Text(localizations.sheetRedownloadServer),
+                          onTap: () {
+                            ConfirmationDialog(
+                              context: context, 
+                              onSure: select.redownloadVideos 
+                            );
+                          },
+                        ),
+                        ListTile(
+                          leading: Icon(Icons.cloud_off_rounded),
+                          title: Text(localizations.sheetDeleteVideoServer),
+                          onTap: () {
+                            ConfirmationDialog(
+                              context: context,
+                              onSure: select.deleteVideos
+                            ); 
+                          },
+                        ),
+                      ]
+                    ),
+                ],
+              )
             )
           )
         );
       },
     );
-
   }
-
 }
