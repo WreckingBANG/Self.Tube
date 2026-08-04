@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:Self.Tube/features/player/domain/video_player_interface.dart';
 import 'package:Self.Tube/features/player/ui/overlays/top_controls_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'video_player_ui_fullscreen.dart';
 import 'overlays/gesture_message.dart';
 import 'overlays/bottom_controls_overlay.dart';
@@ -73,8 +74,12 @@ class _VideoPlayerUIState extends State<VideoPlayerUI> {
     //TODO: add settings toggle
     PlaybackSpeed playbackSpeed;
     if (toggle) {
+      //this is to emulate youtube behaviour with vibration
+      HapticFeedback.heavyImpact();
+      if (!widget.player.isPlaying) return;
       playbackSpeed = PlaybackSpeed.x2_0;
     } else {
+      if (!widget.player.isPlaying) return;
       playbackSpeed = PlaybackSpeed.x1_0;
     }
     widget.player.setPlaybackSpeed(playbackSpeed);
