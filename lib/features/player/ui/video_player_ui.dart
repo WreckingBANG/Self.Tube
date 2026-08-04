@@ -68,6 +68,18 @@ class _VideoPlayerUIState extends State<VideoPlayerUI> {
     }
   }
 
+  //this is duplicated code from video_player_ui_fullscreen, make sure to change that when changing this
+  void _toggleFastForward(bool toggle) {
+    //TODO: add settings toggle
+    PlaybackSpeed playbackSpeed;
+    if (toggle) {
+      playbackSpeed = PlaybackSpeed.x2_0;
+    } else {
+      playbackSpeed = PlaybackSpeed.x1_0;
+    }
+    widget.player.setPlaybackSpeed(playbackSpeed);
+  }
+
   void _openFullscreen() {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -92,6 +104,8 @@ class _VideoPlayerUIState extends State<VideoPlayerUI> {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: _toggleControls,
+      onLongPress: () => _toggleFastForward(true),
+      onLongPressEnd: (details) => _toggleFastForward(false),
       child: Stack(
         children: [
           Center(child: widget.player.buildView()),
