@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:Self.Tube/common/data/services/device/device_service.dart';
 import 'package:Self.Tube/features/player/domain/video_player_interface.dart';
+import 'package:Self.Tube/features/player/ui/overlays/fastforward_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'overlays/bottom_controls_overlay.dart';
@@ -26,6 +27,7 @@ class VideoPlayerFullscreenUI extends StatefulWidget {
 
 class _VideoPlayerFullscreenUIState extends State<VideoPlayerFullscreenUI> {
   bool _showControls = false;
+  bool _showFF = false;
   Timer? _hideTimer;
   String? _gestureMessage;
   IconData? _gestureIcon;
@@ -93,9 +95,11 @@ class _VideoPlayerFullscreenUIState extends State<VideoPlayerFullscreenUI> {
       //this is to emulate youtube behaviour with vibration
       HapticFeedback.heavyImpact();
       if (!widget.player.isPlaying) return;
+      setState(() => _showFF = true);
       playbackSpeed = PlaybackSpeed.x2_0;
     } else {
       if (!widget.player.isPlaying) return;
+      setState(() => _showFF = false);
       playbackSpeed = PlaybackSpeed.x1_0;
     }
     widget.player.setPlaybackSpeed(playbackSpeed);
@@ -142,6 +146,7 @@ class _VideoPlayerFullscreenUIState extends State<VideoPlayerFullscreenUI> {
                     ],
                   ),
                 ],
+                if (_showFF) FastforwardOverlay(playbackSpeedText: "2x"),
               ],
             )
           ],

@@ -8,6 +8,7 @@ import 'overlays/gesture_message.dart';
 import 'overlays/bottom_controls_overlay.dart';
 import 'overlays/gesture_controls_overlay.dart';
 import 'overlays/center_controls_overlay.dart';
+import 'overlays/fastforward_overlay.dart';
 
 class VideoPlayerUI extends StatefulWidget {
   final MediaPlayer player;
@@ -31,6 +32,7 @@ class _VideoPlayerUIState extends State<VideoPlayerUI> {
   Timer? _messageTimer;
 
   bool _showControls = false;
+  bool _showFF = false;
   Timer? _hideTimer;
 
   void _showMessage(String message, IconData icon) {
@@ -77,9 +79,11 @@ class _VideoPlayerUIState extends State<VideoPlayerUI> {
       //this is to emulate youtube behaviour with vibration
       HapticFeedback.heavyImpact();
       if (!widget.player.isPlaying) return;
+      setState(() => _showFF = true);
       playbackSpeed = PlaybackSpeed.x2_0;
     } else {
       if (!widget.player.isPlaying) return;
+      setState(() => _showFF = false);
       playbackSpeed = PlaybackSpeed.x1_0;
     }
     widget.player.setPlaybackSpeed(playbackSpeed);
@@ -144,6 +148,7 @@ class _VideoPlayerUIState extends State<VideoPlayerUI> {
                     )
                   ],
                 ),
+              if (_showFF) FastforwardOverlay(playbackSpeedText: "2x"),
             ],
           ),
         ],
