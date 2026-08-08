@@ -68,6 +68,8 @@
     "settingsVPPlayerBackend": "Player-Backend",
     "settingsVPPlayerBackendDesc": "Ein spezifisches Player Backend erzwingen",
     "settingsVPPlayerBackendDyn": "Dynamisch",
+    "settingsDistractions": "Ablenkungen",
+    "settingsDistractionsHint": "Ablenkende Elemente der App ausblenden",
     "settingsDistractionsRecommendations": "Entferne Empfehlungen",
     "settingsDistractionsComments": "Entferne Kommentare",
     "settingsDistractionsHome": "Entferne Startseite",

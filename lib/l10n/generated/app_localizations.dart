@@ -512,6 +512,18 @@ abstract class AppLocalizations {
   /// **'Dynamic'**
   String get settingsVPPlayerBackendDyn;
 
+  /// No description provided for @settingsDistractions.
+  ///
+  /// In en, this message translates to:
+  /// **'Distractions'**
+  String get settingsDistractions;
+
+  /// No description provided for @settingsDistractionsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide distracting parts of the App'**
+  String get settingsDistractionsHint;
+
   /// No description provided for @settingsDistractionsRecommendations.
   ///
   /// In en, this message translates to:

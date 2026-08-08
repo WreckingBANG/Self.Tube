@@ -53,8 +53,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
           ),
           ListTile(
-            title: Text("Distractions"),
-            subtitle: Text("Hide Elements to not get Distracted"),
+            title: Text(localizations.settingsDistractions),
+            subtitle: Text(localizations.settingsDistractionsHint),
             leading: Icon(Icons.self_improvement),
             onTap: () {
               Navigator.pushNamed(

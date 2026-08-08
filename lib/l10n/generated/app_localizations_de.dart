@@ -222,6 +222,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsVPPlayerBackendDyn => 'Dynamisch';
 
   @override
+  String get settingsDistractions => 'Ablenkungen';
+
+  @override
+  String get settingsDistractionsHint =>
+      'Ablenkende Elemente der App ausblenden';
+
+  @override
   String get settingsDistractionsRecommendations => 'Entferne Empfehlungen';
 
   @override

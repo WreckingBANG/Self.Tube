@@ -223,6 +223,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settingsVPPlayerBackendDyn => 'Dinámico';
 
   @override
+  String get settingsDistractions => 'Distractions';
+
+  @override
+  String get settingsDistractionsHint => 'Hide distracting parts of the App';
+
+  @override
   String get settingsDistractionsRecommendations => 'Disable Recommendations';
 
   @override

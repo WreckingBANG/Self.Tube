@@ -68,6 +68,8 @@
     "settingsVPPlayerBackend": "Player-Backend",
     "settingsVPPlayerBackendDesc": "Force a specific player backend",
     "settingsVPPlayerBackendDyn": "Dynamic",
+    "settingsDistractions": "Distractions",
+    "settingsDistractionsHint": "Hide distracting parts of the App",
     "settingsDistractionsRecommendations": "Disable Recommendations",
     "settingsDistractionsComments": "Disable Comments",
     "settingsDistractionsHome": "Disable Home",
