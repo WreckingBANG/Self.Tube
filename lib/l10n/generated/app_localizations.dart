@@ -338,6 +338,30 @@ abstract class AppLocalizations {
   /// **'Coming soon'**
   String get sheetComingSoon;
 
+  /// No description provided for @sheetSingleItem.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} video selected'**
+  String sheetSingleItem(Object count);
+
+  /// No description provided for @sheetMultiItems.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} videos selected'**
+  String sheetMultiItems(Object count);
+
+  /// No description provided for @sheetActionExec.
+  ///
+  /// In en, this message translates to:
+  /// **'Executing Action'**
+  String get sheetActionExec;
+
+  /// No description provided for @sheetActionInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Please do not close the App'**
+  String get sheetActionInfo;
+
   /// No description provided for @listShowMore.
   ///
   /// In en, this message translates to:

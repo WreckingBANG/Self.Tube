@@ -59,7 +59,9 @@ class VideoListMultiselectSheet extends ConsumerWidget {
                         padding: EdgeInsets.only(
                           left: 10
                         ),
-                        child: Text(selection.length.toString())                   
+                        child: selection.length > 1 
+                          ? Text(localizations.sheetMultiItems(selection.length.toString()))                  
+                          : Text(localizations.sheetSingleItem(selection.length.toString()))
                       ),
                       const Spacer(),
                       Padding(

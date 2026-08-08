@@ -127,6 +127,22 @@ class AppLocalizationsDe extends AppLocalizations {
   String get sheetComingSoon => 'Kommt bald';
 
   @override
+  String sheetSingleItem(Object count) {
+    return '$count Video ausgewählt';
+  }
+
+  @override
+  String sheetMultiItems(Object count) {
+    return '$count Videos ausgewählt';
+  }
+
+  @override
+  String get sheetActionExec => 'Aktion wird ausgeführt';
+
+  @override
+  String get sheetActionInfo => 'Bitte die App nicht schließen';
+
+  @override
   String get listShowMore => 'Mehr anzeigen';
 
   @override
