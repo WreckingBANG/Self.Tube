@@ -1,6 +1,8 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/common/ui/widgets/sections/empty_error_section.dart';
+import 'package:Self.Tube/features/player/domain/video_player_service.dart';
 import 'package:Self.Tube/features/videos/domain/videolist_similar_provider.dart';
+import 'package:Self.Tube/features/videos/ui/sheets/video_list_bottomsheet.dart';
 import 'package:Self.Tube/features/videos/ui/tiles/video_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,9 +38,18 @@ class VideoListSimilarSection extends ConsumerWidget {
               final video = videos[index];
               return VideoListTile(
                 video: video,
+                query: query,
                 hideChannel: false,
-                onWatched: (value) => provider.setWatched(value, video.youtubeId),
-                onDelete: () => provider.deleteVideo(video.youtubeId),
+                onPress: () => VideoPlayerService.openPlayer(video.youtubeId),
+                onLongPress: () {
+                  showVideoListBottomSheet(
+                    context: context,
+                    video: video,
+                    hideChannel: false,
+                    onWatched: (value) => provider.setWatched(value, video.youtubeId),
+                    onDelete: () => provider.deleteVideo(video.youtubeId)
+                  );
+                }
               );
             }
           )

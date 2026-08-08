@@ -1,8 +1,11 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/common/ui/widgets/sections/empty_error_section.dart';
 import 'package:Self.Tube/common/ui/widgets/sections/sort_chips_section.dart';
+import 'package:Self.Tube/features/player/domain/video_player_service.dart';
+import 'package:Self.Tube/features/videos/domain/selection_provider.dart';
 import 'package:Self.Tube/features/videos/domain/videolist_provider.dart';
 import 'package:Self.Tube/features/videos/ui/containers/continue_watching_list.dart';
+import 'package:Self.Tube/features/videos/ui/sheets/video_list_multiselect_sheet.dart';
 import 'package:Self.Tube/features/videos/ui/tiles/video_horizontal_tile.dart';
 import 'package:Self.Tube/features/videos/ui/tiles/video_list_tile.dart';
 import 'package:flutter/material.dart';
@@ -30,86 +33,120 @@ class VideoListSection extends ConsumerWidget {
     this.playlistType = "",
     this.showSorting = false,
   });
-
+  
+  final OverlayPortalController _portalController = OverlayPortalController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context)!;
+    final mediaQuery =  MediaQuery.of(context);
+    final usableSpace = (mediaQuery.size.height - mediaQuery.padding.top - mediaQuery.padding.bottom)-56;
 
     final provider = ref.read(videoListProvider(query).notifier);
     final videos = ref.watch(videoListProvider(query));
+
+    final select = ref.read(selectionProvider(query).notifier);
+    final selection = ref.watch(selectionProvider(query));
+
+    if (!_portalController.isShowing) {
+      _portalController.show();
+    }
 
     return videos.when(
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
       data: (videos) {
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if ((videos!.isNotEmpty || !hideIfEmpty) && !horizontalScroll)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 0),
-                child: Text(
-                  title,
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondaryContainer),
-                ),
-              ),
-            if (showSorting)
-              SortChipsSection(
-                sortOptions: (value) {
-                  provider.setSorting(value);
-                },
-              ),
-            if (videos.isEmpty && hideIfEmpty)
-              const SizedBox.shrink()
-            else if (videos.isEmpty && !hideIfEmpty)
-              Padding(
-                padding: EdgeInsets.only(top: 20),
-                child: EmptyErrorSection()
-              )
-            else if (horizontalScroll)
-              ContinueWatchingList(
-                title: title,
-                itemCount: videos.length,
-                itemBuilder: (context, index) {
-                  final video = videos[index];
-                  return VideoHorizontalTile(
-                    video: video, 
-                    hideChannel: hideChannel, 
-                    playlistId: playlistId, 
-                    playlistType: playlistType,
-                    onWatched: (value) => provider.setWatched(value, video.youtubeId),
-                    onDelete: () => provider.deleteVideo(video.youtubeId)
-                  );
-                },
-              )
-            else
-              ListSectionContainer(
-                itemCount: videos.length,
-                itemBuilder: (context, index) {
-                  final video = videos[index];
-                  return VideoListTile(
-                    video: video, 
-                    hideChannel: hideChannel, 
-                    playlistId: playlistId, 
-                    playlistType: playlistType,
-                    onWatched: (value) => provider.setWatched(value, video.youtubeId),
-                    onDelete: () => provider.deleteVideo(video.youtubeId)
-                  );
-                 }
-               ),
-            if (provider.hasMore && videos.isNotEmpty && !horizontalScroll)
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: TextButton(
-                    onPressed: provider.fetchNext,
-                    child: Text(localizations.listShowMore),
+        return OverlayPortal(
+          controller: _portalController,
+          overlayChildBuilder: (context) {
+            if (selection.isEmpty) {
+              return const SizedBox.shrink();
+            } 
+            
+            return VideoListMultiselectSheet(
+              query: query,
+              hideChannel: hideChannel,
+            );
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if ((videos!.isNotEmpty || !hideIfEmpty) && !horizontalScroll)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 0),
+                  child: Text(
+                    title,
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondaryContainer),
                   ),
                 ),
-              )
-          ]
+              if (showSorting)
+                SortChipsSection(
+                  sortOptions: (value) {
+                    provider.setSorting(value);
+                  },
+                ),
+              if (videos.isEmpty && hideIfEmpty)
+                const SizedBox.shrink()
+              else if (videos.isEmpty && !hideIfEmpty)
+                Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: EmptyErrorSection()
+                )
+              else if (horizontalScroll)
+                ContinueWatchingList(
+                  title: title,
+                  itemCount: videos.length,
+                  itemBuilder: (context, index) {
+                    final video = videos[index];
+                    return VideoHorizontalTile(
+                      video: video, 
+                      hideChannel: hideChannel, 
+                      playlistId: playlistId, 
+                      playlistType: playlistType,
+                      onWatched: (value) => provider.setWatched(value, video.youtubeId),
+                      onDelete: () => provider.deleteVideo(video.youtubeId)
+                    );
+                  },
+                )
+              else
+                ListSectionContainer(
+                  itemCount: videos.length,
+                  itemBuilder: (context, index) {
+                    final video = videos[index];
+                    return VideoListTile(
+                      video: video,
+                      query: query,
+                      hideChannel: hideChannel, 
+                      playlistId: playlistId, 
+                      playlistType: playlistType,
+                      onPress: () {
+                        if (selection.isNotEmpty) {
+                          select.toggle(video.youtubeId);
+                        } else {
+                          VideoPlayerService.loadVideo(video.youtubeId, true, context);
+                        }
+                      },
+                      onLongPress:() {
+                        select.toggle(video.youtubeId);
+                      },
+                    );
+                   }
+                 ),
+              if (provider.hasMore && videos.isNotEmpty && !horizontalScroll)
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: TextButton(
+                      onPressed: provider.fetchNext,
+                      child: Text(localizations.listShowMore),
+                    ),
+                  ),
+                ),
+              if (selection.isNotEmpty)
+                SizedBox(height: usableSpace*20/100)
+            ]
+          )
         );
       }
     );
