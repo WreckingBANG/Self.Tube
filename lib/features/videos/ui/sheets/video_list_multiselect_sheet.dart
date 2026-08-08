@@ -4,6 +4,7 @@ import 'package:Self.Tube/common/ui/widgets/dialogs/confirmation_dialog.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session.dart';
 import 'package:Self.Tube/features/playlist/ui/dialogs/add_to_playlist_dialog.dart';
 import 'package:Self.Tube/features/videos/domain/selection_provider.dart';
+import 'package:Self.Tube/features/videos/ui/dialogs/multiselect_progress_dialog.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -80,14 +81,24 @@ class VideoListMultiselectSheet extends ConsumerWidget {
                         leading: Icon(Icons.timer_outlined),
                         title: Text(localizations.sheetMarkWatched),
                         onTap: () {
-                          select.setWatched(true);
+                          ProgressDialog(
+                            context: context, 
+                            query: query, 
+                            action: () => select.setWatched(true),
+                            ref: ref
+                          );
                         },
                       ),
                       ListTile(
                         leading: Icon(Icons.timer_off_outlined),
                         title: Text(localizations.sheetMarkUnwatched),
                         onTap: () {
-                          select.setWatched(false);
+                          ProgressDialog(
+                            context: context, 
+                            query: query, 
+                            action: () => select.setWatched(false), 
+                            ref: ref
+                          );
                         },
                       ),
                       if (!hideChannel && selection.length == 1)
@@ -121,7 +132,12 @@ class VideoListMultiselectSheet extends ConsumerWidget {
                               context: context,
                               builder: (context) => AddToPlaylistDialog(returnOnly: true)
                             );
-                            select.addToPlaylist(playlistId);
+                            ProgressDialog(
+                              context: context, 
+                              query: query, 
+                              action: () => select.addToPlaylist(playlistId), 
+                              ref: ref
+                            );
                           },
                         ),
                       ListTile(
@@ -142,7 +158,12 @@ class VideoListMultiselectSheet extends ConsumerWidget {
                           onTap: () {
                             ConfirmationDialog(
                               context: context, 
-                              onSure: select.redownloadVideos 
+                              onSure: () => ProgressDialog(
+                                context: context,
+                                query: query,
+                                action: () => select.redownloadVideos(),
+                                ref: ref
+                              ) 
                             );
                           },
                         ),
@@ -151,9 +172,14 @@ class VideoListMultiselectSheet extends ConsumerWidget {
                           title: Text(localizations.sheetDeleteVideoServer),
                           onTap: () {
                             ConfirmationDialog(
-                              context: context,
-                              onSure: select.deleteVideos
-                            ); 
+                              context: context, 
+                              onSure: () => ProgressDialog(
+                                context: context,
+                                query: query,
+                                action: () => select.deleteVideos(),
+                                ref: ref
+                              ) 
+                            );
                           },
                         ),
                       ]
