@@ -1,3 +1,4 @@
+import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/selectable_text.dart';
 import 'package:Self.Tube/features/videos/ui/sections/comment_list_section.dart';
 import 'package:Self.Tube/features/videos/ui/sections/video_list_similar_section.dart';
@@ -16,66 +17,70 @@ class PlayerInfoSection extends StatefulWidget {
 }
 
 class _PlayerInfoSectionState extends State<PlayerInfoSection> with SingleTickerProviderStateMixin{
-  late TabController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = TabController(
-      length: 3,
-      vsync: this
-    );
-
-    _controller.addListener(() {
-      setState(() {});      
-    });
   }
 
   
   @override
   Widget build (BuildContext context) {
-    return Column(
-      children: [
-        TabBar(
-          controller: _controller,
-          dividerColor: Colors.transparent,
-          tabs: [
-            Tab(
-              icon: const Icon(Icons.description_outlined),
-              //text: localizations.playerDescription,
-            ),
-            Tab(
-              icon: const Icon(Icons.comment_outlined),
-              //text: localizations.playerComments,
-            ),
-            Tab(
-              icon: const Icon(Icons.video_collection_outlined),
-              //text: localizations.playerSimilar,
-            ),
-          ],
+
+    final tabs = [
+      Tab(
+        icon: const Icon(Icons.description_outlined),
+        //text: localizations.playerDescription,
+      ),
+      
+      if (SettingsService.disableComments != true)
+        Tab(
+          icon: const Icon(Icons.comment_outlined),
+          //text: localizations.playerComments,
         ),
-        Expanded(
-          child: TabBarView(
-            controller: _controller,
-            children: [
-              Padding(
-                padding: EdgeInsets.all(12),
-                child: SelectableLinkText(text: widget.video.videoDescription),
-              ),
-              
-              CommentListWidget(videoId: widget.video.videoId),
-              
-              Padding(
-                padding: EdgeInsets.only(top: 12),
-                child: VideoListSimilarSection(
-                  videoId: widget.video.videoId, 
-                  query: ""
-                )
-              )
-            ],
-          ),
+      
+      if (SettingsService.disableRecommendations != true) 
+        Tab(
+          icon: const Icon(Icons.video_collection_outlined),
+          //text: localizations.playerSimilar,
+        ),
+    ];
+
+    final tabViews = [
+      Padding(
+        padding: EdgeInsets.all(12),
+        child: SelectableLinkText(text: widget.video.videoDescription),
+      ),
+
+      if (SettingsService.disableComments != true)
+        CommentListWidget(videoId: widget.video.videoId),
+      
+      
+      if (SettingsService.disableRecommendations != true) 
+        Padding(
+          padding: EdgeInsets.only(top: 12),
+          child: VideoListSimilarSection(
+            videoId: widget.video.videoId, 
+            query: ""
+          )
         )
-      ],
+    ];
+    
+    return DefaultTabController(
+      length: tabs.length,
+      child: Column(
+        children: [
+          TabBar(
+            dividerColor: Colors.transparent,
+            tabs: tabs
+          ),
+          Expanded(
+            child: TabBarView(
+              children: tabViews
+            ),
+          )
+        ],
+      ),
     );
   }
 } 

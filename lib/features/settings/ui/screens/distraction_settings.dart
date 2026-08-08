@@ -85,6 +85,7 @@ class _DistractionsSettingsScreenState extends State<DistractionsSettingsScreen>
               },
             ),
             title: Text("Disable Home"),
+            subtitle: Text("Requires App Restart"),
             value: _disableHome,
             onChanged: (bool value) {
               setState(() => _disableHome = value);
