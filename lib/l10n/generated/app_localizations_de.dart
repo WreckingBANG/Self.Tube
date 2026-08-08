@@ -206,6 +206,18 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsVPPlayerBackendDyn => 'Dynamisch';
 
   @override
+  String get settingsDistractionsRecommendations => 'Entferne Empfehlungen';
+
+  @override
+  String get settingsDistractionsComments => 'Entferne Kommentare';
+
+  @override
+  String get settingsDistractionsHome => 'Entferne Startseite';
+
+  @override
+  String get settingsDistractionsHomeHint => 'Benötigt App-Neustart';
+
+  @override
   String get searchLabel => 'Suchen...';
 
   @override

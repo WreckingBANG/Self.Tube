@@ -52,7 +52,7 @@ class _DistractionsSettingsScreenState extends State<DistractionsSettingsScreen>
                 return const Icon(Icons.close);
               },
             ),
-            title: Text("Disable Recommendations"),
+            title: Text(localizations.settingsDistractionsRecommendations),
             value: _disableRecommendations,
             onChanged: (bool value) {
               setState(() => _disableRecommendations = value);
@@ -68,7 +68,7 @@ class _DistractionsSettingsScreenState extends State<DistractionsSettingsScreen>
                 return const Icon(Icons.close);
               },
             ),
-            title: Text("Disable Comments"),
+            title: Text(localizations.settingsDistractionsComments),
             value: _disableComments,
             onChanged: (bool value) {
               setState(() => _disableComments = value);
@@ -84,8 +84,8 @@ class _DistractionsSettingsScreenState extends State<DistractionsSettingsScreen>
                 return const Icon(Icons.close);
               },
             ),
-            title: Text("Disable Home"),
-            subtitle: Text("Requires App Restart"),
+            title: Text(localizations.settingsDistractionsHome),
+            subtitle: Text(localizations.settingsDistractionsHomeHint),
             value: _disableHome,
             onChanged: (bool value) {
               setState(() => _disableHome = value);

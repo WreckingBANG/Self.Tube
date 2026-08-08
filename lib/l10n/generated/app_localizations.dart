@@ -488,6 +488,30 @@ abstract class AppLocalizations {
   /// **'Dynamic'**
   String get settingsVPPlayerBackendDyn;
 
+  /// No description provided for @settingsDistractionsRecommendations.
+  ///
+  /// In en, this message translates to:
+  /// **'Disable Recommendations'**
+  String get settingsDistractionsRecommendations;
+
+  /// No description provided for @settingsDistractionsComments.
+  ///
+  /// In en, this message translates to:
+  /// **'Disable Comments'**
+  String get settingsDistractionsComments;
+
+  /// No description provided for @settingsDistractionsHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Disable Home'**
+  String get settingsDistractionsHome;
+
+  /// No description provided for @settingsDistractionsHomeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Requires App Restart'**
+  String get settingsDistractionsHomeHint;
+
   /// No description provided for @searchLabel.
   ///
   /// In en, this message translates to:
