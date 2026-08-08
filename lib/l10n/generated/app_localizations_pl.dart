@@ -212,6 +212,13 @@ class AppLocalizationsPl extends AppLocalizations {
       'Aby przewinąć do przodu lub do tyłu, dotknij dwukrotnie prawej lub lewej strony odtwarzacza, a aby odtworzyć/wstrzymać odtwarzanie, dotknij środka';
 
   @override
+  String get settingsVPGesturesFastForward => 'Fast Forward';
+
+  @override
+  String get settingsVPGesturesFastForwardDesc =>
+      'Tap and hold the screen to play the video in double speed';
+
+  @override
   String get settingsVPAdvanded => 'Rozszerzone';
 
   @override

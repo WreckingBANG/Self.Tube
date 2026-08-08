@@ -213,6 +213,13 @@ class AppLocalizationsEs extends AppLocalizations {
       'Toca dos veces rápidamente a la derecha y a la izquierda del reproductor para saltar o rebobinar, y en el centro para reproducir o pausar';
 
   @override
+  String get settingsVPGesturesFastForward => 'Fast Forward';
+
+  @override
+  String get settingsVPGesturesFastForwardDesc =>
+      'Tap and hold the screen to play the video in double speed';
+
+  @override
   String get settingsVPAdvanded => 'Avanzado';
 
   @override

@@ -212,6 +212,13 @@ class AppLocalizationsDe extends AppLocalizations {
       'Tippe zweimal schnell auf die rechte oder linke Seite des Players zum Vor- bzw. Zurückspulen und in der Mitte zum Abspielen/Pausieren';
 
   @override
+  String get settingsVPGesturesFastForward => 'Fast Forward';
+
+  @override
+  String get settingsVPGesturesFastForwardDesc =>
+      'Tap and hold the screen to play the video in double speed';
+
+  @override
   String get settingsVPAdvanded => 'Erweitert';
 
   @override

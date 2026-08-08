@@ -213,6 +213,13 @@ class AppLocalizationsNl extends AppLocalizations {
       'Dubbeltik op de rechter- en linkerzijde van de speler om terug- en vooruit te spoelen, of het midden om af te spelen/pauzeren';
 
   @override
+  String get settingsVPGesturesFastForward => 'Fast Forward';
+
+  @override
+  String get settingsVPGesturesFastForwardDesc =>
+      'Tap and hold the screen to play the video in double speed';
+
+  @override
   String get settingsVPAdvanded => 'Geavanceerd';
 
   @override

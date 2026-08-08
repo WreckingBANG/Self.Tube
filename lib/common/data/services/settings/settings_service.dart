@@ -32,6 +32,7 @@ class SettingsService {
   static const _vpGestureFullscreen = 'vpGestureFullscreen';
   static const _vpGesturePinch = 'vpGesturePinch';
   static const _vpGestureDoubleTap = 'vpGestureDoubleTap';
+  static const _vpGestureFastForward = 'vpGestureFastForward';
   static const _playerBackend = 'playerBackend';
 
   static const _disableRecommendations = 'disableRecommendations';
@@ -63,6 +64,7 @@ class SettingsService {
   static bool? vpGestureFullscreen;
   static bool? vpGesturePinch;
   static bool? vpGestureDoubleTap;
+  static bool? vpGestureFastForward;
   static int? playerBackend;
 
   static bool? disableRecommendations;
@@ -71,21 +73,21 @@ class SettingsService {
 
   static Future<void> load() async {
     final data = await _dao.readAll();
-  
-    bool? b(String k, [bool? defaultValue]) => 
-      data[k] == null ? defaultValue : data[k] == '1';
+
+    bool? b(String k, [bool? defaultValue]) =>
+        data[k] == null ? defaultValue : data[k] == '1';
 
     int? i(String k, [int? defaultValue]) =>
-      data[k] == null ? defaultValue : int.tryParse(data[k]!);
+        data[k] == null ? defaultValue : int.tryParse(data[k]!);
 
     instanceUrl = data[_instanceUrlKey];
     apiTokenAuth = b(_apiTokenAuth);
     doneSetup = b(_doneSetup);
     allowSelfSigned = b(_allowSelfSigned);
-    
+
     showCommentPics = b(_showCommentPics);
     materialYouColors = b(_materialYouColors, true);
-  
+
     sponsorBlockEnabled = b(_sponsorBlockEnabledKey, true);
     sbSponsor = b(_sponsorKey, true);
     sbSelfpromo = b(_selfPromoKey);
@@ -95,22 +97,22 @@ class SettingsService {
     sbPreview = b(_previewKey);
     sbHook = b(_hookKey);
     sbFiller = b(_fillerKey);
-  
+
     vpGestureSwipe = b(_vpGestureSwipe, true);
     vpGestureFullscreen = b(_vpGestureFullscreen, true);
     vpGesturePinch = b(_vpGesturePinch, true);
     vpGestureDoubleTap = b(_vpGestureDoubleTap, true);
+    vpGestureFastForward = b(_vpGestureFastForward, false);
     playerBackend = i(_playerBackend, 0);
 
     disableRecommendations = b(_disableRecommendations);
     disableComments = b(_disableComments);
     disableHome = b(_disableHome);
-  
+
     apiToken = await _secure.read(key: _apiTokenKey);
     sessionToken = await _secure.read(key: _sessionToken);
     csrfToken = await _secure.read(key: _csrfToken);
   }
-
 
   static Future<void> _persist(String key, dynamic value) async {
     final String str = value is bool ? (value ? '1' : '0') : value.toString();
@@ -218,6 +220,11 @@ class SettingsService {
     vpGestureDoubleTap = value;
   }
 
+  static Future<void> setVPGestureFastForward(bool value) async {
+    await _persist(_vpGestureFastForward, value);
+    vpGestureFastForward = value;
+  }
+
   static Future<void> setPlayerBackend(int value) async {
     await _persist(_playerBackend, value);
     playerBackend = value;
@@ -238,4 +245,3 @@ class SettingsService {
     disableHome = value;
   }
 }
-

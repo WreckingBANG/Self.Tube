@@ -16,6 +16,7 @@ class _PlayerSettingsScreenState extends State<PlayerSettingsScreen> {
   bool _vpGestureFullscreen = false;
   bool _vpGesturePinch = false;
   bool _vpGestureDoubleTap = false;
+  bool _vpGestureFastForward = true;
   int _playerBackend = 0;
 
 
@@ -30,6 +31,7 @@ class _PlayerSettingsScreenState extends State<PlayerSettingsScreen> {
     _vpGestureFullscreen = SettingsService.vpGestureFullscreen ?? false;
     _vpGesturePinch = SettingsService.vpGesturePinch ?? false;
     _vpGestureDoubleTap = SettingsService.vpGestureDoubleTap ?? false;
+    _vpGestureFastForward = SettingsService.vpGestureFastForward ?? false;
     _playerBackend = SettingsService.playerBackend ?? 0;
   }
 
@@ -38,6 +40,7 @@ class _PlayerSettingsScreenState extends State<PlayerSettingsScreen> {
     await SettingsService.setVPGestureFullscreen(_vpGestureFullscreen);
     await SettingsService.setVPGesturePinch(_vpGesturePinch);
     await SettingsService.setVPGestureDoubleTap(_vpGestureDoubleTap);
+    await SettingsService.setVPGestureFastForward(_vpGestureFastForward);
     await SettingsService.setPlayerBackend(_playerBackend);
   }
 
@@ -131,8 +134,30 @@ class _PlayerSettingsScreenState extends State<PlayerSettingsScreen> {
                       _saveSettings();
                     });
                   },
-                )
-              ]
+                ),
+                SwitchListTile(
+                  thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.selected)) {
+                      return const Icon(Icons.check);
+                    }
+                    return const Icon(Icons.close);
+                  }),
+                  title: Text(localizations.settingsVPGesturesFastForward),
+                  subtitle: Text(
+                    localizations.settingsVPGesturesFastForwardDesc,
+                  ),
+                  secondary: const Icon(Icons.fast_forward),
+                  value: _vpGestureFastForward,
+                  onChanged: (bool value) {
+                    setState(() {
+                      _vpGestureFastForward = value;
+                      _saveSettings();
+                    });
+                  },
+                ),
+              ],
             ),
             if (Platform.isAndroid)
               ListSectionContainer(

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/features/player/domain/video_player_interface.dart';
 import 'package:Self.Tube/features/player/ui/overlays/top_controls_overlay.dart';
 import 'package:flutter/material.dart';
@@ -72,15 +73,15 @@ class _VideoPlayerUIState extends State<VideoPlayerUI> {
   }
 
   //this is duplicated code from video_player_ui_fullscreen, make sure to change that when changing this
-  void _toggleFastForward(bool toggle) {
-    //TODO: add settings toggle
+  Future<void> _toggleFastForward(bool toggle) async {
+    if (SettingsService.vpGestureFastForward != true) return;
+    debugPrint(SettingsService.vpGestureFastForward.toString());
     //mirrors youtube functionality (haptic before isPlaying check)
     if (toggle) {
-      //this is to emulate youtube behaviour with vibration
       HapticFeedback.heavyImpact();
     }
+    //this implementation is not perfect, since if the player is buffering, isPlaying is false.
     if (!widget.player.isPlaying) return;
-
     setState(() => _showFF = toggle);
     widget.player.setPlaybackSpeed(
       toggle ? PlaybackSpeed.x2_0 : PlaybackSpeed.x1_0,

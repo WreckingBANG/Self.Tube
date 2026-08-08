@@ -494,6 +494,18 @@ abstract class AppLocalizations {
   /// **'Tap twice quickly on the right and left side of the player to skip/rewind and the center to play/pause'**
   String get settingsVPGesturesDoubleTapDesc;
 
+  /// No description provided for @settingsVPGesturesFastForward.
+  ///
+  /// In en, this message translates to:
+  /// **'Fast Forward'**
+  String get settingsVPGesturesFastForward;
+
+  /// No description provided for @settingsVPGesturesFastForwardDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap and hold the screen to play the video in double speed'**
+  String get settingsVPGesturesFastForwardDesc;
+
   /// No description provided for @settingsVPAdvanded.
   ///
   /// In en, this message translates to:
