@@ -202,5 +202,15 @@
     "onboardingAllowSelfSigned": "Zelf-ondertekende certificaten toestaan",
     "onboardingAllowSelfSignedDesc": "Op Android moet het certificaat zich in de certificaatopslag van het apparaat bevinden",
     "taskQueue": "Wachtrij",
-    "taskShowIgnored": "Alleen genegeerde video's tonen"
+    "taskShowIgnored": "Alleen genegeerde video's tonen",
+    "sheetSingleItem": "{count} video gekozen",
+    "sheetMultiItems": "{count} video's gekozen",
+    "sheetActionExec": "Actie uitvoeren",
+    "sheetActionInfo": "Sluit de app niet af",
+    "settingsDistractions": "Afleidingen",
+    "settingsDistractionsHint": "Afleidende secties in de app verbergen",
+    "settingsDistractionsRecommendations": "Aanbevelingen verbergen",
+    "settingsDistractionsComments": "Reacties verbergen",
+    "settingsDistractionsHome": "Startpagina verbergen",
+    "settingsDistractionsHomeHint": "Herstart vereist"
 }
