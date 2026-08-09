@@ -66,7 +66,6 @@ class MiniPlayerTile extends StatelessWidget {
                           builder: (context, snapshot) {
                             final isP = snapshot.data ?? true; 
                             return IconButton(
-                              color: Colors.white,
                               icon: Icon(
                                 isP
                                   ? Icons.pause
