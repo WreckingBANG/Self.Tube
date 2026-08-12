@@ -1,3 +1,5 @@
+import 'package:Self.Tube/app/navigation/app_navigation.dart';
+import 'package:Self.Tube/features/onboarding/domain/user_session_provider.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_m3shapes_extended/flutter_m3shapes_extended.dart';
@@ -41,6 +43,19 @@ class ConnectionErrorSection extends StatelessWidget {
           onPressed: () => ref.invalidate(provider),
           child: Text(localizations.errorTryAgain),
         ),
+        const SizedBox(height: 16),
+        TextButton(
+          onPressed: () async {
+            await ref.read(userSessionProvider.notifier).logout();
+
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              AppRouter.onboarding,
+              (route) => false,
+            );
+          },
+          child: Text(localizations.settingsSheetLogout),
+        )
       ],
     );
   }

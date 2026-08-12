@@ -47,11 +47,11 @@ class AuthController {
       if (SettingsService.apiTokenAuth == false) {
         await UserApi().logout();
       }
-      
-      await resetLoginSettings();
 
     } catch (e) {
       talker.error("Logout failed: $e");
+    } finally {
+      await resetLoginSettings();
     }
   }
 
