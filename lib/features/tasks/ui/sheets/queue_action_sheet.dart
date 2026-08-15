@@ -7,7 +7,6 @@ import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 Future<void> showQueueActionBottomSheet({
   required BuildContext context,
   required dynamic video,
-
   String? title,
 }) {
   final localizations = AppLocalizations.of(context)!;
@@ -17,6 +16,12 @@ Future<void> showQueueActionBottomSheet({
     children: [
       ListSectionContainer(
         children: [
+          if (video.message.isNotEmpty)
+            ListTile(
+              title: Text(video.message),
+              leading: Icon(Icons.error),
+              tileColor: Colors.red, 
+            ),
           ListTile(
             leading: Icon(Icons.file_download_rounded),
             title: Text(localizations.taskDownloadNow),

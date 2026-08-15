@@ -30,10 +30,23 @@ class QueueListTile extends StatelessWidget {
                   child: Stack(
                     alignment: Alignment.bottomCenter,
                     children: [
-                      CustomNetworkImage(
-                        imageLink: video.thumbnail,
-                        logicalWidth: 170,
+                      ColorFiltered(
+                        colorFilter: ColorFilter.mode(
+                          video.message.isEmpty
+                            ? Colors.transparent
+                            : Colors.red.withOpacity(0.75),
+                          BlendMode.srcATop
+                        ),
+                        child: CustomNetworkImage(
+                          imageLink: video.thumbnail,
+                          logicalWidth: 170,
+                        )
                       ),
+                      if (video.message.isNotEmpty)
+                        Align(
+                          alignment: Alignment.center,
+                          child: Icon(Icons.error, color: Colors.white),
+                        ),
                       Align(
                         alignment: Alignment.bottomRight,
                         child: Container(

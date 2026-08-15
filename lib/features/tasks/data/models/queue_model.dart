@@ -6,6 +6,7 @@ class QueueItemModel {
   final String thumbnail;
   final String durationStr;
   final String videoDate;
+  final String message;
 
   QueueItemModel({
     required this.youtubeId,
@@ -14,7 +15,8 @@ class QueueItemModel {
     required this.channelName,
     required this.thumbnail,
     required this.durationStr,
-    required this.videoDate
+    required this.videoDate,
+    required this.message
   });
 
   factory QueueItemModel.fromJson(Map<String, dynamic> json) {
@@ -26,6 +28,7 @@ class QueueItemModel {
       thumbnail: json['vid_thumb_url'] ?? '',
       durationStr: json['duration'] ?? '',
       videoDate: json['published'] ?? '',
+      message: json['message'] ?? '',
     );
   }
 
