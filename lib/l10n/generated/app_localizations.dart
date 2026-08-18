@@ -362,6 +362,12 @@ abstract class AppLocalizations {
   /// **'Please do not close the App'**
   String get sheetActionInfo;
 
+  /// No description provided for @sheetUpdateAvail.
+  ///
+  /// In en, this message translates to:
+  /// **'TA-Update available'**
+  String get sheetUpdateAvail;
+
   /// No description provided for @listShowMore.
   ///
   /// In en, this message translates to:

@@ -13,6 +13,14 @@ class UserApi {
     );
   }
 
+  Future<PingModel?> testConnection() {
+    return ApiService.request(
+      url: '/api/ping',
+      method: 'GET',
+      parser: (json) => PingModel.fromJson(json),
+    );
+  }
+
   Future<PingModel?> testConnectionSession(String tBaseUrl, String tSessionToken, String tCSRFToken) {
     return ApiService.request(
       baseUrl: tBaseUrl,

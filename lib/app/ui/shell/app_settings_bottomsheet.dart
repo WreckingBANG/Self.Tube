@@ -130,6 +130,15 @@ Future<void> showAppSettingsBottomSheet({
                         Navigator.pop(context);
                       },
                     ),
+                    if (UserSession.ping!.hasUpdate)
+                      ListTile(
+                        title: Text(
+                          "${localizations.sheetUpdateAvail}: ${UserSession.ping!.version} -> ${UserSession.ping!.updateVersion}",
+                          style: TextStyle(color: Theme.of(context).colorScheme.onError),   
+                        ),
+                        leading: Icon(Icons.error, color: Theme.of(context).colorScheme.onError),
+                        tileColor: Theme.of(context).colorScheme.error, 
+                      ),
                   ],
                 )
             ],
