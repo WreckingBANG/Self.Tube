@@ -37,12 +37,16 @@ Future<void> ProgressDialog({
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircularProgressIndicator(
-                  value: progress.clamp(0.0, 1.0)
+                Row(
+                  children: [
+                    CircularProgressIndicator(
+                      value: progress.clamp(0.0, 1.0)
+                    ),
+                    SizedBox(width: 10),
+                    Text("${totalItems - currentItems} / $totalItems"),
+                  ],
                 ),
-                SizedBox(width: 10),
-                Text("${totalItems - currentItems} / $totalItems"),
-                SizedBox(width: 15),
+                SizedBox(height: 15),
                 Row(
                   children: [
                     Icon(Icons.info_rounded),

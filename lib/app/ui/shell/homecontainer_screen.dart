@@ -84,7 +84,10 @@ class _HomeContainerState extends State<HomeContainer> {
             },
           ),
           IconButton(
-            icon: const Icon(Icons.manage_accounts_outlined),
+            icon: Badge(
+              isLabelVisible: UserSession.isPrivileged && UserSession.ping!.hasUpdate,
+              child: Icon(Icons.manage_accounts_outlined)
+            ),
             tooltip: localizations.tooltipSettings,
             onPressed: () {
               showAppSettingsBottomSheet(context: context);

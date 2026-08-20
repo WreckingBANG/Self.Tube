@@ -40,7 +40,6 @@ class HomeScreen extends ConsumerWidget {
                   )
                 ],
               ),
-              SizedBox(height: 20),
               Padding(
                 padding: EdgeInsets.only(left: 15, right: 15),
                 child: GestureDetector(
