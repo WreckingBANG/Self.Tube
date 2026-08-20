@@ -214,5 +214,6 @@
     "settingsDistractionsRecommendations": "Desactivar las recomendaciones",
     "settingsDistractionsComments": "Desactivar comentarios",
     "settingsDistractionsHome": "Desactivar la página de inicio",
-    "settingsDistractionsHomeHint": "Es necesario reiniciar la aplicación"
+    "settingsDistractionsHomeHint": "Es necesario reiniciar la aplicación",
+    "sheetUpdateAvail": "Actualización de TA disponible"
 }
