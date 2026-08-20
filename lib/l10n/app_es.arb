@@ -204,5 +204,15 @@
     "onboardingAllowSelfSigned": "Permitir certificados autofirmados",
     "onboardingAllowSelfSignedDesc": "En Android, el certificado debe estar en el almacén de certificados del dispositivo",
     "taskQueue": "Cola",
-    "taskShowIgnored": "Mostrar solo los vídeos ignorados"
+    "taskShowIgnored": "Mostrar solo los vídeos ignorados",
+    "sheetSingleItem": "{count} video seleccionado",
+    "sheetMultiItems": "{count} videos seleccionados",
+    "sheetActionExec": "Ejecutando",
+    "sheetActionInfo": "Por favor, mantén abierta la aplicación",
+    "settingsDistractions": "Interrupciones",
+    "settingsDistractionsHint": "Evita las interrupciones",
+    "settingsDistractionsRecommendations": "Desactivar las recomendaciones",
+    "settingsDistractionsComments": "Desactivar comentarios",
+    "settingsDistractionsHome": "Desactivar la página de inicio",
+    "settingsDistractionsHomeHint": "Es necesario reiniciar la aplicación"
 }
