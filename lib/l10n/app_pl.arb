@@ -202,5 +202,16 @@
     "onboardingAllowSelfSigned": "Zezwalaj na certyfikaty podpisane samodzielnie",
     "onboardingAllowSelfSignedDesc": "W systemie Android certyfikat musi znajdować się w magazynie certyfikatów",
     "taskQueue": "Kolejka",
-    "taskShowIgnored": "Pokaż tylko zignorowane filmy"
+    "taskShowIgnored": "Pokaż tylko zignorowane filmy",
+    "sheetSingleItem": "Wybrano {count} film",
+    "sheetMultiItems": "Wybrano {count} filmów",
+    "sheetActionExec": "Akcja jest wykonywana",
+    "sheetActionInfo": "Proszę nie zamykać aplikacji",
+    "sheetUpdateAvail": "Dostępna aktualizacja TA",
+    "settingsDistractions": "Rozproszenia",
+    "settingsDistractionsHint": "Ukryj rozpraszające elementy aplikacji",
+    "settingsDistractionsRecommendations": "Usuń rekomendacje",
+    "settingsDistractionsComments": "Usuń komentarze",
+    "settingsDistractionsHome": "Usuń stronę główną",
+    "settingsDistractionsHomeHint": "Wymagane ponowne uruchomienie aplikacji"
 }
