@@ -144,7 +144,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get sheetActionInfo => 'Sluit de app niet af';
 
   @override
-  String get sheetUpdateAvail => 'TA-Update available';
+  String get sheetUpdateAvail => 'TA-update beschikbaar';
 
   @override
   String get listShowMore => 'Meer tonen';

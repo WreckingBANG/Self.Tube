@@ -144,7 +144,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get sheetActionInfo => 'Por favor, mantén abierta la aplicación';
 
   @override
-  String get sheetUpdateAvail => 'TA-Update available';
+  String get sheetUpdateAvail => 'Actualización de TA disponible';
 
   @override
   String get listShowMore => 'Ver más';

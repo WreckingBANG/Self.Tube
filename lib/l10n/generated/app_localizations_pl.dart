@@ -128,22 +128,22 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String sheetSingleItem(Object count) {
-    return '$count video selected';
+    return 'Wybrano $count film';
   }
 
   @override
   String sheetMultiItems(Object count) {
-    return '$count videos selected';
+    return 'Wybrano $count filmów';
   }
 
   @override
-  String get sheetActionExec => 'Executing Action';
+  String get sheetActionExec => 'Akcja jest wykonywana';
 
   @override
-  String get sheetActionInfo => 'Please do not close the App';
+  String get sheetActionInfo => 'Proszę nie zamykać aplikacji';
 
   @override
-  String get sheetUpdateAvail => 'TA-Update available';
+  String get sheetUpdateAvail => 'Dostępna aktualizacja TA';
 
   @override
   String get listShowMore => 'Pokaż więcej';
@@ -225,22 +225,24 @@ class AppLocalizationsPl extends AppLocalizations {
   String get settingsVPPlayerBackendDyn => 'Dynamiczny';
 
   @override
-  String get settingsDistractions => 'Distractions';
+  String get settingsDistractions => 'Rozproszenia';
 
   @override
-  String get settingsDistractionsHint => 'Hide distracting parts of the App';
+  String get settingsDistractionsHint =>
+      'Ukryj rozpraszające elementy aplikacji';
 
   @override
-  String get settingsDistractionsRecommendations => 'Disable Recommendations';
+  String get settingsDistractionsRecommendations => 'Usuń rekomendacje';
 
   @override
-  String get settingsDistractionsComments => 'Disable Comments';
+  String get settingsDistractionsComments => 'Usuń komentarze';
 
   @override
-  String get settingsDistractionsHome => 'Disable Home';
+  String get settingsDistractionsHome => 'Usuń stronę główną';
 
   @override
-  String get settingsDistractionsHomeHint => 'Requires App Restart';
+  String get settingsDistractionsHomeHint =>
+      'Wymagane ponowne uruchomienie aplikacji';
 
   @override
   String get searchLabel => 'Szukać...';
