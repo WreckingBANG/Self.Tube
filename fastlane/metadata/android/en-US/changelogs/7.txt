@@ -1,0 +1,30 @@
+Governance:
+- Added an AI-Policy
+  - All contributions including any AI-Usage are now prohibited
+
+Features:
+- Video-Progress-Bar improvements
+  - Added Buffering Position
+  - Added Sponsorblock-Segment indicators
+- Multi-Select Actions for Videos
+  - Videos can now be bulk deleted, marked as (un)watched, added to a playlist or redownloaded
+- Distraction Settings
+  - Disable Distracting Elements of the App to stay focused
+- New modern App-Icon
+- TubeArchivist Update-Indicator
+- Logout-Button on Connection Error Screen
+
+Bug Fixes:
+- MiniPlayerTile Play-Icon always white
+- added explicit buffersize to media_kit
+- playlist-tile not opening channel on click
+- localizations falling back to german instead of english (thanks to @it-lacks for reporting)
+
+Other:
+- updated translations (Dutch, Spanish, Polish, English, German)  
+
+Thanks to:
+- All submitters of Issues
+- @BlackZ – Polish translations  
+- @gallegonovato – Spanish translations  
+- @Vistaus – Dutch translations
