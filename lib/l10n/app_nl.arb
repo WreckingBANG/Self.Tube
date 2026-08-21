@@ -212,5 +212,6 @@
     "settingsDistractionsRecommendations": "Aanbevelingen verbergen",
     "settingsDistractionsComments": "Reacties verbergen",
     "settingsDistractionsHome": "Startpagina verbergen",
-    "settingsDistractionsHomeHint": "Herstart vereist"
+    "settingsDistractionsHomeHint": "Herstart vereist",
+    "sheetUpdateAvail": "TA-update beschikbaar"
 }
