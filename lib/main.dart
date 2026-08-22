@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DynamicColorBuilder(
-      builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+      builder: (lightDynamic, darkDynamic) {
         return MaterialApp(
           navigatorKey: AppRouter.navigatorKey, 
           scaffoldMessengerKey: GlobalSnackbar.key,
