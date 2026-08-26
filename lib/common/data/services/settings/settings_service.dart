@@ -73,21 +73,21 @@ class SettingsService {
 
   static Future<void> load() async {
     final data = await _dao.readAll();
-
-    bool? b(String k, [bool? defaultValue]) =>
-        data[k] == null ? defaultValue : data[k] == '1';
+  
+    bool? b(String k, [bool? defaultValue]) => 
+      data[k] == null ? defaultValue : data[k] == '1';
 
     int? i(String k, [int? defaultValue]) =>
-        data[k] == null ? defaultValue : int.tryParse(data[k]!);
+      data[k] == null ? defaultValue : int.tryParse(data[k]!);
 
     instanceUrl = data[_instanceUrlKey];
     apiTokenAuth = b(_apiTokenAuth);
     doneSetup = b(_doneSetup);
     allowSelfSigned = b(_allowSelfSigned);
-
+    
     showCommentPics = b(_showCommentPics);
     materialYouColors = b(_materialYouColors, true);
-
+  
     sponsorBlockEnabled = b(_sponsorBlockEnabledKey, true);
     sbSponsor = b(_sponsorKey, true);
     sbSelfpromo = b(_selfPromoKey);
@@ -97,7 +97,7 @@ class SettingsService {
     sbPreview = b(_previewKey);
     sbHook = b(_hookKey);
     sbFiller = b(_fillerKey);
-
+  
     vpGestureSwipe = b(_vpGestureSwipe, true);
     vpGestureFullscreen = b(_vpGestureFullscreen, true);
     vpGesturePinch = b(_vpGesturePinch, true);
@@ -108,11 +108,12 @@ class SettingsService {
     disableRecommendations = b(_disableRecommendations);
     disableComments = b(_disableComments);
     disableHome = b(_disableHome);
-
+  
     apiToken = await _secure.read(key: _apiTokenKey);
     sessionToken = await _secure.read(key: _sessionToken);
     csrfToken = await _secure.read(key: _csrfToken);
   }
+
 
   static Future<void> _persist(String key, dynamic value) async {
     final String str = value is bool ? (value ? '1' : '0') : value.toString();
@@ -245,3 +246,4 @@ class SettingsService {
     disableHome = value;
   }
 }
+
