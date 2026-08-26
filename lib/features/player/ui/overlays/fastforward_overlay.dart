@@ -11,7 +11,6 @@ class FastforwardOverlay extends StatelessWidget {
       alignment: Alignment(0.0, -0.95),
       child: Card(
         color: Theme.of(context).colorScheme.surface,
-        //these are largely arbitrary values, most of this was copied from gesture_message.dart to keep ui elements consistent
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),

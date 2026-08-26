@@ -72,15 +72,11 @@ class _VideoPlayerUIState extends State<VideoPlayerUI> {
     }
   }
 
-  //this is duplicated code from video_player_ui_fullscreen, make sure to change that when changing this
   Future<void> _toggleFastForward(bool toggle) async {
     if (SettingsService.vpGestureFastForward != true) return;
-    debugPrint(SettingsService.vpGestureFastForward.toString());
-    //mirrors youtube functionality (haptic before isPlaying check)
     if (toggle) {
       HapticFeedback.heavyImpact();
     }
-    //this implementation is not perfect, since if the player is buffering, isPlaying is false.
     if (!widget.player.isPlaying) return;
     setState(() => _showFF = toggle);
     widget.player.setPlaybackSpeed(
