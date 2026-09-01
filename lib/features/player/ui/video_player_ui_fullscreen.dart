@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:Self.Tube/common/data/services/device/device_service.dart';
+import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/features/player/domain/video_player_interface.dart';
+import 'package:Self.Tube/features/player/ui/overlays/fastforward_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'overlays/bottom_controls_overlay.dart';
@@ -26,6 +28,7 @@ class VideoPlayerFullscreenUI extends StatefulWidget {
 
 class _VideoPlayerFullscreenUIState extends State<VideoPlayerFullscreenUI> {
   bool _showControls = false;
+  bool _showFF = false;
   Timer? _hideTimer;
   String? _gestureMessage;
   IconData? _gestureIcon;
@@ -85,6 +88,18 @@ class _VideoPlayerFullscreenUIState extends State<VideoPlayerFullscreenUI> {
     }
   }
 
+  void _toggleFastForward(bool toggle) {
+    if (SettingsService.vpGestureFastForward != true) return;
+    if (toggle) {
+      HapticFeedback.heavyImpact();
+    }
+    if (!widget.player.isPlaying) return;
+    setState(() => _showFF = toggle);
+    widget.player.setPlaybackSpeed(
+      toggle ? PlaybackSpeed.x2_0 : PlaybackSpeed.x1_0,
+    );
+  }
+
   @override
   void dispose() {
     _hideTimer?.cancel();
@@ -100,6 +115,8 @@ class _VideoPlayerFullscreenUIState extends State<VideoPlayerFullscreenUI> {
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: _toggleControls,
+        onLongPress: () => _toggleFastForward(true),
+        onLongPressEnd: (details) => _toggleFastForward(false),
         child: Stack(
           children: [
             Center(child: widget.player.buildView()),
@@ -124,6 +141,7 @@ class _VideoPlayerFullscreenUIState extends State<VideoPlayerFullscreenUI> {
                     ],
                   ),
                 ],
+                if (_showFF) FastforwardOverlay(playbackSpeedText: "2x"),
               ],
             )
           ],

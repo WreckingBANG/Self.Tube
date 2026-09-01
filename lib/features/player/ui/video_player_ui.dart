@@ -1,12 +1,15 @@
 import 'dart:async';
+import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/features/player/domain/video_player_interface.dart';
 import 'package:Self.Tube/features/player/ui/overlays/top_controls_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'video_player_ui_fullscreen.dart';
 import 'overlays/gesture_message.dart';
 import 'overlays/bottom_controls_overlay.dart';
 import 'overlays/gesture_controls_overlay.dart';
 import 'overlays/center_controls_overlay.dart';
+import 'overlays/fastforward_overlay.dart';
 
 class VideoPlayerUI extends StatefulWidget {
   final MediaPlayer player;
@@ -30,6 +33,7 @@ class _VideoPlayerUIState extends State<VideoPlayerUI> {
   Timer? _messageTimer;
 
   bool _showControls = false;
+  bool _showFF = false;
   Timer? _hideTimer;
 
   void _showMessage(String message, IconData icon) {
@@ -68,6 +72,18 @@ class _VideoPlayerUIState extends State<VideoPlayerUI> {
     }
   }
 
+  Future<void> _toggleFastForward(bool toggle) async {
+    if (SettingsService.vpGestureFastForward != true) return;
+    if (toggle) {
+      HapticFeedback.heavyImpact();
+    }
+    if (!widget.player.isPlaying) return;
+    setState(() => _showFF = toggle);
+    widget.player.setPlaybackSpeed(
+      toggle ? PlaybackSpeed.x2_0 : PlaybackSpeed.x1_0,
+    );
+  }
+
   void _openFullscreen() {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -92,6 +108,8 @@ class _VideoPlayerUIState extends State<VideoPlayerUI> {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: _toggleControls,
+      onLongPress: () => _toggleFastForward(true),
+      onLongPressEnd: (details) => _toggleFastForward(false),
       child: Stack(
         children: [
           Center(child: widget.player.buildView()),
@@ -125,6 +143,7 @@ class _VideoPlayerUIState extends State<VideoPlayerUI> {
                     )
                   ],
                 ),
+              if (_showFF) FastforwardOverlay(playbackSpeedText: "2x"),
             ],
           ),
         ],

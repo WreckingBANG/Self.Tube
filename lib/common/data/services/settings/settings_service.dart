@@ -32,6 +32,7 @@ class SettingsService {
   static const _vpGestureFullscreen = 'vpGestureFullscreen';
   static const _vpGesturePinch = 'vpGesturePinch';
   static const _vpGestureDoubleTap = 'vpGestureDoubleTap';
+  static const _vpGestureFastForward = 'vpGestureFastForward';
   static const _playerBackend = 'playerBackend';
 
   static const _disableRecommendations = 'disableRecommendations';
@@ -63,6 +64,7 @@ class SettingsService {
   static bool? vpGestureFullscreen;
   static bool? vpGesturePinch;
   static bool? vpGestureDoubleTap;
+  static bool? vpGestureFastForward;
   static int? playerBackend;
 
   static bool? disableRecommendations;
@@ -100,6 +102,7 @@ class SettingsService {
     vpGestureFullscreen = b(_vpGestureFullscreen, true);
     vpGesturePinch = b(_vpGesturePinch, true);
     vpGestureDoubleTap = b(_vpGestureDoubleTap, true);
+    vpGestureFastForward = b(_vpGestureFastForward, false);
     playerBackend = i(_playerBackend, 0);
 
     disableRecommendations = b(_disableRecommendations);
@@ -216,6 +219,11 @@ class SettingsService {
   static Future<void> setVPGestureDoubleTap(bool value) async {
     await _persist(_vpGestureDoubleTap, value);
     vpGestureDoubleTap = value;
+  }
+
+  static Future<void> setVPGestureFastForward(bool value) async {
+    await _persist(_vpGestureFastForward, value);
+    vpGestureFastForward = value;
   }
 
   static Future<void> setPlayerBackend(int value) async {

@@ -65,6 +65,8 @@
     "settingsVPGesturesPinchDesc": "Coming Soon",
     "settingsVPGesturesDoubleTap": "Double Tap",
     "settingsVPGesturesDoubleTapDesc": "Tap twice quickly on the right and left side of the player to skip/rewind and the center to play/pause",
+    "settingsVPGesturesFastForward": "Fast Forward",
+    "settingsVPGesturesFastForwardDesc": "Tap and hold the screen to play the video in double speed",
     "settingsVPAdvanded": "Advanced",
     "settingsVPPlayerBackend": "Player-Backend",
     "settingsVPPlayerBackendDesc": "Force a specific player backend",
