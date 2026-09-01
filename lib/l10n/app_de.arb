@@ -214,5 +214,7 @@
     "statsAudio": "Audio",
     "statsTitle": "Wiedergabestatistiken",
     "userStaff": "Mitarbeiter",
-    "userSuperUser": "Superuser"
+    "userSuperUser": "Superuser",
+    "settingsVPGesturesFastForward": "Vorspulen",
+    "settingsVPGesturesFastForwardDesc": "Tippe und halte gedrückt, um das Video in doppelter Geschwindigkeit abzuspielen"
 }
