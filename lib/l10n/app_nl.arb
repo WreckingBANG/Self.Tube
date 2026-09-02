@@ -213,5 +213,7 @@
     "settingsDistractionsComments": "Reacties verbergen",
     "settingsDistractionsHome": "Startpagina verbergen",
     "settingsDistractionsHomeHint": "Herstart vereist",
-    "sheetUpdateAvail": "TA-update beschikbaar"
+    "sheetUpdateAvail": "TA-update beschikbaar",
+    "settingsVPGesturesFastForward": "Doorspoelen",
+    "settingsVPGesturesFastForwardDesc": "Houd het scherm ingedrukt om de video twee keer zo snel af te spelen"
 }
