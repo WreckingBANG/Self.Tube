@@ -6,7 +6,7 @@ class ThemeHelper {
 
   static ColorScheme resolveColorScheme({
     required bool isDark,
-    required ColorScheme? dynamicScheme,
+    required dynamic dynamicScheme,
   }) {
     if (SettingsService.materialYouColors == false || dynamicScheme == null) {
       return ColorScheme.fromSeed(

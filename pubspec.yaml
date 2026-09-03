@@ -18,27 +18,27 @@ dependencies:
     sdk: flutter
   intl: ^0.20.2
   cached_network_image: ^3.4.1
-  share_plus: ^12.0.1
-  dynamic_color: ^1.8.1
+  share_plus: ^13.3.0
+  dynamic_color: ^2.1.0
   url_launcher: ^6.3.2
   screen_brightness: ^2.1.7
   video_player: ^2.10.1
   wakelock_plus: ^1.4.0
   flutter_linkify: ^6.0.0
-  flutter_secure_storage: ^10.0.0
+  flutter_secure_storage: ^11.0.0
   window_manager: ^0.5.1
   rxdart: ^0.28.0
   audio_service: ^0.18.18
   audio_service_mpris: ^0.2.0
   drift: ^2.31.0
-  drift_flutter: ^0.2.8
+  drift_flutter: ^0.3.1
   path_provider: ^2.1.5
   path: ^1.9.1
   flutter_riverpod: ^3.2.1
   talker: ^5.1.17
   talker_flutter: ^5.1.16
   material_symbols_icons: ^4.2928.1
-  flutter_m3shapes_extended: 1.1.0
+  flutter_m3shapes_extended: ^2.0.0
 
 dev_dependencies:
   flutter_test:

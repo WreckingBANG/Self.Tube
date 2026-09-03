@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const Color fallbackSeedColor = Color(0xff1e766a);
 
-ThemeData lightThemeFrom(ColorScheme colorScheme) {
+ThemeData lightThemeFrom(colorScheme) {
   return ThemeData(
     useMaterial3: true,
     colorScheme: colorScheme,
@@ -36,7 +36,7 @@ ThemeData lightThemeFrom(ColorScheme colorScheme) {
   );
 }
 
-ThemeData darkThemeFrom(ColorScheme colorScheme) {
+ThemeData darkThemeFrom(colorScheme) {
   return ThemeData(
     useMaterial3: true,
     colorScheme: colorScheme,
