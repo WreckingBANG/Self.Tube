@@ -12,8 +12,8 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context)!;
     
-    final queryContinue = "?order=asc&watch=continue";
-    final queryLatest = "?order=desc&sort=published&type=videos";
+    final queryContinue = "&order=asc&watch=continue";
+    final queryLatest = "&order=desc&sort=published&type=videos";
 
     if (SettingsService.disableHome == true) {
       return Scaffold(

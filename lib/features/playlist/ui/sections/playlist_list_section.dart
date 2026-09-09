@@ -48,7 +48,7 @@ class PlaylistListSection extends ConsumerWidget {
                   );
                 },  
               ),
-            if (provider.hasMore && playlists.isNotEmpty)
+            if (provider.pagination.hasMore && playlists.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.all(8),
                 child: Center(

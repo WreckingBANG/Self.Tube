@@ -1,71 +1,47 @@
+import 'package:Self.Tube/common/domain/pagination_mixin.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session_provider.dart';
 import 'package:Self.Tube/features/videos/data/api/video_api.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class VideoListNotifier extends AsyncNotifier<List?> {
+class VideoListNotifier extends AsyncNotifier<List?> with PaginationMixin {
   VideoListNotifier(this.query);
-  late final query;
-  int currentPage = 1;
-  bool hasMore = true;
-  String sortOptions = "";
+  late final String query;
 
   @override
   Future<List?> build() async {
+    pagination.query = query;
     final isLoggedIn = ref.watch(userSessionProvider).value ?? false;
     
     if (!isLoggedIn) {
-      currentPage = 1;
-      hasMore = true;
-      sortOptions = "";
+      pagination.currentPage = 1;
+      pagination.hasMore = true;
       return [];
     }
 
-    final videos = await VideoApi().fetchVideoList("$query$sortOptions&page=$currentPage");
-
-    if (videos != null) {
-      if (currentPage >= videos.lastPage) {
-        hasMore = false;
-      }
-
-      return videos.data;
+    final result = await getData();
+    
+    if (result.hasError == false) {
+      return result.data;
     }
     
     return [];
   }
 
-  Future<void> refresh() async {
-    hasMore = true;
-    currentPage = 1;
-    ref.invalidateSelf();
-  }
-
-  Future<void> fetchNext() async {
-    final current = state.value!;
-
-    currentPage++;
-
-    final newPage = await VideoApi().fetchVideoList("$query$sortOptions&page=$currentPage");
-    if (newPage != null) {
-      if (currentPage >= newPage.lastPage) {
-        hasMore = false;
-      }
-
-      final merged = [
-        ...current,
-        ...newPage.data,
-      ];
-
-      state = AsyncData(merged);
+  @override 
+  Future<PageResult> apiLoader(String query) async {
+     
+    final result  = await VideoApi().fetchVideoList(query);
+    
+    if (result == null) {
+      return PageResult(hasError: true);
     }
-  }
 
-  Future<void> setSorting(String value) async {
-    sortOptions = value;
-    currentPage = 1;
-    hasMore = true;
-    ref.invalidateSelf();
+    return PageResult(
+      data: result.data, 
+      lastPage: result.lastPage
+    ); 
   }
-
+  
   Future<void> deleteVideo(String id) async {
     final current = state.value!;
     await VideoApi.deleteVideo(id);
@@ -93,3 +69,4 @@ class VideoListNotifier extends AsyncNotifier<List?> {
 final videoListProvider = AsyncNotifierProvider.family<VideoListNotifier, List?, String> (
   VideoListNotifier.new,
 );
+

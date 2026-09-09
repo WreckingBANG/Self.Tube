@@ -24,7 +24,7 @@ class PlaylistpageScreen extends ConsumerWidget{
 
     final provider = ref.read(playlistPageProvider(playlistId).notifier);
     final playlist = ref.watch(playlistPageProvider(playlistId));
-    final query = "?playlist=$playlistId";
+    final query = "&playlist=$playlistId";
   
     return playlist.when(
       loading: () => const Center(child: CircularProgressIndicator()),

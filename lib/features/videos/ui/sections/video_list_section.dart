@@ -133,7 +133,7 @@ class VideoListSection extends ConsumerWidget {
                     );
                    }
                  ),
-              if (provider.hasMore && videos.isNotEmpty && !horizontalScroll)
+              if (provider.pagination.hasMore && videos.isNotEmpty && !horizontalScroll)
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(

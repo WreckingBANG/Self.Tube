@@ -28,7 +28,7 @@ class ChannelpageScreen extends ConsumerWidget{
     
     final provider = ref.read(channelPageProvider(channelId).notifier);
     final channel = ref.watch(channelPageProvider(channelId));
-    final query = "?channel=$channelId&order=desc&sort=published";
+    final query = "&channel=$channelId&order=desc&sort=published";
     
     return channel.when(
       loading: () => const Center(child: CircularProgressIndicator()),
