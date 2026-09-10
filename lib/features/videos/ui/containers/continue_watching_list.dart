@@ -17,7 +17,7 @@ class ContinueWatchingList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    final queryContinue = "?order=asc&watch=continue";
+    final queryContinue = "&order=asc&watch=continue";
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

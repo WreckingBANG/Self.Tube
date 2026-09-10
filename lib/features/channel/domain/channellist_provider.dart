@@ -1,60 +1,43 @@
+import 'package:Self.Tube/common/domain/pagination_mixin.dart';
 import 'package:Self.Tube/features/channel/data/api/channel_api.dart';
 import 'package:Self.Tube/features/onboarding/domain/user_session_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ChannelListNotifier extends AsyncNotifier<List?> {
+class ChannelListNotifier extends AsyncNotifier<List?> with PaginationMixin{
   ChannelListNotifier(this.query);
-  late final query;
-  int currentPage = 1;
-  bool hasMore = true;
+  late final String query;
   
   @override
   Future<List?> build() async {
     final isLoggedIn = ref.watch(userSessionProvider).value ?? false;
 
     if (!isLoggedIn) {
-      currentPage = 1;
-      hasMore = true;
+      pagination.currentPage = 1;
+      pagination.hasMore = true;
       return [];
     }
 
-    final channels = await ChannelApi().fetchChannelList("$query&page=$currentPage");
+    final result = await getData(); 
     
-    if (channels != null) {
-      if (currentPage >= channels.lastPage) {
-        hasMore = false;
-      }
-
-      return channels.data; 
+    if (result.data != null) {
+      return result.data; 
     }
+    
     return []; 
   }
-  
-  Future<void> refresh() async {
-    hasMore = true;
-    currentPage = 1;
-    ref.invalidateSelf();
-  }
 
-  Future<void> fetchNext() async {
-    final current = state.value!; 
+  Future<PageResult> apiLoader(String query) async {
+    
+    final result = await ChannelApi().fetchChannelList(query);
 
-    currentPage++;
-
-    final newPage = await ChannelApi().fetchChannelList("$query&page=$currentPage");
-    if (newPage != null) {
-
-      if (currentPage >= newPage.lastPage) {
-        hasMore = false;
-      }
-      
-      final merged = [
-        ...current,
-        ...newPage.data,
-      ];
-
-      state = AsyncData(merged);
+    if (result == null) {
+      return PageResult(hasError: true);
     }
+
+    return PageResult(
+      data: result.data,
+      lastPage: result.lastPage
+    );
   }
 
   Future<void> addChannel(String id) async {

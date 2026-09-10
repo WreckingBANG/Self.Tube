@@ -48,7 +48,7 @@ class ChannelListSection extends ConsumerWidget {
                   );
                 }
               ),
-            if (provider.hasMore && channels.isNotEmpty)
+            if (provider.pagination.hasMore && channels.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
