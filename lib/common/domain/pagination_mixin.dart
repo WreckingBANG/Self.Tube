@@ -48,6 +48,8 @@ mixin PaginationMixin on AsyncNotifier<List?>  {
     if (result.hasError == false) {
       if (pagination.currentPage >= result.lastPage) {
         pagination.hasMore = false;
+      } else {
+        pagination.hasMore = true;
       }
 
       return PageResult(
@@ -90,5 +92,17 @@ mixin PaginationMixin on AsyncNotifier<List?>  {
     }
   }
 
+  Future<void> goToPage(int pagenum) async {
+    pagination.currentPage = pagenum;
+
+    final newPage = await getData();
+    
+    if (newPage.hasError == false) {
+      state = AsyncData(
+        newPage.data
+      );
+    }
+
+  } 
 
 }

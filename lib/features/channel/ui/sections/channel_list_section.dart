@@ -1,4 +1,5 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/common/ui/widgets/pagination/pagination_buttons.dart';
 import 'package:Self.Tube/common/ui/widgets/sections/empty_error_section.dart';
 import 'package:Self.Tube/features/channel/domain/channellist_provider.dart';
 import 'package:Self.Tube/features/channel/ui/tiles/channel_list_tile.dart';
@@ -37,7 +38,7 @@ class ChannelListSection extends ConsumerWidget {
                 padding: EdgeInsets.only(top: 20),
                 child: EmptyErrorSection()
               )
-           else
+            else
               ListSectionContainer(
                 itemCount: channels!.length,
                 itemBuilder: (context, index) {
@@ -48,16 +49,13 @@ class ChannelListSection extends ConsumerWidget {
                   );
                 }
               ),
-            if (provider.pagination.hasMore && channels.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: TextButton(
-                    onPressed: provider.fetchNext,
-                    child: Text(localizations.listShowMore),
-                  ),
-                ),
-              ),
+            PaginationButtons(
+              currentPage: provider.pagination.currentPage,
+              hasMore: provider.pagination.hasMore,
+              next: () => provider.goToPage(provider.pagination.currentPage+1),
+              previous: () => provider.goToPage(provider.pagination.currentPage-1),
+              fetchNext: () => provider.fetchNext()
+            ),
           ],
         );
       }

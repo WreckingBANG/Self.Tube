@@ -1,5 +1,6 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/common/ui/widgets/sections/empty_error_section.dart';
+import 'package:Self.Tube/common/ui/widgets/pagination/pagination_buttons.dart';
 import 'package:Self.Tube/common/ui/widgets/sections/sort_chips_section.dart';
 import 'package:Self.Tube/features/player/domain/video_player_service.dart';
 import 'package:Self.Tube/features/videos/domain/selection_provider.dart';
@@ -133,16 +134,14 @@ class VideoListSection extends ConsumerWidget {
                     );
                    }
                  ),
-              if (provider.pagination.hasMore && videos.isNotEmpty && !horizontalScroll)
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: TextButton(
-                      onPressed: provider.fetchNext,
-                      child: Text(localizations.listShowMore),
-                    ),
+                if (!horizontalScroll)
+                  PaginationButtons(
+                    currentPage: provider.pagination.currentPage,
+                    hasMore: provider.pagination.hasMore,
+                    next: () => provider.goToPage(provider.pagination.currentPage+1),
+                    previous: () => provider.goToPage(provider.pagination.currentPage-1),
+                    fetchNext: () => provider.fetchNext()
                   ),
-                ),
               if (selection.isNotEmpty)
                 SizedBox(height: usableSpace*20/100)
             ]
