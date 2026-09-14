@@ -7,12 +7,14 @@ class PaginationModel {
   bool hasMore;
   String query;
   String sortOptions;
+  String filter;
 
   PaginationModel({
     required this.currentPage,
     required this.hasMore,
     required this.query,
     this.sortOptions = "",
+    this.filter = ""
   });
 }
 
@@ -35,6 +37,7 @@ mixin PaginationMixin on AsyncNotifier<List?>  {
     currentPage: 1,
     hasMore: true,
     query: "",
+    filter: "",
   );
 
   Future<PageResult> getData() async {
@@ -42,7 +45,7 @@ mixin PaginationMixin on AsyncNotifier<List?>  {
       "?page=${pagination.currentPage}"
       "${pagination.query}"
       "${pagination.sortOptions}"
-      
+      "${pagination.filter}" 
     );
     
     if (result.hasError == false) {

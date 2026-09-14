@@ -1,16 +1,13 @@
 import 'dart:async';
+import 'package:Self.Tube/common/domain/pagination_mixin.dart';
 import 'package:Self.Tube/features/tasks/data/api/task_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class QueueNotifier extends AsyncNotifier<List?> with WidgetsBindingObserver{
+class QueueNotifier extends AsyncNotifier<List?> with WidgetsBindingObserver, PaginationMixin{
   QueueNotifier(this.query);
   Timer? _timer;
-  late final query;
-  int currentPage = 1;
-  bool showHidden = false;
-  String filter = "pending";
-  bool hasMore = true;
+  late final String query;
 
   @override
   Future<List?> build() async {
@@ -20,19 +17,34 @@ class QueueNotifier extends AsyncNotifier<List?> with WidgetsBindingObserver{
     ref.onDispose((){
       WidgetsBinding.instance.removeObserver(this);
     });
+    
+    if (pagination.filter.isEmpty) {
+      pagination.filter = "&filter=pending";
+    }
 
-    final videos = await TaskApi().fetchQueue("${query}filter=${filter}&page=$currentPage");
+    final result = await getData();
 
-    if (videos != null) {
-      if (currentPage >= videos.lastPage) {
-        hasMore = false;
-      }
-
-      return videos.data;
+    if (result.hasError == false) {
+      return result.data;
     }
     
     return [];
   }
+
+  @override 
+  Future<PageResult> apiLoader(String query) async {
+     
+    final result  = await TaskApi().fetchQueue(query);
+    
+    if (result == null) {
+      return PageResult(hasError: true);
+    }
+
+    return PageResult(
+      data: result.data, 
+      lastPage: result.lastPage
+    ); 
+  } 
 
   void _startPolling() {
     _timer?.cancel();
@@ -54,41 +66,21 @@ class QueueNotifier extends AsyncNotifier<List?> with WidgetsBindingObserver{
       _startPolling();
     }
   }
-
+  
+  @override
   Future<void> refresh() async {
-    hasMore = true;
-    currentPage = 1;
     ref.invalidateSelf();
   }
 
   Future<void> changeHidden(bool value) async {
     if (value) {
-      filter = "ignore";
+      pagination.filter = "&filter=ignore";
+      pagination.currentPage = 1;
     } else {
-      filter = "pending";
+      pagination.filter = "&filter=pending";
+      pagination.currentPage = 1;
     }
-    showHidden = value;
     refresh();
-  }
-
-  Future<void> fetchNext() async {
-    final current = state.value!;
-
-    currentPage++;
-
-    final newPage = await TaskApi().fetchQueue("$query&page=$currentPage");
-    if (newPage != null) {
-      if (currentPage >= newPage.lastPage) {
-        hasMore = false;
-      }
-
-      final merged = [
-        ...current,
-        ...newPage.data,
-      ];
-
-      state = AsyncData(merged);
-    }
   }
 
   Future<void> deleteVideo(String id) async {
