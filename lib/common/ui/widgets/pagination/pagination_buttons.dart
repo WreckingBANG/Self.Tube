@@ -25,6 +25,11 @@ class PaginationButtons extends StatelessWidget {
     final paginationStyle = 1;
     
     if (paginationStyle == 1 || enforcePages) {
+      
+      if (currentPage == 1 && !hasMore) {
+        return SizedBox.shrink();
+      }
+
       return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(

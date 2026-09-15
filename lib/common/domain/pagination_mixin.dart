@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class PaginationModel {
 
   int currentPage;
+  int lastPage;
   bool hasMore;
   String query;
   String sortOptions;
@@ -11,6 +12,7 @@ class PaginationModel {
 
   PaginationModel({
     required this.currentPage,
+    required this.lastPage,
     required this.hasMore,
     required this.query,
     this.sortOptions = "",
@@ -35,6 +37,7 @@ mixin PaginationMixin on AsyncNotifier<List?>  {
 
   PaginationModel pagination = PaginationModel(
     currentPage: 1,
+    lastPage: 1,
     hasMore: true,
     query: "",
     filter: "",
@@ -47,8 +50,17 @@ mixin PaginationMixin on AsyncNotifier<List?>  {
       "${pagination.sortOptions}"
       "${pagination.filter}" 
     );
-    
+   
     if (result.hasError == false) {
+      
+      // Fix for Issue where the lastPage value is 0,
+      // when the API hits the last Page
+      if (result.lastPage == 0) {
+        pagination.lastPage = pagination.currentPage;
+      } else {
+        pagination.lastPage = result.lastPage;
+      }
+      
       if (pagination.currentPage >= result.lastPage) {
         pagination.hasMore = false;
       } else {
@@ -96,16 +108,17 @@ mixin PaginationMixin on AsyncNotifier<List?>  {
   }
 
   Future<void> goToPage(int pagenum) async {
-    pagination.currentPage = pagenum;
+    if ((pagenum > 0) && (pagenum <= pagination.lastPage)) {
+      pagination.currentPage = pagenum;
 
-    final newPage = await getData();
-    
-    if (newPage.hasError == false) {
-      state = AsyncData(
-        newPage.data
-      );
+      final newPage = await getData();
+      
+      if (newPage.hasError == false) {
+        state = AsyncData(
+          newPage.data
+        );
+      }
     }
-
   } 
 
 }
