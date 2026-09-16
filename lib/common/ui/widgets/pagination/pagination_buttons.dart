@@ -1,20 +1,22 @@
+import 'package:Self.Tube/common/ui/widgets/pagination/go_to_page_dialog.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PaginationButtons extends StatelessWidget {
   final bool enforcePages;
   final int currentPage;
+  final int lastPage;
   final bool hasMore;
-  final VoidCallback next;
-  final VoidCallback previous;
+  final ValueChanged<int> goToPage;
   final VoidCallback fetchNext;
 
   const PaginationButtons({
     super.key,
     required this.currentPage,
+    required this.lastPage,
     required this.hasMore,
-    required this.next,
-    required this.previous,
+    required this.goToPage,
     required this.fetchNext,
     this.enforcePages = false
   });
@@ -51,7 +53,7 @@ class PaginationButtons extends StatelessWidget {
                       )
                     ) 
                   ),
-                  onPressed: () => previous.call(),
+                  onPressed: () => goToPage(currentPage - 1),
                   child: Text("Previous"),
                 ),
               ),
@@ -63,16 +65,11 @@ class PaginationButtons extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(5))
                 ) 
               ),
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      content: Text("WIP"),
-                    );
-                  }
-                );
-              },
+              onPressed: () => GoToPageDialog(
+                context: context, 
+                lastPage: lastPage, 
+                goToPage: goToPage
+              ),
               child: Text(currentPage.toString()),
             ),
             SizedBox(width: 5),
@@ -91,7 +88,7 @@ class PaginationButtons extends StatelessWidget {
                       )
                     ) 
                   ),
-                  onPressed: () => next.call(),
+                  onPressed: () => goToPage(currentPage + 1),
                   child: Text("Forward"),
                 ),
               ),

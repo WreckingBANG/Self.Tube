@@ -137,9 +137,9 @@ class VideoListSection extends ConsumerWidget {
                 if (!horizontalScroll)
                   PaginationButtons(
                     currentPage: provider.pagination.currentPage,
+                    lastPage: provider.pagination.lastPage,
                     hasMore: provider.pagination.hasMore,
-                    next: () => provider.goToPage(provider.pagination.currentPage+1),
-                    previous: () => provider.goToPage(provider.pagination.currentPage-1),
+                    goToPage: (page) => provider.goToPage(page),
                     fetchNext: () => provider.fetchNext()
                   ),
               if (selection.isNotEmpty)
