@@ -109,6 +109,7 @@ mixin PaginationMixin on AsyncNotifier<List?>  {
 
   Future<void> goToPage(int pagenum) async {
     if ((pagenum > 0) && (pagenum <= pagination.lastPage)) {
+      state = AsyncLoading();
       pagination.currentPage = pagenum;
 
       final newPage = await getData();
