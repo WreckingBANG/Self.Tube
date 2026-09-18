@@ -16,6 +16,7 @@ class SettingsService {
 
   static const _showCommentPics = 'showCommentPics';
   static const _materialYouColors = 'materialYouColors';
+  static const _paginationStyle = 'paginationStyle';
   static const _doneSetup = 'doneSetup';
 
   static const _sponsorBlockEnabledKey = 'sponsorBlockEnabled';
@@ -48,6 +49,7 @@ class SettingsService {
 
   static bool? showCommentPics;
   static bool? materialYouColors;
+  static int? paginationStyle;
   static bool? doneSetup;
 
   static bool? sponsorBlockEnabled;
@@ -87,6 +89,7 @@ class SettingsService {
     
     showCommentPics = b(_showCommentPics);
     materialYouColors = b(_materialYouColors, true);
+    paginationStyle = i(_paginationStyle, 0);
   
     sponsorBlockEnabled = b(_sponsorBlockEnabledKey, true);
     sbSponsor = b(_sponsorKey, true);
@@ -158,6 +161,11 @@ class SettingsService {
   static Future<void> setMaterialYouColors(bool value) async {
     await _persist(_materialYouColors, value);
     materialYouColors = value;
+  }
+
+  static Future<void> setPaginationStyle(int value) async {
+    await _persist(_paginationStyle, value);
+    paginationStyle = value;
   }
 
   static Future<void> setDoneSetup(bool value) async {

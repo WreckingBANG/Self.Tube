@@ -1,3 +1,4 @@
+import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/common/ui/widgets/pagination/go_to_page_dialog.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -24,9 +25,9 @@ class PaginationButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
-    final paginationStyle = 1;
+    final paginationStyle = SettingsService.paginationStyle;
     
-    if (paginationStyle == 1 || enforcePages) {
+    if (paginationStyle == 0 || enforcePages) {
       
       if (currentPage == 1 && !hasMore) {
         return SizedBox.shrink();
@@ -97,7 +98,7 @@ class PaginationButtons extends StatelessWidget {
         ),
       );
         
-    } else if (paginationStyle == 2 && hasMore) {
+    } else if (paginationStyle == 1 && hasMore) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Center(
