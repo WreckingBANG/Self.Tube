@@ -1,17 +1,19 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/features/onboarding/domain/user_session_provider.dart';
 import 'package:Self.Tube/features/settings/domain/controllers/appearance_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
-class AppearanceSettingsScreen extends StatefulWidget {
+class AppearanceSettingsScreen extends ConsumerStatefulWidget {
   const AppearanceSettingsScreen({super.key});
 
   @override
   _AppearanceSettingsScreenState createState() => _AppearanceSettingsScreenState();
 }
 
-class _AppearanceSettingsScreenState extends State<AppearanceSettingsScreen> {
+class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScreen> {
   final controller = AppearanceController();
 
   bool _showCommentPics = false;
@@ -105,6 +107,7 @@ class _AppearanceSettingsScreenState extends State<AppearanceSettingsScreen> {
                     onSelectionChanged: (value) {
                       setState(() {
                         controller.setPaginationStyle(value.first);
+                        ref.read(userSessionProvider.notifier).forceRefresh();
                         _paginationStyle = value.first;
                       });
                     },

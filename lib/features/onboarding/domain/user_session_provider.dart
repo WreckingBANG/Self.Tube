@@ -31,6 +31,13 @@ class UserSessionNotifier extends AsyncNotifier<bool> {
     }
     state = AsyncData(result);
   }
+  
+  Future<void> forceRefresh() async {
+    if (state.value == true) {
+      state = AsyncData(false);
+      state = AsyncData(true);
+    }
+  }
 
   Future<void> resetLoginSettings() async {
     AuthController().resetLoginSettings();
