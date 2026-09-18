@@ -215,5 +215,7 @@
     "settingsDistractionsComments": "Desactivar comentarios",
     "settingsDistractionsHome": "Desactivar la página de inicio",
     "settingsDistractionsHomeHint": "Es necesario reiniciar la aplicación",
-    "sheetUpdateAvail": "Actualización de TA disponible"
+    "sheetUpdateAvail": "Actualización de TA disponible",
+    "settingsVPGesturesFastForward": "Avance rápido",
+    "settingsVPGesturesFastForwardDesc": "Mantén pulsado para reproducir a doble velocidad"
 }
