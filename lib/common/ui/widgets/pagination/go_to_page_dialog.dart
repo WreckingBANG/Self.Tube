@@ -1,4 +1,5 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -7,6 +8,9 @@ Future<void> GoToPageDialog({
   required int lastPage,
   required ValueChanged<int> goToPage
 }) async {
+  
+  final localizations = AppLocalizations.of(context)!;
+
   final controller = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
@@ -26,7 +30,7 @@ Future<void> GoToPageDialog({
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("Jump to Page", style: const TextStyle(fontSize: 20)),
+            Text(localizations.paginationJumpToPage, style: const TextStyle(fontSize: 20)),
             SizedBox(height: 5),
             ListSectionContainer(
               children: [
@@ -48,11 +52,11 @@ Future<void> GoToPageDialog({
                       final int? page = int.tryParse(controller.text);
 
                       if (page == null) {
-                        return "Cannot be empty";
+                        return localizations.paginationEmptyErr;
                       }
 
                       if (page < 1 || page > lastPage) {
-                        return "Value has to be between 1 and $lastPage";
+                        return localizations.paginationRangeErr(lastPage);
                       }
 
                       return null;
@@ -68,7 +72,7 @@ Future<void> GoToPageDialog({
                       Icon(Icons.info, size: 15),
                       SizedBox(width: 2.5),
                       Text(
-                        "Value must be between 1 and $lastPage",
+                        localizations.paginationRangeInfo(lastPage),
                         style: TextStyle(fontSize: 12.5),
                       )
                     ],
@@ -81,11 +85,11 @@ Future<void> GoToPageDialog({
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text("Cancel"),
+            child: Text(localizations.dialogCancel),
           ),
           TextButton(
             onPressed: () => submit(), 
-            child: Text("Go To Page") 
+            child: Text(localizations.paginationGo) 
           )
         ],
       );

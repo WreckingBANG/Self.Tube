@@ -214,5 +214,13 @@
     "statsAudio": "Audio",
     "statsTitle": "Wiedergabestatistiken",
     "userStaff": "Mitarbeiter",
-    "userSuperUser": "Superuser"
+    "userSuperUser": "Superuser",
+    "dialogCancel": "Abbrechen",
+    "paginationNext": "Nächste",
+    "paginationPrevious": "Vorherige",
+    "paginationJumpToPage": "Zu Seite springen",
+    "paginationEmptyErr": "Das Feld darf nicht leer sein",
+    "paginationRangeErr": "Die Seitenzahl muss zwischen 1 und {lastPage} liegen",
+    "paginationRangeInfo": "Gib eine Seitenzahl zwischen 1 und {lastPage} ein",
+    "paginationGo": "Los"
 }

@@ -4,7 +4,7 @@
     "barHome": "Home",
     "barChannels": "Channels",
     "barPlaylists": "Playlists",
-    "barActions": "Actions",
+"barActions": "Actions",
     "tooltipSearch": "Search",
     "tooltipSettings": "Settings",
     "homeLatestVideos": "Latest Videos",
@@ -216,5 +216,13 @@
     "statsAudio": "Audio",
     "statsTitle": "Playback Stats",
     "userStaff": "Staff",
-    "userSuperUser": "Superuser"
+    "userSuperUser": "Superuser",
+    "dialogCancel": "Cancel",
+    "paginationNext": "Next",
+    "paginationPrevious": "Previous",
+    "paginationJumpToPage": "Jump to Page",
+    "paginationEmptyErr": "Cannot be empty",
+    "paginationRangeErr": "Value must be between 1 and {lastPage}",
+    "paginationRangeInfo": "Enter a value between 1 and {lastPage}",
+    "paginationGo": "Go"
 }

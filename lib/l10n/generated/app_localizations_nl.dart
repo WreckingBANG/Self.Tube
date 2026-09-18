@@ -707,4 +707,32 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get userSuperUser => 'Supergebruiker';
+
+  @override
+  String get dialogCancel => 'Cancel';
+
+  @override
+  String get paginationNext => 'Next';
+
+  @override
+  String get paginationPrevious => 'Previous';
+
+  @override
+  String get paginationJumpToPage => 'Jump to Page';
+
+  @override
+  String get paginationEmptyErr => 'Cannot be empty';
+
+  @override
+  String paginationRangeErr(Object lastPage) {
+    return 'Value must be between 1 and $lastPage';
+  }
+
+  @override
+  String paginationRangeInfo(Object lastPage) {
+    return 'Enter a value between 1 and $lastPage';
+  }
+
+  @override
+  String get paginationGo => 'Go';
 }

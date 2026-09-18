@@ -55,7 +55,7 @@ class PaginationButtons extends StatelessWidget {
                     ) 
                   ),
                   onPressed: () => goToPage(currentPage - 1),
-                  child: Text("Previous"),
+                  child: Text(localizations!.paginationPrevious),
                 ),
               ),
             ),
@@ -90,7 +90,7 @@ class PaginationButtons extends StatelessWidget {
                     ) 
                   ),
                   onPressed: () => goToPage(currentPage + 1),
-                  child: Text("Forward"),
+                  child: Text(localizations.paginationNext),
                 ),
               ),
             ),
