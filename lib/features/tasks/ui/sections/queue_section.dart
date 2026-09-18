@@ -1,4 +1,5 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/common/ui/widgets/pagination/pagination_buttons.dart';
 import 'package:Self.Tube/features/tasks/domain/queue_provider.dart';
 import 'package:Self.Tube/features/tasks/ui/tiles/queue_list_tile.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class QueueSection extends ConsumerWidget {
                 },
               ),
               title: Text(localizations.taskShowIgnored),
-              value: provider.showHidden,
+              value: provider.pagination.filter == "&filter=ignore",
               onChanged: (bool value) {
                 provider.changeHidden(value);
               },
@@ -63,16 +64,14 @@ class QueueSection extends ConsumerWidget {
                   );
                 },
               ),
-            if (provider.hasMore && queue.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: TextButton(
-                    onPressed: provider.fetchNext,
-                    child: Text(localizations.listShowMore),
-                  ),
-                ),
-              ),
+            PaginationButtons(
+              enforcePages: true,
+              currentPage: provider.pagination.currentPage,
+              lastPage: provider.pagination.lastPage,
+              hasMore: provider.pagination.hasMore,
+              goToPage: (page) => provider.goToPage(page),
+              fetchNext: () => provider.fetchNext()
+            ),
           ],
         );
       }

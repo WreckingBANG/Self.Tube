@@ -1,4 +1,5 @@
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
+import 'package:Self.Tube/common/ui/widgets/pagination/pagination_buttons.dart';
 import 'package:Self.Tube/common/ui/widgets/sections/empty_error_section.dart';
 import 'package:Self.Tube/features/playlist/domain/playlistlist_provider.dart';
 import 'package:Self.Tube/features/playlist/ui/tiles/playlist_list_tile.dart';
@@ -48,16 +49,13 @@ class PlaylistListSection extends ConsumerWidget {
                   );
                 },  
               ),
-            if (provider.hasMore && playlists.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.all(8),
-                child: Center(
-                  child: TextButton(
-                    onPressed: provider.fetchNext,
-                    child: Text(localizations.listShowMore),
-                  )
-                ),
-              )
+            PaginationButtons(
+              currentPage: provider.pagination.currentPage,
+              lastPage: provider.pagination.lastPage, 
+              hasMore: provider.pagination.hasMore,
+              goToPage: (page) => provider.goToPage(page),
+              fetchNext: () => provider.fetchNext()
+            ),
           ],
         );
       }

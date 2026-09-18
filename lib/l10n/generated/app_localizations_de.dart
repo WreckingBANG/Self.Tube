@@ -706,4 +706,32 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get userSuperUser => 'Superuser';
+
+  @override
+  String get dialogCancel => 'Abbrechen';
+
+  @override
+  String get paginationNext => 'Nächste';
+
+  @override
+  String get paginationPrevious => 'Vorherige';
+
+  @override
+  String get paginationJumpToPage => 'Zu Seite springen';
+
+  @override
+  String get paginationEmptyErr => 'Das Feld darf nicht leer sein';
+
+  @override
+  String paginationRangeErr(Object lastPage) {
+    return 'Die Seitenzahl muss zwischen 1 und $lastPage liegen';
+  }
+
+  @override
+  String paginationRangeInfo(Object lastPage) {
+    return 'Gib eine Seitenzahl zwischen 1 und $lastPage ein';
+  }
+
+  @override
+  String get paginationGo => 'Los';
 }

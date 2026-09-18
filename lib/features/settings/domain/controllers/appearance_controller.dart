@@ -9,11 +9,19 @@ class AppearanceController {
     return SettingsService.materialYouColors ?? false;
   }
 
+  Future<int> loadPaginationStyle() async {
+    return SettingsService.paginationStyle ?? 0;
+  }
+
   Future<void> setShowCommentPics(bool value) async {
     await SettingsService.setShowCommentPics(value);
   }
 
   Future<void> setMaterialYouColors(bool value) async {
     await SettingsService.setMaterialYouColors(value);
+  }
+
+  Future<void> setPaginationStyle(int value) async {
+    await SettingsService.setPaginationStyle(value);
   }
 }

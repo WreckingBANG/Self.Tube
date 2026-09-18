@@ -1405,6 +1405,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Superuser'**
   String get userSuperUser;
+
+  /// No description provided for @dialogCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get dialogCancel;
+
+  /// No description provided for @paginationNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get paginationNext;
+
+  /// No description provided for @paginationPrevious.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous'**
+  String get paginationPrevious;
+
+  /// No description provided for @paginationJumpToPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Jump to Page'**
+  String get paginationJumpToPage;
+
+  /// No description provided for @paginationEmptyErr.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot be empty'**
+  String get paginationEmptyErr;
+
+  /// No description provided for @paginationRangeErr.
+  ///
+  /// In en, this message translates to:
+  /// **'Value must be between 1 and {lastPage}'**
+  String paginationRangeErr(Object lastPage);
+
+  /// No description provided for @paginationRangeInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a value between 1 and {lastPage}'**
+  String paginationRangeInfo(Object lastPage);
+
+  /// No description provided for @paginationGo.
+  ///
+  /// In en, this message translates to:
+  /// **'Go'**
+  String get paginationGo;
 }
 
 class _AppLocalizationsDelegate

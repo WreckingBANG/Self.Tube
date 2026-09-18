@@ -215,6 +215,14 @@
     "statsTitle": "Wiedergabestatistiken",
     "userStaff": "Mitarbeiter",
     "userSuperUser": "Superuser",
+    "dialogCancel": "Abbrechen",
+    "paginationNext": "Nächste",
+    "paginationPrevious": "Vorherige",
+    "paginationJumpToPage": "Zu Seite springen",
+    "paginationEmptyErr": "Das Feld darf nicht leer sein",
+    "paginationRangeErr": "Die Seitenzahl muss zwischen 1 und {lastPage} liegen",
+    "paginationRangeInfo": "Gib eine Seitenzahl zwischen 1 und {lastPage} ein",
+    "paginationGo": "Los",
     "settingsVPGesturesFastForward": "Vorspulen",
     "settingsVPGesturesFastForwardDesc": "Tippe und halte gedrückt, um das Video in doppelter Geschwindigkeit abzuspielen"
 }
