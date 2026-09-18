@@ -1,3 +1,4 @@
+import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -25,40 +26,56 @@ Future<void> GoToPageDialog({
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Form(
-              key: formKey,
-              child: TextFormField(
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  FilteringTextInputFormatter.digitsOnly
-                ],
-                controller: controller,
-                autofocus: true,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) {
-                    
-                  final int? page = int.tryParse(controller.text);
-
-                  if (page == null) {
-                    return "Cannot be empty";
-                  }
-
-                  if (page < 1 || page > lastPage) {
-                    return "Value has to be between 1 and $lastPage";
-                  }
-
-                  return null;
-
-                },
-                onFieldSubmitted: (_) => submit(),
-              ),
-            ),
-            Row(
+            Text("Jump to Page", style: const TextStyle(fontSize: 20)),
+            SizedBox(height: 5),
+            ListSectionContainer(
               children: [
-                Icon(Icons.info),
-                Text("Value must be between 1 and $lastPage")
+                Form(
+                  key: formKey,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      border: InputBorder.none
+                    ),
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
+                    controller: controller,
+                    autofocus: true,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                        
+                      final int? page = int.tryParse(controller.text);
+
+                      if (page == null) {
+                        return "Cannot be empty";
+                      }
+
+                      if (page < 1 || page > lastPage) {
+                        return "Value has to be between 1 and $lastPage";
+                      }
+
+                      return null;
+
+                    },
+                    onFieldSubmitted: (_) => submit(),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Row(
+                    children: [
+                      Icon(Icons.info, size: 15),
+                      SizedBox(width: 2.5),
+                      Text(
+                        "Value must be between 1 and $lastPage",
+                        style: TextStyle(fontSize: 12.5),
+                      )
+                    ],
+                  )
+                )
               ],
-            )
+            ),
           ],
         ), 
         actions: [
