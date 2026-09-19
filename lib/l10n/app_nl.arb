@@ -215,5 +215,13 @@
     "settingsDistractionsHomeHint": "Herstart vereist",
     "sheetUpdateAvail": "TA-update beschikbaar",
     "settingsVPGesturesFastForward": "Doorspoelen",
-    "settingsVPGesturesFastForwardDesc": "Houd het scherm ingedrukt om de video twee keer zo snel af te spelen"
+    "settingsVPGesturesFastForwardDesc": "Houd het scherm ingedrukt om de video twee keer zo snel af te spelen",
+    "dialogCancel": "Annuleren",
+    "paginationNext": "Volgende",
+    "paginationPrevious": "Vorige",
+    "paginationJumpToPage": "Ga naar pagina",
+    "paginationEmptyErr": "Vul iets in",
+    "paginationRangeErr": "De waarde moet tussen 1 en {lastPage} zijn",
+    "paginationRangeInfo": "De waarde moet tussen 1 en {lastPage} liggen",
+    "paginationGo": "Gaan"
 }
