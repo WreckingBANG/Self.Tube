@@ -36,8 +36,8 @@ class VideoPlayerAdapter implements MediaPlayer {
       final value = _controller.value;
       
       //temporary fix to resolve video/audio desync
-      _controller.seekTo(duration);
-      _controller.seekTo(Duration(seconds: 0));
+      safeSeek(duration);
+      safeSeek(Duration(seconds: 0));
 
       _lastPlaying = value.isPlaying;
       _lastPosition = value.position;
@@ -160,12 +160,18 @@ class VideoPlayerAdapter implements MediaPlayer {
   @override
   Future<void> seek(Duration position) async {
     if (position < Duration.zero) {
-      return _controller.seekTo(Duration.zero);
+      return safeSeek(Duration.zero);
     } else if (position > duration) {
-      return _controller.seekTo(duration);
+      return safeSeek(duration);
     } else {
-      return _controller.seekTo(position);
+      return safeSeek(position);
     }
+  }
+
+  Future<void> safeSeek(Duration position) async {
+    _controller.pause();
+    _controller.seekTo(position);
+    _controller.play();
   }
 
   @override
