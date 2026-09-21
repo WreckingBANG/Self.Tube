@@ -217,5 +217,13 @@
     "settingsDistractionsHomeHint": "Es necesario reiniciar la aplicación",
     "sheetUpdateAvail": "Actualización de TA disponible",
     "settingsVPGesturesFastForward": "Avance rápido",
-    "settingsVPGesturesFastForwardDesc": "Mantén pulsado para reproducir a doble velocidad"
+    "settingsVPGesturesFastForwardDesc": "Mantén pulsado para reproducir a doble velocidad",
+    "dialogCancel": "Cancelar",
+    "paginationNext": "Siguiente",
+    "paginationPrevious": "Anterior",
+    "paginationJumpToPage": "Saltar a la página",
+    "paginationEmptyErr": "No puede estar vacío",
+    "paginationRangeErr": "El valor debe estar entre 1 y {lastPage}",
+    "paginationRangeInfo": "Ingrese un valor entre 1 y {lastPage}",
+    "paginationGo": "Ir"
 }
