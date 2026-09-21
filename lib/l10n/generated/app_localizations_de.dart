@@ -64,6 +64,15 @@ class AppLocalizationsDe extends AppLocalizations {
       'Wenn aktiviert, wird das Bild von Google bezogen, da es nicht von TubeArchivist bereitgestellt wird';
 
   @override
+  String get settingsPaginationStyle => 'Seiten Stil';
+
+  @override
+  String get settingsPaginationStylePages => 'Seiten (Default)';
+
+  @override
+  String get settingsPaginationStyleShowMore => 'Mehr anzeigen';
+
+  @override
   String get settingsSheetComingSoon => 'Kommt bald';
 
   @override
@@ -467,6 +476,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get expandableTextLess => 'Weniger ...';
 
   @override
+  String get aboutTitle => 'Über die App';
+
+  @override
   String get aboutVersion => 'Version';
 
   @override
@@ -734,4 +746,19 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get paginationGo => 'Los';
+
+  @override
+  String get dialogConfirmSure => 'Bist du sicher?';
+
+  @override
+  String get dialogConfirmYes => 'Ja';
+
+  @override
+  String get dialogPlaylistAddPlaylist => 'Zu Playlist hinzufügen';
+
+  @override
+  String get dialogPlaylistSelect => 'Playlist auswählen';
+
+  @override
+  String get dialogPlaylistAdd => 'Hinzufügen';
 }

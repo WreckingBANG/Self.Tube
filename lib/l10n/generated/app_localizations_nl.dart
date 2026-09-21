@@ -64,6 +64,15 @@ class AppLocalizationsNl extends AppLocalizations {
       'Let op: hierdoor wordt verbinding gemaakt met Google, daar de afbeeldingen door deze app worden opgeslagen';
 
   @override
+  String get settingsPaginationStyle => 'Pagination Style';
+
+  @override
+  String get settingsPaginationStylePages => 'Pages (Default)';
+
+  @override
+  String get settingsPaginationStyleShowMore => 'Show more';
+
+  @override
   String get settingsSheetComingSoon => 'Volgt binnenkort';
 
   @override
@@ -468,6 +477,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get expandableTextLess => 'Minder tonen';
 
   @override
+  String get aboutTitle => 'About';
+
+  @override
   String get aboutVersion => 'Versie';
 
   @override
@@ -709,30 +721,45 @@ class AppLocalizationsNl extends AppLocalizations {
   String get userSuperUser => 'Supergebruiker';
 
   @override
-  String get dialogCancel => 'Cancel';
+  String get dialogCancel => 'Annuleren';
 
   @override
-  String get paginationNext => 'Next';
+  String get paginationNext => 'Volgende';
 
   @override
-  String get paginationPrevious => 'Previous';
+  String get paginationPrevious => 'Vorige';
 
   @override
-  String get paginationJumpToPage => 'Jump to Page';
+  String get paginationJumpToPage => 'Ga naar pagina';
 
   @override
-  String get paginationEmptyErr => 'Cannot be empty';
+  String get paginationEmptyErr => 'Vul iets in';
 
   @override
   String paginationRangeErr(Object lastPage) {
-    return 'Value must be between 1 and $lastPage';
+    return 'De waarde moet tussen 1 en $lastPage zijn';
   }
 
   @override
   String paginationRangeInfo(Object lastPage) {
-    return 'Enter a value between 1 and $lastPage';
+    return 'De waarde moet tussen 1 en $lastPage liggen';
   }
 
   @override
-  String get paginationGo => 'Go';
+  String get paginationGo => 'Gaan';
+
+  @override
+  String get dialogConfirmSure => 'Are you sure?';
+
+  @override
+  String get dialogConfirmYes => 'Yes';
+
+  @override
+  String get dialogPlaylistAddPlaylist => 'Add to Playlist';
+
+  @override
+  String get dialogPlaylistSelect => 'Select a playlist';
+
+  @override
+  String get dialogPlaylistAdd => 'Add';
 }

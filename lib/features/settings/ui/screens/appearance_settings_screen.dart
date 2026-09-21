@@ -79,12 +79,11 @@ class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScr
             },
           ),
           ListTile(
-            title: Text("Pagination Style"),
+            title: Text(localizations.settingsPaginationStyle),
             leading: Icon(Symbols.auto_stories),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                //Text(localizations.settingsVPPlayerBackendDesc),
                 SizedBox(
                   width: double.infinity,
                   child: SegmentedButton<int>(
@@ -92,7 +91,7 @@ class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScr
                       ButtonSegment(
                         value: 0,
                         label: Text(
-                          "Pages (Default)",
+                          localizations.settingsPaginationStylePages,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           softWrap: false,
@@ -100,7 +99,7 @@ class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScr
                       ),
                       ButtonSegment(
                         value: 1, 
-                        label: Text("Show More")
+                        label: Text(localizations.settingsPaginationStyleShowMore)
                       ),
                     ], 
                     selected: {_paginationStyle},

@@ -13,7 +13,7 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: const Text("About")),
+      appBar: AppBar(title: Text(localizations.aboutTitle)),
       body: CustomScrollView(
         slivers: [
           SliverFillRemaining(

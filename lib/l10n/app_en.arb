@@ -18,6 +18,9 @@
     "settingsSheetLibraryStats": "Library Statistics",
     "settingsShowCommentPics": "Show Commentator Pictures",
     "settingsShowCommentPicsDisclaimer": "This will make a connection to Google as the Images are not stored by TubeArchivist",
+    "settingsPaginationStyle": "Pagination Style",
+    "settingsPaginationStylePages": "Pages (Default)",
+    "settingsPaginationStyleShowMore": "Show more",
     "settingsSheetComingSoon": "Coming Soon",
     "errorNoDataFound": "Error: No data found",
     "errorFailedToLoadData": "Error: Failed to load",
@@ -144,6 +147,7 @@
     "sponsorblockFillerHint": "Tangents/ Jokes is only for tangential scenes that are not required to understand the main content of the video.",
     "expandableTextMore": "Show more",
     "expandableTextLess": "Show less",
+    "aboutTitle": "About",
     "aboutVersion": "Version",
     "aboutLicense": "License",
     "aboutDeveloper": "Developed by WreckingBANG",
@@ -224,5 +228,10 @@
     "paginationEmptyErr": "Cannot be empty",
     "paginationRangeErr": "Value must be between 1 and {lastPage}",
     "paginationRangeInfo": "Enter a value between 1 and {lastPage}",
-    "paginationGo": "Go"
+    "paginationGo": "Go",
+    "dialogConfirmSure": "Are you sure?",
+    "dialogConfirmYes": "Yes",
+    "dialogPlaylistAddPlaylist": "Add to Playlist",
+    "dialogPlaylistSelect": "Select a playlist",
+    "dialogPlaylistAdd": "Add"
 }

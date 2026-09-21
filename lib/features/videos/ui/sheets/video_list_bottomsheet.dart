@@ -66,7 +66,7 @@ Future<void> showVideoListBottomSheet({
           if (UserSession.isPrivileged)
             ListTile(
               leading: Icon(Icons.playlist_add_check_rounded),
-              title: Text("Add to Playlist"),
+              title: Text(localizations.dialogPlaylistAddPlaylist),
               onTap: () {
                 Navigator.pop(context);
                 showDialog(

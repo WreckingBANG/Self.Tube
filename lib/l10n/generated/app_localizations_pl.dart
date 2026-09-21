@@ -64,6 +64,15 @@ class AppLocalizationsPl extends AppLocalizations {
       'Jeśli ta Opcja jest włączona, Obraz będzie pochodził z serwisu Google, ponieważ nie jest udostępniany przez TubeArchivist';
 
   @override
+  String get settingsPaginationStyle => 'Pagination Style';
+
+  @override
+  String get settingsPaginationStylePages => 'Pages (Default)';
+
+  @override
+  String get settingsPaginationStyleShowMore => 'Show more';
+
+  @override
   String get settingsSheetComingSoon => 'Już wkrótce';
 
   @override
@@ -468,6 +477,9 @@ class AppLocalizationsPl extends AppLocalizations {
   String get expandableTextLess => 'Mniej';
 
   @override
+  String get aboutTitle => 'About';
+
+  @override
   String get aboutVersion => 'wersja';
 
   @override
@@ -735,4 +747,19 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get paginationGo => 'Go';
+
+  @override
+  String get dialogConfirmSure => 'Are you sure?';
+
+  @override
+  String get dialogConfirmYes => 'Yes';
+
+  @override
+  String get dialogPlaylistAddPlaylist => 'Add to Playlist';
+
+  @override
+  String get dialogPlaylistSelect => 'Select a playlist';
+
+  @override
+  String get dialogPlaylistAdd => 'Add';
 }

@@ -64,6 +64,15 @@ class AppLocalizationsEn extends AppLocalizations {
       'This will make a connection to Google as the Images are not stored by TubeArchivist';
 
   @override
+  String get settingsPaginationStyle => 'Pagination Style';
+
+  @override
+  String get settingsPaginationStylePages => 'Pages (Default)';
+
+  @override
+  String get settingsPaginationStyleShowMore => 'Show more';
+
+  @override
   String get settingsSheetComingSoon => 'Coming Soon';
 
   @override
@@ -464,6 +473,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get expandableTextLess => 'Show less';
 
   @override
+  String get aboutTitle => 'About';
+
+  @override
   String get aboutVersion => 'Version';
 
   @override
@@ -731,4 +743,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get paginationGo => 'Go';
+
+  @override
+  String get dialogConfirmSure => 'Are you sure?';
+
+  @override
+  String get dialogConfirmYes => 'Yes';
+
+  @override
+  String get dialogPlaylistAddPlaylist => 'Add to Playlist';
+
+  @override
+  String get dialogPlaylistSelect => 'Select a playlist';
+
+  @override
+  String get dialogPlaylistAdd => 'Add';
 }

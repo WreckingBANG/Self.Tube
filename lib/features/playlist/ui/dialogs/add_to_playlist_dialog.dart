@@ -1,4 +1,5 @@
 import 'package:Self.Tube/features/playlist/data/api/playlist_api.dart';
+import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class AddToPlaylistDialog extends StatefulWidget {
@@ -56,6 +57,9 @@ class _AddToPlaylistDialogState extends State<AddToPlaylistDialog> {
 
   @override
   Widget build(BuildContext context) {
+    
+    final localizations = AppLocalizations.of(context)!;
+
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
@@ -65,12 +69,12 @@ class _AddToPlaylistDialogState extends State<AddToPlaylistDialog> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("Add to Playlist", style: const TextStyle(fontSize: 20)),
+            Text(localizations.dialogPlaylistAddPlaylist, style: const TextStyle(fontSize: 20)),
             const SizedBox(height: 16),
 
             DropdownButton<String>(
               value: selectedPlaylist,
-              hint: const Text("Select a playlist"),
+              hint: Text(localizations.dialogPlaylistSelect),
               isExpanded: true,
               items: List.generate(playlists.length, (index) {
                 final playlist = playlists[index];
@@ -95,7 +99,7 @@ class _AddToPlaylistDialogState extends State<AddToPlaylistDialog> {
                 }
                 Navigator.pop(context, selectedPlaylist);
               },
-              child: const Text('Add'),
+              child: Text(localizations.dialogPlaylistAdd),
             ),
           ],
         ),

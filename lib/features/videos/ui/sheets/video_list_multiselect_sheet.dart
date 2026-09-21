@@ -128,7 +128,7 @@ class VideoListMultiselectSheet extends ConsumerWidget {
                       if (UserSession.isPrivileged)
                         ListTile(
                           leading: Icon(Icons.playlist_add_check_rounded),
-                          title: Text("Add to Playlist"),
+                          title: Text(localizations.dialogPlaylistAddPlaylist),
                           onTap: () async {
                             final playlistId = await showDialog(
                               context: context,

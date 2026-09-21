@@ -1,3 +1,4 @@
+import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 Future<void> ConfirmationDialog({
@@ -9,8 +10,10 @@ Future<void> ConfirmationDialog({
   final confirmed = await showDialog<bool>(
     context: context,
     builder: (context) {
+      final localizations = AppLocalizations.of(context)!;
+      
       return AlertDialog(
-        title: Text("Are you sure?"),
+        title: Text(localizations.dialogConfirmSure),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,11 +27,11 @@ Future<void> ConfirmationDialog({
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: Text("Cancel"),
+            child: Text(localizations.dialogCancel),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: Text("Yes"),
+            child: Text(localizations.dialogConfirmYes),
           ),
         ],
       );

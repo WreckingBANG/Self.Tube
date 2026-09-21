@@ -212,6 +212,24 @@ abstract class AppLocalizations {
   /// **'This will make a connection to Google as the Images are not stored by TubeArchivist'**
   String get settingsShowCommentPicsDisclaimer;
 
+  /// No description provided for @settingsPaginationStyle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pagination Style'**
+  String get settingsPaginationStyle;
+
+  /// No description provided for @settingsPaginationStylePages.
+  ///
+  /// In en, this message translates to:
+  /// **'Pages (Default)'**
+  String get settingsPaginationStylePages;
+
+  /// No description provided for @settingsPaginationStyleShowMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Show more'**
+  String get settingsPaginationStyleShowMore;
+
   /// No description provided for @settingsSheetComingSoon.
   ///
   /// In en, this message translates to:
@@ -968,6 +986,12 @@ abstract class AppLocalizations {
   /// **'Show less'**
   String get expandableTextLess;
 
+  /// No description provided for @aboutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get aboutTitle;
+
   /// No description provided for @aboutVersion.
   ///
   /// In en, this message translates to:
@@ -1453,6 +1477,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Go'**
   String get paginationGo;
+
+  /// No description provided for @dialogConfirmSure.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure?'**
+  String get dialogConfirmSure;
+
+  /// No description provided for @dialogConfirmYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get dialogConfirmYes;
+
+  /// No description provided for @dialogPlaylistAddPlaylist.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to Playlist'**
+  String get dialogPlaylistAddPlaylist;
+
+  /// No description provided for @dialogPlaylistSelect.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a playlist'**
+  String get dialogPlaylistSelect;
+
+  /// No description provided for @dialogPlaylistAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get dialogPlaylistAdd;
 }
 
 class _AppLocalizationsDelegate

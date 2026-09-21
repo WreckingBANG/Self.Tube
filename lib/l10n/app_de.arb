@@ -18,6 +18,9 @@
     "settingsSheetLibraryStats": "Bibliotheksstatistiken",
     "settingsShowCommentPics": "Zeige Kommentator-Bilder",
     "settingsShowCommentPicsDisclaimer": "Wenn aktiviert, wird das Bild von Google bezogen, da es nicht von TubeArchivist bereitgestellt wird",
+    "settingsPaginationStyle": "Seiten Stil",
+    "settingsPaginationStylePages": "Seiten (Default)",
+    "settingsPaginationStyleShowMore": "Mehr anzeigen",
     "settingsSheetComingSoon": "Kommt bald",
     "errorNoDataFound": "Fehler: Keine Daten gefunden",
     "errorFailedToLoadData": "Fehler: Laden fehlgeschlagen",
@@ -134,6 +137,7 @@
     "sponsorblockFiller": "Abschweifungen/Witze überspringen",
     "expandableTextMore": "Mehr ...",
     "expandableTextLess": "Weniger ...",
+    "aboutTitle": "Über die App",
     "aboutVersion": "Version",
     "aboutLicense": "Lizenz",
     "aboutDeveloper": "Entwickelt von WreckingBANG",
@@ -224,5 +228,10 @@
     "paginationRangeInfo": "Gib eine Seitenzahl zwischen 1 und {lastPage} ein",
     "paginationGo": "Los",
     "settingsVPGesturesFastForward": "Vorspulen",
-    "settingsVPGesturesFastForwardDesc": "Tippe und halte gedrückt, um das Video in doppelter Geschwindigkeit abzuspielen"
+    "settingsVPGesturesFastForwardDesc": "Tippe und halte gedrückt, um das Video in doppelter Geschwindigkeit abzuspielen",
+    "dialogConfirmSure": "Bist du sicher?",
+    "dialogConfirmYes": "Ja",
+    "dialogPlaylistAddPlaylist": "Zu Playlist hinzufügen",
+    "dialogPlaylistSelect": "Playlist auswählen",
+    "dialogPlaylistAdd": "Hinzufügen"
 }
