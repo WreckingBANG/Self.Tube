@@ -223,5 +223,14 @@
     "paginationEmptyErr": "Vul iets in",
     "paginationRangeErr": "De waarde moet tussen 1 en {lastPage} zijn",
     "paginationRangeInfo": "De waarde moet tussen 1 en {lastPage} liggen",
-    "paginationGo": "Gaan"
+    "paginationGo": "Gaan",
+    "settingsPaginationStyle": "Pagina-indeling",
+    "settingsPaginationStylePages": "Pagina's (standaard)",
+    "settingsPaginationStyleShowMore": "Eindeloos scrollen",
+    "aboutTitle": "Over",
+    "dialogConfirmSure": "Weet je het zeker?",
+    "dialogConfirmYes": "Ja",
+    "dialogPlaylistAddPlaylist": "Toevoegen aan afspeellijst",
+    "dialogPlaylistSelect": "Kies een afspeellijst",
+    "dialogPlaylistAdd": "Toevoegen"
 }
