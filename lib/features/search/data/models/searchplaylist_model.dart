@@ -19,13 +19,13 @@ class SearchPlaylistModel {
 
   factory SearchPlaylistModel.fromJson(Map<String, dynamic> json) {
     return SearchPlaylistModel(
-      playlistId: json['playlist_id'],
+      playlistId: json['playlist_id'] ?? '',
       playlistName: json['playlist_name'],
-      playlistChannelName: json['playlist_channel'],
-      playlistChannelId: json['playlist_channel_id'],
-      playlistPic: json['playlist_thumbnail'],
+      playlistChannelName: json['playlist_channel'] ?? '',
+      playlistChannelId: json['playlist_channel_id'] ?? '',
+      playlistPic: json['playlist_thumbnail'] ?? '',
       playlistType: json['playlist_type'],
-      playlistSubscribed: json['playlist_subscribed'],
+      playlistSubscribed: json['playlist_subscribed'] ?? '',
     );
   }
 
