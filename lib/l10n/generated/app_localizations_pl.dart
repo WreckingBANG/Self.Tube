@@ -64,13 +64,13 @@ class AppLocalizationsPl extends AppLocalizations {
       'Jeśli ta Opcja jest włączona, Obraz będzie pochodził z serwisu Google, ponieważ nie jest udostępniany przez TubeArchivist';
 
   @override
-  String get settingsPaginationStyle => 'Pagination Style';
+  String get settingsPaginationStyle => 'Styl strony';
 
   @override
-  String get settingsPaginationStylePages => 'Pages (Default)';
+  String get settingsPaginationStylePages => 'Strony (standardowe)';
 
   @override
-  String get settingsPaginationStyleShowMore => 'Show more';
+  String get settingsPaginationStyleShowMore => 'Pokaż więcej';
 
   @override
   String get settingsSheetComingSoon => 'Już wkrótce';
@@ -221,11 +221,11 @@ class AppLocalizationsPl extends AppLocalizations {
       'Aby przewinąć do przodu lub do tyłu, dotknij dwukrotnie prawej lub lewej strony odtwarzacza, a aby odtworzyć/wstrzymać odtwarzanie, dotknij środka';
 
   @override
-  String get settingsVPGesturesFastForward => 'Fast Forward';
+  String get settingsVPGesturesFastForward => 'Przewiń do przodu';
 
   @override
   String get settingsVPGesturesFastForwardDesc =>
-      'Tap and hold the screen to play the video in double speed';
+      'Dotknij i przytrzymaj, aby odtworzyć film z podwójną prędkością';
 
   @override
   String get settingsVPAdvanded => 'Rozszerzone';
@@ -477,7 +477,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get expandableTextLess => 'Mniej';
 
   @override
-  String get aboutTitle => 'About';
+  String get aboutTitle => 'Za pośrednictwem aplikacji';
 
   @override
   String get aboutVersion => 'wersja';
@@ -721,45 +721,45 @@ class AppLocalizationsPl extends AppLocalizations {
   String get userSuperUser => 'Superuser';
 
   @override
-  String get dialogCancel => 'Cancel';
+  String get dialogCancel => 'odłamać';
 
   @override
-  String get paginationNext => 'Next';
+  String get paginationNext => 'Następny';
 
   @override
-  String get paginationPrevious => 'Previous';
+  String get paginationPrevious => 'Poprzedni';
 
   @override
-  String get paginationJumpToPage => 'Jump to Page';
+  String get paginationJumpToPage => 'Przejdź do strony';
 
   @override
-  String get paginationEmptyErr => 'Cannot be empty';
+  String get paginationEmptyErr => 'Pole nie może być puste';
 
   @override
   String paginationRangeErr(Object lastPage) {
-    return 'Value must be between 1 and $lastPage';
+    return 'Numer strony musi zawierać się pomiędzy 1 a $lastPage';
   }
 
   @override
   String paginationRangeInfo(Object lastPage) {
-    return 'Enter a value between 1 and $lastPage';
+    return 'Wprowadź numer strony od 1 do $lastPage';
   }
 
   @override
-  String get paginationGo => 'Go';
+  String get paginationGo => 'start';
 
   @override
-  String get dialogConfirmSure => 'Are you sure?';
+  String get dialogConfirmSure => 'Jesteś pewien?';
 
   @override
-  String get dialogConfirmYes => 'Yes';
+  String get dialogConfirmYes => 'Tak';
 
   @override
-  String get dialogPlaylistAddPlaylist => 'Add to Playlist';
+  String get dialogPlaylistAddPlaylist => 'Dodaj do Playlist';
 
   @override
-  String get dialogPlaylistSelect => 'Select a playlist';
+  String get dialogPlaylistSelect => 'Wibierz Playlist';
 
   @override
-  String get dialogPlaylistAdd => 'Add';
+  String get dialogPlaylistAdd => 'Dodać';
 }

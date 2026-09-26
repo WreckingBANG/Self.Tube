@@ -67,7 +67,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsPaginationStyle => 'Seiten Stil';
 
   @override
-  String get settingsPaginationStylePages => 'Seiten (Default)';
+  String get settingsPaginationStylePages => 'Seiten (Standard)';
 
   @override
   String get settingsPaginationStyleShowMore => 'Mehr anzeigen';

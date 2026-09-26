@@ -64,13 +64,13 @@ class AppLocalizationsNl extends AppLocalizations {
       'Let op: hierdoor wordt verbinding gemaakt met Google, daar de afbeeldingen door deze app worden opgeslagen';
 
   @override
-  String get settingsPaginationStyle => 'Pagination Style';
+  String get settingsPaginationStyle => 'Pagina-indeling';
 
   @override
-  String get settingsPaginationStylePages => 'Pages (Default)';
+  String get settingsPaginationStylePages => 'Pagina\'s (standaard)';
 
   @override
-  String get settingsPaginationStyleShowMore => 'Show more';
+  String get settingsPaginationStyleShowMore => 'Eindeloos scrollen';
 
   @override
   String get settingsSheetComingSoon => 'Volgt binnenkort';
@@ -477,7 +477,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get expandableTextLess => 'Minder tonen';
 
   @override
-  String get aboutTitle => 'About';
+  String get aboutTitle => 'Over';
 
   @override
   String get aboutVersion => 'Versie';
@@ -749,17 +749,17 @@ class AppLocalizationsNl extends AppLocalizations {
   String get paginationGo => 'Gaan';
 
   @override
-  String get dialogConfirmSure => 'Are you sure?';
+  String get dialogConfirmSure => 'Weet je het zeker?';
 
   @override
-  String get dialogConfirmYes => 'Yes';
+  String get dialogConfirmYes => 'Ja';
 
   @override
-  String get dialogPlaylistAddPlaylist => 'Add to Playlist';
+  String get dialogPlaylistAddPlaylist => 'Toevoegen aan afspeellijst';
 
   @override
-  String get dialogPlaylistSelect => 'Select a playlist';
+  String get dialogPlaylistSelect => 'Kies een afspeellijst';
 
   @override
-  String get dialogPlaylistAdd => 'Add';
+  String get dialogPlaylistAdd => 'Toevoegen';
 }

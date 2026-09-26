@@ -65,13 +65,13 @@ class AppLocalizationsEs extends AppLocalizations {
       'Esto establecerá una conexión con Google, ya que TubeArchivist no almacena las imágenes';
 
   @override
-  String get settingsPaginationStyle => 'Pagination Style';
+  String get settingsPaginationStyle => 'Estilo de paginación';
 
   @override
-  String get settingsPaginationStylePages => 'Pages (Default)';
+  String get settingsPaginationStylePages => 'Páginas (predeterminado)';
 
   @override
-  String get settingsPaginationStyleShowMore => 'Show more';
+  String get settingsPaginationStyleShowMore => 'Mostrar más';
 
   @override
   String get settingsSheetComingSoon => 'Próximamente';
@@ -477,7 +477,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get expandableTextLess => 'Mostrar menos';
 
   @override
-  String get aboutTitle => 'About';
+  String get aboutTitle => 'Acerca de';
 
   @override
   String get aboutVersion => 'Versión';
@@ -749,17 +749,17 @@ class AppLocalizationsEs extends AppLocalizations {
   String get paginationGo => 'Ir';
 
   @override
-  String get dialogConfirmSure => 'Are you sure?';
+  String get dialogConfirmSure => '¿Está seguro?';
 
   @override
-  String get dialogConfirmYes => 'Yes';
+  String get dialogConfirmYes => 'Sí';
 
   @override
-  String get dialogPlaylistAddPlaylist => 'Add to Playlist';
+  String get dialogPlaylistAddPlaylist => 'Añadir a la lista de reproducción';
 
   @override
-  String get dialogPlaylistSelect => 'Select a playlist';
+  String get dialogPlaylistSelect => 'Seleccione una lista de reproducción';
 
   @override
-  String get dialogPlaylistAdd => 'Add';
+  String get dialogPlaylistAdd => 'Añadir';
 }
