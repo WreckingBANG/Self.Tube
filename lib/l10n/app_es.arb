@@ -225,5 +225,14 @@
     "paginationEmptyErr": "No puede estar vacío",
     "paginationRangeErr": "El valor debe estar entre 1 y {lastPage}",
     "paginationRangeInfo": "Ingrese un valor entre 1 y {lastPage}",
-    "paginationGo": "Ir"
+    "paginationGo": "Ir",
+    "settingsPaginationStyle": "Estilo de paginación",
+    "settingsPaginationStylePages": "Páginas (predeterminado)",
+    "settingsPaginationStyleShowMore": "Mostrar más",
+    "aboutTitle": "Acerca de",
+    "dialogConfirmSure": "¿Está seguro?",
+    "dialogConfirmYes": "Sí",
+    "dialogPlaylistAddPlaylist": "Añadir a la lista de reproducción",
+    "dialogPlaylistSelect": "Seleccione una lista de reproducción",
+    "dialogPlaylistAdd": "Añadir"
 }
