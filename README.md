@@ -12,11 +12,11 @@ With a streamlined interface and direct connection to your TubeArchivist server,
 
 <div style="width:100%; display:flex; justify-content:space-between;">
 
-[<img src="docs/screenshots/screenshot_home.png" width=19% alt="Home">](docs/screenshots/screenshot_home.png)
-[<img src="docs/screenshots/screenshot_player.png" width=19% alt="Player">](docs/screenshots/screenshot_player.png)
-[<img src="docs/screenshots/screenshot_channels.png" width=19% alt="Channels">](docs/screenshots/screenshot_channels.png)
-[<img src="docs/screenshots/screenshot_playlists.png" width=19% alt="Playlists">](docs/screenshots/screenshot_playlists.png)
-[<img src="docs/screenshots/screenshot_tasks.png" width=19% alt="Tasks">](docs/screenshots/screenshot_tasks.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width=19% alt="Home">](fastlane/metadata/android/en-US/images/phoneScreenshots/1.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width=19% alt="Player">](fastlane/metadata/android/en-US/images/phoneScreenshots/2.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width=19% alt="Channels">](fastlane/metadata/android/en-US/images/phoneScreenshots/3.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width=19% alt="Playlists">](fastlane/metadata/android/en-US/images/phoneScreenshots/4.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" width=19% alt="Tasks">](fastlane/metadata/android/en-US/images/phoneScreenshots/5.png)
 
 ## Download
 
