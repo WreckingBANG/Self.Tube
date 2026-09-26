@@ -42,7 +42,8 @@ jobs:
           echo "/usr/lib/android-sdk/platform-tools" >> $GITHUB_PATH
           yes | sdkmanager --licenses >/dev/null || true
           sdkmanager "platform-tools" \
-           "platforms;android-36" \
+           "platforms;android-37" \
+           "build-tools;37.0.0" \
            "build-tools;36.0.0" \
            "build-tools;28.0.3"
       - name: Setup Flutter
