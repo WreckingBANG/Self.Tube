@@ -1,1 +1,1 @@
-Self.Tube is a sleek, lightweight client for TubeArchivist.
+A modern, feature-rich TubeArchivist companion app
