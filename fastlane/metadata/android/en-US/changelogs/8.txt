@@ -1,0 +1,26 @@
+Features:
+- Fast-forward on long press, contributed by @it-lacks
+- Added page-style pagination as the new default
+
+Improvements:
+- Added a setting to change the pagination style
+- Added direct page navigation
+- Improved video seeking stability
+
+Bug Fixes:
+- Fixed forced queue refreshes on the “Actions” page
+- Fixed a null error when search results contain a local playlist
+
+Other:
+- Made several previously untranslatable strings translatable
+- Enabled legacy packaging to reduce APK size
+- Updated dependencies
+- Updated the Kotlin version
+- Updated translations
+
+Thanks to:
+- Everyone who submitted issues
+- @BlackZ — Polish translations
+- @gallegonovato — Spanish translations
+- @Vistaus — Dutch translations
+- @it-lacks — Fast-forward on long press
