@@ -33,6 +33,8 @@ class VideoPlayerAdapter implements MediaPlayer {
     _initialized = _controller.initialize().then((_) {
       if (!_controller.value.isInitialized) return;
 
+      talker.log("EXO: Received Playback Job");
+
       final value = _controller.value;
       
       //temporary fix to resolve video/audio desync
@@ -72,6 +74,10 @@ class VideoPlayerAdapter implements MediaPlayer {
     if (value.isBuffering != _lastBuffering) {
       _lastBuffering = value.isBuffering;
       _bufferingController.add(value.isBuffering);
+    }
+
+    if (value.hasError) {
+      talker.error("EXO: ${value.errorDescription}");
     }
 
     if (value.isPlaying != _lastPlaying) {

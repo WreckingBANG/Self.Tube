@@ -27,6 +27,7 @@ class MediaKitAdapter implements MediaPlayer {
       
       _initialized = () async {
         await _player.open(Media(url, httpHeaders: headers));
+        talker.log("MPV: Received Playback Job");
         await for (final d in _player.stream.duration) {
           if (d > Duration.zero) break;
         }

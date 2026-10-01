@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:Self.Tube/app/logging/talker.dart';
 import 'package:Self.Tube/features/player/domain/audio_service.dart';
 import 'package:Self.Tube/features/player/domain/sponsorblock_service.dart';
 import 'package:Self.Tube/features/player/ui/screens/player_screen.dart';
@@ -34,7 +35,11 @@ class VideoPlayerService {
     final video = await PlayerApi.fetchVideoPlayer(id);
     currentVideo.value = video;
     if (video == null) return;
-   
+    
+    talker.log("Loading Video: $id");
+    talker.log("Video-Codec: ${currentVideo.value!.streams.video!.codec}");
+    talker.log("Audio-Codec: ${currentVideo.value!.streams.audio!.codec}");
+    
     if (SettingsService.sponsorBlockEnabled!) {
       SponsorblockService.init(video);
     }
