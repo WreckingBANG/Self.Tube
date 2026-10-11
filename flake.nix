@@ -18,9 +18,15 @@
         androidComposition = pkgs.androidenv.composeAndroidPackages {
           buildToolsVersions = [ buildToolsVersion "35.0.0" ];
           platformVersions = [ 31 34 35 36 37 ];
-          abiVersions = [ "armeabi-v7a" "arm64-v8a" ];
+          includeSystemImages = true;
+          includeEmulator = true;  
+          abiVersions = [ "armeabi-v7a" "arm64-v8a" "x86_64" ];
           ndkVersions = [ "28.2.13676358" ];
           cmakeVersions = [ "3.22.1" ];
+          systemImageTypes = [ 
+            "default" 
+            #"android-tv" 
+          ];
           includeNDK = true;
         };
         androidSdk = androidComposition.androidsdk;
