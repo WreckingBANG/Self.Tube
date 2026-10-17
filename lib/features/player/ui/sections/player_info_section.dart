@@ -53,7 +53,11 @@ class _PlayerInfoSectionState extends State<PlayerInfoSection> with SingleTicker
       ),
 
       if (SettingsService.disableComments != true)
-        CommentListWidget(videoId: widget.video.videoId),
+        CustomScrollView(
+          slivers: [
+            CommentListWidget(videoId: widget.video.videoId),
+          ],
+        ),
       
       
       if (SettingsService.disableRecommendations != true) 

@@ -32,64 +32,75 @@ class _CommentListWidgetState extends State<CommentListWidget> {
       future: _commentsFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return const SliverToBoxAdapter(
+            child: Center(
+              child: CircularProgressIndicator()
+            )
+          );
         } else if (snapshot.hasError) {
-          return EmptyErrorSection();
+          return SliverToBoxAdapter(
+            child: EmptyErrorSection()
+          );
         }
         
         final data = snapshot.data!;
         final comments = snapshot.data!.data;
         
         if (data.error != null || comments == null || comments.isEmpty) {
-          return Center(child: Text(localizations.errorNoDataFound));
+          return SliverToBoxAdapter(
+            child: Center(child: Text(localizations.errorNoDataFound)
+            )
+          );
         }
         
-        return ListView(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          children: comments.map((comment) {
-            final isExpanded = _expandedMap[comment.commentId] ?? false;
-            final hasReplies = comment.commentReplies.isNotEmpty;
-
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CommentListTile(
-                  commentAuthor: comment.commentAuthor,
-                  commentText: comment.commentText,
-                  commentAuthorIsUploader: comment.commentAuthorIsUploader,
-                  commentHasReplys: hasReplies,
-                  commentLikeCount: comment.commentLikeCount,
-                  commentIsExpanded: isExpanded,
-                  commentAuthorThumbnail: comment.commentAuthorThumbnail,
-                  onPressed: () {
-                    setState(() {
-                      _expandedMap[comment.commentId] = !isExpanded;
-                    });
-                  }
-                ),
-                if (isExpanded)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0),
-                    child: Column(
-                      children: comment.commentReplies.map((reply) {
-                        return CommentListTile(
-                          commentAuthor: reply.commentAuthor,
-                          commentText: reply.commentText,
-                          commentAuthorIsUploader: reply.commentAuthorIsUploader,
-                          commentLikeCount: reply.commentLikeCount,
-                          onPressed: () {
-                            setState(() {
-                              _expandedMap[comment.commentId] = !isExpanded;
-                            });
-                          }
-                        );
-                      }).toList(),
-                    ),
+        return SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              final comment = comments[index];
+              final isExpanded = _expandedMap[comment.commentId] ?? false;
+              final hasReplies = comment.commentReplies.isNotEmpty;
+              
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CommentListTile(
+                    commentAuthor: comment.commentAuthor,
+                    commentText: comment.commentText,
+                    commentAuthorIsUploader: comment.commentAuthorIsUploader,
+                    commentHasReplys: hasReplies,
+                    commentLikeCount: comment.commentLikeCount,
+                    commentIsExpanded: isExpanded,
+                    commentAuthorThumbnail: comment.commentAuthorThumbnail,
+                    onPressed: () {
+                      setState(() {
+                        _expandedMap[comment.commentId] = !isExpanded;
+                      });
+                    }
                   ),
-              ],
-            );
-          }).toList(),
+                  if (isExpanded)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0),
+                      child: Column(
+                        children: comment.commentReplies.map((reply) {
+                          return CommentListTile(
+                            commentAuthor: reply.commentAuthor,
+                            commentText: reply.commentText,
+                            commentAuthorIsUploader: reply.commentAuthorIsUploader,
+                            commentLikeCount: reply.commentLikeCount,
+                            onPressed: () {
+                              setState(() {
+                                _expandedMap[comment.commentId] = !isExpanded;
+                              });
+                            }
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                ],
+              );
+            },
+            childCount: comments.length
+          ),
         );
       },
     );
