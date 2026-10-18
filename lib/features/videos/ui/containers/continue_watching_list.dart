@@ -39,12 +39,14 @@ class ContinueWatchingList extends StatelessWidget {
                 useSafeArea: true,
                 isScrollControlled: true,
                 builder: (_) {
-                  return SingleChildScrollView(
-                    child: VideoListSection(
-                     hideChannel: false,
-                     title: localizations.homeContinueWatching,
-                     query: queryContinue
-                   )
+                  return CustomScrollView(
+                    slivers: [ 
+                      VideoListSection(
+                        hideChannel: false,
+                        title: localizations.homeContinueWatching,
+                        query: queryContinue
+                      )
+                    ]
                   );
                 }
               );

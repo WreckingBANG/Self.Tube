@@ -56,40 +56,46 @@ class PlaylistpageScreen extends ConsumerWidget{
                 ref.invalidate(playlistPageProvider);
                 ref.read(videoListProvider(query).notifier).refresh();
               },
-              child: ListView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                children: [
-                  ListTile(
-                    title: Text(playlist!.playlistName),
-                    leading: AspectRatio(
-                      aspectRatio: 1 / 1,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: CustomNetworkImage(imageLink: playlist.playlistPic)
+              child: CustomScrollView(
+                slivers: [
+                    
+                  SliverToBoxAdapter(
+                    child: ListTile(
+                      title: Text(playlist!.playlistName),
+                      leading: AspectRatio(
+                        aspectRatio: 1 / 1,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: CustomNetworkImage(imageLink: playlist.playlistPic)
+                        ),
                       ),
+                      trailing: playlist.playlistType == "regular" && UserSession.isPrivileged
+                        ? playlist.playlistSubscribed
+                            ? FilledButton(
+                                onPressed: () {
+                                  ConfirmationDialog(
+                                    context: context, 
+                                    onSure: () {
+                                      provider.subscribe(false);
+                                    }
+                                  ); 
+                                },
+                                child: Text(localizations.playerUnsubscribe),
+                              )
+                            : OutlinedButton(
+                                onPressed: () {
+                                  provider.subscribe(true);
+                                },
+                                child: Text(localizations.playerSubscribe),
+                              )
+                        : null
                     ),
-                    trailing: playlist.playlistType == "regular" && UserSession.isPrivileged
-                      ? playlist.playlistSubscribed
-                          ? FilledButton(
-                              onPressed: () {
-                                ConfirmationDialog(
-                                  context: context, 
-                                  onSure: () {
-                                    provider.subscribe(false);
-                                  }
-                                ); 
-                              },
-                              child: Text(localizations.playerUnsubscribe),
-                            )
-                          : OutlinedButton(
-                              onPressed: () {
-                                provider.subscribe(true);
-                              },
-                              child: Text(localizations.playerSubscribe),
-                            )
-                      : null
                   ),
-                  SizedBox(height: 20),
+                  
+                  SliverToBoxAdapter(
+                    child: SizedBox(height: 20),
+                  ),
+
                   VideoListSection(
                     title: localizations.playlistVideos, 
                     query: query, 

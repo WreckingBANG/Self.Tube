@@ -69,9 +69,8 @@ class HomeScreen extends ConsumerWidget {
           ref.read(videoListProvider(queryContinue).notifier).refresh();
           ref.read(videoListProvider(queryLatest).notifier).refresh();
         },
-        child: ListView(
-          physics: const ClampingScrollPhysics(),
-          children: [
+        child: CustomScrollView(
+          slivers: [
             VideoListSection(
               title: localizations.homeContinueWatching,
               hideChannel: false,
@@ -79,7 +78,9 @@ class HomeScreen extends ConsumerWidget {
               horizontalScroll: true,
               query: queryContinue 
             ),
-            SizedBox(height: 16),
+            SliverToBoxAdapter(
+              child: SizedBox(height: 16),
+            ),
             VideoListSection(
               title: localizations.homeLatestVideos,
               hideChannel: false,
