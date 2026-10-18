@@ -27,19 +27,31 @@ class PlaylistListSection extends ConsumerWidget {
     final playlists = ref.watch(playlistListProvider(query));
 
     return playlists.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
+      loading: () => const SliverToBoxAdapter(
+        child: Center(
+          child: CircularProgressIndicator()
+        ),
+      ),
+      error: (error, stack) => SliverToBoxAdapter(
+        child: Center(
+          child: Text(localizations.errorFailedToLoadData)
+        ),
+      ),
       data: (playlists) {
-        return Column (
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        
+        return SliverMainAxisGroup (
+          slivers: [
+            
             if (playlists!.isEmpty && !hideIfEmpty)
-              Padding(
-                padding: EdgeInsets.only(top: 20),
-                child: EmptyErrorSection()
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: EmptyErrorSection()
+                )
               )
             else 
               ListSectionContainer(
+                returnSliver: true,
                 itemCount: playlists.length,
                 itemBuilder: (context, index) {
                   final playlist = playlists[index];
@@ -49,13 +61,15 @@ class PlaylistListSection extends ConsumerWidget {
                   );
                 },  
               ),
-            PaginationButtons(
-              currentPage: provider.pagination.currentPage,
-              lastPage: provider.pagination.lastPage, 
-              hasMore: provider.pagination.hasMore,
-              goToPage: (page) => provider.goToPage(page),
-              fetchNext: () => provider.fetchNext()
-            ),
+            SliverToBoxAdapter(
+              child: PaginationButtons(
+                currentPage: provider.pagination.currentPage,
+                lastPage: provider.pagination.lastPage, 
+                hasMore: provider.pagination.hasMore,
+                goToPage: (page) => provider.goToPage(page),
+                fetchNext: () => provider.fetchNext()
+              ),
+            )
           ],
         );
       }

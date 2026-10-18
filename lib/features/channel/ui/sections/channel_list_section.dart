@@ -27,20 +27,32 @@ class ChannelListSection extends ConsumerWidget {
     final channels = ref.watch(channelListProvider(query));
 
     return channels.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
+      loading: () => const SliverToBoxAdapter(
+        child: Center(
+          child: CircularProgressIndicator()
+        ),
+      ),
+      error: (error, stack) => SliverToBoxAdapter(
+        child: Center(
+          child: Text(localizations.errorFailedToLoadData)
+        ),
+      ),
       data: (channels) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        
+        return SliverMainAxisGroup(
+          slivers: [
+            
             if (channels!.isEmpty && !hideIfEmpty)
-              Padding(
-                padding: EdgeInsets.only(top: 20),
-                child: EmptyErrorSection()
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: EmptyErrorSection()
+                )
               )
             else
               ListSectionContainer(
-                itemCount: channels!.length,
+                returnSliver: true,
+                itemCount: channels.length,
                 itemBuilder: (context, index) {
                   final channel = channels[index];
                   return ChannelListTile(
@@ -49,13 +61,15 @@ class ChannelListSection extends ConsumerWidget {
                   );
                 }
               ),
-            PaginationButtons(
-              currentPage: provider.pagination.currentPage,
-              lastPage: provider.pagination.lastPage, 
-              hasMore: provider.pagination.hasMore,
-              goToPage: (page) => provider.goToPage(page),
-              fetchNext: () => provider.fetchNext()
-            ),
+            SliverToBoxAdapter(
+              child: PaginationButtons(
+                currentPage: provider.pagination.currentPage,
+                lastPage: provider.pagination.lastPage, 
+                hasMore: provider.pagination.hasMore,
+                goToPage: (page) => provider.goToPage(page),
+                fetchNext: () => provider.fetchNext()
+              ),
+            )
           ],
         );
       }

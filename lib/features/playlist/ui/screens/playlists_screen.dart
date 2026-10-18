@@ -33,8 +33,8 @@ class PlaylistsScreen extends ConsumerWidget {
         onRefresh: () async {
           provider.refresh();
         },
-        child: ListView(
-          children: [
+        child: CustomScrollView(
+          slivers: [
             PlaylistListSection(query: query)
           ],
         )
