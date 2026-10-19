@@ -69,77 +69,77 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                 error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
                 data: (search) {
 
-                if (search == null) {
-                  return Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        M3EContainer.gem(
-                          width: 100,
-                          height: 100,
-                          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
-                          child: Icon(
-                            Symbols.database_search_rounded,
-                            size: 50,
-                          )
-                        ),
-                        SizedBox(height: 10),
-                        Text(localizations.searchTooltip)
-                      ],
-                    ),
-                  );
-                }
+                  if (search == null) {
+                    return Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          M3EContainer.gem(
+                            width: 100,
+                            height: 100,
+                            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
+                            child: Icon(
+                              Symbols.database_search_rounded,
+                              size: 50,
+                            )
+                          ),
+                          SizedBox(height: 10),
+                          Text(localizations.searchTooltip)
+                        ],
+                      ),
+                    );
+                  }
 
-                return SingleChildScrollView(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ListSectionContainer(
-                          title: localizations.searchChannels,
-                          itemCount: search.channels.length,
-                          itemBuilder: (context, index) {
-                            final channel = search.channels[index];
-                            return ChannelListTile(
-                              channel: channel, 
-                              onDelete: () => provider.deleteChannel(channel.channelId)
-                            );
-                          },
-                        ),
-                        ListSectionContainer(
-                          title: localizations.searchVideos,
-                          itemCount: search.videos.length,
-                          itemBuilder: (context, index) {
-                            final video = search.videos[index];
-                            return VideoListTile(
-                              video: video,
-                              query: "search",
-                              hideChannel: false,
-                              onPress: () => VideoPlayerService.loadVideo(video.youtubeId, true, context),
-                              onLongPress: () {
-                                showVideoListBottomSheet(
-                                  context: context,
-                                  video: video, 
-                                  hideChannel: false,
-                                  onWatched: (value) => provider.setVideoWatched(value, video.youtubeId),
-                                  onDelete: () => provider.deleteVideo(video.youtubeId)
-                                );
-                              }
-                            );
-                          },
-                        ),
-                        ListSectionContainer(
-                          title: localizations.searchPlaylists,
-                          itemCount: search.playlists.length,
-                          itemBuilder: (context, index) {
-                            final playlist = search.playlists[index];
-                            return PlaylistListTile(
-                              playlist: playlist, 
-                              onDelete: () => provider.deletePlaylist(playlist.playlistId)
-                            );
-                          },
-                        ),
-                      ],
-                    )
+                  return CustomScrollView(
+                    slivers: [
+                      ListSectionContainer(
+                        returnSliver: true,
+                        title: localizations.searchChannels,
+                        itemCount: search.channels.length,
+                        itemBuilder: (context, index) {
+                          final channel = search.channels[index];
+                          return ChannelListTile(
+                            channel: channel, 
+                            onDelete: () => provider.deleteChannel(channel.channelId)
+                          );
+                        },
+                      ),
+                      ListSectionContainer(
+                        returnSliver: true,
+                        title: localizations.searchVideos,
+                        itemCount: search.videos.length,
+                        itemBuilder: (context, index) {
+                          final video = search.videos[index];
+                          return VideoListTile(
+                            video: video,
+                            query: "search",
+                            hideChannel: false,
+                            onPress: () => VideoPlayerService.loadVideo(video.youtubeId, true, context),
+                            onLongPress: () {
+                              showVideoListBottomSheet(
+                                context: context,
+                                video: video, 
+                                hideChannel: false,
+                                onWatched: (value) => provider.setVideoWatched(value, video.youtubeId),
+                                onDelete: () => provider.deleteVideo(video.youtubeId)
+                              );
+                            }
+                          );
+                        },
+                      ),
+                      ListSectionContainer(
+                        returnSliver: true,
+                        title: localizations.searchPlaylists,
+                        itemCount: search.playlists.length,
+                        itemBuilder: (context, index) {
+                          final playlist = search.playlists[index];
+                          return PlaylistListTile(
+                            playlist: playlist, 
+                            onDelete: () => provider.deletePlaylist(playlist.playlistId)
+                          );
+                        },
+                      ),
+                    ],
                   );
                 }
               )
@@ -147,6 +147,6 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           ],
         )
       )
-    ); 
+    );
   }
 }

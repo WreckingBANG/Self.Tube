@@ -33,8 +33,8 @@ class ChannelsScreen extends ConsumerWidget {
         onRefresh: () async {
           provider.refresh();
         },
-        child: ListView(
-          children: [
+        child: CustomScrollView(
+          slivers: [
             ChannelListSection(query: query)
           ],
         )

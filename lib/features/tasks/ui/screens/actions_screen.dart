@@ -23,35 +23,48 @@ class ActionsScreen extends StatelessWidget {
         child: Icon(Icons.add),
       ),
       body: RefreshContainer(
-        child: ListView(
-          children: [
-            TaskSection(),
-            SizedBox(height: 20),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 14),
-              child: Row(
-                children: [
-                  Expanded(child: 
-                    FilledButton(
-                      onPressed: () {
-                        TaskApi().rescanSubscriptions();
-                      },
-                      child: Text(localizations.taskRescanSubs),
+        child: CustomScrollView(
+          slivers: [
+            
+            SliverToBoxAdapter(
+              child: TaskSection(),
+            ),
+            
+            SliverToBoxAdapter(
+              child: SizedBox(height: 20),
+            ),
+            
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 14),
+                child: Row(
+                  children: [
+                    Expanded(child: 
+                      FilledButton(
+                        onPressed: () {
+                          TaskApi().rescanSubscriptions();
+                        },
+                        child: Text(localizations.taskRescanSubs),
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 10),
-                  Expanded(child: 
-                    FilledButton(
-                      onPressed: () {
-                        TaskApi().startDownloads();
-                      },
-                      child: Text(localizations.taskStartDownloads),
+                    SizedBox(width: 10),
+                    Expanded(child: 
+                      FilledButton(
+                        onPressed: () {
+                          TaskApi().startDownloads();
+                        },
+                        child: Text(localizations.taskStartDownloads),
+                      )
                     )
-                  )
-                ]
+                  ]
+                ),
               ),
             ),
-            SizedBox(height: 20),
+            
+            SliverToBoxAdapter(
+              child: SizedBox(height: 20)
+            ),
+
             QueueSection(query: "?")
           ],
         )

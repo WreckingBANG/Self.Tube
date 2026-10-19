@@ -61,56 +61,69 @@ class ChannelpageScreen extends ConsumerWidget{
                 ref.invalidate(channelPageProvider);
                 ref.read(videoListProvider(query).notifier).refresh();
               },
-              child: ListView(
-                    children: [
-                      if (channel!.banner.isNotEmpty)
-                        CustomNetworkImage(imageLink: channel.banner),
-                      ListTile(
-                        title: Text(channel.channelName),
-                        subtitle: Text(formatNumberCompact(channel.subscribers, context)),
-                        leading: AspectRatio(
-                          aspectRatio: 1 / 1,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: CustomNetworkImage(imageLink: channel.profilePic)
-                          ),
-                        ),
-                        trailing: UserSession.isPrivileged 
-                        ? channel.subscribed
-                          ? FilledButton(
-                              onPressed: () {
-                                ConfirmationDialog(
-                                  context: context, 
-                                  onSure: () {
-                                    provider.subscribe(false);
-                                  } 
-                                );
-                              },
-                              child: Text(localizations.playerUnsubscribe),
-                            )
-                          : OutlinedButton(
-                              onPressed: () {
-                                provider.subscribe(true);
-                              },
-                              child: Text(localizations.playerSubscribe),
-                            )
-                        : SizedBox()
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: ExpandableText(channel.description),
+              child: CustomScrollView(
+                slivers: [
+                  
+                  if (channel!.banner.isNotEmpty)
+                    SliverToBoxAdapter(
+                      child: CustomNetworkImage(imageLink: channel.banner),
+                    ),
+                  
+                  SliverToBoxAdapter(
+                    child: ListTile(
+                      title: Text(channel.channelName),
+                      subtitle: Text(formatNumberCompact(channel.subscribers, context)),
+                      leading: AspectRatio(
+                        aspectRatio: 1 / 1,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: CustomNetworkImage(imageLink: channel.profilePic)
                         ),
                       ),
-                      VideoListSection(title: localizations.channelVideos, showSorting: true, hideChannel: true, query: query) 
-                     ],
-                  )
-                )
-              ) 
-            );
-          }
+                      trailing: UserSession.isPrivileged 
+                      ? channel.subscribed
+                        ? FilledButton(
+                            onPressed: () {
+                              ConfirmationDialog(
+                                context: context, 
+                                onSure: () {
+                                  provider.subscribe(false);
+                                } 
+                              );
+                            },
+                            child: Text(localizations.playerUnsubscribe),
+                          )
+                        : OutlinedButton(
+                            onPressed: () {
+                              provider.subscribe(true);
+                            },
+                            child: Text(localizations.playerSubscribe),
+                          )
+                      : SizedBox()
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: ExpandableText(channel.description),
+                      ),
+                    ),
+                  ),
+                  VideoListSection(
+                    title: localizations.channelVideos, 
+                    showSorting: true, 
+                    hideChannel: true, 
+                    query: query
+                  ) 
+                ],
+              )
+            )
+          ) 
         );
+      }
+    );
   }
 }
 

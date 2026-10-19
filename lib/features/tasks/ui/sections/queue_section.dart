@@ -22,40 +22,58 @@ class QueueSection extends ConsumerWidget {
     final queue = ref.watch(queueProvider(query));
     
     return queue.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
+      loading: () => const SliverToBoxAdapter(
+        child: Center(
+          child: CircularProgressIndicator()
+        ),
+      ),
+      error: (error, stack) => SliverToBoxAdapter(
+        child: Center(
+          child: Text(localizations.errorFailedToLoadData)
+        ),
+      ),
       data: (queue) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 8, left: 14, right: 14),
-              child: Text(
-                localizations.taskQueue,
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, 
-                color: Theme.of(context).colorScheme.onSecondaryContainer),
+        return SliverMainAxisGroup(
+          slivers: [
+            
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8, left: 14, right: 14),
+                child: Text(
+                  localizations.taskQueue,
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, 
+                  color: Theme.of(context).colorScheme.onSecondaryContainer),
+                ),
               ),
             ),
-            SwitchListTile(
-              thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.selected)) {
-                    return const Icon(Icons.check);
-                  }
-                  return const Icon(Icons.close);
+            
+            SliverToBoxAdapter(
+              child: SwitchListTile(
+                thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.selected)) {
+                      return const Icon(Icons.check);
+                    }
+                    return const Icon(Icons.close);
+                  },
+                ),
+                title: Text(localizations.taskShowIgnored),
+                value: provider.pagination.filter == "&filter=ignore",
+                onChanged: (bool value) {
+                  provider.changeHidden(value);
                 },
               ),
-              title: Text(localizations.taskShowIgnored),
-              value: provider.pagination.filter == "&filter=ignore",
-              onChanged: (bool value) {
-                provider.changeHidden(value);
-              },
             ),
-
+            
             if (queue!.isEmpty)
-              Center(child: Text(localizations.taskQueueEmpty))
+              SliverToBoxAdapter(
+                child: Center(
+                  child: Text(localizations.taskQueueEmpty)
+                )
+              )
             else
               ListSectionContainer(
+                returnSliver: true,
                 itemCount: queue.length,
                 itemBuilder: (context, index) {
                   final video = queue[index];
@@ -64,14 +82,18 @@ class QueueSection extends ConsumerWidget {
                   );
                 },
               ),
-            PaginationButtons(
-              enforcePages: true,
-              currentPage: provider.pagination.currentPage,
-              lastPage: provider.pagination.lastPage,
-              hasMore: provider.pagination.hasMore,
-              goToPage: (page) => provider.goToPage(page),
-              fetchNext: () => provider.fetchNext()
-            ),
+            
+            SliverToBoxAdapter(
+              child: PaginationButtons(
+                enforcePages: true,
+                currentPage: provider.pagination.currentPage,
+                lastPage: provider.pagination.lastPage,
+                hasMore: provider.pagination.hasMore,
+                goToPage: (page) => provider.goToPage(page),
+                fetchNext: () => provider.fetchNext()
+              ),
+            )
+
           ],
         );
       }

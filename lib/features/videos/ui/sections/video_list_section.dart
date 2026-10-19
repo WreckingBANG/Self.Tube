@@ -54,50 +54,51 @@ class VideoListSection extends ConsumerWidget {
     }
 
     return videos.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stack) => Center(child: Text(localizations.errorFailedToLoadData)),
+      loading: () => const SliverToBoxAdapter(
+        child: Center(
+          child: CircularProgressIndicator()
+        ),
+      ),
+      error: (error, stack) => SliverToBoxAdapter(
+        child: Center(
+          child: Text(localizations.errorFailedToLoadData)
+        ),
+      ),
       data: (videos) {
-
-        return OverlayPortal(
-          controller: _portalController,
-          overlayChildBuilder: (context) {
-            if (selection.isEmpty) {
-              return const SizedBox.shrink();
-            } 
+        
+        return SliverMainAxisGroup(
+          slivers: [
             
-            return VideoListMultiselectSheet(
-              query: query,
-              hideChannel: hideChannel,
-            );
-          },
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if ((videos!.isNotEmpty || !hideIfEmpty) && !horizontalScroll)
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 0),
-                  child: Text(
-                    title,
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondaryContainer),
-                  ),
-                ),
-              if (showSorting)
-                SortChipsSection(
+            SliverToBoxAdapter(
+              child: OverlayPortal(
+                controller: _portalController,
+                overlayChildBuilder: (context) {
+                  if (selection.isEmpty) {
+                    return const SizedBox.shrink();
+                  } 
+                  
+                  return VideoListMultiselectSheet(
+                    query: query,
+                    hideChannel: hideChannel,
+                  );
+                },
+              )
+            ),
+
+            if (showSorting)
+              SliverToBoxAdapter(
+                child: SortChipsSection(
                   sortOptions: (value) {
                     provider.setSorting(value);
                   },
-                ),
-              if (videos.isEmpty && hideIfEmpty)
-                const SizedBox.shrink()
-              else if (videos.isEmpty && !hideIfEmpty)
-                Padding(
-                  padding: EdgeInsets.only(top: 20),
-                  child: EmptyErrorSection()
                 )
-              else if (horizontalScroll)
-                ContinueWatchingList(
+              ),
+            
+            if (horizontalScroll)
+              SliverToBoxAdapter(
+                child: ContinueWatchingList(
                   title: title,
-                  itemCount: videos.length,
+                  itemCount: videos!.length,
                   itemBuilder: (context, index) {
                     final video = videos[index];
                     return VideoHorizontalTile(
@@ -110,42 +111,60 @@ class VideoListSection extends ConsumerWidget {
                     );
                   },
                 )
-              else
-                ListSectionContainer(
-                  itemCount: videos.length,
-                  itemBuilder: (context, index) {
-                    final video = videos[index];
-                    return VideoListTile(
-                      video: video,
-                      query: query,
-                      hideChannel: hideChannel, 
-                      playlistId: playlistId, 
-                      playlistType: playlistType,
-                      onPress: () {
-                        if (selection.isNotEmpty) {
-                          select.toggle(video.youtubeId);
-                        } else {
-                          VideoPlayerService.loadVideo(video.youtubeId, true, context);
-                        }
-                      },
-                      onLongPress:() {
+              ),
+               
+
+            if (!horizontalScroll)
+              ListSectionContainer(
+                returnSliver: true,
+                itemCount: videos!.length,
+                itemBuilder: (context, index) {
+                  final video = videos[index];
+                  return VideoListTile(
+                    video: video,
+                    query: query,
+                    hideChannel: hideChannel, 
+                    playlistId: playlistId, 
+                    playlistType: playlistType,
+                    onPress: () {
+                      if (selection.isNotEmpty) {
                         select.toggle(video.youtubeId);
-                      },
-                    );
-                   }
-                 ),
-                if (!horizontalScroll)
-                  PaginationButtons(
-                    currentPage: provider.pagination.currentPage,
-                    lastPage: provider.pagination.lastPage,
-                    hasMore: provider.pagination.hasMore,
-                    goToPage: (page) => provider.goToPage(page),
-                    fetchNext: () => provider.fetchNext()
-                  ),
-              if (selection.isNotEmpty)
-                SizedBox(height: usableSpace*20/100)
-            ]
-          )
+                      } else {
+                        VideoPlayerService.loadVideo(video.youtubeId, true, context);
+                      }
+                    },
+                    onLongPress:() {
+                      select.toggle(video.youtubeId);
+                    },
+                  );
+                }
+              ),
+
+            if (!horizontalScroll)
+              SliverToBoxAdapter(
+                child: PaginationButtons(
+                  currentPage: provider.pagination.currentPage,
+                  lastPage: provider.pagination.lastPage,
+                  hasMore: provider.pagination.hasMore,
+                  goToPage: (page) => provider.goToPage(page),
+                  fetchNext: () => provider.fetchNext()
+                ),
+              ),
+
+            if (videos!.isEmpty && !hideIfEmpty)
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: EmptyErrorSection()
+                )
+              ),
+
+            if (selection.isNotEmpty)
+              SliverToBoxAdapter(
+                child: SizedBox(height: usableSpace*20/100)
+              )
+
+          ],
         );
       }
     );
