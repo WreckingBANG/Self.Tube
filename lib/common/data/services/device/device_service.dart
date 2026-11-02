@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/services.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
@@ -7,12 +8,22 @@ import 'package:screen_brightness/screen_brightness.dart';
 
 class DeviceService {
   static late final VolumeController _volume;
+  static late final DeviceInfoPlugin _info;
+  static late final AndroidDeviceInfo? androidInfo;
 
   static Future<void> init() async {
     _volume = VolumeController.instance;
-    _volume.showSystemUI = false; 
+    _volume.showSystemUI = false;
+    _info = DeviceInfoPlugin();
+    getDeviceInfo();
   } 
-  
+
+  static Future<void> getDeviceInfo() async {
+    if (Platform.isAndroid) {
+      androidInfo = await _info.androidInfo;
+    }
+  }
+
   static Future<void> setFullScreen(bool value) async {
     if(Platform.isAndroid && value){
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);

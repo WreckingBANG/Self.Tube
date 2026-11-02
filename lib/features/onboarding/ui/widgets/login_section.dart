@@ -1,8 +1,15 @@
+import 'dart:io';
+
+import 'package:Self.Tube/app/navigation/app_navigation.dart';
+import 'package:Self.Tube/common/data/services/device/device_service.dart';
+import 'package:Self.Tube/common/data/services/permissions/permission_service.dart';
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/features/onboarding/domain/controllers/auth_controller.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class LoginSectionWidget extends StatefulWidget{
   final VoidCallback? onLoginSuccess;
@@ -26,12 +33,14 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
   bool _isLoading = false; 
   bool _isLoggedIn = false;
   bool _allowSelfSigned = false;
+  bool _localNetworkPermission = false;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
     _allowSelfSigned = SettingsService.allowSelfSigned ?? false;
+    checkLocalNetworkPermission();
   }
 
   @override
@@ -40,9 +49,39 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
     super.dispose();
   }
 
+  Future<void> checkLocalNetworkPermission() async {
+    print("checking");
+    final status = await PermissionService.checkLocalNetworkPermission();
+    if (status.isGranted) {
+      setState(() {
+        _localNetworkPermission = true;
+      });
+      SettingsService.setLocalNetworkPermission(true);
+    } else {
+      setState(() {
+        _localNetworkPermission = false;
+      });
+    }
+  }
+
+  Future<void> requestNetPermission() async {
+    bool showRationaleBefore = await Permission.accessLocalNetwork.shouldShowRequestRationale;    
+    await PermissionService.requestLocalNetworkPermission();
+    if (!showRationaleBefore) {
+      await openAppSettings();
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        AppRouter.onboarding,
+        (route) => false
+      );
+    }
+    checkLocalNetworkPermission();
+  }
+
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -133,6 +172,32 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
             });
           }
         ),
+        if (Platform.isAndroid && DeviceService.androidInfo != null && DeviceService.androidInfo!.version.sdkInt >= 37)
+          IgnorePointer(
+            ignoring: _localNetworkPermission,
+            child: Opacity(
+              opacity: _localNetworkPermission ? 0.4 : 1.0,
+              child: SwitchListTile(
+                thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.selected)) {
+                      return const Icon(Icons.check);
+                    }
+                    return const Icon(Icons.close);
+                  },
+                ),
+                title: Text("Local Network Access"),
+                subtitle: Text("Since Android 17, you need to grant Apps Permission to access Servers on your Local Network"),
+                value: _localNetworkPermission, 
+                onChanged: (bool value) {
+                  setState( () {
+                    _localNetworkPermission = value;
+                    requestNetPermission();
+                  });
+                }
+              ),
+            ),
+          ),
         ElevatedButton(
           onPressed: _isLoading || _isLoggedIn
               ? null
