@@ -15,7 +15,7 @@ class DeviceService {
     _volume = VolumeController.instance;
     _volume.showSystemUI = false;
     _info = DeviceInfoPlugin();
-    getDeviceInfo();
+    await getDeviceInfo();
   } 
 
   static Future<void> getDeviceInfo() async {

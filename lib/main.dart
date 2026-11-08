@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
             ThemeHelper.resolveColorScheme(isDark: true, dynamicScheme: darkDynamic),
           ),
           initialRoute: SettingsService.doneSetup == true
-              ? AppRouter.home
+              ? AppRouter.startup
               : AppRouter.onboarding,
           onGenerateRoute: AppRouter.onGenerateRoute,
         );

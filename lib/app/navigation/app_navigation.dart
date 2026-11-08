@@ -1,4 +1,6 @@
 import 'package:Self.Tube/app/ui/about/about_screen.dart';
+import 'package:Self.Tube/app/ui/startup/app_startup.dart';
+import 'package:Self.Tube/app/ui/startup/localnetwork_permission_dialog.dart';
 import 'package:Self.Tube/features/channel/ui/screens/channelpage_screen.dart';
 import 'package:Self.Tube/features/onboarding/ui/screens/login_screen.dart';
 import 'package:Self.Tube/features/playlist/ui/screens/playlistpage_screen.dart';
@@ -14,7 +16,9 @@ import 'package:Self.Tube/features/onboarding/ui/screens/privacypolicy_screen.da
 
 class AppRouter {
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  static const home = '/';
+  static const startup = '/startup';
+  static const localNetPermission = '/startup/localnetpermissison';
+  static const home = '/home';
   static const onboarding = '/onboarding';
   static const onboardingLogin = '/onboarding/login';
   static const search = '/search';
@@ -30,8 +34,14 @@ class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
 
+      case startup:
+        return MaterialPageRoute(builder: (_) => AppStartup());
+
+      case localNetPermission:
+        return MaterialPageRoute(builder: (_) => LocalNetworkPermissionScreen());
+
       case home:
-        return MaterialPageRoute(builder: (_) => const HomeContainerScreen());
+        return MaterialPageRoute(builder: (_) => const HomeContainer());
 
       case onboarding:
         return MaterialPageRoute(builder: (_) => OnBoardingPrivacyPolicyScreen());

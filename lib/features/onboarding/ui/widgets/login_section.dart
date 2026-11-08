@@ -1,12 +1,9 @@
 import 'dart:io';
-
-import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/data/services/device/device_service.dart';
 import 'package:Self.Tube/common/data/services/permissions/permission_service.dart';
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/features/onboarding/domain/controllers/auth_controller.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -23,7 +20,7 @@ class LoginSectionWidget extends StatefulWidget{
   _LoginSectionWidgetState createState() => _LoginSectionWidgetState();
 }
 
-class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTickerProviderStateMixin {
+class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTickerProviderStateMixin,WidgetsBindingObserver  {
   final TextEditingController _instanceUrlController = TextEditingController();
   final TextEditingController _apiTokenController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
@@ -40,17 +37,25 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
     _allowSelfSigned = SettingsService.allowSelfSigned ?? false;
+    WidgetsBinding.instance.addObserver(this);
     checkLocalNetworkPermission();
   }
 
   @override
   void dispose() {
     _tabController.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      checkLocalNetworkPermission();
+    }
+  }
+
   Future<void> checkLocalNetworkPermission() async {
-    print("checking");
     final status = await PermissionService.checkLocalNetworkPermission();
     if (status.isGranted) {
       setState(() {
@@ -65,16 +70,10 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
   }
 
   Future<void> requestNetPermission() async {
-    bool showRationaleBefore = await Permission.accessLocalNetwork.shouldShowRequestRationale;    
-    await PermissionService.requestLocalNetworkPermission();
-    if (!showRationaleBefore) {
+    final result = await PermissionService.requestLocalNetworkPermission();
+    if (result == PermissionStatus.permanentlyDenied) {
       await openAppSettings();
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        AppRouter.onboarding,
-        (route) => false
-      );
-    }
+    }    
     checkLocalNetworkPermission();
   }
 
