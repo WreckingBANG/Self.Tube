@@ -185,8 +185,8 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
                     return const Icon(Icons.close);
                   },
                 ),
-                title: Text("Local Network Access"),
-                subtitle: Text("Since Android 17, you need to grant Apps Permission to access Servers on your Local Network"),
+                title: Text(localizations.permissionLocalNetwork),
+                subtitle: Text(localizations.permissionLocalNetworkDesc),
                 value: _localNetworkPermission, 
                 onChanged: (bool value) {
                   setState( () {

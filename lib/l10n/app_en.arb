@@ -128,6 +128,8 @@
     "onboardingContinue": "Agree & Continue",
     "onboardingAllowSelfSigned": "Allow Self-Signed Certificates",
     "onboardingAllowSelfSignedDesc": "On Android the Certificate must be in the Device Certificate-Store",
+    "permissionLocalNetwork": "Local Network Access",
+    "permissionLocalNetworkDesc": "Android 17 requires permission for apps to access your local network. If your server is on your local network, allow this app to access it.", 
     "sponsorblockEnable": "Enable Sponsorblock",
     "sponsorblockSponsor": "Skip Sponsor",
     "sponsorblockSponsorHint": "Part of a video promoting a product or service not directly related to the creator.",

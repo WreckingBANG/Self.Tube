@@ -1,6 +1,7 @@
 import 'package:Self.Tube/app/navigation/app_navigation.dart';
 import 'package:Self.Tube/common/data/services/permissions/permission_service.dart';
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
+import 'package:Self.Tube/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_m3shapes_extended/flutter_m3shapes_extended.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -60,6 +61,7 @@ class _LocalNetworkPermisionScreenState extends State<LocalNetworkPermissionScre
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
@@ -94,7 +96,7 @@ class _LocalNetworkPermisionScreenState extends State<LocalNetworkPermissionScre
           const SizedBox(height: 16),
 
           Text(
-            "Local Network Permission",
+            localizations.permissionLocalNetwork,
             style: TextStyle(
               fontSize: 20,
               //fontWeight: FontWeight(25)
@@ -106,8 +108,7 @@ class _LocalNetworkPermisionScreenState extends State<LocalNetworkPermissionScre
           Padding(
             padding: EdgeInsets.all(10),
             child: Text(
-              "Android 17 requires permission for apps to access your local network. "
-              "If your server is on your local network, allow this app to access it.",
+              localizations.permissionLocalNetworkDesc,
               style: TextStyle(
                 fontSize: 15,
               ),
@@ -127,7 +128,7 @@ class _LocalNetworkPermisionScreenState extends State<LocalNetworkPermissionScre
                     return const Icon(Icons.close);
                   },
                 ),
-                title: Text("Local Network Access"),
+                title: Text(localizations.permissionLocalNetwork),
                 value: _localNetworkPermission, 
                 onChanged: (bool value) {
                   setState( () {

@@ -872,6 +872,18 @@ abstract class AppLocalizations {
   /// **'On Android the Certificate must be in the Device Certificate-Store'**
   String get onboardingAllowSelfSignedDesc;
 
+  /// No description provided for @permissionLocalNetwork.
+  ///
+  /// In en, this message translates to:
+  /// **'Local Network Access'**
+  String get permissionLocalNetwork;
+
+  /// No description provided for @permissionLocalNetworkDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Android 17 requires permission for apps to access your local network. If your server is on your local network, allow this app to access it.'**
+  String get permissionLocalNetworkDesc;
+
   /// No description provided for @sponsorblockEnable.
   ///
   /// In en, this message translates to:
