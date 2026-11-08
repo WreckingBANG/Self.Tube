@@ -1,8 +1,12 @@
+import 'dart:io';
+import 'package:Self.Tube/common/data/services/device/device_service.dart';
+import 'package:Self.Tube/common/data/services/permissions/permission_service.dart';
 import 'package:Self.Tube/common/data/services/settings/settings_service.dart';
 import 'package:Self.Tube/common/ui/widgets/containers/list_section_container.dart';
 import 'package:Self.Tube/features/onboarding/domain/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:Self.Tube/l10n/generated/app_localizations.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class LoginSectionWidget extends StatefulWidget{
   final VoidCallback? onLoginSuccess;
@@ -16,7 +20,7 @@ class LoginSectionWidget extends StatefulWidget{
   _LoginSectionWidgetState createState() => _LoginSectionWidgetState();
 }
 
-class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTickerProviderStateMixin {
+class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTickerProviderStateMixin,WidgetsBindingObserver  {
   final TextEditingController _instanceUrlController = TextEditingController();
   final TextEditingController _apiTokenController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
@@ -26,23 +30,57 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
   bool _isLoading = false; 
   bool _isLoggedIn = false;
   bool _allowSelfSigned = false;
+  bool _localNetworkPermission = false;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
     _allowSelfSigned = SettingsService.allowSelfSigned ?? false;
+    WidgetsBinding.instance.addObserver(this);
+    checkLocalNetworkPermission();
   }
 
   @override
   void dispose() {
     _tabController.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      checkLocalNetworkPermission();
+    }
+  }
+
+  Future<void> checkLocalNetworkPermission() async {
+    final status = await PermissionService.checkLocalNetworkPermission();
+    if (status.isGranted) {
+      setState(() {
+        _localNetworkPermission = true;
+      });
+      SettingsService.setLocalNetworkPermission(true);
+    } else {
+      setState(() {
+        _localNetworkPermission = false;
+      });
+    }
+  }
+
+  Future<void> requestNetPermission() async {
+    final result = await PermissionService.requestLocalNetworkPermission();
+    if (result == PermissionStatus.permanentlyDenied) {
+      await openAppSettings();
+    }    
+    checkLocalNetworkPermission();
   }
 
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -133,6 +171,32 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
             });
           }
         ),
+        if (Platform.isAndroid && DeviceService.androidInfo != null && DeviceService.androidInfo!.version.sdkInt >= 37)
+          IgnorePointer(
+            ignoring: _localNetworkPermission,
+            child: Opacity(
+              opacity: _localNetworkPermission ? 0.4 : 1.0,
+              child: SwitchListTile(
+                thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.selected)) {
+                      return const Icon(Icons.check);
+                    }
+                    return const Icon(Icons.close);
+                  },
+                ),
+                title: Text(localizations.permissionLocalNetwork),
+                subtitle: Text(localizations.permissionLocalNetworkDesc),
+                value: _localNetworkPermission, 
+                onChanged: (bool value) {
+                  setState( () {
+                    _localNetworkPermission = value;
+                    requestNetPermission();
+                  });
+                }
+              ),
+            ),
+          ),
         ElevatedButton(
           onPressed: _isLoading || _isLoggedIn
               ? null

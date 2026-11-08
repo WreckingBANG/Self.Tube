@@ -411,6 +411,13 @@ class AppLocalizationsDe extends AppLocalizations {
       'Auf Android muss das Zertifikat im Zertifikats-Store sein';
 
   @override
+  String get permissionLocalNetwork => 'Zugriff auf lokales Netzwerk';
+
+  @override
+  String get permissionLocalNetworkDesc =>
+      'Ab Android 17 benötigen Apps die Berechtigung, auf das lokale Netzwerk zuzugreifen. Befindet sich der Server im lokalen Netzwerk, benötigt diese App die Berechtigung.';
+
+  @override
   String get sponsorblockEnable => 'SponsorBlock aktivieren';
 
   @override

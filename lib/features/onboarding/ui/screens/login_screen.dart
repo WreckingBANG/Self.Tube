@@ -39,7 +39,7 @@ class _OnBoardingLoginScreenState extends ConsumerState<OnBoardingLoginScreen> {
                   await ref.read(userSessionProvider.notifier).refresh();
                   Navigator.pushNamedAndRemoveUntil(
                     context,
-                    AppRouter.home,
+                    AppRouter.startup,
                     (route) => false,
                   );
                 },

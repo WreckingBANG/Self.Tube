@@ -13,6 +13,7 @@ class SettingsService {
   static const _sessionToken = 'sessionToken';
   static const _csrfToken = 'csrfToken';
   static const _allowSelfSigned = 'allowSelfSigned';
+  static const _localNetworkPermission = 'localNetworkPermission';
 
   static const _showCommentPics = 'showCommentPics';
   static const _materialYouColors = 'materialYouColors';
@@ -46,6 +47,7 @@ class SettingsService {
   static String? sessionToken;
   static String? csrfToken;
   static bool? allowSelfSigned;
+  static bool? localNetworkPermission;
 
   static bool? showCommentPics;
   static bool? materialYouColors;
@@ -86,6 +88,7 @@ class SettingsService {
     apiTokenAuth = b(_apiTokenAuth);
     doneSetup = b(_doneSetup);
     allowSelfSigned = b(_allowSelfSigned);
+    localNetworkPermission = b(_localNetworkPermission);
     
     showCommentPics = b(_showCommentPics);
     materialYouColors = b(_materialYouColors, true);
@@ -151,6 +154,11 @@ class SettingsService {
   static Future<void> setAllowSelfSigned(bool value) async {
     await _persist(_allowSelfSigned, value);
     allowSelfSigned = value;
+  }
+
+  static Future<void> setLocalNetworkPermission(bool value) async {
+    await _persist(_localNetworkPermission, value);
+    localNetworkPermission = value;
   }
 
   static Future<void> setShowCommentPics(bool value) async {
