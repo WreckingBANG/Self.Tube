@@ -1,0 +1,7 @@
+Improvements:
+- Added local network permission support for Android 17
+- Improved scrolling performance in lists
+- Added a desktop layout for the player screen
+
+Bug Fixes:
+- Fixed the GTK window icon using an outdated path
