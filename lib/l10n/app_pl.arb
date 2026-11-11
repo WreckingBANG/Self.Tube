@@ -232,5 +232,7 @@
     "dialogConfirmYes": "Tak",
     "dialogPlaylistAddPlaylist": "Dodaj do Playlist",
     "dialogPlaylistSelect": "Wibierz Playlist",
-    "dialogPlaylistAdd": "Dodać"
+    "dialogPlaylistAdd": "Dodać",
+    "permissionLocalNetwork": "Dostęp do sieci lokalnej",
+    "permissionLocalNetworkDesc": "Począwszy od Androida 17, aplikacje wymagają pozwolenia na dostęp do sieci lokalnej. Jeśli serwer znajduje się w sieci lokalnej, ta aplikacja wymaga pozwolenia."
 }

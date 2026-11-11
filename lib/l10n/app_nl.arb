@@ -232,5 +232,7 @@
     "dialogConfirmYes": "Ja",
     "dialogPlaylistAddPlaylist": "Toevoegen aan afspeellijst",
     "dialogPlaylistSelect": "Kies een afspeellijst",
-    "dialogPlaylistAdd": "Toevoegen"
+    "dialogPlaylistAdd": "Toevoegen",
+    "permissionLocalNetwork": "Lokale netwerktoegang",
+    "permissionLocalNetworkDesc": "Android 17 vereist dat apps toegang hebben tot je lokale netwerk. Als je server zich op je lokale netwerk bevindt, geef deze app dan toegang."
 }
