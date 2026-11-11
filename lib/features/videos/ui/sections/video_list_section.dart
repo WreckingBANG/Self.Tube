@@ -94,11 +94,11 @@ class VideoListSection extends ConsumerWidget {
                 )
               ),
             
-            if (horizontalScroll)
+            if (horizontalScroll && videos!.isNotEmpty)
               SliverToBoxAdapter(
                 child: ContinueWatchingList(
                   title: title,
-                  itemCount: videos!.length,
+                  itemCount: videos.length,
                   itemBuilder: (context, index) {
                     final video = videos[index];
                     return VideoHorizontalTile(
