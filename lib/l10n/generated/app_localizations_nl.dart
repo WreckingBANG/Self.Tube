@@ -412,11 +412,11 @@ class AppLocalizationsNl extends AppLocalizations {
       'Op Android moet het certificaat zich in de certificaatopslag van het apparaat bevinden';
 
   @override
-  String get permissionLocalNetwork => 'Local Network Access';
+  String get permissionLocalNetwork => 'Lokale netwerktoegang';
 
   @override
   String get permissionLocalNetworkDesc =>
-      'Android 17 requires permission for apps to access your local network. If your server is on your local network, allow this app to access it.';
+      'Android 17 vereist dat apps toegang hebben tot je lokale netwerk. Als je server zich op je lokale netwerk bevindt, geef deze app dan toegang.';
 
   @override
   String get sponsorblockEnable => 'SponsorBlock inschakelen';

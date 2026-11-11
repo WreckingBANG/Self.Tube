@@ -412,11 +412,11 @@ class AppLocalizationsPl extends AppLocalizations {
       'W systemie Android certyfikat musi znajdować się w magazynie certyfikatów';
 
   @override
-  String get permissionLocalNetwork => 'Local Network Access';
+  String get permissionLocalNetwork => 'Dostęp do sieci lokalnej';
 
   @override
   String get permissionLocalNetworkDesc =>
-      'Android 17 requires permission for apps to access your local network. If your server is on your local network, allow this app to access it.';
+      'Począwszy od Androida 17, aplikacje wymagają pozwolenia na dostęp do sieci lokalnej. Jeśli serwer znajduje się w sieci lokalnej, ta aplikacja wymaga pozwolenia.';
 
   @override
   String get sponsorblockEnable => 'Aktywuj SponsorBlock';
