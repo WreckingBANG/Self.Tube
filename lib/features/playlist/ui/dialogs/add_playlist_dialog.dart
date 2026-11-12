@@ -63,6 +63,7 @@ class AddPlaylistDialog extends ConsumerWidget {
                           labelText: localizations.playlistUrl,
                           hint: Text(localizations.playlistUrlHint),
                           border: InputBorder.none,
+                          contentPadding: EdgeInsets.fromLTRB(8, 8, 0, 8),
                         )
                       ),
                     ],
@@ -75,6 +76,7 @@ class AddPlaylistDialog extends ConsumerWidget {
                           labelText: localizations.playlistName,
                           hint: Text(localizations.playlistNameHint),
                           border: InputBorder.none,
+                          contentPadding: EdgeInsets.fromLTRB(8, 8, 0, 8),
                         ),
                       )
                     ],

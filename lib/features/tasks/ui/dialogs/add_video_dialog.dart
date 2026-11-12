@@ -26,7 +26,8 @@ class AddVideoDialog extends StatelessWidget{
                   controller: _videoUrlController,
                   decoration: InputDecoration(
                     labelText: localizations.taskAddVideoLabel,
-                    border: InputBorder.none
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.fromLTRB(8, 8, 0, 8),
                   )
                 )
               ]

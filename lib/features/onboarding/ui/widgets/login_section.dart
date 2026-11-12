@@ -109,6 +109,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
                       labelText: localizations.onboardingInstanceUrl,
                       hint: Text(localizations.onboardingUrlExample),
                       border: InputBorder.none,
+                      contentPadding: EdgeInsets.fromLTRB(8, 8, 0, 8),
                     ),
                   ),
                   TextField(
@@ -116,6 +117,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
                     decoration: InputDecoration(
                       labelText: localizations.onboardingUsername,
                       border: InputBorder.none,
+                      contentPadding: EdgeInsets.fromLTRB(8, 8, 0, 8),
                     ),
                   ),
                   TextField(
@@ -123,6 +125,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
                     decoration: InputDecoration(
                       labelText: localizations.onboardingPassword,
                       border: InputBorder.none,
+                      contentPadding: EdgeInsets.fromLTRB(8, 8, 0, 8),
                     ),
                     obscureText: true,
                   ),
@@ -136,6 +139,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
                       labelText: localizations.onboardingInstanceUrl,
                       hint: Text(localizations.onboardingUrlExample),
                       border: InputBorder.none,
+                      contentPadding: EdgeInsets.fromLTRB(8, 8, 0, 8),
                     ),
                   ),
                   TextField(
@@ -144,6 +148,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> with SingleTick
                       labelText: localizations.onboardingToken,
                       hint: Text(localizations.onboardingTokenExample),
                       border: InputBorder.none,
+                      contentPadding: EdgeInsets.fromLTRB(8, 8, 0, 8),
                     ),
                     obscureText: true,
                   ),
