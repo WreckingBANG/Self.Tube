@@ -45,6 +45,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             Padding(
               padding: EdgeInsets.all(7.5),
               child: Row(
+                spacing: 8,
                 children: [
                   IconButton(
                     icon: Icon(Icons.arrow_back),

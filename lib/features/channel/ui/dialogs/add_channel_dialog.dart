@@ -38,7 +38,8 @@ class AddChannelDialog extends ConsumerWidget{
                   controller: _channelUrlController,
                   decoration: InputDecoration(
                     labelText: localizations.channelUrl,
-                    border: InputBorder.none
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.fromLTRB(8, 8, 0, 8),
                   )
                 )
               ]

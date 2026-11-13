@@ -38,7 +38,8 @@ Future<void> GoToPageDialog({
                   key: formKey,
                   child: TextFormField(
                     decoration: InputDecoration(
-                      border: InputBorder.none
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.fromLTRB(8, 8, 0, 8),
                     ),
                     keyboardType: TextInputType.number,
                     inputFormatters: [
