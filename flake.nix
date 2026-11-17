@@ -86,6 +86,8 @@
         commonPackages = with pkgs; [
           flutter
           cmake
+          clang
+          ninja
           glibcLocales
           cacert
         ];
