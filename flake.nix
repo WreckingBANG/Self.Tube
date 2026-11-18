@@ -49,7 +49,7 @@
         };
 
         androidPackages = with pkgs; [
-          jdk17
+          apksigner
           openjdk17
         ];
 
@@ -95,8 +95,9 @@
         androidHook = sdk: ''
           export JAVA_HOME="${pkgs.openjdk17}"
           export ANDROID_NDK_ROOT="${sdk}/libexec/android-sdk/ndk/${ndkVersion}"
-          export GRADLE_OPTS="-Dorg.gradle.project.android.aapt2FromMavenOverride=${sdk}/libexec/android-sdk/build-tools/${buildToolsVersion}/aapt2";
-          export ANDROID_SDK_ROOT="${sdk}/libexec/android-sdk";
+          export BUILD_TOOLS="${sdk}/libexec/android-sdk/build-tools/${buildToolsVersion}"
+          export GRADLE_OPTS="-Dorg.gradle.project.android.aapt2FromMavenOverride=${sdk}/libexec/android-sdk/build-tools/${buildToolsVersion}/aapt2"
+          export ANDROID_SDK_ROOT="${sdk}/libexec/android-sdk"
         '';
 
         linuxHook = ''
@@ -173,3 +174,4 @@
       }
    );
 }
+
