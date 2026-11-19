@@ -5,6 +5,106 @@ on:
 
 jobs:
 
+  build_flatpak-aarch64:
+    runs-on: codeberg-aarch64-1
+    container: 
+      image: docker.io/node:22-bookworm
+    steps:
+
+      - name: Prepare Nix
+        uses: https://github.com/DeterminateSystems/nix-installer-action@main
+    
+      - uses: actions/checkout@v6
+        
+      - name: Setup Flatpak
+        run: |
+          unshare -U true
+          apt update
+          apt install flatpak flatpak-builder -y
+          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          flatpak install -y flathub org.gnome.Platform//48
+          flatpak install -y flathub org.gnome.Sdk//48
+          
+      - name: Setup Flutter
+        run: |
+          nix develop .#ciLinux --command bash -ec '
+            flutter --version
+            flutter doctor
+          '
+          
+      - name: Build Flutter
+        run: |
+          nix develop .#ciLinux --command bash -ec '
+            flutter pub get
+            flutter build linux --debug
+          '
+          
+      - name: Build Flatpak
+        run: |
+          cd "$GITHUB_WORKSPACE/flatpak"
+          git config --global protocol.file.allow always
+          flatpak-builder --disable-rofiles-fuse build-dir com.wreckingbang.selftube.yaml --force-clean --repo=repo
+          flatpak build-bundle repo selftube.flatpak com.wreckingbang.selftube
+          mv $GITHUB_WORKSPACE/flatpak/selftube.flatpak $GITHUB_WORKSPACE/flatpak/selftube-linux-aarch64.flatpak
+          
+      - name: Upload Flatpak
+        uses: actions/upload-artifact@v3
+        with:
+          name: selftube-linux-aarch64
+          path: |
+            flatpak/selftube-linux-aarch64.flatpak
+
+          
+  build_flatpak-x86_64:
+    runs-on: codeberg-x86-1
+    container: 
+      image: docker.io/node:22-bookworm
+    steps:
+
+      - name: Prepare Nix
+        uses: https://github.com/DeterminateSystems/nix-installer-action@main
+    
+      - uses: actions/checkout@v6
+        
+      - name: Setup Flatpak
+        run: |
+          unshare -U true
+          apt update
+          apt install flatpak flatpak-builder -y
+          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          flatpak install -y flathub org.gnome.Platform//48
+          flatpak install -y flathub org.gnome.Sdk//48
+          
+      - name: Setup Flutter
+        run: |
+          nix develop .#ciLinux --command bash -ec '
+            flutter --version
+            flutter doctor
+          '
+          
+      - name: Build Flutter
+        run: |
+          nix develop .#ciLinux --command bash -ec '
+            flutter pub get
+            flutter build linux --debug
+          '
+          
+      - name: Build Flatpak
+        run: |
+          cd "$GITHUB_WORKSPACE/flatpak"
+          git config --global protocol.file.allow always
+          flatpak-builder --disable-rofiles-fuse build-dir com.wreckingbang.selftube.yaml --force-clean --repo=repo
+          flatpak build-bundle repo selftube.flatpak com.wreckingbang.selftube
+          mv $GITHUB_WORKSPACE/flatpak/selftube.flatpak $GITHUB_WORKSPACE/flatpak/selftube-linux-x86_64.flatpak
+          
+      - name: Upload Flatpak
+        uses: actions/upload-artifact@v3
+        with:
+          name: selftube-linux-x86_64
+          path: |
+            flatpak/selftube-linux-x86_64.flatpak
+
+
   build_apk:
     runs-on: codeberg-x86-2
     container: 
