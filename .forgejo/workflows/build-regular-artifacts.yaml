@@ -127,12 +127,52 @@ jobs:
         run: |
           nix develop .#ciAndroid --command bash -ec '
             flutter pub get
-            flutter build apk --release
+            flutter build apk --release --split-per-abi
           '
-          
+
+      - name: Decode signing key
+        run: |
+          echo "$SIGNING_KEY_B64" | base64 -d > release-keystore.jks
+        env:
+          SIGNING_KEY_B64: ${{ secrets.SIGNING_KEY_B64 }}
+
+      - name: Sign & rename APKs
+        run: |
+          nix develop .#ciAndroid --command bash -ec '
+            for apk in build/app/outputs/flutter-apk/*.apk; do
+              filename=$(basename "$apk")
+             
+              arch=$(echo "$filename" | sed -E '\''s/app-(.*)-release\.apk/\1/'\'')
+            
+              out="build/app/outputs/flutter-apk/selftube-android-${arch}.apk"
+            
+              echo "Signing $apk → $out"
+            
+              apksigner sign \
+                --ks release-keystore.jks \
+                --ks-key-alias "$KEY_ALIAS" \
+                --ks-pass pass:"$KEYSTORE_PASSWORD" \
+                --key-pass pass:"$KEY_PASSWORD" \
+                --out "$out" \
+                "$apk"
+            done
+          '
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+
+      - name: Sign & rename APKs
+        run: |
+          nix develop .#ciAndroid --command bash -ec '
+            for apk in build/app/outputs/flutter-apk/selftube-android-*.apk; do
+              echo "Verifying $apk"
+              $BUILD_TOOLS/apksigner verify --verbose "$apk"
+            done
+          '
+
       - name: Upload APKs
         uses: actions/upload-artifact@v3
         with:
-          name: selftube-android-universal
-          path: |
-            build/app/outputs/flutter-apk/*.apk
+          name: selftube-android
+          path: build/app/outputs/flutter-apk/selftube-android-*.apk
