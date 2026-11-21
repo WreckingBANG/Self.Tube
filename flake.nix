@@ -21,7 +21,8 @@
         platformVersions = [ 31 34 35 36 37 ];
         abiVersions = [ "armeabi-v7a" "arm64-v8a" "x86_64" ];
         ndkVersion = "28.2.13676358";
-        
+        cmakeVersion = "3.22.1";
+
         ciAndroidComposition = pkgs.androidenv.composeAndroidPackages {
           buildToolsVersions = [ buildToolsVersion ];
           platformVersions = platformVersions;
@@ -29,7 +30,7 @@
           includeEmulator = false;  
           abiVersions = abiVersions;
           ndkVersions = [ ndkVersion ];
-          cmakeVersions = [ "3.22.1" ];
+          cmakeVersions = [ cmakeVersion ];
           includeNDK = true;
         };
 
@@ -40,7 +41,7 @@
           includeEmulator = true;  
           abiVersions = abiVersions;
           ndkVersions = [ ndkVersion ];
-          cmakeVersions = [ "3.22.1" ];
+          cmakeVersions = [ cmakeVersion ];
           systemImageTypes = [ 
             "default" 
             #"android-tv" 
