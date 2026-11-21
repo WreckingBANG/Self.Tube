@@ -135,6 +135,7 @@
               ${commonHook}
               ${androidHook devAndroidComposition.androidsdk}
               ${linuxHook}
+              export DEVENV=true
 
               echo "Self.Tube Dev-Shell is ready!"
             '';
