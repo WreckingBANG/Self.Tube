@@ -1,6 +1,5 @@
 plugins {
     id("com.android.application")
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
 
@@ -22,9 +21,15 @@ android {
         versionName = flutter.versionName
     }
 
+    val isDevEnv = System.getenv("DEVENV").toBoolean()
+
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = if (isDevEnv) {
+                signingConfigs.getByName("debug")
+            } else {
+                null
+            }
         }
     }
 
