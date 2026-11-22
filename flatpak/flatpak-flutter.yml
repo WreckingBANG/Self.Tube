@@ -35,8 +35,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/mpv-player/mpv.git
-        tag: v0.39.0
-        commit: a0fba7be57f3822d967b04f0f6b6d6341e7516e7
+        tag: v0.42.0
+        commit: b0841e8c4d156b8403dc1876c4cbd9011eb583f3
 
     modules:
       - name: libass
@@ -51,8 +51,8 @@ modules:
         sources:
           - type: git
             url: https://github.com/libass/libass.git
-            tag: 0.17.3
-            commit: e46aedea0a0d17da4c4ef49d84b94a7994664ab5
+            tag: 0.17.5
+            commit: 4a05d8127f525943ebf45fdc6497c9e665947f0d
 
       - name: libplacebo
         buildsystem: meson
