@@ -24,7 +24,7 @@ class CustomNetworkImage extends StatelessWidget {
         : null;
 
     return CachedNetworkImage(
-      imageUrl: "$baseUrl/$imageLink",
+      imageUrl: "$baseUrl$imageLink",
       httpHeaders: ApiHeaders.authHeaders(),
       fit: BoxFit.cover,
       memCacheWidth: memCacheWidth,
