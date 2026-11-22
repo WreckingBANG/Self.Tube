@@ -13,6 +13,9 @@ finish-args:
   - --share=network
   - --talk-name=org.freedesktop.secrets
   - --filesystem=xdg-run/pipewire-0:ro
+  - --socket=pulseaudio
+  - --talk-name=org.freedesktop.PowerManagement
+  - --talk-name=org.freedesktop.ScreenSaver
 modules:
 
   - name: mpv
@@ -26,8 +29,6 @@ modules:
       - -Dpulse=enabled
       - -Dalsa=enabled
       - --libdir=/app/lib
-    build-options:
-      pkg-config-path: /usr/lib/extensions/ffmpeg-full/lib/pkgconfig
     cleanup:
       - /lib/pkgconfig
       - /share

@@ -21,6 +21,9 @@ finish-args:
   - --share=network
   - --talk-name=org.freedesktop.secrets
   - --filesystem=xdg-run/pipewire-0:ro
+  - --socket=pulseaudio
+  - --talk-name=org.freedesktop.PowerManagement
+  - --talk-name=org.freedesktop.ScreenSaver
 modules:
   - name: mpv
     buildsystem: meson
@@ -33,8 +36,6 @@ modules:
       - -Dpulse=enabled
       - -Dalsa=enabled
       - --libdir=/app/lib
-    build-options:
-      pkg-config-path: /usr/lib/extensions/ffmpeg-full/lib/pkgconfig
     cleanup:
       - /lib/pkgconfig
       - /share
@@ -96,7 +97,7 @@ modules:
     sources:
       - type: git
         url: ../
-        commit: 384fe75d904664c6f0d7ab00e6c44ed7472d3170
+        commit: 3b92dc3d2038b1b8a2206d1a8c6fb9101cf0f304
       - generated/sources/pubspec.json
     modules:
       - generated/modules/flutter-sdk-3.47.4.json
