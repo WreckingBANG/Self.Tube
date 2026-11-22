@@ -234,5 +234,7 @@
     "dialogConfirmYes": "Sí",
     "dialogPlaylistAddPlaylist": "Añadir a la lista de reproducción",
     "dialogPlaylistSelect": "Seleccione una lista de reproducción",
-    "dialogPlaylistAdd": "Añadir"
+    "dialogPlaylistAdd": "Añadir",
+    "permissionLocalNetwork": "Acceso a la red local",
+    "permissionLocalNetworkDesc": "Android 17 requiere permiso para que las aplicaciones accedan a tu red local. Si tu servidor está en tu red local, permite que esta aplicación acceda a él."
 }
