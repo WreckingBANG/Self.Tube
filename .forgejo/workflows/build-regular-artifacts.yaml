@@ -8,7 +8,7 @@ jobs:
   build_flatpak-aarch64:
     runs-on: codeberg-aarch64-1
     container: 
-      image: docker.io/node:22-bookworm
+      image: docker.io/node:24-trixie
     steps:
 
       - name: Prepare Nix
@@ -58,7 +58,7 @@ jobs:
   build_flatpak-x86_64:
     runs-on: codeberg-x86-1
     container: 
-      image: docker.io/node:22-bookworm
+      image: docker.io/node:24-trixie
     steps:
 
       - name: Prepare Nix
@@ -108,7 +108,7 @@ jobs:
   build_apk:
     runs-on: codeberg-x86-2
     container: 
-      image: docker.io/node:22-bookworm
+      image: docker.io/node:24-trixie
     steps:
 
       - name: Prepare Nix

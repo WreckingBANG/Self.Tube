@@ -8,7 +8,7 @@ jobs:
   build_test:
     runs-on: codeberg-x86
     container: 
-      image: docker.io/node:22-bookworm
+      image: docker.io/node:24-trixie
     steps:
       - name: Prepare Nix
         uses: https://github.com/DeterminateSystems/nix-installer-action@main
