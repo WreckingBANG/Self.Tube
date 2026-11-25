@@ -99,6 +99,7 @@
           export BUILD_TOOLS="${sdk}/libexec/android-sdk/build-tools/${buildToolsVersion}"
           export GRADLE_OPTS="-Dorg.gradle.project.android.aapt2FromMavenOverride=${sdk}/libexec/android-sdk/build-tools/${buildToolsVersion}/aapt2"
           export ANDROID_SDK_ROOT="${sdk}/libexec/android-sdk"
+          export PUB_CACHE="$HOME/.pub-cache"
         '';
 
         linuxHook = ''
