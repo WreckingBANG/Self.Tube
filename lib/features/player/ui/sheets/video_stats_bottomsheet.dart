@@ -18,39 +18,33 @@ Future<void> showVideoStatsBottomSheet({
       ListSectionContainer(
         title: localizations.playerTitle,
         children: [
-          Padding(
-            padding: EdgeInsets.all(5), 
-            child: Text("${localizations.statsBackend}: ${VideoPlayerService.player!.backend()}")
+          ListTile(
+            title: Text("${localizations.statsBackend}: ${VideoPlayerService.player!.backend()}"),
           )
         ],
       ),
       ListSectionContainer(
         title: localizations.statsVideo,
         children: [
-          Padding(
-            padding: EdgeInsets.all(5),
-            child: Text("${localizations.statsCodec}: ${video.codec}"),   
+          ListTile(
+            title: Text("${localizations.statsCodec}: ${video.codec}"),   
           ),
-          Padding(
-            padding: EdgeInsets.all(5),
-            child: Text("${localizations.statsBitrate}: ${video.bitrate}"),
+          ListTile(
+            title: Text("${localizations.statsBitrate}: ${video.bitrate}"),
           ),
-          Padding(
-            padding: EdgeInsets.all(5),
-            child: Text("${localizations.statsSize}: ${video.width} x ${video.height}")
+          ListTile(
+            title: Text("${localizations.statsSize}: ${video.width} x ${video.height}")
           )
         ],
       ),
       ListSectionContainer(
         title: localizations.statsAudio,
         children: [
-          Padding(
-            padding: EdgeInsets.all(5),
-            child: Text("${localizations.statsCodec}: ${audio.codec}"),
+          ListTile(
+            title: Text("${localizations.statsCodec}: ${audio.codec}"),
           ),
-          Padding(
-            padding: EdgeInsets.all(5),
-            child: Text("${localizations.statsBitrate}: ${audio.bitrate}")
+          ListTile(
+            title: Text("${localizations.statsBitrate}: ${audio.bitrate}")
           )
         ],
       )
