@@ -84,6 +84,11 @@
           sysprof.dev
         ];
 
+        flatpakPackages = with pkgs; [
+          flatpak
+          flatpak-builder
+        ];
+
         commonPackages = with pkgs; [
           flutter
           cmake
@@ -169,6 +174,19 @@
               ${linuxHook}
 
               echo "Self.Tube Linux-CI Shell is ready!"
+            '';
+
+          };
+
+          ciFlatpak = pkgs.mkShell {
+            
+            packages = commonPackages ++
+              flatpakPackages;
+
+            shellHook = ''
+              ${commonHook}
+
+              echo "Self.Tube Flatpak-CI Shell is ready!"
             '';
 
           };

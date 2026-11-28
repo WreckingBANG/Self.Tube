@@ -14,6 +14,7 @@
 .android-sdk
 local.properties
 migrate_working_dir/
+.flatpak-builder
 
 # IntelliJ related
 *.iml
