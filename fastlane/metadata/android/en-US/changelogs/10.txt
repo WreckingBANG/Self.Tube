@@ -1,0 +1,4 @@
+Bug Fixes:
+- Fixed images not loading in TubeArchivist v0.6.0
+- Fixed spacing in several parts of the app
+- Fixed the layout of the Video Stats sheet
